@@ -1,4 +1,3 @@
-import me from "@/assets/untitled.jpg";
 import { H1 } from "@/components/ui/H1";
 import { H2 } from "@/components/ui/H2";
 import { Metadata } from "next";
@@ -25,13 +24,6 @@ export default function Home() {
           </p>
         </div>
         <div className="flex justify-center">
-          <Image
-            src={me}
-            alt="A cat"
-            height={300}
-            width={300}
-            className="aspect-square rounded border-2 object-cover shadow-md dark:border-foreground"
-          />
         </div>
       </section>
     </section>
