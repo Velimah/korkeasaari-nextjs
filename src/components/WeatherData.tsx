@@ -55,16 +55,26 @@ export default function WeatherData() {
     value: entry.value,
   }));
 
+    const precipitationData = weatherData.precipitationAmountData.map((entry) => ({
+    time: formatTime(entry.time),
+    value: entry.value,
+  }));
+
   const combinedData = temperatureData.map((tempEntry) => {
     // Find the corresponding cloud cover entry
     const cloudCoverEntry = cloudCoverData.find(
       (cloudEntry) => cloudEntry.time === tempEntry.time
     );
 
+        const precipitationEntry = precipitationData.find(
+      (precipitationEntry) => precipitationEntry.time === tempEntry.time
+    );
+
     return {
       time: tempEntry.time,
       temperature: tempEntry.value,
       cloudCover: cloudCoverEntry?.value || 0,
+      precipitation: precipitationEntry?.value || 0,
     };
   });
 
@@ -101,7 +111,7 @@ export default function WeatherData() {
               activeDot={{ r: 8 }} 
               name="Temperature"
             />
-            <Bar yAxisId="right" dataKey="cloudCover" barSize={10} fill="rgba(65, 62, 160, 0.3)" />
+            <Bar yAxisId="right" dataKey="cloudCover" barSize={10} fill="rgba(65, 62, 160, 0.8)" />
           </ComposedChart>
         </ResponsiveContainer>
       </div>

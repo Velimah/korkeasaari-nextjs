@@ -24,14 +24,13 @@ export default function Home() {
           </p>
         </div>
       </section>
-    </section>
-          <section className="space-y-3 text-center">
-          <H2>Data</H2>
-         <WeatherData />
-         <VisitorData />
-         <WeatherHistoricalData />
-         
-        </section>
-        </>
+      </section>
+      <section className="space-y-3 text-center">
+        <H2>Data</H2>
+        <WeatherData />
+        <VisitorData />
+        <WeatherHistoricalData />
+      </section>
+    </>
   );
 }
