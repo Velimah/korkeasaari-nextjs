@@ -23,7 +23,7 @@ export const fetchWeatherData = async (): Promise<WeatherData> => {
   try {
     const endTime = getEndTime();
     const response = await fetch(
-      `http://opendata.fmi.fi/wfs?service=WFS&version=2.0.0&request=getFeature&storedquery_id=fmi::forecast::harmonie::surface::point::timevaluepair&place=korkeasaari&endtime=${endTime}&`
+      `https://opendata.fmi.fi/wfs?service=WFS&version=2.0.0&request=getFeature&storedquery_id=fmi::forecast::harmonie::surface::point::timevaluepair&place=korkeasaari&endtime=${endTime}&`
     );
 
     if (!response.ok) {
