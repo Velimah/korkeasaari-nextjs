@@ -55,7 +55,7 @@ const darkModeTooltipStyle = {
 
   return (
   <section className="space-y-3 px-6 text-center">
-    <h2>Visitor Data Graph</h2>
+    <h2>Historical Visitor Count</h2>
     <div>
     <ResponsiveContainer width="100%" height={400}>
         <LineChart

@@ -11,6 +11,8 @@ import {
   Tooltip,
   Legend,
   ResponsiveContainer,
+  ComposedChart,
+  Bar,
 } from 'recharts';
 import { fetchWeatherData, WeatherData as WeatherDataType } from '../utils/weatherForecastHook';
 
@@ -75,40 +77,32 @@ export default function WeatherData() {
 
   return (
     <section className="space-y-3 px-6 text-center">
-      <h2>Weather Data Graph</h2>
-
-      {/* Combined Line Chart */}
       <div>
-        <h3>Temperature and Cloud Coverage</h3>
+        <h3>Temperature and Cloud Coverage Forecast</h3>
         <ResponsiveContainer width="100%" height={400}>
-          <LineChart
+          <ComposedChart
             data={combinedData}
-            margin={{ top: 5, right: 0, left: 0, bottom: 5 }}
+            margin={{ top: 5, right: 5, left: 5, bottom: 5 }}
           >
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis 
               dataKey="time" 
               tickFormatter={(tick) => new Date(tick).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} 
             />
-            <YAxis yAxisId="left" orientation="left" />
             <Tooltip contentStyle={darkModeTooltipStyle} />
             <Legend />
+            <YAxis yAxisId="left" label={{ value: 'Temperature (°C)', angle: -90, position: 'insideLeft' }} />
+            <YAxis yAxisId="right" orientation="right" label={{ value: 'Cloud Cover (%)', angle: 90, position: 'insideRight' }} />
             <Line 
               yAxisId="left"
               type="monotone" 
               dataKey="temperature" 
-              stroke="#8884d8" 
+              stroke="green" 
               activeDot={{ r: 8 }} 
               name="Temperature"
             />
-            <Line 
-              yAxisId="left"
-              type="monotone" 
-              dataKey="cloudCover" 
-              stroke="#82ca9d" 
-              name="Cloud Coverage"
-            />
-          </LineChart>
+            <Bar yAxisId="right" dataKey="cloudCover" barSize={10} fill="rgba(65, 62, 160, 0.3)" />
+          </ComposedChart>
         </ResponsiveContainer>
       </div>
     </section>

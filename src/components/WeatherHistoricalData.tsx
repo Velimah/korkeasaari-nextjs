@@ -38,7 +38,7 @@ export default function WeatherHistoricalData() {
 
   return (
     <section className="space-y-3 px-6 text-center">
-      <h2>Weather Data</h2>
+      <h2>Historical Temperature</h2>
       <ResponsiveContainer width="100%" height={400}>
           <LineChart
             data={weatherData}
