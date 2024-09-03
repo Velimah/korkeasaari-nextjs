@@ -15,15 +15,13 @@ import WeatherHistoricalData from "@/components/WeatherHistoricalData";
 export default function Home() {
   return (
     <>
-    <section className="space-y-16 px-1 py-8">
-      <section className="grid grid-cols-1 items-center gap-8 sm:grid-cols-2">
+    <section className="px-1 py-8">
+      <section className="items-center px-8">
         <div className="space-y-3">
-          <H1 className="text-center sm:text-start">Welcome to Korkeasaari Weather and visitor data dashboard 👋</H1>
+          <H1 className="text-center sm:text-start">Welcome to Korkeasaari weather and visitor data dashboard 👋</H1>
           <p className="text-center sm:text-start">
-            You can find all the information about the weather and visitor data
+            You can find all the information about the weather and visitor data of Korkeasaari here.
           </p>
-        </div>
-        <div className="flex justify-center">
         </div>
       </section>
     </section>

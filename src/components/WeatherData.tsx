@@ -74,7 +74,7 @@ export default function WeatherData() {
   };
 
   return (
-    <section className="space-y-3 text-center">
+    <section className="space-y-3 px-6 text-center">
       <h2>Weather Data Graph</h2>
 
       {/* Combined Line Chart */}

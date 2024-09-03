@@ -29,8 +29,15 @@ export default function WeatherHistoricalData() {
     fetchData();
   }, []);
 
+    // Define custom tooltip styles
+    const darkModeTooltipStyle = {
+      backgroundColor: '#333',  // Dark background
+      border: '1px solid #555',  // Slightly lighter border
+      color: '#fff',             // White text
+    };
+
   return (
-    <section className="space-y-3 text-center">
+    <section className="space-y-3 px-6 text-center">
       <h2>Weather Data</h2>
       <ResponsiveContainer width="100%" height={400}>
           <LineChart
@@ -43,7 +50,7 @@ export default function WeatherHistoricalData() {
               tickFormatter={(tick) => new Date(tick).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} 
             />
             <YAxis yAxisId="left" orientation="left" />
-            <Tooltip />
+            <Tooltip contentStyle={darkModeTooltipStyle} />
             <Legend />
             <Line 
               yAxisId="left"
