@@ -11,7 +11,6 @@ interface WeatherData {
   }
   
   export interface AggregatedWeatherRecord {
-    station: string;
     date: string; // ISO 8601 formatted timestamp
     averageTemperature: number;
     totalPrecipitation: number | string;
@@ -52,7 +51,6 @@ interface WeatherData {
     }, 0);
 
     return {
-      station: records[0].station,
       date: `${dateKey}`,
       averageTemperature: parseFloat(averageTemperature.toFixed(2)),
       totalPrecipitation: parseFloat(totalPrecipitation.toFixed(2)),

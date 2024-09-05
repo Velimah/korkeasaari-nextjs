@@ -14,6 +14,7 @@ import {
   Bar,
 } from 'recharts';
 import { fetchWeatherData, WeatherData as WeatherDataType } from '../utils/weatherForecastHook';
+import { H2 } from './ui/H2';
 
 // Define the WeatherData component
 export default function WeatherData() {
@@ -78,9 +79,9 @@ export default function WeatherData() {
   });
 
   return (
-    <section className="space-y-3 px-6 text-center">
+    <section className="py-6 px-6 text-center">
       <div>
-        <h3>Temperature and Cloud Cover Forecast</h3>
+        <H2>Temperature and Cloud Cover Forecast</H2>
         <ResponsiveContainer width="100%" height={400}>
           <ComposedChart
             data={combinedData}

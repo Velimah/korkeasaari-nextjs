@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     template: "%s | Korkeasaari",
     default: "Korkeasaari",
   },
-  description: "Korkeasaari data dashboard",
+  description: "Korkeasaari dashboard",
 };
 
 export default function RootLayout({

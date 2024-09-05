@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import { Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, ComposedChart } from 'recharts';
 import { fetchVisitorData, YearlyData } from '../utils/visitorDataHook';
+import { H2 } from './ui/H2';
 
 export default function VisitorData() {
     const [visitorData, setVisitorData] = useState<any | null>(null);
@@ -43,8 +44,8 @@ export default function VisitorData() {
   }
 
   return (
-    <section className="space-y-3 px-6 text-center">
-      <h2>Visitor Count</h2>
+    <section className="py-6 px-6 text-center">
+      <H2>Visitor Count 2024</H2>
       <div>
       <ResponsiveContainer width="100%" height={400}>
           <ComposedChart

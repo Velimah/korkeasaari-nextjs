@@ -14,7 +14,8 @@ import {
     ResponsiveContainer,
     ComposedChart,
     Bar,
-  } from 'recharts';
+} from 'recharts';
+import { H2 } from './ui/H2';
 
 // Define the WeatherData component
 export default function WeatherHistoricalData() {
@@ -44,8 +45,8 @@ export default function WeatherHistoricalData() {
   }
   
   return (
-    <section className="space-y-3 px-6 text-center">
-      <h2>Temperatures for year 2023</h2>
+    <section className="py-6 px-6 text-center">
+      <H2>Temperatures and Precipitation between 10:00-20:00 for year 2023</H2>
       <ResponsiveContainer width="100%" height={400}>
         <ComposedChart
           data={weatherData}

@@ -23,10 +23,9 @@ export default function Home() {
       </section>
       </section>
       <section className="space-y-3 text-center">
-        <H2>Data</H2>
         <WeatherData />
-        <VisitorData />
         <WeatherHistoricalData />
+        <VisitorData />
       </section>
     </>
   );
