@@ -10,33 +10,33 @@ interface WeatherData {
     precipitation: number | string;
   }
   
-  export interface AggregatedWeatherRecord {
-    date: string; // ISO 8601 formatted timestamp
-    averageTemperature: number;
-    totalPrecipitation: number | string;
-  }
-  
-  export const fetchWeatherHistoricalData = (): AggregatedWeatherRecord[] => {
+export interface AggregatedWeatherRecord {
+  date: string; // ISO 8601 formatted timestamp
+  averageTemperature: number;
+  totalPrecipitation: number | string;
+}
 
-    // Helper function to check if time is within the range 10:00 to 20:00
-    const isTimeInRange = (time: string): boolean => {
-        const [hours] = time.split(':').map(Number);
-        return hours >= 10 && hours <= 20;
-    };
-  
-    // Group records by date
-    const groupedRecords = FMI2023.reduce((acc: { [key: string]: WeatherData[] }, entry: WeatherData) => {
-      if (isTimeInRange(entry.time)) {
-        const { year, month, date } = entry;
-        const dateKey = `${year}-${month.toString().padStart(2, '0')}-${date.toString().padStart(2, '0')}`;
+export const fetchWeatherHistoricalData = (): AggregatedWeatherRecord[] => {
 
-        if (!acc[dateKey]) {
-          acc[dateKey] = [];
-        }
-        acc[dateKey].push(entry);
+  // Helper function to check if time is within the range 10:00 to 20:00
+  const isTimeInRange = (time: string): boolean => {
+      const [hours] = time.split(':').map(Number);
+      return hours >= 10 && hours <= 20;
+  };
+
+  // Group records by date
+  const groupedRecords = FMI2023.reduce((acc: { [key: string]: WeatherData[] }, entry: WeatherData) => {
+    if (isTimeInRange(entry.time)) {
+      const { year, month, date } = entry;
+      const dateKey = `${year}-${month.toString().padStart(2, '0')}-${date.toString().padStart(2, '0')}`;
+
+      if (!acc[dateKey]) {
+        acc[dateKey] = [];
       }
-      return acc;
-    }, {});
+      acc[dateKey].push(entry);
+    }
+    return acc;
+  }, {});
 
   // Calculate average temperature and total precipitation for each date
   const aggregatedRecords: AggregatedWeatherRecord[] = Object.keys(groupedRecords).map(dateKey => {

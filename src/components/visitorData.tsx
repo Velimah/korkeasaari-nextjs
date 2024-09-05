@@ -1,7 +1,7 @@
 "use client";  // Ensure this component is treated as a client component
 
 import React, { useEffect, useState } from 'react';
-import { Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, ComposedChart } from 'recharts';
+import { Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, ComposedChart, Brush } from 'recharts';
 import { fetchVisitorData, YearlyData } from '../utils/visitorDataHook';
 import { H2 } from './ui/H2';
 
@@ -66,6 +66,7 @@ export default function VisitorData() {
               stroke="#8884d8"
               name="Daily Visitors"
             />
+            <Brush />
           </ComposedChart>
         </ResponsiveContainer>
       </div>

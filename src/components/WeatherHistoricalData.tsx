@@ -14,6 +14,7 @@ import {
     ResponsiveContainer,
     ComposedChart,
     Bar,
+    Brush,
 } from 'recharts';
 import { H2 } from './ui/H2';
 
@@ -38,9 +39,9 @@ export default function WeatherHistoricalData() {
       border: '1px solid #555',  // Slightly lighter border
       color: '#fff',             // White text
     };
-*/
+  */
   
-    if (!weatherData) {
+  if (!weatherData) {
     return <p>Loading...</p>;
   }
   
@@ -70,6 +71,7 @@ export default function WeatherHistoricalData() {
             name="Temperature"
           />
           <Bar yAxisId="right" name="Precipitation" dataKey="totalPrecipitation" barSize={10} fill="rgba(65, 62, 160, 0.8)" />
+          <Brush />
         </ComposedChart>
         </ResponsiveContainer>
     </section>
