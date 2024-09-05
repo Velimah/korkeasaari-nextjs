@@ -58,7 +58,7 @@ export default function WeatherHistoricalData() {
             dataKey="date" 
             tickFormatter={(date) => new Date(date).toLocaleDateString()} 
           />
-          <YAxis yAxisId="left" label={{ value: 'Temperature (°C)', angle: -90, position: 'insideLeft' }} />
+          <YAxis yAxisId="left" domain={[(dataMin: number) => dataMin - 2, (dataMax: number) => dataMax + 2]}  label={{ value: 'Temperature (°C)', angle: -90, position: 'insideLeft' }} />
           <YAxis yAxisId="right" orientation="right" label={{ value: 'Precipitation (mm)', angle: 90, position: 'insideRight' }} />
           <Tooltip />
           <Legend />

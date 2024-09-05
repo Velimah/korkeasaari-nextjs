@@ -91,11 +91,10 @@ export default function WeatherData() {
             <XAxis 
               dataKey="time" 
               tickFormatter={(tick) => new Date(tick).toLocaleTimeString('fi-FI', { hour: '2-digit', minute: '2-digit' })}
-
             />
             <Tooltip />
             <Legend />
-            <YAxis yAxisId="left" label={{ value: 'Temperature (°C)', angle: -90, position: 'insideLeft' }} />
+            <YAxis yAxisId="left" domain={[(dataMin: number) => dataMin - 2, (dataMax: number) => dataMax + 2]}  label={{ value: 'Temperature (°C)', angle: -90, position: 'insideLeft' }} />
             <YAxis yAxisId="right" orientation="right" label={{ value: 'Cloud Cover (%)', angle: 90, position: 'insideRight' }} />
             <Line 
               yAxisId="left"
