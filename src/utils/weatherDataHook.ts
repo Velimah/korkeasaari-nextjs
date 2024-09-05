@@ -19,25 +19,25 @@ interface WeatherData {
   
   export const fetchWeatherHistoricalData = (): AggregatedWeatherRecord[] => {
 
-        // Helper function to check if time is within the range 10:00 to 20:00
+    // Helper function to check if time is within the range 10:00 to 20:00
     const isTimeInRange = (time: string): boolean => {
         const [hours] = time.split(':').map(Number);
         return hours >= 10 && hours <= 20;
     };
   
-   // Group records by date
-  const groupedRecords = FMI2023.reduce((acc: { [key: string]: WeatherData[] }, entry: WeatherData) => {
-    if (isTimeInRange(entry.time)) {
-      const { year, month, date, station } = entry;
-      const dateKey = `${year}-${month.toString().padStart(2, '0')}-${date.toString().padStart(2, '0')}`;
+    // Group records by date
+    const groupedRecords = FMI2023.reduce((acc: { [key: string]: WeatherData[] }, entry: WeatherData) => {
+      if (isTimeInRange(entry.time)) {
+        const { year, month, date } = entry;
+        const dateKey = `${year}-${month.toString().padStart(2, '0')}-${date.toString().padStart(2, '0')}`;
 
-      if (!acc[dateKey]) {
-        acc[dateKey] = [];
+        if (!acc[dateKey]) {
+          acc[dateKey] = [];
+        }
+        acc[dateKey].push(entry);
       }
-      acc[dateKey].push(entry);
-    }
-    return acc;
-  }, {});
+      return acc;
+    }, {});
 
   // Calculate average temperature and total precipitation for each date
   const aggregatedRecords: AggregatedWeatherRecord[] = Object.keys(groupedRecords).map(dateKey => {
@@ -53,9 +53,9 @@ interface WeatherData {
 
     return {
       station: records[0].station,
-      date: `${dateKey}T12:00:00Z`, // Choosing 12:00 for consistency in ISO format
+      date: `${dateKey}`,
       averageTemperature: parseFloat(averageTemperature.toFixed(2)),
-      totalPrecipitation,
+      totalPrecipitation: parseFloat(totalPrecipitation.toFixed(2)),
     };
   });
 

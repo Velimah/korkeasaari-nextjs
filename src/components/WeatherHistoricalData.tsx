@@ -12,6 +12,8 @@ import {
     Tooltip,
     Legend,
     ResponsiveContainer,
+    ComposedChart,
+    Bar,
   } from 'recharts';
 
 // Define the WeatherData component
@@ -25,42 +27,49 @@ export default function WeatherHistoricalData() {
         setWeatherData(data);
         console.log(data);
     }
-
     fetchData();
   }, []);
 
+  /*
     // Define custom tooltip styles
     const darkModeTooltipStyle = {
       backgroundColor: '#333',  // Dark background
       border: '1px solid #555',  // Slightly lighter border
       color: '#fff',             // White text
     };
-
+*/
+  
+    if (!weatherData) {
+    return <p>Loading...</p>;
+  }
+  
   return (
     <section className="space-y-3 px-6 text-center">
-      <h2>Historical Temperature</h2>
+      <h2>Temperatures for year 2023</h2>
       <ResponsiveContainer width="100%" height={400}>
-          <LineChart
-            data={weatherData}
-            margin={{ top: 5, right: 0, left: 0, bottom: 5 }}
-          >
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis 
-              dataKey="date" 
-              tickFormatter={(tick) => new Date(tick).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} 
-            />
-            <YAxis yAxisId="left" orientation="left" />
-            <Tooltip contentStyle={darkModeTooltipStyle} />
-            <Legend />
-            <Line 
-              yAxisId="left"
-              type="monotone" 
-              dataKey="averageTemperature" 
-              stroke="#8884d8" 
-              activeDot={{ r: 8 }} 
-              name="Temperature"
-            />
-          </LineChart>
+        <ComposedChart
+          data={weatherData}
+          margin={{ top: 5, right: 5, left: 5, bottom: 5 }}
+        >
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis 
+            dataKey="date" 
+            tickFormatter={(date) => new Date(date).toLocaleDateString()} 
+          />
+          <YAxis yAxisId="left" label={{ value: 'Temperature (°C)', angle: -90, position: 'insideLeft' }} />
+          <YAxis yAxisId="right" orientation="right" label={{ value: 'Precipitation (mm)', angle: 90, position: 'insideRight' }} />
+          <Tooltip />
+          <Legend />
+          <Line 
+            yAxisId="left"
+            type="monotone" 
+            dataKey="averageTemperature" 
+            stroke="green"
+            activeDot={{ r: 8 }} 
+            name="Temperature"
+          />
+          <Bar yAxisId="right" name="Precipitation" dataKey="totalPrecipitation" barSize={10} fill="rgba(65, 62, 160, 0.8)" />
+        </ComposedChart>
         </ResponsiveContainer>
     </section>
   );

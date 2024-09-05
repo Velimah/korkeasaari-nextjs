@@ -3,7 +3,6 @@
 
 import React, { useEffect, useState } from 'react';
 import {
-  LineChart,
   Line,
   XAxis,
   YAxis,
@@ -78,17 +77,10 @@ export default function WeatherData() {
     };
   });
 
-  // Define custom tooltip styles
-  const darkModeTooltipStyle = {
-    backgroundColor: '#333',  // Dark background
-    border: '1px solid #555',  // Slightly lighter border
-    color: '#fff',             // White text
-  };
-
   return (
     <section className="space-y-3 px-6 text-center">
       <div>
-        <h3>Temperature and Cloud Coverage Forecast</h3>
+        <h3>Temperature and Cloud Cover Forecast</h3>
         <ResponsiveContainer width="100%" height={400}>
           <ComposedChart
             data={combinedData}
@@ -97,9 +89,10 @@ export default function WeatherData() {
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis 
               dataKey="time" 
-              tickFormatter={(tick) => new Date(tick).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} 
+              tickFormatter={(tick) => new Date(tick).toLocaleTimeString('fi-FI', { hour: '2-digit', minute: '2-digit' })}
+
             />
-            <Tooltip contentStyle={darkModeTooltipStyle} />
+            <Tooltip />
             <Legend />
             <YAxis yAxisId="left" label={{ value: 'Temperature (°C)', angle: -90, position: 'insideLeft' }} />
             <YAxis yAxisId="right" orientation="right" label={{ value: 'Cloud Cover (%)', angle: 90, position: 'insideRight' }} />
@@ -111,7 +104,7 @@ export default function WeatherData() {
               activeDot={{ r: 8 }} 
               name="Temperature"
             />
-            <Bar yAxisId="right" dataKey="cloudCover" barSize={10} fill="rgba(65, 62, 160, 0.8)" />
+            <Bar yAxisId="right" name="Cloud Cover" dataKey="cloudCover" barSize={10} fill="rgba(65, 62, 160, 0.8)" />
           </ComposedChart>
         </ResponsiveContainer>
       </div>

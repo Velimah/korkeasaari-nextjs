@@ -1,7 +1,7 @@
 "use client";  // Ensure this component is treated as a client component
 
 import React, { useEffect, useState } from 'react';
-import { BarChart, Bar, Rectangle, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Line, LineChart } from 'recharts';
+import { Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, ComposedChart } from 'recharts';
 import { fetchVisitorData, YearlyData } from '../utils/visitorDataHook';
 
 export default function VisitorData() {
@@ -18,15 +18,8 @@ export default function VisitorData() {
           console.error('Error fetching visitor data:', error);
         }
       }
-  
       fetchData();
     }, []);
-
-    // Utility function to format time as local time
-    const formatTime = (timeString: string): string => {
-      const date = new Date(timeString);
-      return date.toLocaleString(); // Local date and time string
-    };
 
     function getDailyTotals(yearlyData: YearlyData): { date: string; total: number }[] {
       const dailyTotals: { date: string; total: number }[] = [];
@@ -37,49 +30,44 @@ export default function VisitorData() {
           const date = `${yearlyData.year}-${String(month.month + 1).padStart(2, '0')}-${String(day.day).padStart(2, '0')}`;
           dailyTotals.push({ date, total: day.total });
         });
-      });
-    
+      });   
       return dailyTotals;
     }
     
-    // Convert the data for the chart
-const dailyTotals = visitorData ? getDailyTotals(visitorData) : [];
-console.log('Daily Totals:', dailyTotals);
+  // Convert the data for the chart
+  const dailyTotals = visitorData ? getDailyTotals(visitorData) : [];
+  console.log('Daily Totals:', dailyTotals);
 
-// Define custom tooltip styles
-const darkModeTooltipStyle = {
-  backgroundColor: '#333',  // Dark background
-  border: '1px solid #555',  // Slightly lighter border
-  color: '#fff',             // White text
-};
+    if (!dailyTotals) {
+    return <p>Loading...</p>;
+  }
 
   return (
-  <section className="space-y-3 px-6 text-center">
-    <h2>Historical Visitor Count</h2>
-    <div>
-    <ResponsiveContainer width="100%" height={400}>
-        <LineChart
-          data={dailyTotals}
-          margin={{ top: 5, right: 0, left: 0, bottom: 5 }}
-        >
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis 
-            dataKey="date" 
-            tickFormatter={(date) => new Date(date).toLocaleDateString()} // Format date
-          />
-          <YAxis />
-          <Tooltip contentStyle={darkModeTooltipStyle} />
-          <Legend />
-          <Line 
-            type="monotone" 
-            dataKey="total" 
-            stroke="#8884d8" 
-            activeDot={{ r: 8 }} 
-            name="Daily Visitors"
-          />
-        </LineChart>
-      </ResponsiveContainer>
-    </div>
-  </section>
+    <section className="space-y-3 px-6 text-center">
+      <h2>Visitor Count</h2>
+      <div>
+      <ResponsiveContainer width="100%" height={400}>
+          <ComposedChart
+            data={dailyTotals}
+            margin={{ top: 5, right: 5, left: 5, bottom: 5 }}
+          >
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis 
+              dataKey="date" 
+              tickFormatter={(date) => new Date(date).toLocaleDateString()} // Format date
+            />
+            <YAxis />
+            <Tooltip />
+            <Legend />
+            <Bar 
+              type="monotone" 
+              dataKey="total" 
+              stroke="#8884d8"
+              name="Daily Visitors"
+            />
+          </ComposedChart>
+        </ResponsiveContainer>
+      </div>
+    </section>
   );
 }

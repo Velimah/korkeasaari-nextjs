@@ -16,12 +16,9 @@ export default function Home() {
   return (
     <>
     <section className="px-1 py-8">
-      <section className="items-center px-8">
+      <section className="items-center flex justify-center px-8">
         <div className="space-y-3">
-          <H1 className="text-center sm:text-start">Welcome to Korkeasaari weather and visitor data dashboard 👋</H1>
-          <p className="text-center sm:text-start">
-            You can find all the information about the weather and visitor data of Korkeasaari here.
-          </p>
+          <H1 className="text-center sm:text-start">Welcome to Korkeasaari weather and visitor dashboard</H1>
         </div>
       </section>
       </section>
