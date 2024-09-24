@@ -1,6 +1,6 @@
 const url = "https://oma.enkora.fi/korkeasaari/reports/validations/json";
 
-export const fetchEnkoraData = async (startDate: string, endDate: string) => {
+const fetchEnkoraData = async (startDate: string, endDate: string) => {
   const data = new URLSearchParams({
     input_format: "post_data",
     authentication: `${process.env.ENKORA_USER},${process.env.ENKORA_PASS}`,

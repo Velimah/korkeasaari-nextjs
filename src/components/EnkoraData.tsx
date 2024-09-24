@@ -1,7 +1,6 @@
 "use client";  // Ensure this component is treated as a client component
 
 import { useEffect, useState } from "react";
-import { H2 } from "./ui/H2";
 import { ChartConfig, ChartContainer, ChartLegend, ChartLegendContent, ChartTooltip, ChartTooltipContent } from "./ui/chart";
 import { Bar, CartesianGrid, ComposedChart, XAxis, YAxis } from "recharts";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./ui/card";
@@ -56,7 +55,6 @@ export default function EnkoraData() {
         date: string;
         [key: string]: number | string;
     }
-
 
     if (visitorData && visitorData.validations && visitorData.validations.rows) {
         const output: OutputEntry[] = [];

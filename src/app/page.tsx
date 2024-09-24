@@ -1,6 +1,5 @@
 import { H2 } from "@/components/ui/H2";
 import { Metadata } from "next";
-import VisitorData from "@/components/visitorData";
 import WeatherHistoricalData from "@/components/WeatherHistoricalData";
 import EnkoraData from "@/components/EnkoraData";
 
@@ -20,6 +19,7 @@ export default function Dashboard() {
         </section>
       </section>
       <section className="space-y-3 text-center">
+        <WeatherHistoricalData />
         <EnkoraData />
       </section>
     </>
