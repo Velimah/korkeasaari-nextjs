@@ -4,7 +4,7 @@ export default function Footer() {
   return (
     <footer>
       <nav className="mx-auto flex justify-center gap-3 p-3 bg-secondary">
-        <Link href="/privacy">Metsämurmelit</Link>
+        <Link href="/">Metsämurmelit</Link>
       </nav>
     </footer>
   );

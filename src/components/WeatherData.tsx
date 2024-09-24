@@ -12,7 +12,6 @@ import {
 } from 'recharts';
 import { ChartContainer, ChartLegend, ChartLegendContent, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart"
 import { fetchWeatherData, WeatherData as WeatherDataType } from '../utils/weatherForecastHook';
-
 import { type ChartConfig } from "@/components/ui/chart"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
 
@@ -112,7 +111,7 @@ export default function WeatherData() {
                     <ChartTooltipContent
                       formatter={(value, name) => (
                         <>
-                          <div className="flex items-center justify-between min-w-[130px] gap-2 text-xs text-muted-foreground">
+                          <div className="flex items-center justify-between min-w-[130px] w-full gap-4 text-xs text-muted-foreground">
                             <div className="flex items-center gap-2">
                               <div
                                 className="h-2.5 w-2.5 shrink-0 rounded-[2px] bg-[--color-bg]"
@@ -124,7 +123,7 @@ export default function WeatherData() {
                               />
                               {chartConfig[name as keyof typeof chartConfig]?.label || name}
                             </div>
-                            <div className="ml-auto flex items-baseline gap-0.5 font-mono font-medium text-right text-foreground">
+                            <div className="flex items-center font-mono font-medium text-right text-foreground">
                               {value}
                             </div>
                           </div>
@@ -143,7 +142,10 @@ export default function WeatherData() {
                 />
                 <YAxis
                   yAxisId="left"
-                  domain={[(dataMin: number) => dataMin - 2, (dataMax: number) => dataMax + 2]}
+                  domain={[
+                    (dataMin: number) => Math.floor(dataMin - 2),
+                    (dataMax: number) => Math.ceil(dataMax + 2),
+                  ]}
                   label={{ value: 'Temperature (°C)', angle: -90, position: 'insideLeft' }}
                 />
                 <YAxis

@@ -30,20 +30,20 @@ export default function WeatherHistoricalData() {
     fetchData();
   }, []);
 
-  if (!weatherData) {
-    return <p>Loading...</p>;
-  }
-
   const chartConfig = {
     averageTemperature: {
-      label: "Average Temperature",
+      label: "Average Temperature (°C)",
       color: "#25582b",
     },
     totalPrecipitation: {
-      label: "Total Precipitation",
+      label: "Total Precipitation (mm)",
       color: "#aac929",
     },
   } satisfies ChartConfig
+
+  if (!weatherData) {
+    return <p>Loading...</p>;
+  }
 
   return (
     <section className="py-6 px-6 text-center">
@@ -60,18 +60,48 @@ export default function WeatherHistoricalData() {
           <ChartContainer config={chartConfig} className="h-[400px] w-full">
             <ComposedChart accessibilityLayer data={weatherData}>
               <CartesianGrid vertical={false} />
-              <ChartTooltip content={<ChartTooltipContent />} />
+              <ChartTooltip
+                content={
+                  <ChartTooltipContent
+                    formatter={(value, name) => (
+                      <>
+                        <div className="flex items-center justify-between min-w-[130px] w-full gap-4 text-xs text-muted-foreground">
+                          <div className="flex items-center gap-2">
+                            <div
+                              className="h-2.5 w-2.5 shrink-0 rounded-[2px] bg-[--color-bg]"
+                              style={
+                                {
+                                  "--color-bg": `var(--color-${name})`,
+                                } as React.CSSProperties
+                              }
+                            />
+                            {chartConfig[name as keyof typeof chartConfig]?.label || name}
+                          </div>
+                          <div className="flex items-center gap-0.5 font-mono font-medium text-right text-foreground">
+                            {value}
+                          </div>
+                        </div>
+                      </>
+                    )}
+                  />
+                }
+                cursor={false}
+                defaultIndex={1}
+              />
               <ChartLegend content={<ChartLegendContent />} />
               <XAxis
                 dataKey="date"
                 tickLine={false}
                 tickMargin={10}
                 axisLine={false}
-                tickFormatter={(date) => new Date(date).toLocaleDateString()}
+
               />
               <YAxis
                 yAxisId="left"
-                domain={[(dataMin: number) => dataMin - 2, (dataMax: number) => dataMax + 2]}
+                domain={[
+                  (dataMin: number) => Math.floor(dataMin - 2),
+                  (dataMax: number) => Math.ceil(dataMax + 2),
+                ]}
                 label={{ value: 'Temperature (°C)', angle: -90, position: 'insideLeft' }}
               />
               <YAxis

@@ -13,7 +13,7 @@ export default function Analytics() {
       <section className="px-1 py-8">
         <section className="items-center flex justify-center px-8">
           <div className="space-y-3">
-            <H2 className="text-center sm:text-start">Welcome to Korkeasaari weather and visitor dashboard</H2>
+            <H2 className="text-center sm:text-start">Weather and Visitor Analytics</H2>
           </div>
         </section>
       </section>
