@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     template: "%s | Korkeasaari",
     default: "Korkeasaari",
   },
-  description: "Korkeasaari dashboard",
+  description: "Korkeasaari Zoo Dashboard",
 };
 
 export default function RootLayout({
@@ -25,7 +25,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <ThemeProvider attribute="class">
           <Navbar />
-            <main className="mx-auto max-w-6xl pb-6 pt-0">{children}</main>
+          <main className="mx-auto max-w-6xl pb-6 pt-0">{children}</main>
           <Footer />
         </ThemeProvider>
       </body>

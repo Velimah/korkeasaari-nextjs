@@ -56,7 +56,7 @@ export default function WeatherData() {
     value: entry.value,
   }));
 
-    const precipitationData = weatherData.precipitationAmountData.map((entry) => ({
+  const precipitationData = weatherData.precipitationAmountData.map((entry) => ({
     time: formatTime(entry.time),
     value: entry.value,
   }));
@@ -67,7 +67,7 @@ export default function WeatherData() {
       (cloudEntry) => cloudEntry.time === tempEntry.time
     );
 
-        const precipitationEntry = precipitationData.find(
+    const precipitationEntry = precipitationData.find(
       (precipitationEntry) => precipitationEntry.time === tempEntry.time
     );
 
@@ -84,91 +84,91 @@ export default function WeatherData() {
       label: "Temperature (°C)",
       color: "#25582b",
     },
-      precipitation: {
+    precipitation: {
       label: "Precipitation (mm)",
       color: "#aac929",
     },
   } satisfies ChartConfig
-  
+
   return (
     <section className="py-6 px-6 text-center">
       <div>
-      <Card>
-        <CardHeader>
-          <CardTitle>
-            Weather Forecast
-          </CardTitle>
-          <CardDescription>
-            Temperature and Cloud Cover for the next 60 Hours.
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <ChartContainer config={chartConfig} className="h-[400px] w-full">
-            <ComposedChart accessibilityLayer data={combinedData}>
-              <CartesianGrid vertical={false} />
-              <ChartLegend content={<ChartLegendContent />} />
-              <ChartTooltip
-                content={
-                  <ChartTooltipContent
-                    formatter={(value, name) => (
-                      <>
-                        <div className="flex items-center justify-between min-w-[130px] gap-2 text-xs text-muted-foreground">
-                          <div className="flex items-center gap-2">
-                            <div
-                              className="h-2.5 w-2.5 shrink-0 rounded-[2px] bg-[--color-bg]"
-                              style={
-                                {
-                                  "--color-bg": `var(--color-${name})`,
-                                } as React.CSSProperties
-                              }
-                            />
-                            {chartConfig[name as keyof typeof chartConfig]?.label || name}
+        <Card>
+          <CardHeader>
+            <CardTitle>
+              Weather Forecast
+            </CardTitle>
+            <CardDescription>
+              Temperature and Precipitation for the next 60 Hours.
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <ChartContainer config={chartConfig} className="h-[400px] w-full">
+              <ComposedChart accessibilityLayer data={combinedData}>
+                <CartesianGrid vertical={false} />
+                <ChartLegend content={<ChartLegendContent />} />
+                <ChartTooltip
+                  content={
+                    <ChartTooltipContent
+                      formatter={(value, name) => (
+                        <>
+                          <div className="flex items-center justify-between min-w-[130px] gap-2 text-xs text-muted-foreground">
+                            <div className="flex items-center gap-2">
+                              <div
+                                className="h-2.5 w-2.5 shrink-0 rounded-[2px] bg-[--color-bg]"
+                                style={
+                                  {
+                                    "--color-bg": `var(--color-${name})`,
+                                  } as React.CSSProperties
+                                }
+                              />
+                              {chartConfig[name as keyof typeof chartConfig]?.label || name}
+                            </div>
+                            <div className="ml-auto flex items-baseline gap-0.5 font-mono font-medium text-right text-foreground">
+                              {value}
+                            </div>
                           </div>
-                          <div className="ml-auto flex items-baseline gap-0.5 font-mono font-medium text-right text-foreground">
-                            {value}
-                          </div>
-                        </div>
-                      </>
-                    )}
-                  />
+                        </>
+                      )}
+                    />
                   }
                   cursor={false}
                   defaultIndex={1}
-              />
-              <XAxis
-                dataKey="time"
-                tickLine={false}
-                tickMargin={10}
-                axisLine={false}
-              />
-              <YAxis
-                yAxisId="left"
-                domain={[(dataMin: number) => dataMin - 2, (dataMax: number) => dataMax + 2]}
-                label={{ value: 'Temperature (°C)', angle: -90, position: 'insideLeft' }}
-              />
-              <YAxis
-                yAxisId="right"
-                orientation="right"
-                label={{ value: 'Precipitation (mm)', angle: 90, position: 'insideRight' }}
+                />
+                <XAxis
+                  dataKey="time"
+                  tickLine={false}
+                  tickMargin={10}
+                  axisLine={false}
+                />
+                <YAxis
+                  yAxisId="left"
+                  domain={[(dataMin: number) => dataMin - 2, (dataMax: number) => dataMax + 2]}
+                  label={{ value: 'Temperature (°C)', angle: -90, position: 'insideLeft' }}
+                />
+                <YAxis
+                  yAxisId="right"
+                  orientation="right"
+                  label={{ value: 'Precipitation (mm)', angle: 90, position: 'insideRight' }}
                 />
                 <Bar
-                yAxisId="right"
-                dataKey="precipitation"
-                fill="var(--color-precipitation)"
-                radius={4}
+                  yAxisId="right"
+                  dataKey="precipitation"
+                  fill="var(--color-precipitation)"
+                  radius={4}
                 />
                 <Line
-                yAxisId="left"
-                dataKey="temperature"
-                type="natural"
-                stroke="var(--color-temperature)"
-                strokeWidth={2}
-                dot={false}
-              />
-            </ComposedChart>
-          </ChartContainer>
-        </CardContent>
-      </Card>
+                  yAxisId="left"
+                  dataKey="temperature"
+                  type="natural"
+                  stroke="var(--color-temperature)"
+                  strokeWidth={2}
+                  dot={false}
+                />
+              </ComposedChart>
+            </ChartContainer>
+          </CardContent>
+        </Card>
       </div>
     </section>
   );

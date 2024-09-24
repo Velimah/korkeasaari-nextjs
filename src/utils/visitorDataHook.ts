@@ -31,7 +31,6 @@ export const fetchVisitorData = async (): Promise<YearlyData> => {
       }
   
       const visitorData = await response.json();
-      console.log("Visitor data:", visitorData);
       return visitorData;
   } catch (error) {
     console.error("Error fetching or processing data:", error);

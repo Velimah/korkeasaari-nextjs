@@ -1,15 +1,13 @@
 import { H2 } from "@/components/ui/H2";
 import { Metadata } from "next";
-import VisitorData from "@/components/visitorData";
-import WeatherHistoricalData from "@/components/WeatherHistoricalData";
-import EnkoraData from "@/components/EnkoraData";
 
 export const metadata: Metadata = {
-  title: "Dashboard",
-  description: "Dashboard for Weather and Visitor Data.",
+  title: "Analytics",
+  description: "Analytics for Weather and Visitor Data.",
 };
 
-export default function Dashboard() {
+
+export default function Analytics() {
   return (
     <>
       <section className="px-1 py-8">
@@ -20,7 +18,6 @@ export default function Dashboard() {
         </section>
       </section>
       <section className="space-y-3 text-center">
-        <EnkoraData />
       </section>
     </>
   );
