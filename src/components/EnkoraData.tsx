@@ -2,8 +2,8 @@
 
 import { useEffect, useState } from "react";
 import { ChartConfig, ChartContainer, ChartLegend, ChartLegendContent, ChartTooltip, ChartTooltipContent } from "./ui/chart";
-import { Bar, CartesianGrid, ComposedChart, XAxis, YAxis } from "recharts";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./ui/card";
+import { Bar, CartesianGrid, ComposedChart, XAxis, YAxis } from "recharts";
 
 export default function EnkoraData() {
 
@@ -78,23 +78,23 @@ export default function EnkoraData() {
   const chartConfig = {
     Kulkulupa: {
       label: "Kulkulupa",
-      color: "#B14D97",
+      color: "#000000",
     },
     Ilmaiskävijät: {
       label: "Ilmaiskävijät",
-      color: "#000000",
+      color: "#FF3B2F",
     },
     Pääsyliput: {
       label: "Pääsyliput",
-      color: "#25582b",
+      color: "#AAC929",
     },
     Verkkokauppa_Pääsyliput: {
       label: "Verkkokauppa Pääsyliput",
-      color: "#AAC929",
+      color: "#25582b",
     },
     Vuosiliput: {
       label: "Vuosiliput",
-      color: "#FF3B2F",
+      color: "#B14D97",
     },
   } satisfies ChartConfig
 
@@ -103,12 +103,14 @@ export default function EnkoraData() {
   }
 
   return (
-    <section className="py-6 px-6 text-center">
+    <section className="m-6 text-center">
       <div>
-        <Card>
+        <Card className='dark:bg-slate-800 bg-secondary' >
           <CardHeader>
-            <CardTitle>Visitor Count Korkeasaari</CardTitle>
-            <CardDescription>{startDate} - {endDate}</CardDescription>
+            <CardTitle>Korkeasaaren Kävijämäärät</CardTitle>
+            <CardDescription>
+              {new Date(startDate).toLocaleDateString('fi-FI')} - {new Date(endDate).toLocaleDateString('fi-FI')}
+            </CardDescription>
           </CardHeader>
           <CardContent>
             <ChartContainer config={chartConfig} className="h-[400px] w-full">
@@ -119,12 +121,19 @@ export default function EnkoraData() {
                   tickLine={false}
                   tickMargin={10}
                   axisLine={false}
-                  tickFormatter={(value) => value}
+                  tickFormatter={(value) => new Date(value).toLocaleDateString('fi-FI')}
                 />
                 <ChartTooltip
                   content={
                     <ChartTooltipContent
-                      formatter={(value, name) => (
+                      labelFormatter={(value) => {
+                        return new Date(value).toLocaleDateString("fi-FI", {
+                          day: "numeric",
+                          month: "long",
+                          year: "numeric",
+                        })
+                      }}
+                      formatter={(value, name, item, index) => (
                         <>
                           <div className="flex items-center justify-between min-w-[130px] w-full gap-4 text-xs text-muted-foreground">
                             <div className="flex items-center gap-2">
@@ -142,16 +151,24 @@ export default function EnkoraData() {
                               {value}
                             </div>
                           </div>
+                          {index === 4 && (
+                            <div className="mt-1.5 flex basis-full items-center border-t pt-1.5 text-xs font-medium text-foreground">
+                              Yhteensä
+                              <div className="ml-auto flex items-baseline gap-0.5 font-mono font-semibold tabular-nums text-foreground">
+                                {item.payload.Ilmaiskävijät + item.payload.Pääsyliput + item.payload.Verkkokauppa_Pääsyliput + item.payload.Vuosiliput}
+                              </div>
+                            </div>
+                          )}
                         </>
                       )}
                     />
                   }
-                  cursor={false}
+                  cursor={true}
                   defaultIndex={1}
                 />
                 <ChartLegend content={<ChartLegendContent />} />
                 <YAxis
-                  label={{ value: 'Visitors', angle: -90, position: 'insideLeft' }} />
+                  label={{ value: 'Kävijämäärä', angle: -90, position: 'insideLeft' }} />
                 <Bar
                   dataKey="Kulkulupa"
                   stackId="a"
@@ -165,9 +182,9 @@ export default function EnkoraData() {
                   radius={[0, 0, 0, 0]}
                 />
                 <Bar
-                  dataKey="Pääsyliput"
+                  dataKey="Vuosiliput"
                   stackId="a"
-                  fill="var(--color-Pääsyliput)"
+                  fill="var(--color-Vuosiliput)"
                   radius={[0, 0, 0, 0]}
                 />
                 <Bar
@@ -177,9 +194,9 @@ export default function EnkoraData() {
                   radius={[0, 0, 0, 0]}
                 />
                 <Bar
-                  dataKey="Vuosiliput"
+                  dataKey="Pääsyliput"
                   stackId="a"
-                  fill="var(--color-Vuosiliput)"
+                  fill="var(--color-Pääsyliput)"
                   radius={[0, 0, 0, 0]}
                 />
               </ComposedChart>

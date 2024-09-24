@@ -1,7 +1,9 @@
-
 "use client";  // Ensure this component is treated as a client component
 
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
+import { fetchWeatherData, WeatherData as WeatherDataType } from '../utils/weatherForecastHook';
+import { ChartConfig, ChartContainer, ChartLegend, ChartLegendContent, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
 import {
   Line,
   XAxis,
@@ -10,10 +12,6 @@ import {
   ComposedChart,
   Bar,
 } from 'recharts';
-import { ChartContainer, ChartLegend, ChartLegendContent, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart"
-import { fetchWeatherData, WeatherData as WeatherDataType } from '../utils/weatherForecastHook';
-import { type ChartConfig } from "@/components/ui/chart"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
 
 
 // Define the WeatherData component
@@ -90,9 +88,9 @@ export default function WeatherData() {
   } satisfies ChartConfig
 
   return (
-    <section className="py-6 px-6 text-center">
+    <section className="m-6 text-center">
       <div>
-        <Card>
+        <Card className='dark:bg-slate-800 bg-secondary' >
           <CardHeader>
             <CardTitle>
               Weather Forecast
@@ -131,7 +129,7 @@ export default function WeatherData() {
                       )}
                     />
                   }
-                  cursor={false}
+                  cursor={true}
                   defaultIndex={1}
                 />
                 <XAxis
@@ -152,6 +150,7 @@ export default function WeatherData() {
                   yAxisId="right"
                   orientation="right"
                   label={{ value: 'Precipitation (mm)', angle: 90, position: 'insideRight' }}
+                  domain={[0, (dataMax: number) => Math.ceil(dataMax + 10)]} // Ensures that the max value is slightly above the data max
                 />
                 <Bar
                   yAxisId="right"

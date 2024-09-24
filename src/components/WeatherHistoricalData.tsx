@@ -1,8 +1,9 @@
-
 "use client";  // Ensure this component is treated as a client component
 
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { fetchWeatherHistoricalData } from '@/utils/weatherDataHook';
+import { ChartConfig, ChartContainer, ChartLegend, ChartLegendContent, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
 import {
   Line,
   XAxis,
@@ -12,9 +13,6 @@ import {
   Bar,
   Brush,
 } from 'recharts';
-import { ChartContainer, ChartLegend, ChartLegendContent, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart"
-import { type ChartConfig } from "@/components/ui/chart"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
 
 // Define the WeatherData component
 export default function WeatherHistoricalData() {
@@ -46,14 +44,14 @@ export default function WeatherHistoricalData() {
   }
 
   return (
-    <section className="py-6 px-6 text-center">
-      <Card>
+    <section className="m-6 text-center">
+      <Card className='dark:bg-slate-800 bg-secondary' >
         <CardHeader>
           <CardTitle>
-            Weather Forecast
+            Weather data for 2023
           </CardTitle>
           <CardDescription>
-            Temperature and Cloud Cover for the next 60 Hours.
+            Average Temperature and Daily Precipitation.
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -85,7 +83,7 @@ export default function WeatherHistoricalData() {
                     )}
                   />
                 }
-                cursor={false}
+                cursor={true}
                 defaultIndex={1}
               />
               <ChartLegend content={<ChartLegendContent />} />
@@ -94,7 +92,6 @@ export default function WeatherHistoricalData() {
                 tickLine={false}
                 tickMargin={10}
                 axisLine={false}
-
               />
               <YAxis
                 yAxisId="left"
@@ -123,7 +120,7 @@ export default function WeatherHistoricalData() {
                 strokeWidth={2}
                 dot={false}
               />
-              <Brush />
+              <Brush travellerWidth={20} stroke="#25582b" height={30} />
             </ComposedChart>
           </ChartContainer>
         </CardContent>
