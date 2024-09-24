@@ -1,12 +1,15 @@
 "use client";  // Ensure this component is treated as a client component
 
 import React, { useEffect, useState } from 'react';
-import { Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, ComposedChart, Brush } from 'recharts';
+import { Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, ComposedChart, Brush, ScatterChart, Scatter } from 'recharts';
 import { fetchVisitorData, YearlyData } from '../utils/visitorDataHook';
 import { H2 } from './ui/H2';
+import { fetchWeatherHistoricalData } from '@/utils/weatherDataHook';
+import { ChartContainer, ChartLegend, ChartLegendContent, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart"
+import { type ChartConfig } from "@/components/ui/chart"
 
 export default function VisitorData() {
-    const [visitorData, setVisitorData] = useState<any | null>(null);
+  const [visitorData, setVisitorData] = useState<any | null>(null);
   
     // Fetch weather data on client side
     useEffect(() => {
@@ -39,36 +42,49 @@ export default function VisitorData() {
   const dailyTotals = visitorData ? getDailyTotals(visitorData) : [];
   console.log('Daily Totals:', dailyTotals);
 
-    if (!dailyTotals) {
+  if (!dailyTotals) {
     return <p>Loading...</p>;
   }
+
+ const chartConfig = {   
+    total: {
+      label: "Visitors",
+      color: "#aac929",
+    },
+  } satisfies ChartConfig
 
   return (
     <section className="py-6 px-6 text-center">
       <H2>Visitor Count 2024</H2>
       <div>
-      <ResponsiveContainer width="100%" height={400}>
-          <ComposedChart
-            data={dailyTotals}
-            margin={{ top: 5, right: 5, left: 5, bottom: 5 }}
-          >
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis 
-              dataKey="date" 
-              tickFormatter={(date) => new Date(date).toLocaleDateString()} // Format date
+        
+         <ChartContainer config={chartConfig} className="h-[400px] w-full">
+          <ComposedChart accessibilityLayer data={dailyTotals}>
+            <CartesianGrid vertical={false} />
+            <ChartTooltip content={<ChartTooltipContent />} />
+            <ChartLegend content={<ChartLegendContent />} />
+            <XAxis
+              dataKey="date"
+              tickLine={false}
+              tickMargin={10}
+              axisLine={false}
+              tickFormatter={(date) => new Date(date).toLocaleDateString()}
             />
-            <YAxis />
-            <Tooltip />
-            <Legend />
-            <Bar 
-              type="monotone" 
-              dataKey="total" 
-              stroke="#8884d8"
-              name="Daily Visitors"
+           <YAxis
+              yAxisId="left"
+              orientation="left"
+              label={{ value: 'Visitors', angle: -90, position: 'insideLeft' }}
+            />
+            <Bar
+              yAxisId="left"
+              dataKey="total"
+              fill="var(--color-total)"
+              radius={4}
             />
             <Brush />
           </ComposedChart>
-        </ResponsiveContainer>
+        </ChartContainer>
+
       </div>
     </section>
   );

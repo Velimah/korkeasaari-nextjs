@@ -7,14 +7,15 @@ import {
   XAxis,
   YAxis,
   CartesianGrid,
-  Tooltip,
-  Legend,
-  ResponsiveContainer,
   ComposedChart,
   Bar,
 } from 'recharts';
+import { ChartContainer, ChartLegend, ChartLegendContent, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart"
 import { fetchWeatherData, WeatherData as WeatherDataType } from '../utils/weatherForecastHook';
-import { H2 } from './ui/H2';
+
+import { type ChartConfig } from "@/components/ui/chart"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
+
 
 // Define the WeatherData component
 export default function WeatherData() {
@@ -40,8 +41,8 @@ export default function WeatherData() {
 
   // Utility function to format time as local time
   const formatTime = (timeString: string): string => {
-  const date = new Date(timeString);
-  return date.toLocaleString(); // Local date and time string
+    const date = new Date(timeString);
+    return date.toLocaleString('fi-FI'); // Local date and time string
   };
 
   // Convert fetched data to the format needed for Recharts
@@ -72,41 +73,102 @@ export default function WeatherData() {
 
     return {
       time: tempEntry.time,
-      temperature: tempEntry.value,
-      cloudCover: cloudCoverEntry?.value || 0,
-      precipitation: precipitationEntry?.value || 0,
+      temperature: tempEntry.value.toFixed(1),
+      cloudCover: cloudCoverEntry?.value.toFixed(1) || 0,
+      precipitation: precipitationEntry?.value.toFixed(1) || 0,
     };
   });
 
+  const chartConfig = {
+    temperature: {
+      label: "Temperature (°C)",
+      color: "#25582b",
+    },
+      precipitation: {
+      label: "Precipitation (mm)",
+      color: "#aac929",
+    },
+  } satisfies ChartConfig
+  
   return (
     <section className="py-6 px-6 text-center">
       <div>
-        <H2>Temperature and Cloud Cover Forecast</H2>
-        <ResponsiveContainer width="100%" height={400}>
-          <ComposedChart
-            data={combinedData}
-            margin={{ top: 5, right: 5, left: 5, bottom: 5 }}
-          >
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis 
-              dataKey="time" 
-              tickFormatter={(tick) => new Date(tick).toLocaleTimeString('fi-FI', { hour: '2-digit', minute: '2-digit' })}
-            />
-            <Tooltip />
-            <Legend />
-            <YAxis yAxisId="left" domain={[(dataMin: number) => dataMin - 2, (dataMax: number) => dataMax + 2]}  label={{ value: 'Temperature (°C)', angle: -90, position: 'insideLeft' }} />
-            <YAxis yAxisId="right" orientation="right" label={{ value: 'Cloud Cover (%)', angle: 90, position: 'insideRight' }} />
-            <Line 
-              yAxisId="left"
-              type="monotone" 
-              dataKey="temperature" 
-              stroke="green" 
-              activeDot={{ r: 8 }} 
-              name="Temperature"
-            />
-            <Bar yAxisId="right" name="Cloud Cover" dataKey="cloudCover" barSize={10} fill="rgba(65, 62, 160, 0.8)" />
-          </ComposedChart>
-        </ResponsiveContainer>
+      <Card>
+        <CardHeader>
+          <CardTitle>
+            Weather Forecast
+          </CardTitle>
+          <CardDescription>
+            Temperature and Cloud Cover for the next 60 Hours.
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <ChartContainer config={chartConfig} className="h-[400px] w-full">
+            <ComposedChart accessibilityLayer data={combinedData}>
+              <CartesianGrid vertical={false} />
+              <ChartLegend content={<ChartLegendContent />} />
+              <ChartTooltip
+                content={
+                  <ChartTooltipContent
+                    formatter={(value, name) => (
+                      <>
+                        <div className="flex items-center justify-between min-w-[130px] gap-2 text-xs text-muted-foreground">
+                          <div className="flex items-center gap-2">
+                            <div
+                              className="h-2.5 w-2.5 shrink-0 rounded-[2px] bg-[--color-bg]"
+                              style={
+                                {
+                                  "--color-bg": `var(--color-${name})`,
+                                } as React.CSSProperties
+                              }
+                            />
+                            {chartConfig[name as keyof typeof chartConfig]?.label || name}
+                          </div>
+                          <div className="ml-auto flex items-baseline gap-0.5 font-mono font-medium text-right text-foreground">
+                            {value}
+                          </div>
+                        </div>
+                      </>
+                    )}
+                  />
+                  }
+                  cursor={false}
+                  defaultIndex={1}
+              />
+              <XAxis
+                dataKey="time"
+                tickLine={false}
+                tickMargin={10}
+                axisLine={false}
+              />
+              <YAxis
+                yAxisId="left"
+                domain={[(dataMin: number) => dataMin - 2, (dataMax: number) => dataMax + 2]}
+                label={{ value: 'Temperature (°C)', angle: -90, position: 'insideLeft' }}
+              />
+              <YAxis
+                yAxisId="right"
+                orientation="right"
+                label={{ value: 'Precipitation (mm)', angle: 90, position: 'insideRight' }}
+                />
+                <Bar
+                yAxisId="right"
+                dataKey="precipitation"
+                fill="var(--color-precipitation)"
+                radius={4}
+                />
+                <Line
+                yAxisId="left"
+                dataKey="temperature"
+                type="natural"
+                stroke="var(--color-temperature)"
+                strokeWidth={2}
+                dot={false}
+              />
+            </ComposedChart>
+          </ChartContainer>
+        </CardContent>
+      </Card>
       </div>
     </section>
   );

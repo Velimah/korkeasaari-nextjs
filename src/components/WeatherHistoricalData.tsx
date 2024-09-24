@@ -4,19 +4,18 @@
 import React, { useEffect, useState } from 'react';
 import { fetchWeatherHistoricalData } from '@/utils/weatherDataHook';
 import {
-    LineChart,
     Line,
     XAxis,
     YAxis,
     CartesianGrid,
-    Tooltip,
-    Legend,
-    ResponsiveContainer,
     ComposedChart,
     Bar,
     Brush,
 } from 'recharts';
+import { ChartContainer, ChartLegend, ChartLegendContent, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart"
+import { type ChartConfig } from "@/components/ui/chart"
 import { H2 } from './ui/H2';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
 
 // Define the WeatherData component
 export default function WeatherHistoricalData() {
@@ -31,49 +30,75 @@ export default function WeatherHistoricalData() {
     }
     fetchData();
   }, []);
-
-  /*
-    // Define custom tooltip styles
-    const darkModeTooltipStyle = {
-      backgroundColor: '#333',  // Dark background
-      border: '1px solid #555',  // Slightly lighter border
-      color: '#fff',             // White text
-    };
-  */
   
   if (!weatherData) {
     return <p>Loading...</p>;
   }
+
+  const chartConfig = {
+    averageTemperature: {
+      label: "Average Temperature",
+      color: "#25582b",
+    },
+      totalPrecipitation: {
+      label: "Total Precipitation",
+      color: "#aac929",
+    },
+  } satisfies ChartConfig
   
   return (
     <section className="py-6 px-6 text-center">
-      <H2>Temperatures and Precipitation between 10:00-20:00 for year 2023</H2>
-      <ResponsiveContainer width="100%" height={400}>
-        <ComposedChart
-          data={weatherData}
-          margin={{ top: 5, right: 5, left: 5, bottom: 5 }}
-        >
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis 
-            dataKey="date" 
-            tickFormatter={(date) => new Date(date).toLocaleDateString()} 
+      <Card>
+        <CardHeader>
+          <CardTitle>
+            Weather Forecast
+          </CardTitle>
+          <CardDescription>
+            Temperature and Cloud Cover for the next 60 Hours.
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+        <ChartContainer config={chartConfig} className="h-[400px] w-full">
+          <ComposedChart accessibilityLayer data={weatherData}>
+            <CartesianGrid vertical={false} />
+            <ChartTooltip content={<ChartTooltipContent />} />
+            <ChartLegend content={<ChartLegendContent />} />
+            <XAxis
+              dataKey="date"
+              tickLine={false}
+              tickMargin={10}
+              axisLine={false}
+              tickFormatter={(date) => new Date(date).toLocaleDateString()}
+            />
+            <YAxis
+              yAxisId="left"
+              domain={[(dataMin: number) => dataMin - 2, (dataMax: number) => dataMax + 2]}
+              label={{ value: 'Temperature (°C)', angle: -90, position: 'insideLeft' }}
+            />
+           <YAxis
+              yAxisId="right"
+              orientation="right"
+              label={{ value: 'Precipitation (mm)', angle: 90, position: 'insideRight' }}
+            />
+            <Bar
+              yAxisId="right"
+              dataKey="totalPrecipitation"
+              fill="var(--color-totalPrecipitation)"
+              radius={4}
+            />
+            <Line
+              yAxisId="left"
+              dataKey="averageTemperature"
+              type="natural"
+              stroke="var(--color-averageTemperature)"
+              strokeWidth={2}
+              dot={false}
           />
-          <YAxis yAxisId="left" domain={[(dataMin: number) => dataMin - 2, (dataMax: number) => dataMax + 2]}  label={{ value: 'Temperature (°C)', angle: -90, position: 'insideLeft' }} />
-          <YAxis yAxisId="right" orientation="right" label={{ value: 'Precipitation (mm)', angle: 90, position: 'insideRight' }} />
-          <Tooltip />
-          <Legend />
-          <Line 
-            yAxisId="left"
-            type="monotone" 
-            dataKey="averageTemperature" 
-            stroke="green"
-            activeDot={{ r: 8 }} 
-            name="Temperature"
-          />
-          <Bar yAxisId="right" name="Precipitation" dataKey="totalPrecipitation" barSize={10} fill="rgba(65, 62, 160, 0.8)" />
           <Brush />
-        </ComposedChart>
-        </ResponsiveContainer>
+          </ComposedChart>
+          </ChartContainer>
+                  </CardContent>
+      </Card>
     </section>
   );
 }
