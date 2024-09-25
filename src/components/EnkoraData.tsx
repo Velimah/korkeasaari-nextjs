@@ -8,7 +8,7 @@ import { Bar, CartesianGrid, ComposedChart, XAxis, YAxis } from "recharts";
 export default function EnkoraData() {
 
   const [visitorData, setVisitorData] = useState<any | null>(null);
-  const [startDate, setStartDate] = useState<string>('2024-09-15');
+  const [startDate, setStartDate] = useState<string>('2024-09-20');
   const [endDate, setEndDate] = useState<string>('2024-09-24');
 
   useEffect(() => {
@@ -25,15 +25,14 @@ export default function EnkoraData() {
               endDate,   // Send end date
             }),
           });
+
           if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
           }
+
           const data = await response.json();
-
-
           setVisitorData(data);
 
-          console.log('Visitor data Enkora:', data);
         } catch (error) {
           console.error('Error fetching visitor data:', error);
         }
