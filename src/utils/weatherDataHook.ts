@@ -1,4 +1,9 @@
-import FMI2023 from "../assets/FMI2023.json";
+import FMI2019 from "@/assets/FMI2019.json";
+import FMI2020 from "@/assets/FMI2020.json";
+import FMI2021 from "@/assets/FMI2021.json";
+import FMI2022 from "@/assets/FMI2022.json";
+import FMI2023 from "@/assets/FMI2023.json";
+import FMI2024 from "@/assets/FMI2024.json";
 
 interface WeatherData {
     station: string;
@@ -25,7 +30,7 @@ export const fetchWeatherHistoricalData = (): AggregatedWeatherRecord[] => {
   };
 
   // Group records by date
-  const groupedRecords = FMI2023.reduce((acc: { [key: string]: WeatherData[] }, entry: WeatherData) => {
+  const groupedRecords = FMI2024.reduce((acc: { [key: string]: WeatherData[] }, entry: WeatherData) => {
     if (isTimeInRange(entry.time)) {
       const { year, month, date } = entry;
       const dateKey = `${year}-${month.toString().padStart(2, '0')}-${date.toString().padStart(2, '0')}`;
@@ -57,6 +62,7 @@ export const fetchWeatherHistoricalData = (): AggregatedWeatherRecord[] => {
     };
   });
 
+  console.log("FMI2019", aggregatedRecords);
   return aggregatedRecords;
 };
   

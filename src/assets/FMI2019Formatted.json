@@ -1,0 +1,1827 @@
+[
+    {
+      "date": "2019-01-01",
+      "averageTemperature": 3.37,
+      "totalPrecipitation": 0.5
+    },
+    {
+      "date": "2019-01-02",
+      "averageTemperature": -3.89,
+      "totalPrecipitation": 0.3
+    },
+    {
+      "date": "2019-01-03",
+      "averageTemperature": -9.08,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-01-04",
+      "averageTemperature": 0.59,
+      "totalPrecipitation": 0.4
+    },
+    {
+      "date": "2019-01-05",
+      "averageTemperature": -4.85,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-01-06",
+      "averageTemperature": -2.61,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-01-07",
+      "averageTemperature": 1.6,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-01-08",
+      "averageTemperature": 0.76,
+      "totalPrecipitation": 3.1
+    },
+    {
+      "date": "2019-01-09",
+      "averageTemperature": -2.24,
+      "totalPrecipitation": 0.5
+    },
+    {
+      "date": "2019-01-10",
+      "averageTemperature": -5.29,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-01-11",
+      "averageTemperature": 1.47,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-01-12",
+      "averageTemperature": -1.21,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-01-13",
+      "averageTemperature": -1.01,
+      "totalPrecipitation": 0.5
+    },
+    {
+      "date": "2019-01-14",
+      "averageTemperature": -2.28,
+      "totalPrecipitation": 0.9
+    },
+    {
+      "date": "2019-01-15",
+      "averageTemperature": -4.97,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-01-16",
+      "averageTemperature": -6.77,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-01-17",
+      "averageTemperature": -4.77,
+      "totalPrecipitation": 0.8
+    },
+    {
+      "date": "2019-01-18",
+      "averageTemperature": -8.31,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-01-19",
+      "averageTemperature": -2.55,
+      "totalPrecipitation": 1.9
+    },
+    {
+      "date": "2019-01-20",
+      "averageTemperature": -8.56,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-01-21",
+      "averageTemperature": -14.91,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-01-22",
+      "averageTemperature": -13.15,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-01-23",
+      "averageTemperature": -0.65,
+      "totalPrecipitation": 1.1
+    },
+    {
+      "date": "2019-01-24",
+      "averageTemperature": -10.22,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-01-25",
+      "averageTemperature": -3.41,
+      "totalPrecipitation": 0.1
+    },
+    {
+      "date": "2019-01-26",
+      "averageTemperature": -8.62,
+      "totalPrecipitation": 2.3
+    },
+    {
+      "date": "2019-01-27",
+      "averageTemperature": -13.79,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-01-28",
+      "averageTemperature": -5.64,
+      "totalPrecipitation": 7.5
+    },
+    {
+      "date": "2019-01-29",
+      "averageTemperature": -4.38,
+      "totalPrecipitation": 6.5
+    },
+    {
+      "date": "2019-01-30",
+      "averageTemperature": 0.08,
+      "totalPrecipitation": 1
+    },
+    {
+      "date": "2019-01-31",
+      "averageTemperature": -0.92,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-02-01",
+      "averageTemperature": -3.11,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-02-02",
+      "averageTemperature": -2.19,
+      "totalPrecipitation": 1.2
+    },
+    {
+      "date": "2019-02-03",
+      "averageTemperature": 0.81,
+      "totalPrecipitation": 3.9
+    },
+    {
+      "date": "2019-02-04",
+      "averageTemperature": -4.38,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-02-05",
+      "averageTemperature": 0.21,
+      "totalPrecipitation": 2.3
+    },
+    {
+      "date": "2019-02-06",
+      "averageTemperature": -6.14,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-02-07",
+      "averageTemperature": 0.96,
+      "totalPrecipitation": 0.6
+    },
+    {
+      "date": "2019-02-08",
+      "averageTemperature": 1.57,
+      "totalPrecipitation": 0.4
+    },
+    {
+      "date": "2019-02-09",
+      "averageTemperature": 1.91,
+      "totalPrecipitation": 2.7
+    },
+    {
+      "date": "2019-02-10",
+      "averageTemperature": 2.64,
+      "totalPrecipitation": 0.3
+    },
+    {
+      "date": "2019-02-11",
+      "averageTemperature": 1.07,
+      "totalPrecipitation": 2.4
+    },
+    {
+      "date": "2019-02-12",
+      "averageTemperature": -1.06,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-02-13",
+      "averageTemperature": 0.57,
+      "totalPrecipitation": 1.5
+    },
+    {
+      "date": "2019-02-14",
+      "averageTemperature": 1.94,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-02-15",
+      "averageTemperature": 6.04,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-02-16",
+      "averageTemperature": 4.63,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-02-17",
+      "averageTemperature": 2.41,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-02-18",
+      "averageTemperature": 1.56,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-02-19",
+      "averageTemperature": 1.96,
+      "totalPrecipitation": 3.8
+    },
+    {
+      "date": "2019-02-20",
+      "averageTemperature": -1.64,
+      "totalPrecipitation": 0.1
+    },
+    {
+      "date": "2019-02-21",
+      "averageTemperature": -5.4,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-02-22",
+      "averageTemperature": -4.29,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-02-23",
+      "averageTemperature": 2.77,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-02-24",
+      "averageTemperature": 2.79,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-02-25",
+      "averageTemperature": 6.25,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-02-26",
+      "averageTemperature": 3.23,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-02-27",
+      "averageTemperature": 4.33,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-02-28",
+      "averageTemperature": 2.25,
+      "totalPrecipitation": 0.5
+    },
+    {
+      "date": "2019-03-01",
+      "averageTemperature": -3.93,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-03-02",
+      "averageTemperature": 2.08,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-03-03",
+      "averageTemperature": -4.8,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-03-04",
+      "averageTemperature": -2.12,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-03-05",
+      "averageTemperature": -4.08,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-03-06",
+      "averageTemperature": -4.42,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-03-07",
+      "averageTemperature": 0.31,
+      "totalPrecipitation": 6.7
+    },
+    {
+      "date": "2019-03-08",
+      "averageTemperature": 3.63,
+      "totalPrecipitation": 1.9
+    },
+    {
+      "date": "2019-03-09",
+      "averageTemperature": 0.93,
+      "totalPrecipitation": 1.1
+    },
+    {
+      "date": "2019-03-10",
+      "averageTemperature": -0.75,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-03-11",
+      "averageTemperature": -4,
+      "totalPrecipitation": 0.1
+    },
+    {
+      "date": "2019-03-12",
+      "averageTemperature": -2.38,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-03-13",
+      "averageTemperature": -0.88,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-03-14",
+      "averageTemperature": 1.77,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-03-15",
+      "averageTemperature": 2.06,
+      "totalPrecipitation": 1.2
+    },
+    {
+      "date": "2019-03-16",
+      "averageTemperature": 1.71,
+      "totalPrecipitation": 0.6
+    },
+    {
+      "date": "2019-03-17",
+      "averageTemperature": 1.67,
+      "totalPrecipitation": 3.7
+    },
+    {
+      "date": "2019-03-18",
+      "averageTemperature": 3.54,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-03-19",
+      "averageTemperature": 3.2,
+      "totalPrecipitation": 0.1
+    },
+    {
+      "date": "2019-03-20",
+      "averageTemperature": 1.69,
+      "totalPrecipitation": 0.7
+    },
+    {
+      "date": "2019-03-21",
+      "averageTemperature": 3.42,
+      "totalPrecipitation": 0.1
+    },
+    {
+      "date": "2019-03-22",
+      "averageTemperature": 5.71,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-03-23",
+      "averageTemperature": 2.99,
+      "totalPrecipitation": 0.5
+    },
+    {
+      "date": "2019-03-24",
+      "averageTemperature": 5.85,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-03-25",
+      "averageTemperature": 2.86,
+      "totalPrecipitation": 0.2
+    },
+    {
+      "date": "2019-03-26",
+      "averageTemperature": 2.11,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-03-27",
+      "averageTemperature": 1.83,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-03-28",
+      "averageTemperature": 5.55,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-03-29",
+      "averageTemperature": 8.04,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-03-30",
+      "averageTemperature": 6.77,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-03-31",
+      "averageTemperature": 3.92,
+      "totalPrecipitation": 1
+    },
+    {
+      "date": "2019-04-01",
+      "averageTemperature": 6,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-04-02",
+      "averageTemperature": 4.71,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-04-03",
+      "averageTemperature": 7.6,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-04-04",
+      "averageTemperature": 9.11,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-04-05",
+      "averageTemperature": 9.07,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-04-06",
+      "averageTemperature": 8.84,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-04-07",
+      "averageTemperature": 7.9,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-04-08",
+      "averageTemperature": 2.52,
+      "totalPrecipitation": 1.8
+    },
+    {
+      "date": "2019-04-09",
+      "averageTemperature": 2.65,
+      "totalPrecipitation": 1.9
+    },
+    {
+      "date": "2019-04-10",
+      "averageTemperature": -0.09,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-04-11",
+      "averageTemperature": 1.52,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-04-12",
+      "averageTemperature": 3.43,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-04-13",
+      "averageTemperature": 5.41,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-04-14",
+      "averageTemperature": 6.9,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-04-15",
+      "averageTemperature": 7.85,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-04-16",
+      "averageTemperature": 10.73,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-04-17",
+      "averageTemperature": 9.69,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-04-18",
+      "averageTemperature": 12.79,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-04-19",
+      "averageTemperature": 15.6,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-04-20",
+      "averageTemperature": 11.3,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-04-21",
+      "averageTemperature": 7.65,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-04-22",
+      "averageTemperature": 11.68,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-04-23",
+      "averageTemperature": 15.58,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-04-24",
+      "averageTemperature": 15.6,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-04-25",
+      "averageTemperature": 15.47,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-04-26",
+      "averageTemperature": 12.39,
+      "totalPrecipitation": 0.6
+    },
+    {
+      "date": "2019-04-27",
+      "averageTemperature": 16.89,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-04-28",
+      "averageTemperature": 6.94,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-04-29",
+      "averageTemperature": 7.65,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-04-30",
+      "averageTemperature": 8.35,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-05-01",
+      "averageTemperature": 11.4,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-05-02",
+      "averageTemperature": 4.71,
+      "totalPrecipitation": 9.1
+    },
+    {
+      "date": "2019-05-03",
+      "averageTemperature": 3.2,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-05-04",
+      "averageTemperature": 2.91,
+      "totalPrecipitation": 4.5
+    },
+    {
+      "date": "2019-05-05",
+      "averageTemperature": 6.75,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-05-06",
+      "averageTemperature": 8.39,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-05-07",
+      "averageTemperature": 7.75,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-05-08",
+      "averageTemperature": 8.94,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-05-09",
+      "averageTemperature": 11.55,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-05-10",
+      "averageTemperature": 8.73,
+      "totalPrecipitation": 3.5
+    },
+    {
+      "date": "2019-05-11",
+      "averageTemperature": 10.48,
+      "totalPrecipitation": 3.3
+    },
+    {
+      "date": "2019-05-12",
+      "averageTemperature": 9.7,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-05-13",
+      "averageTemperature": 10.62,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-05-14",
+      "averageTemperature": 10.97,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-05-15",
+      "averageTemperature": 12.42,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-05-16",
+      "averageTemperature": 14.99,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-05-17",
+      "averageTemperature": 16.99,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-05-18",
+      "averageTemperature": 18.88,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-05-19",
+      "averageTemperature": 18.9,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-05-20",
+      "averageTemperature": 18.85,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-05-21",
+      "averageTemperature": 20.65,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-05-22",
+      "averageTemperature": 19.3,
+      "totalPrecipitation": 0.2
+    },
+    {
+      "date": "2019-05-23",
+      "averageTemperature": 12.35,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-05-24",
+      "averageTemperature": 9.49,
+      "totalPrecipitation": 0.2
+    },
+    {
+      "date": "2019-05-25",
+      "averageTemperature": 11.78,
+      "totalPrecipitation": 0.9
+    },
+    {
+      "date": "2019-05-26",
+      "averageTemperature": 9.37,
+      "totalPrecipitation": 12.2
+    },
+    {
+      "date": "2019-05-27",
+      "averageTemperature": 11.32,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-05-28",
+      "averageTemperature": 13.01,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-05-29",
+      "averageTemperature": 14.13,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-05-30",
+      "averageTemperature": 14.38,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-05-31",
+      "averageTemperature": 13.43,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-06-01",
+      "averageTemperature": 14.4,
+      "totalPrecipitation": 0.2
+    },
+    {
+      "date": "2019-06-02",
+      "averageTemperature": 14.52,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-06-03",
+      "averageTemperature": 14.7,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-06-04",
+      "averageTemperature": 19.96,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-06-05",
+      "averageTemperature": 21.76,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-06-06",
+      "averageTemperature": 24.68,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-06-07",
+      "averageTemperature": 24.11,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-06-08",
+      "averageTemperature": 24.93,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-06-09",
+      "averageTemperature": 19.19,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-06-10",
+      "averageTemperature": 17.45,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-06-11",
+      "averageTemperature": 19.31,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-06-12",
+      "averageTemperature": 16.64,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-06-13",
+      "averageTemperature": 14.46,
+      "totalPrecipitation": 1
+    },
+    {
+      "date": "2019-06-14",
+      "averageTemperature": 14,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-06-15",
+      "averageTemperature": 17.85,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-06-16",
+      "averageTemperature": 20.12,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-06-17",
+      "averageTemperature": 20.55,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-06-18",
+      "averageTemperature": 20,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-06-19",
+      "averageTemperature": 20.55,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-06-20",
+      "averageTemperature": 22.63,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-06-21",
+      "averageTemperature": 21.87,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-06-22",
+      "averageTemperature": 17.95,
+      "totalPrecipitation": 0.7
+    },
+    {
+      "date": "2019-06-23",
+      "averageTemperature": 18.87,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-06-24",
+      "averageTemperature": 22.01,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-06-25",
+      "averageTemperature": 19.18,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-06-26",
+      "averageTemperature": 16.41,
+      "totalPrecipitation": 0.1
+    },
+    {
+      "date": "2019-06-27",
+      "averageTemperature": 17.16,
+      "totalPrecipitation": 0.7
+    },
+    {
+      "date": "2019-06-28",
+      "averageTemperature": 20.09,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-06-29",
+      "averageTemperature": 17.36,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-06-30",
+      "averageTemperature": 19.43,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-07-01",
+      "averageTemperature": 19.55,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-07-02",
+      "averageTemperature": 16.7,
+      "totalPrecipitation": 19.2
+    },
+    {
+      "date": "2019-07-03",
+      "averageTemperature": 17.57,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-07-04",
+      "averageTemperature": 15.95,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-07-05",
+      "averageTemperature": 14.65,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-07-06",
+      "averageTemperature": 15.09,
+      "totalPrecipitation": 7.3
+    },
+    {
+      "date": "2019-07-07",
+      "averageTemperature": 16.26,
+      "totalPrecipitation": 1
+    },
+    {
+      "date": "2019-07-08",
+      "averageTemperature": 17.25,
+      "totalPrecipitation": 5.2
+    },
+    {
+      "date": "2019-07-09",
+      "averageTemperature": 14.02,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-07-10",
+      "averageTemperature": 19.09,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-07-11",
+      "averageTemperature": 13.41,
+      "totalPrecipitation": 0.2
+    },
+    {
+      "date": "2019-07-12",
+      "averageTemperature": 17.58,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-07-13",
+      "averageTemperature": 19.09,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-07-14",
+      "averageTemperature": 16.63,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-07-15",
+      "averageTemperature": 18.07,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-07-16",
+      "averageTemperature": 16.43,
+      "totalPrecipitation": 3.5
+    },
+    {
+      "date": "2019-07-17",
+      "averageTemperature": 20.69,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-07-18",
+      "averageTemperature": 22.95,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-07-19",
+      "averageTemperature": 23.05,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-07-20",
+      "averageTemperature": 23.07,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-07-21",
+      "averageTemperature": 23.8,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-07-22",
+      "averageTemperature": 21.08,
+      "totalPrecipitation": 0.3
+    },
+    {
+      "date": "2019-07-23",
+      "averageTemperature": 24.33,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-07-24",
+      "averageTemperature": 27.15,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-07-25",
+      "averageTemperature": 22.42,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-07-26",
+      "averageTemperature": 24.45,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-07-27",
+      "averageTemperature": 28.07,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-07-28",
+      "averageTemperature": 29.81,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-07-29",
+      "averageTemperature": 18.02,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-07-30",
+      "averageTemperature": 15.43,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-07-31",
+      "averageTemperature": 18.74,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-08-01",
+      "averageTemperature": 16.98,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-08-02",
+      "averageTemperature": 19.05,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-08-03",
+      "averageTemperature": 16.18,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-08-04",
+      "averageTemperature": 15.95,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-08-05",
+      "averageTemperature": 20.27,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-08-06",
+      "averageTemperature": 18.46,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-08-07",
+      "averageTemperature": null,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-08-08",
+      "averageTemperature": null,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-08-09",
+      "averageTemperature": 19.79,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-08-10",
+      "averageTemperature": 20.51,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-08-11",
+      "averageTemperature": 17.84,
+      "totalPrecipitation": 4.6
+    },
+    {
+      "date": "2019-08-12",
+      "averageTemperature": 19.28,
+      "totalPrecipitation": 0.1
+    },
+    {
+      "date": "2019-08-13",
+      "averageTemperature": 18.95,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-08-14",
+      "averageTemperature": 18.45,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-08-15",
+      "averageTemperature": 18.37,
+      "totalPrecipitation": 1.2
+    },
+    {
+      "date": "2019-08-16",
+      "averageTemperature": 18.4,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-08-17",
+      "averageTemperature": 19.65,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-08-18",
+      "averageTemperature": 19.61,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-08-19",
+      "averageTemperature": 18.03,
+      "totalPrecipitation": 2.1
+    },
+    {
+      "date": "2019-08-20",
+      "averageTemperature": 18.86,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-08-21",
+      "averageTemperature": 18.32,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-08-22",
+      "averageTemperature": 19.4,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-08-23",
+      "averageTemperature": 17.04,
+      "totalPrecipitation": 11.8
+    },
+    {
+      "date": "2019-08-24",
+      "averageTemperature": 19.75,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-08-25",
+      "averageTemperature": 18.75,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-08-26",
+      "averageTemperature": 20.36,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-08-27",
+      "averageTemperature": 20.2,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-08-28",
+      "averageTemperature": 21.36,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-08-29",
+      "averageTemperature": 20.92,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-08-30",
+      "averageTemperature": 19.68,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-08-31",
+      "averageTemperature": 19.56,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-09-01",
+      "averageTemperature": 19.87,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-09-02",
+      "averageTemperature": 20.17,
+      "totalPrecipitation": 4
+    },
+    {
+      "date": "2019-09-03",
+      "averageTemperature": 17.35,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-09-04",
+      "averageTemperature": 17.85,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-09-05",
+      "averageTemperature": 17.86,
+      "totalPrecipitation": 1.3
+    },
+    {
+      "date": "2019-09-06",
+      "averageTemperature": 15.72,
+      "totalPrecipitation": 0.9
+    },
+    {
+      "date": "2019-09-07",
+      "averageTemperature": 15.95,
+      "totalPrecipitation": 3.6
+    },
+    {
+      "date": "2019-09-08",
+      "averageTemperature": 15.95,
+      "totalPrecipitation": 0.7
+    },
+    {
+      "date": "2019-09-09",
+      "averageTemperature": 17.5,
+      "totalPrecipitation": 3.5
+    },
+    {
+      "date": "2019-09-10",
+      "averageTemperature": 20.07,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-09-11",
+      "averageTemperature": 16.26,
+      "totalPrecipitation": 0.5
+    },
+    {
+      "date": "2019-09-12",
+      "averageTemperature": 16.01,
+      "totalPrecipitation": 0.4
+    },
+    {
+      "date": "2019-09-13",
+      "averageTemperature": 13.02,
+      "totalPrecipitation": 8.4
+    },
+    {
+      "date": "2019-09-14",
+      "averageTemperature": 12.7,
+      "totalPrecipitation": 0.6
+    },
+    {
+      "date": "2019-09-15",
+      "averageTemperature": 12.3,
+      "totalPrecipitation": 13.4
+    },
+    {
+      "date": "2019-09-16",
+      "averageTemperature": 11.93,
+      "totalPrecipitation": 1.5
+    },
+    {
+      "date": "2019-09-17",
+      "averageTemperature": 10.29,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-09-18",
+      "averageTemperature": 10.64,
+      "totalPrecipitation": 0.1
+    },
+    {
+      "date": "2019-09-19",
+      "averageTemperature": 9.63,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-09-20",
+      "averageTemperature": 9.75,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-09-21",
+      "averageTemperature": 9.72,
+      "totalPrecipitation": 0.3
+    },
+    {
+      "date": "2019-09-22",
+      "averageTemperature": 8.78,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-09-23",
+      "averageTemperature": 8.55,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-09-24",
+      "averageTemperature": 8.18,
+      "totalPrecipitation": 1.3
+    },
+    {
+      "date": "2019-09-25",
+      "averageTemperature": 7.73,
+      "totalPrecipitation": 0.9
+    },
+    {
+      "date": "2019-09-26",
+      "averageTemperature": 11.14,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-09-27",
+      "averageTemperature": 10.81,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-09-28",
+      "averageTemperature": 12.77,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-09-29",
+      "averageTemperature": 13.32,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-09-30",
+      "averageTemperature": 13.26,
+      "totalPrecipitation": 0.1
+    },
+    {
+      "date": "2019-10-01",
+      "averageTemperature": 7.88,
+      "totalPrecipitation": 1.2
+    },
+    {
+      "date": "2019-10-02",
+      "averageTemperature": 7.83,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-10-03",
+      "averageTemperature": 5.17,
+      "totalPrecipitation": 2.1
+    },
+    {
+      "date": "2019-10-04",
+      "averageTemperature": 3.06,
+      "totalPrecipitation": 1
+    },
+    {
+      "date": "2019-10-05",
+      "averageTemperature": 3.86,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-10-06",
+      "averageTemperature": 5.01,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-10-07",
+      "averageTemperature": 5.7,
+      "totalPrecipitation": 0.1
+    },
+    {
+      "date": "2019-10-08",
+      "averageTemperature": 5.98,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-10-09",
+      "averageTemperature": 6.28,
+      "totalPrecipitation": 0.6
+    },
+    {
+      "date": "2019-10-10",
+      "averageTemperature": 8.31,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-10-11",
+      "averageTemperature": 10.71,
+      "totalPrecipitation": 1.5
+    },
+    {
+      "date": "2019-10-12",
+      "averageTemperature": 10.28,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-10-13",
+      "averageTemperature": 10.51,
+      "totalPrecipitation": 0.1
+    },
+    {
+      "date": "2019-10-14",
+      "averageTemperature": 6.47,
+      "totalPrecipitation": 9.3
+    },
+    {
+      "date": "2019-10-15",
+      "averageTemperature": 5.95,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-10-16",
+      "averageTemperature": 7.02,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-10-17",
+      "averageTemperature": 5.24,
+      "totalPrecipitation": 0.4
+    },
+    {
+      "date": "2019-10-18",
+      "averageTemperature": 8.58,
+      "totalPrecipitation": 0.5
+    },
+    {
+      "date": "2019-10-19",
+      "averageTemperature": 11.7,
+      "totalPrecipitation": 2.9
+    },
+    {
+      "date": "2019-10-20",
+      "averageTemperature": 10.09,
+      "totalPrecipitation": 3.4
+    },
+    {
+      "date": "2019-10-21",
+      "averageTemperature": 6.45,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-10-22",
+      "averageTemperature": 10.71,
+      "totalPrecipitation": 0.1
+    },
+    {
+      "date": "2019-10-23",
+      "averageTemperature": 10.52,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-10-24",
+      "averageTemperature": 11.28,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-10-25",
+      "averageTemperature": 10.96,
+      "totalPrecipitation": 0.6
+    },
+    {
+      "date": "2019-10-26",
+      "averageTemperature": 7.82,
+      "totalPrecipitation": 13.2
+    },
+    {
+      "date": "2019-10-27",
+      "averageTemperature": 2.67,
+      "totalPrecipitation": 9.7
+    },
+    {
+      "date": "2019-10-28",
+      "averageTemperature": 1.49,
+      "totalPrecipitation": 0.8
+    },
+    {
+      "date": "2019-10-29",
+      "averageTemperature": 0.08,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-10-30",
+      "averageTemperature": 0.18,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-10-31",
+      "averageTemperature": 5.19,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-11-01",
+      "averageTemperature": 2.69,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-11-02",
+      "averageTemperature": 5.95,
+      "totalPrecipitation": 2.4
+    },
+    {
+      "date": "2019-11-03",
+      "averageTemperature": 2.98,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-11-04",
+      "averageTemperature": -0.15,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-11-05",
+      "averageTemperature": -0.5,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-11-06",
+      "averageTemperature": -2.01,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-11-07",
+      "averageTemperature": -0.97,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-11-08",
+      "averageTemperature": 1.69,
+      "totalPrecipitation": 0.1
+    },
+    {
+      "date": "2019-11-09",
+      "averageTemperature": 6.75,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-11-10",
+      "averageTemperature": 8.28,
+      "totalPrecipitation": 6.8
+    },
+    {
+      "date": "2019-11-11",
+      "averageTemperature": 0.15,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-11-12",
+      "averageTemperature": 5.17,
+      "totalPrecipitation": 0.4
+    },
+    {
+      "date": "2019-11-13",
+      "averageTemperature": 6.97,
+      "totalPrecipitation": 12.3
+    },
+    {
+      "date": "2019-11-14",
+      "averageTemperature": 8.95,
+      "totalPrecipitation": 1.5
+    },
+    {
+      "date": "2019-11-15",
+      "averageTemperature": 2.63,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-11-16",
+      "averageTemperature": 1.5,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-11-17",
+      "averageTemperature": 8.45,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-11-18",
+      "averageTemperature": 5.85,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-11-19",
+      "averageTemperature": 7.01,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-11-20",
+      "averageTemperature": 6.39,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-11-21",
+      "averageTemperature": 4.78,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-11-22",
+      "averageTemperature": 1.1,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-11-23",
+      "averageTemperature": 1.06,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-11-24",
+      "averageTemperature": 0.06,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-11-25",
+      "averageTemperature": 1.21,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-11-26",
+      "averageTemperature": 1.65,
+      "totalPrecipitation": 0.1
+    },
+    {
+      "date": "2019-11-27",
+      "averageTemperature": 2.42,
+      "totalPrecipitation": 4.8
+    },
+    {
+      "date": "2019-11-28",
+      "averageTemperature": 3.63,
+      "totalPrecipitation": 8.7
+    },
+    {
+      "date": "2019-11-29",
+      "averageTemperature": 4.29,
+      "totalPrecipitation": 4.7
+    },
+    {
+      "date": "2019-11-30",
+      "averageTemperature": -2.37,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-12-01",
+      "averageTemperature": 0.32,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-12-02",
+      "averageTemperature": -0.68,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-12-03",
+      "averageTemperature": -0.27,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-12-04",
+      "averageTemperature": 5.05,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-12-05",
+      "averageTemperature": 6.82,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-12-06",
+      "averageTemperature": 5.78,
+      "totalPrecipitation": 1.9
+    },
+    {
+      "date": "2019-12-07",
+      "averageTemperature": 6.33,
+      "totalPrecipitation": 2.5
+    },
+    {
+      "date": "2019-12-08",
+      "averageTemperature": 3.04,
+      "totalPrecipitation": 3.7
+    },
+    {
+      "date": "2019-12-09",
+      "averageTemperature": 6.2,
+      "totalPrecipitation": 1.8
+    },
+    {
+      "date": "2019-12-10",
+      "averageTemperature": -2.27,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-12-11",
+      "averageTemperature": 2.33,
+      "totalPrecipitation": 0.2
+    },
+    {
+      "date": "2019-12-12",
+      "averageTemperature": 1.78,
+      "totalPrecipitation": 0.5
+    },
+    {
+      "date": "2019-12-13",
+      "averageTemperature": 3.47,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-12-14",
+      "averageTemperature": 2.89,
+      "totalPrecipitation": 0.7
+    },
+    {
+      "date": "2019-12-15",
+      "averageTemperature": 2.85,
+      "totalPrecipitation": 2.7
+    },
+    {
+      "date": "2019-12-16",
+      "averageTemperature": 3.45,
+      "totalPrecipitation": 0.1
+    },
+    {
+      "date": "2019-12-17",
+      "averageTemperature": 4.2,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-12-18",
+      "averageTemperature": 5.06,
+      "totalPrecipitation": 16
+    },
+    {
+      "date": "2019-12-19",
+      "averageTemperature": 1.83,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-12-20",
+      "averageTemperature": 3.86,
+      "totalPrecipitation": 0.1
+    },
+    {
+      "date": "2019-12-21",
+      "averageTemperature": 3,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-12-22",
+      "averageTemperature": 5.23,
+      "totalPrecipitation": 1.4
+    },
+    {
+      "date": "2019-12-23",
+      "averageTemperature": 4.79,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-12-24",
+      "averageTemperature": 2.97,
+      "totalPrecipitation": 1.7
+    },
+    {
+      "date": "2019-12-25",
+      "averageTemperature": 1.35,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-12-26",
+      "averageTemperature": 0.55,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-12-27",
+      "averageTemperature": -3.42,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-12-28",
+      "averageTemperature": -4.98,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-12-29",
+      "averageTemperature": 3.14,
+      "totalPrecipitation": 0.1
+    },
+    {
+      "date": "2019-12-30",
+      "averageTemperature": 5.83,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2019-12-31",
+      "averageTemperature": 1.21,
+      "totalPrecipitation": 0.1
+    }
+  ]
