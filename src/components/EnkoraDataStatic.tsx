@@ -1,6 +1,6 @@
 "use client";  // Ensure this component is treated as a client component
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ChartConfig, ChartContainer, ChartLegend, ChartLegendContent, ChartTooltip, ChartTooltipContent } from "./ui/chart";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./ui/card";
 import { Bar, Brush, CartesianGrid, ComposedChart, Line, Scatter, ScatterChart, XAxis, YAxis } from "recharts";
@@ -10,6 +10,7 @@ export default function EnkoraDataStatic() {
 
     const [startDate, setStartDate] = useState<string>('2019-01-01');
     const [endDate, setEndDate] = useState<string>('2024-09-25');
+    const [EnkoraFMIData2, setEnkoraFMIData] = useState<any | null>(EnkoraFMIData);
 
     const chartConfig = {
         kulkulupa: {
@@ -34,15 +35,54 @@ export default function EnkoraDataStatic() {
         },
         total: {
             label: "Kävijämäärä",
-            color: "#AAC929",
+            color: "#25582b",
         },
         averageTemperature: {
             label: "Keskimääräinen Lämpötila",
+            color: "#AAC929",
+        },
+        weightedTotal: {
+            label: "testiarvo",
             color: "#FF3B2F",
         },
     } satisfies ChartConfig
+    /*
+        useEffect(() => {
+            const result = processWeatherData(EnkoraFMIData);
+            setEnkoraFMIData(result);
+            console.log('Processed data:', result);
+        }, []); // Empty dependency array ensures this runs only once when the component mounts
+    
+        // Utility to check if a given date is a weekend
+        const isWeekend = (dateString: string): boolean => {
+            const date = new Date(dateString);
+            const dayOfWeek = date.getDay();
+            // 0: Sunday, 6: Saturday
+            return dayOfWeek === 0 || dayOfWeek === 6;
+        };
+    
+        // Function to process the data and apply the weight on weekends
+        const processWeatherData = (data: any[]) => {
+            return data.map((entry) => {
+                const { date, total, totalPrecipitation } = entry;
+                const numericTotal = Number(total); // Ensure total is a number
+                let weightedTotal = isWeekend(date) ? 0.2 * numericTotal : numericTotal;
+                if (totalPrecipitation > 0) {
+                    weightedTotal = weightedTotal * 5;
+                }
+                return {
+                    ...entry,
+                    weightedTotal, // This will now always be a number
+                };
+            });
+        };
 
-    if (!EnkoraFMIData) {
+        
+    const first400Items = EnkoraFMIData.slice(0, 400);
+    
+    */
+
+    if (!EnkoraFMIData2) {
         return <p>Loading...</p>;
     }
 
@@ -59,7 +99,7 @@ export default function EnkoraDataStatic() {
                     </CardHeader>
                     <CardContent>
                         <ChartContainer config={chartConfig} className="h-[400px] w-full">
-                            <ComposedChart accessibilityLayer data={EnkoraFMIData}>
+                            <ComposedChart accessibilityLayer data={EnkoraFMIData2}>
                                 <CartesianGrid vertical={false} />
                                 <XAxis
                                     dataKey="date"
@@ -149,7 +189,7 @@ export default function EnkoraDataStatic() {
                     </CardHeader>
                     <CardContent>
                         <ChartContainer config={chartConfig} className="h-[400px] w-full">
-                            <ScatterChart accessibilityLayer data={EnkoraFMIData}>
+                            <ScatterChart accessibilityLayer data={EnkoraFMIData2}>
                                 <CartesianGrid vertical={false} />
                                 <ChartTooltip
                                     content={
@@ -194,7 +234,7 @@ export default function EnkoraDataStatic() {
                                 <ChartLegend content={<ChartLegendContent />} />
                                 <XAxis dataKey="total" type="number" name="Kävijämäärä" />
                                 <YAxis dataKey="averageTemperature" type="number" name="Keskilämpötila" unit=" (°C)" />
-                                <Scatter name="Kävijät/Lämpötila" data={EnkoraFMIData} fill="#AAC929" />
+                                <Scatter name="Kävijät/Lämpötila" fill="#AAC929" stroke="black" />
                             </ScatterChart>
                         </ChartContainer>
 
@@ -212,7 +252,7 @@ export default function EnkoraDataStatic() {
                     </CardHeader>
                     <CardContent>
                         <ChartContainer config={chartConfig} className="h-[400px] w-full">
-                            <ScatterChart accessibilityLayer data={EnkoraFMIData}>
+                            <ScatterChart accessibilityLayer data={EnkoraFMIData2}>
                                 <CartesianGrid vertical={false} />
                                 <ChartTooltip
                                     content={
@@ -257,7 +297,7 @@ export default function EnkoraDataStatic() {
                                 <ChartLegend content={<ChartLegendContent />} />
                                 <XAxis dataKey="total" type="number" name="Kävijämäärä" />
                                 <YAxis dataKey="totalPrecipitation" type="number" name="Sademäärä" unit=" mm" />
-                                <Scatter name="Kävijät/Sade" data={EnkoraFMIData} fill="#25582b" />
+                                <Scatter name="Kävijät/Sade" data={EnkoraFMIData2} fill="#B14D97" stroke="black" />
                             </ScatterChart>
                         </ChartContainer>
 
