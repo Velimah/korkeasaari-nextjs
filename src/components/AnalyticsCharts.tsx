@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { ChartConfig, ChartContainer, ChartLegend, ChartLegendContent, ChartTooltip, ChartTooltipContent } from "./ui/chart";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./ui/card";
-import { Bar, Brush, CartesianGrid, ComposedChart, Line, Scatter, ScatterChart, XAxis, YAxis } from "recharts";
+import { Bar, Brush, CartesianGrid, ComposedChart, Line, Pie, PieChart, Scatter, ScatterChart, XAxis, YAxis } from "recharts";
 import EnkoraFMIData from "@/assets/FormattedVisitorFMI.json";
 
 export default function EnkoraDataStatic() {
@@ -11,6 +11,7 @@ export default function EnkoraDataStatic() {
     const [startDate, setStartDate] = useState<string>('2019-01-01');
     const [endDate, setEndDate] = useState<string>('2024-09-25');
     const [EnkoraFMIData2, setEnkoraFMIData] = useState<any | null>(EnkoraFMIData);
+    const [visitorTotals, setVisitorTotals] = useState<any | null>(null);
 
     const chartConfig = {
         kulkulupa: {
@@ -20,6 +21,10 @@ export default function EnkoraDataStatic() {
         ilmaiskavijat: {
             label: "Ilmaiskävijät",
             color: "#FF3B2F",
+        },
+        kampanjakavijat: {
+            label: "Kampanjakävijät",
+            color: "blue",
         },
         paasyliput: {
             label: "Pääsyliput",
@@ -46,41 +51,40 @@ export default function EnkoraDataStatic() {
             color: "#FF3B2F",
         },
     } satisfies ChartConfig
-    /*
-        useEffect(() => {
-            const result = processWeatherData(EnkoraFMIData);
-            setEnkoraFMIData(result);
-            console.log('Processed data:', result);
-        }, []); // Empty dependency array ensures this runs only once when the component mounts
-    
-        // Utility to check if a given date is a weekend
-        const isWeekend = (dateString: string): boolean => {
-            const date = new Date(dateString);
-            const dayOfWeek = date.getDay();
-            // 0: Sunday, 6: Saturday
-            return dayOfWeek === 0 || dayOfWeek === 6;
-        };
-    
-        // Function to process the data and apply the weight on weekends
-        const processWeatherData = (data: any[]) => {
-            return data.map((entry) => {
-                const { date, total, totalPrecipitation } = entry;
-                const numericTotal = Number(total); // Ensure total is a number
-                let weightedTotal = isWeekend(date) ? 0.2 * numericTotal : numericTotal;
-                if (totalPrecipitation > 0) {
-                    weightedTotal = weightedTotal * 5;
-                }
-                return {
-                    ...entry,
-                    weightedTotal, // This will now always be a number
-                };
-            });
-        };
 
-        
-    const first400Items = EnkoraFMIData.slice(0, 400);
-    
-    */
+    useEffect(() => {
+        processWeatherData();
+        console.log('Processed data:', visitorTotals);
+    }, []); // Empty dependency array ensures this runs only once when the component mounts
+
+    function processWeatherData() {
+        const aggregatedData = [
+            { name: "kulkulupa", value: 0, fill: "var(--color-kulkulupa)" },
+            { name: "ilmaiskavijat", value: 0, fill: "var(--color-ilmaiskavijat)" },
+            { name: "paasyliput", value: 0, fill: "var(--color-paasyliput)" },
+            { name: "verkkokauppa_paasyliput", value: 0, fill: "var(--color-verkkokauppa_paasyliput)" },
+            { name: "kampanjakavijat", value: 0, fill: "var(--color-kampanjakavijat)" },
+            { name: "vuosiliput", value: 0, fill: "var(--color-vuosiliput)" },
+        ];
+
+        EnkoraFMIData2.forEach((item: { kulkulupa?: number; ilmaiskavijat?: number; paasyliput?: number; verkkokauppa_paasyliput?: number; kampanjakavijat?: number; vuosiliput?: number; }) => {
+            aggregatedData[0].value += item.kulkulupa || 0;
+            aggregatedData[1].value += item.ilmaiskavijat || 0;
+            aggregatedData[2].value += item.paasyliput || 0;
+            aggregatedData[3].value += item.verkkokauppa_paasyliput || 0;
+            aggregatedData[4].value += item.kampanjakavijat || 0;
+            aggregatedData[5].value += item.vuosiliput || 0;
+        });
+
+        // Sort aggregatedData by value (smallest first)
+        aggregatedData.sort((a, b) => a.value - b.value);
+
+        // Set the state with the sorted data
+        setVisitorTotals(aggregatedData);
+    }
+
+
+    console.log('Processed data:', visitorTotals);
 
     if (!EnkoraFMIData2) {
         return <p>Loading...</p>;
@@ -88,6 +92,27 @@ export default function EnkoraDataStatic() {
 
     return (
         <section className="m-6 text-center">
+
+            <Card className="flex flex-col">
+                <CardHeader className="items-center pb-0">
+                    <CardTitle>Kävijöiden jakauma lipputyypin mukaan</CardTitle>
+                    <CardDescription>2019 - 2024</CardDescription>
+                </CardHeader>
+                <CardContent className="flex-1 pb-0">
+                    <ChartContainer
+                        config={chartConfig}
+                        className="mx-auto aspect-square max-h-[400px]"
+                    >
+                        <PieChart>
+                            <ChartTooltip
+                                cursor={false}
+                                content={<ChartTooltipContent hideLabel />}
+                            />
+                            <Pie data={visitorTotals} dataKey="value" nameKey="name" startAngle={90} endAngle={450} />
+                        </PieChart>
+                    </ChartContainer>
+                </CardContent>
+            </Card>
 
             <div className="p-6">
                 <Card className='dark:bg-slate-800 bg-secondary' >

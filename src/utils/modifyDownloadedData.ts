@@ -68,3 +68,39 @@ export const fetchWeatherHistoricalData = (): AggregatedWeatherRecord[] => {
 };
   
 */
+
+    /*
+        useEffect(() => {
+            const result = processWeatherData(EnkoraFMIData);
+            setEnkoraFMIData(result);
+            console.log('Processed data:', result);
+        }, []); // Empty dependency array ensures this runs only once when the component mounts
+    
+        // Utility to check if a given date is a weekend
+        const isWeekend = (dateString: string): boolean => {
+            const date = new Date(dateString);
+            const dayOfWeek = date.getDay();
+            // 0: Sunday, 6: Saturday
+            return dayOfWeek === 0 || dayOfWeek === 6;
+        };
+    
+        // Function to process the data and apply the weight on weekends
+        const processWeatherData = (data: any[]) => {
+            return data.map((entry) => {
+                const { date, total, totalPrecipitation } = entry;
+                const numericTotal = Number(total); // Ensure total is a number
+                let weightedTotal = isWeekend(date) ? 0.2 * numericTotal : numericTotal;
+                if (totalPrecipitation > 0) {
+                    weightedTotal = weightedTotal * 5;
+                }
+                return {
+                    ...entry,
+                    weightedTotal, // This will now always be a number
+                };
+            });
+        };
+
+        
+    const first400Items = EnkoraFMIData.slice(0, 400);
+    
+    */
