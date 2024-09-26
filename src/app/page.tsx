@@ -1,7 +1,7 @@
 import { H2 } from "@/components/ui/H2";
 import { Metadata } from "next";
-import WeatherHistoricalData from "@/components/WeatherHistoricalData";
-import EnkoraData from "@/components/EnkoraData";
+import FMIObservationsCombinedChart from "@/components/FMIObservationsCombinedChart";
+import EnkoraVisitorBarChart from "@/components/EnkoraVisitorBarChart";
 
 export const metadata: Metadata = {
   title: "Dashboard",
@@ -19,8 +19,8 @@ export default function Dashboard() {
         </section>
       </section>
       <section className="space-y-3 text-center">
-        <WeatherHistoricalData />
-        <EnkoraData />
+        <FMIObservationsCombinedChart />
+        <EnkoraVisitorBarChart />
       </section>
     </>
   );

@@ -9,7 +9,7 @@ import localFont from 'next/font/local'
 
 // Font files can be colocated inside of `app`
 const myFont = localFont({
-  src: './fonts/D-DINExp.otf',
+  src: './fonts/D-DIN.otf',
   display: 'swap',
 })
 

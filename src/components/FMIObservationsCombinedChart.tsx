@@ -1,7 +1,6 @@
 "use client";  // Ensure this component is treated as a client component
 
 import { useEffect, useState } from 'react';
-import { fetchWeatherHistoricalData } from '@/utils/weatherDataHook';
 import { ChartConfig, ChartContainer, ChartLegend, ChartLegendContent, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
 import {
@@ -13,19 +12,15 @@ import {
   Bar,
   Brush,
 } from 'recharts';
+import EnkoraFMIData from "@/assets/FormattedVisitorFMI.json";
 
 // Define the WeatherData component
 export default function WeatherHistoricalData() {
-  const [weatherData, setWeatherData] = useState<any | null>(null);
+  const [weatherData, setWeatherData] = useState<any | null>(EnkoraFMIData);
 
   // Fetch weather data on client side
   useEffect(() => {
-    function fetchData() {
-      const data = fetchWeatherHistoricalData();
-      setWeatherData(data);
-      console.log(data);
-    }
-    fetchData();
+    setWeatherData(EnkoraFMIData);
   }, []);
 
   const chartConfig = {

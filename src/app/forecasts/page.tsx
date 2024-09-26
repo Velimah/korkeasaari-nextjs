@@ -1,5 +1,5 @@
 import { H2 } from "@/components/ui/H2";
-import WeatherData from "@/components/WeatherData";
+import FMIForecastCombinedChart from "@/components/FMIForecastCombinedChart";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -19,7 +19,7 @@ export default function Forecasts() {
         </section>
       </section>
       <section className="space-y-3 text-center">
-        <WeatherData />
+        <FMIForecastCombinedChart />
       </section>
     </>
   );

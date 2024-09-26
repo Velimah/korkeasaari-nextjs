@@ -1,8 +1,8 @@
 "use client";  // Ensure this component is treated as a client component
 
 import { useEffect, useState } from "react";
-import { ChartConfig, ChartContainer, ChartLegend, ChartLegendContent, ChartTooltip, ChartTooltipContent } from "./ui/chart";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./ui/card";
+import { ChartConfig, ChartContainer, ChartLegend, ChartLegendContent, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Bar, CartesianGrid, ComposedChart, XAxis, YAxis } from "recharts";
 
 export default function EnkoraData() {
@@ -15,7 +15,7 @@ export default function EnkoraData() {
     async function fetchData() {
       if (startDate && endDate) { // Only fetch if both dates are provided
         try {
-          const response = await fetch('/api/proxy', {
+          const response = await fetch('/api/enkora', {
             method: 'POST', // Use POST method
             headers: {
               'Content-Type': 'application/json',

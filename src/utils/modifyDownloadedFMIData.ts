@@ -1,3 +1,4 @@
+/*
 import FMI2019 from "@/assets/FMI2019.json";
 import FMI2020 from "@/assets/FMI2020.json";
 import FMI2021 from "@/assets/FMI2021.json";
@@ -66,4 +67,4 @@ export const fetchWeatherHistoricalData = (): AggregatedWeatherRecord[] => {
   return aggregatedRecords;
 };
   
-  
+*/

@@ -13,13 +13,14 @@ interface MeasurementTVP {
 }
 
 export interface WeatherData {
-  temperatureData: MeasurementTVP[];
-  precipitationAmountData: MeasurementTVP[];
-  totalCloudCoverData: MeasurementTVP[];
+  time: string,
+  temperature: number,
+  cloudCover: number,
+  precipitation: number,
 }
 
 // Fetch and process the weather data
-export const fetchWeatherData = async (): Promise<WeatherData> => {
+export const fetchFMIForecastData = async (): Promise<WeatherData[]> => {
   try {
     const endTime = getEndTime();
     const response = await fetch(
@@ -78,7 +79,25 @@ export const fetchWeatherData = async (): Promise<WeatherData> => {
       }
     });
 
-    return { temperatureData, precipitationAmountData, totalCloudCoverData };
+    const combinedData = temperatureData.map((tempEntry) => {
+      // Find the corresponding cloud cover entry
+      const cloudCoverEntry = totalCloudCoverData.find(
+        (cloudEntry) => cloudEntry.time === tempEntry.time
+      );
+  
+      const precipitationEntry = precipitationAmountData.find(
+        (precipitationEntry) => precipitationEntry.time === tempEntry.time
+      );
+  
+      return {
+        time: tempEntry.time,
+        temperature: parseFloat(tempEntry.value.toFixed(1)),
+        cloudCover: cloudCoverEntry ? parseFloat(cloudCoverEntry.value.toFixed(1)) : 0,
+        precipitation: precipitationEntry ? parseFloat(precipitationEntry.value.toFixed(1)) : 0,
+      };
+    });
+
+    return combinedData;
   } catch (error) {
     console.error("Error fetching or processing data:", error);
     throw error;

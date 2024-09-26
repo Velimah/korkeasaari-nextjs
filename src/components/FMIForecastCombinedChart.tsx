@@ -1,9 +1,9 @@
 "use client";  // Ensure this component is treated as a client component
 
 import { useEffect, useState } from 'react';
-import { fetchWeatherData, WeatherData as WeatherDataType } from '../utils/weatherForecastHook';
+import { fetchFMIForecastData, WeatherData as WeatherDataType } from '@/utils/fetchFMIForecastData';
 import { ChartConfig, ChartContainer, ChartLegend, ChartLegendContent, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import {
   Line,
   XAxis,
@@ -16,13 +16,13 @@ import {
 
 // Define the WeatherData component
 export default function WeatherData() {
-  const [weatherData, setWeatherData] = useState<WeatherDataType | null>(null);
+  const [weatherData, setWeatherData] = useState<WeatherDataType[] | null>(null);
 
   // Fetch weather data on client side
   useEffect(() => {
     async function fetchData() {
       try {
-        const data = await fetchWeatherData();
+        const data = await fetchFMIForecastData();
         setWeatherData(data);
       } catch (error) {
         console.error('Error fetching weather data:', error);
@@ -35,46 +35,6 @@ export default function WeatherData() {
   if (!weatherData) {
     return <p>Loading...</p>;
   }
-
-  // Utility function to format time as local time
-  const formatTime = (timeString: string): string => {
-    const date = new Date(timeString);
-    return date.toLocaleString('fi-FI'); // Local date and time string
-  };
-
-  // Convert fetched data to the format needed for Recharts
-  const temperatureData = weatherData.temperatureData.map((entry) => ({
-    time: formatTime(entry.time),
-    value: entry.value,
-  }));
-
-  const cloudCoverData = weatherData.totalCloudCoverData.map((entry) => ({
-    time: formatTime(entry.time),
-    value: entry.value,
-  }));
-
-  const precipitationData = weatherData.precipitationAmountData.map((entry) => ({
-    time: formatTime(entry.time),
-    value: entry.value,
-  }));
-
-  const combinedData = temperatureData.map((tempEntry) => {
-    // Find the corresponding cloud cover entry
-    const cloudCoverEntry = cloudCoverData.find(
-      (cloudEntry) => cloudEntry.time === tempEntry.time
-    );
-
-    const precipitationEntry = precipitationData.find(
-      (precipitationEntry) => precipitationEntry.time === tempEntry.time
-    );
-
-    return {
-      time: tempEntry.time,
-      temperature: tempEntry.value.toFixed(1),
-      cloudCover: cloudCoverEntry?.value.toFixed(1) || 0,
-      precipitation: precipitationEntry?.value.toFixed(1) || 0,
-    };
-  });
 
   const chartConfig = {
     temperature: {
@@ -101,7 +61,7 @@ export default function WeatherData() {
           </CardHeader>
           <CardContent>
             <ChartContainer config={chartConfig} className="h-[400px] w-full">
-              <ComposedChart accessibilityLayer data={combinedData}>
+              <ComposedChart accessibilityLayer data={weatherData}>
                 <CartesianGrid vertical={false} />
                 <ChartLegend content={<ChartLegendContent />} />
                 <ChartTooltip
