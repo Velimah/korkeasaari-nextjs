@@ -5,13 +5,43 @@ import { ChartConfig, ChartContainer, ChartLegend, ChartLegendContent, ChartTool
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./ui/card";
 import { Bar, Brush, CartesianGrid, ComposedChart, Line, Pie, PieChart, Scatter, ScatterChart, XAxis, YAxis } from "recharts";
 import EnkoraFMIData from "@/assets/FormattedVisitorFMI.json";
+import AnalyticsPieChart from "./AnalyticsPieChart";
+import AnalyticsScatterChart from "./AnalyticsScatterChart";
+import AnalyticsAnalyticsComposedChartChart from "./AnalyticsComposedChart";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
+import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "./ui/select";
+
+interface DataItem {
+    date: string;
+    kulkulupa?: number;
+    ilmaiskavijat?: number;
+    paasyliput?: number;
+    verkkokauppa_paasyliput?: number;
+    kampanjakavijat?: number;
+    vuosiliput?: number;
+    total?: number;
+    averageTemperature?: number | null;
+    totalPrecipitation?: number;
+}
 
 export default function EnkoraDataStatic() {
 
-    const [startDate, setStartDate] = useState<string>('2019-01-01');
-    const [endDate, setEndDate] = useState<string>('2024-09-25');
-    const [EnkoraFMIData2, setEnkoraFMIData] = useState<any | null>(EnkoraFMIData);
+    const years = [2019, 2020, 2021, 2022, 2023, 2024];
+    const [selectedYear, setSelectedYear] = useState<number>(2024);
+
+    const [EnkoraFMIData2, setEnkoraFMIData] = useState<DataItem[]>([]);
     const [visitorTotals, setVisitorTotals] = useState<any | null>(null);
+
+
+    useEffect(() => {
+        const filteredData = EnkoraFMIData.filter((item: DataItem) => {
+            const itemYear = new Date(item.date).getFullYear(); // Extract the year from the date
+            return itemYear === selectedYear;
+        });
+
+        setEnkoraFMIData(filteredData); // Update state with filtered data
+        processWeatherData(filteredData);
+    }, []); // Empty dependency array ensures this runs only once when the component mounts
 
     const chartConfig = {
         kulkulupa: {
@@ -52,12 +82,7 @@ export default function EnkoraDataStatic() {
         },
     } satisfies ChartConfig
 
-    useEffect(() => {
-        processWeatherData();
-        console.log('Processed data:', visitorTotals);
-    }, []); // Empty dependency array ensures this runs only once when the component mounts
-
-    function processWeatherData() {
+    function processWeatherData(filteredData: DataItem[]) {
         const aggregatedData = [
             { name: "kulkulupa", value: 0, fill: "var(--color-kulkulupa)" },
             { name: "ilmaiskavijat", value: 0, fill: "var(--color-ilmaiskavijat)" },
@@ -67,7 +92,7 @@ export default function EnkoraDataStatic() {
             { name: "vuosiliput", value: 0, fill: "var(--color-vuosiliput)" },
         ];
 
-        EnkoraFMIData2.forEach((item: { kulkulupa?: number; ilmaiskavijat?: number; paasyliput?: number; verkkokauppa_paasyliput?: number; kampanjakavijat?: number; vuosiliput?: number; }) => {
+        filteredData.forEach((item: { kulkulupa?: number; ilmaiskavijat?: number; paasyliput?: number; verkkokauppa_paasyliput?: number; kampanjakavijat?: number; vuosiliput?: number; }) => {
             aggregatedData[0].value += item.kulkulupa || 0;
             aggregatedData[1].value += item.ilmaiskavijat || 0;
             aggregatedData[2].value += item.paasyliput || 0;
@@ -78,257 +103,66 @@ export default function EnkoraDataStatic() {
 
         // Sort aggregatedData by value (smallest first)
         aggregatedData.sort((a, b) => a.value - b.value);
-
+        console.log('aggregatedData', aggregatedData);
         // Set the state with the sorted data
         setVisitorTotals(aggregatedData);
     }
 
+    function handleYearChange(event: React.ChangeEvent<HTMLSelectElement>) {
+        const selectedYear = Number(event.target.value); // Get the selected year from the event
 
-    console.log('Processed data:', visitorTotals);
+        // Filter data based on the selected year
+        const filteredData = EnkoraFMIData.filter((item: DataItem) => {
+            const itemYear = new Date(item.date).getFullYear(); // Extract the year from the date
+            return itemYear === selectedYear;
+        });
+
+        setEnkoraFMIData(filteredData); // Update state with filtered data
+        setSelectedYear(selectedYear); // Update the selected year state
+        processWeatherData(filteredData); // Process the weather data for the filtered year
+    }
 
     if (!EnkoraFMIData2) {
         return <p>Loading...</p>;
     }
 
     return (
-        <section className="m-6 text-center">
+        <section className="flex">
 
-            <Card className="flex flex-col">
-                <CardHeader className="items-center pb-0">
-                    <CardTitle>Kävijöiden jakauma lipputyypin mukaan</CardTitle>
-                    <CardDescription>2019 - 2024</CardDescription>
-                </CardHeader>
-                <CardContent className="flex-1 pb-0">
-                    <ChartContainer
-                        config={chartConfig}
-                        className="mx-auto aspect-square max-h-[400px]"
-                    >
-                        <PieChart>
-                            <ChartTooltip
-                                cursor={false}
-                                content={<ChartTooltipContent hideLabel />}
-                            />
-                            <Pie data={visitorTotals} dataKey="value" nameKey="name" startAngle={90} endAngle={450} />
-                        </PieChart>
-                    </ChartContainer>
-                </CardContent>
-            </Card>
+            <Tabs defaultValue="composedchart" className="w-full">
+                <TabsList className="grid w-full grid-cols-3">
+                    <TabsTrigger value="composedchart">Composed Chart</TabsTrigger>
+                    <TabsTrigger value="scatterchart">Scatter Chart</TabsTrigger>
+                    <TabsTrigger value="piechart">Pie Chart</TabsTrigger>
+                </TabsList>
 
-            <div className="p-6">
-                <Card className='dark:bg-slate-800 bg-secondary' >
-                    <CardHeader>
-                        <CardTitle>Kävijämäärät ja Keskilämpötila 2019-2024</CardTitle>
-                        <CardDescription>
-                            {new Date(startDate).toLocaleDateString('fi-FI')} - {new Date(endDate).toLocaleDateString('fi-FI')}
-                        </CardDescription>
-                    </CardHeader>
-                    <CardContent>
-                        <ChartContainer config={chartConfig} className="h-[400px] w-full">
-                            <ComposedChart accessibilityLayer data={EnkoraFMIData2}>
-                                <CartesianGrid vertical={false} />
-                                <XAxis
-                                    dataKey="date"
-                                    tickLine={false}
-                                    tickMargin={10}
-                                    axisLine={false}
-                                    tickFormatter={(value) => new Date(value).toLocaleDateString('fi-FI')}
-                                />
-                                <ChartTooltip
-                                    content={
-                                        <ChartTooltipContent
-                                            labelFormatter={(value) => {
-                                                return new Date(value).toLocaleDateString("fi-FI", {
-                                                    day: "numeric",
-                                                    month: "long",
-                                                    year: "numeric",
-                                                })
-                                            }}
-                                            formatter={(value, name) => (
-                                                <>
-                                                    <div className="flex items-center justify-between min-w-[130px] w-full gap-4 text-xs text-muted-foreground">
-                                                        <div className="flex items-center gap-2">
-                                                            <div
-                                                                className="h-2.5 w-2.5 shrink-0 rounded-[2px] bg-[--color-bg]"
-                                                                style={
-                                                                    {
-                                                                        "--color-bg": `var(--color-${name})`,
-                                                                    } as React.CSSProperties
-                                                                }
-                                                            />
-                                                            {chartConfig[name as keyof typeof chartConfig]?.label || name}
-                                                        </div>
-                                                        <div className="flex items-center gap-0.5 font-mono font-medium text-right text-foreground">
-                                                            {value}
-                                                        </div>
-                                                    </div>
-                                                </>
-                                            )}
-                                        />
-                                    }
-                                    cursor={true}
-                                    defaultIndex={1}
-                                />
-                                <ChartLegend content={<ChartLegendContent />} />
-                                <YAxis
-                                    yAxisId="right"
-                                    orientation="right"
-                                    label={{ value: 'Kävijämäärä', angle: 90, position: 'insideRight' }}
-                                />
-                                <YAxis
-                                    yAxisId="left"
-                                    domain={[
-                                        (dataMin: number) => Math.floor(dataMin - 2),
-                                        (dataMax: number) => Math.ceil(dataMax + 2),
-                                    ]}
-                                    label={{ value: 'Lämpötila (°C)', angle: -90, position: 'insideLeft' }}
-                                />
-                                <Bar
-                                    dataKey="total"
-                                    yAxisId="right"
-                                    stackId="a"
-                                    fill="var(--color-total)"
-                                    radius={[0, 0, 0, 0]}
-                                />
-                                <Line
-                                    yAxisId="left"
-                                    dataKey="averageTemperature"
-                                    type="natural"
-                                    stroke="var(--color-averageTemperature)"
-                                    strokeWidth={2}
-                                    dot={false}
-                                />
-                                <Brush travellerWidth={20} stroke="#25582b" height={30} />
-                            </ComposedChart>
-                        </ChartContainer>
-                    </CardContent>
-                </Card>
-            </div>
+                <div className="pt-10">
+                    <Select onValueChange={(value) => handleYearChange({ target: { value } } as React.ChangeEvent<HTMLSelectElement>)} value={selectedYear.toString()}>
+                        <SelectTrigger className="w-[250px]">
+                            <SelectValue placeholder="Select a year" />
+                        </SelectTrigger>
+                        <SelectContent>
+                            <SelectGroup>
+                                {years.map((year) => (
+                                    <SelectItem key={year} value={year.toString()}>
+                                        {year}
+                                    </SelectItem>
+                                ))}
+                            </SelectGroup>
+                        </SelectContent>
+                    </Select>
+                </div>
 
-            <div className="p-6">
-                <Card className='dark:bg-slate-800 bg-secondary' >
-                    <CardHeader>
-                        <CardTitle>Kävijämäärät Lämpötilaan Suhteutettuna</CardTitle>
-                        <CardDescription>
-                            {new Date(startDate).toLocaleDateString('fi-FI')} - {new Date(endDate).toLocaleDateString('fi-FI')}
-                        </CardDescription>
-                    </CardHeader>
-                    <CardContent>
-                        <ChartContainer config={chartConfig} className="h-[400px] w-full">
-                            <ScatterChart accessibilityLayer data={EnkoraFMIData2}>
-                                <CartesianGrid vertical={false} />
-                                <ChartTooltip
-                                    content={
-                                        <ChartTooltipContent
-                                            // Access the 'payload' to get the full data object, including the 'date'
-                                            labelFormatter={(_, payload) => {
-                                                const dataPoint = payload && payload[0] ? payload[0].payload : null;
-                                                if (dataPoint) {
-                                                    return new Date(dataPoint.date).toLocaleDateString("fi-FI", {
-                                                        day: "numeric",
-                                                        month: "long",
-                                                        year: "numeric",
-                                                    });
-                                                }
-                                                return "";
-                                            }}
-                                            formatter={(value, name) => (
-                                                <>
-                                                    <div className="flex items-center justify-between min-w-[130px] w-full gap-4 text-xs text-muted-foreground">
-                                                        <div className="flex items-center gap-2">
-                                                            <div
-                                                                className="h-2.5 w-2.5 shrink-0 rounded-[2px] bg-[--color-bg]"
-                                                                style={
-                                                                    {
-                                                                        "--color-bg": `var(--color-${name})`,
-                                                                    } as React.CSSProperties
-                                                                }
-                                                            />
-                                                            {chartConfig[name as keyof typeof chartConfig]?.label || name}
-                                                        </div>
-                                                        <div className="flex items-center gap-0.5 font-mono font-medium text-right text-foreground">
-                                                            {value}
-                                                        </div>
-                                                    </div>
-                                                </>
-                                            )}
-                                        />
-                                    }
-                                    cursor={true}
-                                    defaultIndex={1}
-                                />
-                                <ChartLegend content={<ChartLegendContent />} />
-                                <XAxis dataKey="total" type="number" name="Kävijämäärä" />
-                                <YAxis dataKey="averageTemperature" type="number" name="Keskilämpötila" unit=" (°C)" />
-                                <Scatter name="Kävijät/Lämpötila" fill="#AAC929" stroke="black" />
-                            </ScatterChart>
-                        </ChartContainer>
-
-                    </CardContent>
-                </Card>
-            </div>
-
-            <div className="p-6">
-                <Card className='dark:bg-slate-800 bg-secondary' >
-                    <CardHeader>
-                        <CardTitle>Kävijämäärät Sademäärään Suhteutettuna</CardTitle>
-                        <CardDescription>
-                            {new Date(startDate).toLocaleDateString('fi-FI')} - {new Date(endDate).toLocaleDateString('fi-FI')}
-                        </CardDescription>
-                    </CardHeader>
-                    <CardContent>
-                        <ChartContainer config={chartConfig} className="h-[400px] w-full">
-                            <ScatterChart accessibilityLayer data={EnkoraFMIData2}>
-                                <CartesianGrid vertical={false} />
-                                <ChartTooltip
-                                    content={
-                                        <ChartTooltipContent
-                                            // Access the 'payload' to get the full data object, including the 'date'
-                                            labelFormatter={(_, payload) => {
-                                                const dataPoint = payload && payload[0] ? payload[0].payload : null;
-                                                if (dataPoint) {
-                                                    return new Date(dataPoint.date).toLocaleDateString("fi-FI", {
-                                                        day: "numeric",
-                                                        month: "long",
-                                                        year: "numeric",
-                                                    });
-                                                }
-                                                return "";
-                                            }}
-                                            formatter={(value, name) => (
-                                                <>
-                                                    <div className="flex items-center justify-between min-w-[130px] w-full gap-4 text-xs text-muted-foreground">
-                                                        <div className="flex items-center gap-2">
-                                                            <div
-                                                                className="h-2.5 w-2.5 shrink-0 rounded-[2px] bg-[--color-bg]"
-                                                                style={
-                                                                    {
-                                                                        "--color-bg": `var(--color-${name})`,
-                                                                    } as React.CSSProperties
-                                                                }
-                                                            />
-                                                            {chartConfig[name as keyof typeof chartConfig]?.label || name}
-                                                        </div>
-                                                        <div className="flex items-center gap-0.5 font-mono font-medium text-right text-foreground">
-                                                            {value}
-                                                        </div>
-                                                    </div>
-                                                </>
-                                            )}
-                                        />
-                                    }
-                                    cursor={true}
-                                    defaultIndex={1}
-                                />
-                                <ChartLegend content={<ChartLegendContent />} />
-                                <XAxis dataKey="total" type="number" name="Kävijämäärä" />
-                                <YAxis dataKey="totalPrecipitation" type="number" name="Sademäärä" unit=" mm" />
-                                <Scatter name="Kävijät/Sade" data={EnkoraFMIData2} fill="#B14D97" stroke="black" />
-                            </ScatterChart>
-                        </ChartContainer>
-
-                    </CardContent>
-                </Card>
-            </div>
+                <TabsContent value="composedchart">
+                    <AnalyticsAnalyticsComposedChartChart EnkoraFMIData2={EnkoraFMIData2} selectedYear={selectedYear} chartConfig={chartConfig} />
+                </TabsContent>
+                <TabsContent value="scatterchart">
+                    <AnalyticsScatterChart EnkoraFMIData2={EnkoraFMIData2} selectedYear={selectedYear} chartConfig={chartConfig} />
+                </TabsContent>
+                <TabsContent value="piechart">
+                    <AnalyticsPieChart visitorTotals={visitorTotals} selectedYear={selectedYear} chartConfig={chartConfig} />
+                </TabsContent>
+            </Tabs>
 
         </section >
     );

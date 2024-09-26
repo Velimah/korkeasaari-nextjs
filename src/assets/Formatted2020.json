@@ -1,0 +1,3464 @@
+[
+     {
+      "date": "2020-01-01",
+      "averageTemperature": 3.24,
+      "totalPrecipitation": 0,
+      "kulkulupa": 15,
+      "ilmaiskavijat": 32,
+      "paasyliput": 1406,
+      "kampanjakavijat": 21,
+      "verkkokauppa_paasyliput": 66,
+      "vuosiliput": 562,
+      "total": 2087
+    },
+    {
+      "date": "2020-01-02",
+      "averageTemperature": 4.75,
+      "totalPrecipitation": 0,
+      "kulkulupa": 12,
+      "ilmaiskavijat": 24,
+      "paasyliput": 1307,
+      "kampanjakavijat": 11,
+      "verkkokauppa_paasyliput": 77,
+      "vuosiliput": 402,
+      "total": 1821
+    },
+    {
+      "date": "2020-01-03",
+      "averageTemperature": 5.27,
+      "totalPrecipitation": 0.1,
+      "ilmaiskavijat": 27,
+      "paasyliput": 394,
+      "kampanjakavijat": 2,
+      "verkkokauppa_paasyliput": 3,
+      "vuosiliput": 74,
+      "total": 500
+    },
+    {
+      "date": "2020-01-04",
+      "averageTemperature": 2.59,
+      "totalPrecipitation": 0,
+      "kulkulupa": 8,
+      "ilmaiskavijat": 49,
+      "paasyliput": 2585,
+      "kampanjakavijat": 6,
+      "verkkokauppa_paasyliput": 165,
+      "vuosiliput": 663,
+      "total": 3468
+    },
+    {
+      "date": "2020-01-05",
+      "averageTemperature": -2.33,
+      "totalPrecipitation": 0,
+      "kulkulupa": 12,
+      "ilmaiskavijat": 30,
+      "paasyliput": 2286,
+      "kampanjakavijat": 7,
+      "verkkokauppa_paasyliput": 153,
+      "vuosiliput": 608,
+      "total": 3084
+    },
+    {
+      "date": "2020-01-06",
+      "averageTemperature": 1.66,
+      "totalPrecipitation": 0,
+      "kulkulupa": 4,
+      "ilmaiskavijat": 18,
+      "paasyliput": 1476,
+      "kampanjakavijat": 13,
+      "verkkokauppa_paasyliput": 97,
+      "vuosiliput": 486,
+      "total": 2090
+    },
+    {
+      "date": "2020-01-07",
+      "averageTemperature": 5.26,
+      "totalPrecipitation": 0.3,
+      "ilmaiskavijat": 18,
+      "paasyliput": 292,
+      "kampanjakavijat": 2,
+      "verkkokauppa_paasyliput": 15,
+      "vuosiliput": 81,
+      "total": 408
+    },
+    {
+      "date": "2020-01-08",
+      "averageTemperature": 6.01,
+      "totalPrecipitation": 1.5,
+      "ilmaiskavijat": 13,
+      "paasyliput": 145,
+      "verkkokauppa_paasyliput": 7,
+      "vuosiliput": 63,
+      "total": 228
+    },
+    {
+      "date": "2020-01-09",
+      "averageTemperature": 3.31,
+      "totalPrecipitation": 0,
+      "ilmaiskavijat": 5,
+      "paasyliput": 165,
+      "kampanjakavijat": 2,
+      "vuosiliput": 35,
+      "total": 207
+    },
+    {
+      "date": "2020-01-10",
+      "averageTemperature": -0.89,
+      "totalPrecipitation": 0,
+      "ilmaiskavijat": 44,
+      "paasyliput": 125,
+      "kampanjakavijat": 4,
+      "verkkokauppa_paasyliput": 3,
+      "vuosiliput": 52,
+      "total": 228
+    },
+    {
+      "date": "2020-01-11",
+      "averageTemperature": 2.63,
+      "totalPrecipitation": 0,
+      "ilmaiskavijat": 7,
+      "paasyliput": 391,
+      "kampanjakavijat": 3,
+      "verkkokauppa_paasyliput": 9,
+      "vuosiliput": 187,
+      "total": 597
+    },
+    {
+      "date": "2020-01-12",
+      "averageTemperature": 6,
+      "totalPrecipitation": 0,
+      "ilmaiskavijat": 1,
+      "paasyliput": 193,
+      "vuosiliput": 64,
+      "total": 258
+    },
+    {
+      "date": "2020-01-13",
+      "averageTemperature": 2.31,
+      "totalPrecipitation": 0,
+      "ilmaiskavijat": 3,
+      "paasyliput": 42,
+      "kampanjakavijat": 1,
+      "vuosiliput": 28,
+      "total": 74
+    },
+    {
+      "date": "2020-01-14",
+      "averageTemperature": 4.15,
+      "totalPrecipitation": 0.9,
+      "ilmaiskavijat": 32,
+      "paasyliput": 68,
+      "verkkokauppa_paasyliput": 2,
+      "vuosiliput": 19,
+      "total": 121
+    },
+    {
+      "date": "2020-01-15",
+      "averageTemperature": 6.61,
+      "totalPrecipitation": 5.5,
+      "ilmaiskavijat": 57,
+      "paasyliput": 26,
+      "vuosiliput": 2,
+      "total": 85
+    },
+    {
+      "date": "2020-01-16",
+      "averageTemperature": 5.74,
+      "totalPrecipitation": 0,
+      "kulkulupa": 4,
+      "ilmaiskavijat": 21,
+      "paasyliput": 70,
+      "verkkokauppa_paasyliput": 2,
+      "vuosiliput": 27,
+      "total": 120
+    },
+    {
+      "date": "2020-01-17",
+      "averageTemperature": 5,
+      "totalPrecipitation": 0,
+      "kulkulupa": 1,
+      "ilmaiskavijat": 25,
+      "paasyliput": 65,
+      "kampanjakavijat": 3,
+      "vuosiliput": 18,
+      "total": 111
+    },
+    {
+      "date": "2020-01-18",
+      "averageTemperature": 3.66,
+      "totalPrecipitation": 1.2,
+      "ilmaiskavijat": 6,
+      "paasyliput": 210,
+      "kampanjakavijat": 1,
+      "verkkokauppa_paasyliput": 12,
+      "vuosiliput": 73,
+      "total": 302
+    },
+    {
+      "date": "2020-01-19",
+      "averageTemperature": 3.46,
+      "totalPrecipitation": 0,
+      "ilmaiskavijat": 4,
+      "paasyliput": 318,
+      "verkkokauppa_paasyliput": 2,
+      "vuosiliput": 243,
+      "total": 567
+    },
+    {
+      "date": "2020-01-20",
+      "averageTemperature": 3.64,
+      "totalPrecipitation": 0,
+      "ilmaiskavijat": 7,
+      "paasyliput": 77,
+      "vuosiliput": 31,
+      "total": 115
+    },
+    {
+      "date": "2020-01-21",
+      "averageTemperature": 5.72,
+      "totalPrecipitation": 0,
+      "ilmaiskavijat": 48,
+      "paasyliput": 56,
+      "vuosiliput": 26,
+      "total": 130
+    },
+    {
+      "date": "2020-01-22",
+      "averageTemperature": 1.35,
+      "totalPrecipitation": 0,
+      "ilmaiskavijat": 16,
+      "paasyliput": 64,
+      "vuosiliput": 25,
+      "total": 105
+    },
+    {
+      "date": "2020-01-23",
+      "averageTemperature": 1.68,
+      "totalPrecipitation": 0,
+      "ilmaiskavijat": 32,
+      "paasyliput": 60,
+      "verkkokauppa_paasyliput": 4,
+      "vuosiliput": 24,
+      "total": 120
+    },
+    {
+      "date": "2020-01-24",
+      "averageTemperature": 2.57,
+      "totalPrecipitation": 1.3,
+      "kulkulupa": 1,
+      "ilmaiskavijat": 139,
+      "paasyliput": 70,
+      "kampanjakavijat": 5,
+      "verkkokauppa_paasyliput": 2,
+      "vuosiliput": 20,
+      "total": 236
+    },
+    {
+      "date": "2020-01-25",
+      "averageTemperature": 1.55,
+      "totalPrecipitation": 0,
+      "ilmaiskavijat": 11,
+      "paasyliput": 455,
+      "kampanjakavijat": 1,
+      "verkkokauppa_paasyliput": 18,
+      "vuosiliput": 233,
+      "total": 718
+    },
+    {
+      "date": "2020-01-26",
+      "averageTemperature": 4.78,
+      "totalPrecipitation": 0,
+      "kulkulupa": 1,
+      "ilmaiskavijat": 4,
+      "paasyliput": 311,
+      "kampanjakavijat": 1,
+      "verkkokauppa_paasyliput": 19,
+      "vuosiliput": 221,
+      "total": 556
+    },
+    {
+      "date": "2020-01-27",
+      "averageTemperature": 1.45,
+      "totalPrecipitation": 1.5,
+      "ilmaiskavijat": 6,
+      "paasyliput": 50,
+      "vuosiliput": 7,
+      "total": 63
+    },
+    {
+      "date": "2020-01-28",
+      "averageTemperature": 3.28,
+      "totalPrecipitation": 3.5,
+      "ilmaiskavijat": 27,
+      "paasyliput": 13,
+      "kampanjakavijat": 2,
+      "vuosiliput": 8,
+      "total": 50
+    },
+    {
+      "date": "2020-01-29",
+      "averageTemperature": 1.85,
+      "totalPrecipitation": 1.8,
+      "ilmaiskavijat": 8,
+      "paasyliput": 39,
+      "vuosiliput": 9,
+      "total": 56
+    },
+    {
+      "date": "2020-01-30",
+      "averageTemperature": 1.9,
+      "totalPrecipitation": 4.4,
+      "ilmaiskavijat": 32,
+      "paasyliput": 25,
+      "vuosiliput": 5,
+      "total": 62
+    },
+    {
+      "date": "2020-01-31",
+      "averageTemperature": 2.15,
+      "totalPrecipitation": 0,
+      "ilmaiskavijat": 31,
+      "paasyliput": 100,
+      "kampanjakavijat": 3,
+      "vuosiliput": 48,
+      "total": 182
+    },
+    {
+      "date": "2020-02-01",
+      "averageTemperature": 2.79,
+      "totalPrecipitation": 4.4,
+      "ilmaiskavijat": 67,
+      "paasyliput": 196,
+      "verkkokauppa_paasyliput": 1,
+      "vuosiliput": 111,
+      "total": 375
+    },
+    {
+      "date": "2020-02-02",
+      "averageTemperature": 4.22,
+      "totalPrecipitation": 0.4,
+      "kulkulupa": 1,
+      "ilmaiskavijat": 12,
+      "paasyliput": 179,
+      "kampanjakavijat": 5,
+      "verkkokauppa_paasyliput": 8,
+      "vuosiliput": 189,
+      "total": 393
+    },
+    {
+      "date": "2020-02-03",
+      "averageTemperature": 0.15,
+      "totalPrecipitation": 0,
+      "ilmaiskavijat": 26,
+      "paasyliput": 94,
+      "verkkokauppa_paasyliput": 1,
+      "vuosiliput": 48,
+      "total": 169
+    },
+    {
+      "date": "2020-02-04",
+      "averageTemperature": -2.93,
+      "totalPrecipitation": 0,
+      "kulkulupa": 1,
+      "ilmaiskavijat": 90,
+      "paasyliput": 103,
+      "kampanjakavijat": 3,
+      "verkkokauppa_paasyliput": 1,
+      "vuosiliput": 47,
+      "total": 244
+    },
+    {
+      "date": "2020-02-05",
+      "averageTemperature": 1.12,
+      "totalPrecipitation": 0,
+      "ilmaiskavijat": 18,
+      "paasyliput": 139,
+      "vuosiliput": 29,
+      "total": 186
+    },
+    {
+      "date": "2020-02-06",
+      "averageTemperature": -3,
+      "totalPrecipitation": 0,
+      "ilmaiskavijat": 43,
+      "paasyliput": 116,
+      "kampanjakavijat": 8,
+      "vuosiliput": 25,
+      "total": 192
+    },
+    {
+      "date": "2020-02-07",
+      "averageTemperature": -2.38,
+      "totalPrecipitation": 0.7,
+      "ilmaiskavijat": 38,
+      "paasyliput": 84,
+      "kampanjakavijat": 2,
+      "vuosiliput": 29,
+      "total": 153
+    },
+    {
+      "date": "2020-02-08",
+      "averageTemperature": 1.19,
+      "totalPrecipitation": 0,
+      "ilmaiskavijat": 6,
+      "paasyliput": 292,
+      "kampanjakavijat": 4,
+      "verkkokauppa_paasyliput": 10,
+      "vuosiliput": 176,
+      "total": 488
+    },
+    {
+      "date": "2020-02-09",
+      "averageTemperature": 3.68,
+      "totalPrecipitation": 0.7,
+      "kulkulupa": 2,
+      "ilmaiskavijat": 2,
+      "paasyliput": 157,
+      "kampanjakavijat": 2,
+      "verkkokauppa_paasyliput": 3,
+      "vuosiliput": 119,
+      "total": 283
+    },
+    {
+      "date": "2020-02-10",
+      "averageTemperature": 4.25,
+      "totalPrecipitation": 1.7,
+      "ilmaiskavijat": 3,
+      "paasyliput": 25,
+      "vuosiliput": 5,
+      "total": 33
+    },
+    {
+      "date": "2020-02-11",
+      "averageTemperature": 3.8,
+      "totalPrecipitation": 0.5,
+      "ilmaiskavijat": 90,
+      "paasyliput": 64,
+      "vuosiliput": 16,
+      "total": 170
+    },
+    {
+      "date": "2020-02-12",
+      "averageTemperature": 3.62,
+      "totalPrecipitation": 0.8,
+      "ilmaiskavijat": 16,
+      "paasyliput": 100,
+      "vuosiliput": 12,
+      "total": 128
+    },
+    {
+      "date": "2020-02-13",
+      "averageTemperature": 2.56,
+      "totalPrecipitation": 0,
+      "ilmaiskavijat": 79,
+      "paasyliput": 107,
+      "vuosiliput": 25,
+      "total": 211
+    },
+    {
+      "date": "2020-02-14",
+      "averageTemperature": 0.05,
+      "totalPrecipitation": 0,
+      "ilmaiskavijat": 127,
+      "paasyliput": 69,
+      "kampanjakavijat": 111,
+      "verkkokauppa_paasyliput": 3,
+      "vuosiliput": 81,
+      "total": 391
+    },
+    {
+      "date": "2020-02-15",
+      "averageTemperature": 2.7,
+      "totalPrecipitation": 1.4,
+      "ilmaiskavijat": 6,
+      "paasyliput": 242,
+      "verkkokauppa_paasyliput": 9,
+      "vuosiliput": 113,
+      "total": 370
+    },
+    {
+      "date": "2020-02-16",
+      "averageTemperature": 3.62,
+      "totalPrecipitation": 12.1,
+      "ilmaiskavijat": 1,
+      "paasyliput": 40,
+      "vuosiliput": 34,
+      "total": 75
+    },
+    {
+      "date": "2020-02-17",
+      "averageTemperature": 5.4,
+      "totalPrecipitation": 0,
+      "kulkulupa": 3,
+      "ilmaiskavijat": 5,
+      "paasyliput": 229,
+      "kampanjakavijat": 3,
+      "verkkokauppa_paasyliput": 13,
+      "vuosiliput": 99,
+      "total": 349
+    },
+    {
+      "date": "2020-02-18",
+      "averageTemperature": 5.71,
+      "totalPrecipitation": 0,
+      "ilmaiskavijat": 7,
+      "paasyliput": 416,
+      "kampanjakavijat": 6,
+      "verkkokauppa_paasyliput": 17,
+      "vuosiliput": 124,
+      "total": 570
+    },
+    {
+      "date": "2020-02-19",
+      "averageTemperature": 4.88,
+      "totalPrecipitation": 0.1,
+      "kulkulupa": 1,
+      "ilmaiskavijat": 33,
+      "paasyliput": 659,
+      "kampanjakavijat": 12,
+      "verkkokauppa_paasyliput": 36,
+      "vuosiliput": 228,
+      "total": 968
+    },
+    {
+      "date": "2020-02-20",
+      "averageTemperature": 1.32,
+      "totalPrecipitation": 0,
+      "ilmaiskavijat": 13,
+      "paasyliput": 784,
+      "kampanjakavijat": 8,
+      "verkkokauppa_paasyliput": 36,
+      "vuosiliput": 271,
+      "total": 1112
+    },
+    {
+      "date": "2020-02-21",
+      "averageTemperature": 3.49,
+      "totalPrecipitation": 0,
+      "ilmaiskavijat": 13,
+      "paasyliput": 182,
+      "kampanjakavijat": 1,
+      "verkkokauppa_paasyliput": 13,
+      "vuosiliput": 43,
+      "total": 252
+    },
+    {
+      "date": "2020-02-22",
+      "averageTemperature": 3.71,
+      "totalPrecipitation": 10.6,
+      "ilmaiskavijat": 3,
+      "paasyliput": 57,
+      "kampanjakavijat": 4,
+      "vuosiliput": 19,
+      "total": 83
+    },
+    {
+      "date": "2020-02-23",
+      "averageTemperature": 4.64,
+      "totalPrecipitation": 0,
+      "kulkulupa": 1,
+      "ilmaiskavijat": 8,
+      "paasyliput": 960,
+      "kampanjakavijat": 13,
+      "verkkokauppa_paasyliput": 18,
+      "vuosiliput": 500,
+      "total": 1499
+    },
+    {
+      "date": "2020-02-24",
+      "averageTemperature": 3,
+      "totalPrecipitation": 0,
+      "ilmaiskavijat": 10,
+      "paasyliput": 224,
+      "verkkokauppa_paasyliput": 6,
+      "vuosiliput": 61,
+      "total": 301
+    },
+    {
+      "date": "2020-02-25",
+      "averageTemperature": 0.05,
+      "totalPrecipitation": 0,
+      "ilmaiskavijat": 44,
+      "paasyliput": 284,
+      "kampanjakavijat": 1,
+      "verkkokauppa_paasyliput": 5,
+      "vuosiliput": 65,
+      "total": 399
+    },
+    {
+      "date": "2020-02-26",
+      "averageTemperature": 0.3,
+      "totalPrecipitation": 0,
+      "ilmaiskavijat": 93,
+      "paasyliput": 187,
+      "kampanjakavijat": 4,
+      "verkkokauppa_paasyliput": 4,
+      "vuosiliput": 28,
+      "total": 316
+    },
+    {
+      "date": "2020-02-27",
+      "averageTemperature": -1.37,
+      "totalPrecipitation": 0,
+      "ilmaiskavijat": 24,
+      "paasyliput": 117,
+      "vuosiliput": 30,
+      "total": 171
+    },
+    {
+      "date": "2020-02-28",
+      "averageTemperature": -1.55,
+      "totalPrecipitation": 0,
+      "ilmaiskavijat": 68,
+      "paasyliput": 205,
+      "kampanjakavijat": 5,
+      "verkkokauppa_paasyliput": 7,
+      "vuosiliput": 54,
+      "total": 339
+    },
+    {
+      "date": "2020-02-29",
+      "averageTemperature": 0.31,
+      "totalPrecipitation": 0.7,
+      "kulkulupa": 4,
+      "ilmaiskavijat": 14,
+      "paasyliput": 702,
+      "kampanjakavijat": 5,
+      "verkkokauppa_paasyliput": 20,
+      "vuosiliput": 325,
+      "total": 1066
+    },
+    {
+      "date": "2020-03-01",
+      "averageTemperature": 2.27,
+      "totalPrecipitation": 7.7,
+      "ilmaiskavijat": 3,
+      "paasyliput": 119,
+      "kampanjakavijat": 2,
+      "verkkokauppa_paasyliput": 2,
+      "vuosiliput": 65,
+      "total": 191
+    },
+    {
+      "date": "2020-03-02",
+      "averageTemperature": 4.28,
+      "totalPrecipitation": 0,
+      "ilmaiskavijat": 20,
+      "paasyliput": 175,
+      "kampanjakavijat": 2,
+      "verkkokauppa_paasyliput": 8,
+      "vuosiliput": 17,
+      "total": 222
+    },
+    {
+      "date": "2020-03-03",
+      "averageTemperature": 3.09,
+      "totalPrecipitation": 0.4,
+      "ilmaiskavijat": 57,
+      "paasyliput": 214,
+      "verkkokauppa_paasyliput": 2,
+      "vuosiliput": 27,
+      "total": 300
+    },
+    {
+      "date": "2020-03-04",
+      "averageTemperature": 1.79,
+      "totalPrecipitation": 10.8,
+      "ilmaiskavijat": 41,
+      "paasyliput": 119,
+      "vuosiliput": 4,
+      "total": 164
+    },
+    {
+      "date": "2020-03-05",
+      "averageTemperature": 3.38,
+      "totalPrecipitation": 0.9,
+      "ilmaiskavijat": 123,
+      "paasyliput": 186,
+      "verkkokauppa_paasyliput": 2,
+      "vuosiliput": 12,
+      "total": 323
+    },
+    {
+      "date": "2020-03-06",
+      "averageTemperature": 3.75,
+      "totalPrecipitation": 0,
+      "kulkulupa": 2,
+      "ilmaiskavijat": 68,
+      "paasyliput": 302,
+      "kampanjakavijat": 3,
+      "verkkokauppa_paasyliput": 5,
+      "vuosiliput": 107,
+      "total": 485
+    },
+    {
+      "date": "2020-03-07",
+      "averageTemperature": 2.95,
+      "totalPrecipitation": 0,
+      "ilmaiskavijat": 15,
+      "paasyliput": 730,
+      "kampanjakavijat": 1,
+      "verkkokauppa_paasyliput": 20,
+      "vuosiliput": 262,
+      "total": 1028
+    },
+    {
+      "date": "2020-03-08",
+      "averageTemperature": 2.62,
+      "totalPrecipitation": 0,
+      "ilmaiskavijat": 18,
+      "paasyliput": 1035,
+      "kampanjakavijat": 13,
+      "verkkokauppa_paasyliput": 56,
+      "vuosiliput": 635,
+      "total": 1757
+    },
+    {
+      "date": "2020-03-09",
+      "averageTemperature": 4.65,
+      "totalPrecipitation": 0,
+      "ilmaiskavijat": 24,
+      "paasyliput": 180,
+      "kampanjakavijat": 2,
+      "verkkokauppa_paasyliput": 2,
+      "vuosiliput": 34,
+      "total": 242
+    },
+    {
+      "date": "2020-03-10",
+      "averageTemperature": 3.92,
+      "totalPrecipitation": 3.6,
+      "ilmaiskavijat": 106,
+      "paasyliput": 146,
+      "verkkokauppa_paasyliput": 20,
+      "vuosiliput": 4,
+      "total": 276
+    },
+    {
+      "date": "2020-03-11",
+      "averageTemperature": 3.4,
+      "totalPrecipitation": 6.8,
+      "ilmaiskavijat": 26,
+      "paasyliput": 126,
+      "kampanjakavijat": 2,
+      "verkkokauppa_paasyliput": 3,
+      "vuosiliput": 5,
+      "total": 162
+    },
+    {
+      "date": "2020-03-12",
+      "averageTemperature": 4.95,
+      "totalPrecipitation": 1.8,
+      "ilmaiskavijat": 55,
+      "paasyliput": 186,
+      "vuosiliput": 22,
+      "total": 263
+    },
+    {
+      "date": "2020-03-13",
+      "averageTemperature": 2.49,
+      "totalPrecipitation": 0,
+      "ilmaiskavijat": 39,
+      "paasyliput": 191,
+      "kampanjakavijat": 1,
+      "verkkokauppa_paasyliput": 5,
+      "vuosiliput": 42,
+      "total": 278
+    },
+    {
+      "date": "2020-03-14",
+      "averageTemperature": -0.43,
+      "totalPrecipitation": 0,
+      "ilmaiskavijat": 11,
+      "paasyliput": 670,
+      "kampanjakavijat": 7,
+      "verkkokauppa_paasyliput": 32,
+      "vuosiliput": 435,
+      "total": 1155
+    },
+    {
+      "date": "2020-03-15",
+      "averageTemperature": 3.67,
+      "totalPrecipitation": 0,
+      "kulkulupa": 1,
+      "ilmaiskavijat": 4,
+      "paasyliput": 493,
+      "kampanjakavijat": 5,
+      "verkkokauppa_paasyliput": 24,
+      "vuosiliput": 443,
+      "total": 969
+    },
+    {
+      "date": "2020-03-16",
+      "averageTemperature": 4.4,
+      "totalPrecipitation": 0.2,
+      "ilmaiskavijat": 7,
+      "paasyliput": 39,
+      "vuosiliput": 22,
+      "total": 68
+    },
+    {
+      "date": "2020-03-17",
+      "averageTemperature": 3.58,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2020-03-18",
+      "averageTemperature": 4.75,
+      "totalPrecipitation": 1.3
+    },
+    {
+      "date": "2020-03-19",
+      "averageTemperature": 6.11,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2020-03-20",
+      "averageTemperature": 2.33,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2020-03-21",
+      "averageTemperature": 0.51,
+      "totalPrecipitation": 0.8
+    },
+    {
+      "date": "2020-03-22",
+      "averageTemperature": 0.85,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2020-03-23",
+      "averageTemperature": 3.04,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2020-03-24",
+      "averageTemperature": 4.33,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2020-03-25",
+      "averageTemperature": 5.83,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2020-03-26",
+      "averageTemperature": 5.98,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2020-03-27",
+      "averageTemperature": 5.44,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2020-03-28",
+      "averageTemperature": 7.45,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2020-03-29",
+      "averageTemperature": 1.79,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2020-03-30",
+      "averageTemperature": 0.71,
+      "totalPrecipitation": 0,
+      "ilmaiskavijat": 2,
+      "paasyliput": 2,
+      "total": 4
+    },
+    {
+      "date": "2020-03-31",
+      "averageTemperature": 0.85,
+      "totalPrecipitation": 0,
+      "ilmaiskavijat": 1,
+      "paasyliput": 4,
+      "total": 5
+    },
+    {
+      "date": "2020-04-01",
+      "averageTemperature": 5.9,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2020-04-02",
+      "averageTemperature": 5.01,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2020-04-03",
+      "averageTemperature": 3.23,
+      "totalPrecipitation": 1.7
+    },
+    {
+      "date": "2020-04-04",
+      "averageTemperature": 4.97,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2020-04-05",
+      "averageTemperature": 5.75,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2020-04-06",
+      "averageTemperature": 6.92,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2020-04-07",
+      "averageTemperature": 8.93,
+      "totalPrecipitation": 0.6
+    },
+    {
+      "date": "2020-04-08",
+      "averageTemperature": 8.27,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2020-04-09",
+      "averageTemperature": 7.82,
+      "totalPrecipitation": 0.6
+    },
+    {
+      "date": "2020-04-10",
+      "averageTemperature": 6.32,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2020-04-11",
+      "averageTemperature": 6.56,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2020-04-12",
+      "averageTemperature": 4.58,
+      "totalPrecipitation": 2.8
+    },
+    {
+      "date": "2020-04-13",
+      "averageTemperature": 5.4,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2020-04-14",
+      "averageTemperature": 3.3,
+      "totalPrecipitation": 2.4
+    },
+    {
+      "date": "2020-04-15",
+      "averageTemperature": 4.84,
+      "totalPrecipitation": 1.8
+    },
+    {
+      "date": "2020-04-16",
+      "averageTemperature": 3.82,
+      "totalPrecipitation": 3.2
+    },
+    {
+      "date": "2020-04-17",
+      "averageTemperature": 6.21,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2020-04-18",
+      "averageTemperature": 8.2,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2020-04-19",
+      "averageTemperature": 8.22,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2020-04-20",
+      "averageTemperature": 10.92,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2020-04-21",
+      "averageTemperature": 13.47,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2020-04-22",
+      "averageTemperature": 8.57,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2020-04-23",
+      "averageTemperature": 10.61,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2020-04-24",
+      "averageTemperature": 8.7,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2020-04-25",
+      "averageTemperature": 6.69,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2020-04-26",
+      "averageTemperature": 7.14,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2020-04-27",
+      "averageTemperature": 6.33,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2020-04-28",
+      "averageTemperature": 4.97,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2020-04-29",
+      "averageTemperature": 3.75,
+      "totalPrecipitation": 4.9
+    },
+    {
+      "date": "2020-04-30",
+      "averageTemperature": 5.07,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2020-05-01",
+      "averageTemperature": 7.64,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2020-05-02",
+      "averageTemperature": 9.95,
+      "totalPrecipitation": 3.5
+    },
+    {
+      "date": "2020-05-03",
+      "averageTemperature": 8.75,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2020-05-04",
+      "averageTemperature": 7.35,
+      "totalPrecipitation": 0,
+      "ilmaiskavijat": 36,
+      "paasyliput": 2,
+      "total": 38
+    },
+    {
+      "date": "2020-05-05",
+      "averageTemperature": 12.92,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2020-05-06",
+      "averageTemperature": 14.08,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2020-05-07",
+      "averageTemperature": 11.97,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2020-05-08",
+      "averageTemperature": 9.7,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2020-05-09",
+      "averageTemperature": 12.98,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2020-05-10",
+      "averageTemperature": 10.66,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2020-05-11",
+      "averageTemperature": 3.33,
+      "totalPrecipitation": 10.7,
+      "kulkulupa": 1,
+      "total": 0
+    },
+    {
+      "date": "2020-05-12",
+      "averageTemperature": 7.55,
+      "totalPrecipitation": 0.7
+    },
+    {
+      "date": "2020-05-13",
+      "averageTemperature": 4.96,
+      "totalPrecipitation": 1.9
+    },
+    {
+      "date": "2020-05-14",
+      "averageTemperature": 8.37,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2020-05-15",
+      "averageTemperature": 7.06,
+      "totalPrecipitation": 0.9
+    },
+    {
+      "date": "2020-05-16",
+      "averageTemperature": 5.83,
+      "totalPrecipitation": 4.8
+    },
+    {
+      "date": "2020-05-17",
+      "averageTemperature": 7.03,
+      "totalPrecipitation": 0.2,
+      "vuosiliput": 3,
+      "total": 3
+    },
+    {
+      "date": "2020-05-18",
+      "averageTemperature": 9.6,
+      "totalPrecipitation": 0.5,
+      "ilmaiskavijat": 14,
+      "total": 14
+    },
+    {
+      "date": "2020-05-19",
+      "averageTemperature": 8.59,
+      "totalPrecipitation": 4.6
+    },
+    {
+      "date": "2020-05-20",
+      "averageTemperature": 11.12,
+      "totalPrecipitation": 0.1,
+      "vuosiliput": 1,
+      "total": 1
+    },
+    {
+      "date": "2020-05-21",
+      "averageTemperature": 13.72,
+      "totalPrecipitation": 0,
+      "paasyliput": 3,
+      "total": 3
+    },
+    {
+      "date": "2020-05-22",
+      "averageTemperature": 12.44,
+      "totalPrecipitation": 0,
+      "kulkulupa": 1,
+      "ilmaiskavijat": 3,
+      "total": 3
+    },
+    {
+      "date": "2020-05-23",
+      "averageTemperature": 13.92,
+      "totalPrecipitation": 0,
+      "kulkulupa": 5,
+      "ilmaiskavijat": 16,
+      "paasyliput": 9,
+      "vuosiliput": 20,
+      "total": 45
+    },
+    {
+      "date": "2020-05-24",
+      "averageTemperature": 11.61,
+      "totalPrecipitation": 0,
+      "ilmaiskavijat": 14,
+      "paasyliput": 5,
+      "vuosiliput": 22,
+      "total": 41
+    },
+    {
+      "date": "2020-05-25",
+      "averageTemperature": 16.66,
+      "totalPrecipitation": 0,
+      "kulkulupa": 1,
+      "ilmaiskavijat": 7,
+      "vuosiliput": 1,
+      "total": 8
+    },
+    {
+      "date": "2020-05-26",
+      "averageTemperature": 19.78,
+      "totalPrecipitation": 0,
+      "ilmaiskavijat": 59,
+      "paasyliput": 2,
+      "vuosiliput": 2,
+      "total": 63
+    },
+    {
+      "date": "2020-05-27",
+      "averageTemperature": 17,
+      "totalPrecipitation": 0,
+      "kulkulupa": 2,
+      "ilmaiskavijat": 63,
+      "paasyliput": 1,
+      "vuosiliput": 5,
+      "total": 69
+    },
+    {
+      "date": "2020-05-28",
+      "averageTemperature": 14.72,
+      "totalPrecipitation": 0,
+      "kulkulupa": 6,
+      "ilmaiskavijat": 53,
+      "vuosiliput": 2,
+      "total": 55
+    },
+    {
+      "date": "2020-05-29",
+      "averageTemperature": 16.08,
+      "totalPrecipitation": 0,
+      "ilmaiskavijat": 18,
+      "paasyliput": 2,
+      "vuosiliput": 2,
+      "total": 22
+    },
+    {
+      "date": "2020-05-30",
+      "averageTemperature": 18.69,
+      "totalPrecipitation": 0,
+      "kulkulupa": 1,
+      "ilmaiskavijat": 36,
+      "paasyliput": 4,
+      "vuosiliput": 10,
+      "total": 50
+    },
+    {
+      "date": "2020-05-31",
+      "averageTemperature": 16.74,
+      "totalPrecipitation": 0,
+      "ilmaiskavijat": 13,
+      "vuosiliput": 18,
+      "total": 31
+    },
+    {
+      "date": "2020-06-01",
+      "averageTemperature": 13.27,
+      "totalPrecipitation": 0,
+      "kulkulupa": 30,
+      "ilmaiskavijat": 7,
+      "paasyliput": 541,
+      "verkkokauppa_paasyliput": 152,
+      "vuosiliput": 443,
+      "total": 1143
+    },
+    {
+      "date": "2020-06-02",
+      "averageTemperature": 14.56,
+      "totalPrecipitation": 0,
+      "kulkulupa": 49,
+      "ilmaiskavijat": 25,
+      "paasyliput": 924,
+      "verkkokauppa_paasyliput": 204,
+      "vuosiliput": 501,
+      "total": 1654
+    },
+    {
+      "date": "2020-06-03",
+      "averageTemperature": 16.18,
+      "totalPrecipitation": 0,
+      "kulkulupa": 38,
+      "ilmaiskavijat": 33,
+      "paasyliput": 1186,
+      "verkkokauppa_paasyliput": 261,
+      "vuosiliput": 479,
+      "total": 1959
+    },
+    {
+      "date": "2020-06-04",
+      "averageTemperature": 16.45,
+      "totalPrecipitation": 0.1,
+      "kulkulupa": 24,
+      "ilmaiskavijat": 26,
+      "paasyliput": 639,
+      "verkkokauppa_paasyliput": 112,
+      "vuosiliput": 209,
+      "total": 986
+    },
+    {
+      "date": "2020-06-05",
+      "averageTemperature": 14.35,
+      "totalPrecipitation": 0.7,
+      "kulkulupa": 19,
+      "ilmaiskavijat": 11,
+      "paasyliput": 520,
+      "verkkokauppa_paasyliput": 124,
+      "vuosiliput": 238,
+      "total": 893
+    },
+    {
+      "date": "2020-06-06",
+      "averageTemperature": 14.11,
+      "totalPrecipitation": 2.7,
+      "kulkulupa": 18,
+      "ilmaiskavijat": 13,
+      "paasyliput": 1009,
+      "verkkokauppa_paasyliput": 144,
+      "vuosiliput": 406,
+      "total": 1572
+    },
+    {
+      "date": "2020-06-07",
+      "averageTemperature": 16.01,
+      "totalPrecipitation": 0,
+      "kulkulupa": 78,
+      "ilmaiskavijat": 31,
+      "paasyliput": 2249,
+      "verkkokauppa_paasyliput": 977,
+      "vuosiliput": 966,
+      "total": 4223
+    },
+    {
+      "date": "2020-06-08",
+      "averageTemperature": 16.4,
+      "totalPrecipitation": 0.8,
+      "kulkulupa": 10,
+      "ilmaiskavijat": 14,
+      "paasyliput": 432,
+      "verkkokauppa_paasyliput": 57,
+      "vuosiliput": 137,
+      "total": 640
+    },
+    {
+      "date": "2020-06-09",
+      "averageTemperature": 16.72,
+      "totalPrecipitation": 0,
+      "kulkulupa": 30,
+      "ilmaiskavijat": 24,
+      "paasyliput": 1115,
+      "verkkokauppa_paasyliput": 246,
+      "vuosiliput": 310,
+      "total": 1695
+    },
+    {
+      "date": "2020-06-10",
+      "averageTemperature": 21.65,
+      "totalPrecipitation": 0,
+      "kulkulupa": 53,
+      "ilmaiskavijat": 33,
+      "paasyliput": 1524,
+      "verkkokauppa_paasyliput": 324,
+      "vuosiliput": 354,
+      "total": 2235
+    },
+    {
+      "date": "2020-06-11",
+      "averageTemperature": 19.38,
+      "totalPrecipitation": 0,
+      "kulkulupa": 34,
+      "ilmaiskavijat": 31,
+      "paasyliput": 1488,
+      "verkkokauppa_paasyliput": 323,
+      "vuosiliput": 268,
+      "total": 2110
+    },
+    {
+      "date": "2020-06-12",
+      "averageTemperature": 20.81,
+      "totalPrecipitation": 0,
+      "kulkulupa": 43,
+      "ilmaiskavijat": 20,
+      "paasyliput": 1312,
+      "verkkokauppa_paasyliput": 290,
+      "vuosiliput": 359,
+      "total": 1981
+    },
+    {
+      "date": "2020-06-13",
+      "averageTemperature": 20.21,
+      "totalPrecipitation": 0,
+      "kulkulupa": 77,
+      "ilmaiskavijat": 30,
+      "paasyliput": 2594,
+      "verkkokauppa_paasyliput": 728,
+      "vuosiliput": 623,
+      "total": 3975
+    },
+    {
+      "date": "2020-06-14",
+      "averageTemperature": 21.03,
+      "totalPrecipitation": 0,
+      "kulkulupa": 80,
+      "ilmaiskavijat": 28,
+      "paasyliput": 2136,
+      "verkkokauppa_paasyliput": 449,
+      "vuosiliput": 561,
+      "total": 3174
+    },
+    {
+      "date": "2020-06-15",
+      "averageTemperature": 22.21,
+      "totalPrecipitation": 0,
+      "kulkulupa": 28,
+      "ilmaiskavijat": 23,
+      "paasyliput": 1324,
+      "kampanjakavijat": 3,
+      "verkkokauppa_paasyliput": 323,
+      "vuosiliput": 294,
+      "total": 1967
+    },
+    {
+      "date": "2020-06-16",
+      "averageTemperature": 22.55,
+      "totalPrecipitation": 0,
+      "kulkulupa": 3,
+      "ilmaiskavijat": 13,
+      "paasyliput": 1100,
+      "verkkokauppa_paasyliput": 195,
+      "vuosiliput": 224,
+      "total": 1532
+    },
+    {
+      "date": "2020-06-17",
+      "averageTemperature": 22.41,
+      "totalPrecipitation": 0,
+      "kulkulupa": 8,
+      "ilmaiskavijat": 48,
+      "paasyliput": 1007,
+      "verkkokauppa_paasyliput": 143,
+      "vuosiliput": 192,
+      "total": 1390
+    },
+    {
+      "date": "2020-06-18",
+      "averageTemperature": 20.5,
+      "totalPrecipitation": 0,
+      "kulkulupa": 1,
+      "ilmaiskavijat": 15,
+      "paasyliput": 731,
+      "verkkokauppa_paasyliput": 193,
+      "vuosiliput": 135,
+      "total": 1074
+    },
+    {
+      "date": "2020-06-19",
+      "averageTemperature": 23.39,
+      "totalPrecipitation": 0,
+      "kulkulupa": 19,
+      "ilmaiskavijat": 32,
+      "paasyliput": 1375,
+      "verkkokauppa_paasyliput": 311,
+      "vuosiliput": 295,
+      "total": 2013
+    },
+    {
+      "date": "2020-06-20",
+      "averageTemperature": 20.21,
+      "totalPrecipitation": 0,
+      "kulkulupa": 22,
+      "ilmaiskavijat": 29,
+      "paasyliput": 2527,
+      "verkkokauppa_paasyliput": 574,
+      "vuosiliput": 438,
+      "total": 3568
+    },
+    {
+      "date": "2020-06-21",
+      "averageTemperature": 18.56,
+      "totalPrecipitation": 0,
+      "kulkulupa": 35,
+      "ilmaiskavijat": 18,
+      "paasyliput": 2182,
+      "kampanjakavijat": 2,
+      "verkkokauppa_paasyliput": 411,
+      "vuosiliput": 413,
+      "total": 3026
+    },
+    {
+      "date": "2020-06-22",
+      "averageTemperature": 19.87,
+      "totalPrecipitation": 0,
+      "kulkulupa": 17,
+      "ilmaiskavijat": 36,
+      "paasyliput": 1439,
+      "verkkokauppa_paasyliput": 390,
+      "vuosiliput": 279,
+      "total": 2144
+    },
+    {
+      "date": "2020-06-23",
+      "averageTemperature": 22.27,
+      "totalPrecipitation": 0,
+      "kulkulupa": 7,
+      "ilmaiskavijat": 14,
+      "paasyliput": 1511,
+      "verkkokauppa_paasyliput": 390,
+      "vuosiliput": 248,
+      "total": 2163
+    },
+    {
+      "date": "2020-06-24",
+      "averageTemperature": 24.55,
+      "totalPrecipitation": 0,
+      "kulkulupa": 15,
+      "ilmaiskavijat": 23,
+      "paasyliput": 1396,
+      "verkkokauppa_paasyliput": 331,
+      "vuosiliput": 208,
+      "total": 1958
+    },
+    {
+      "date": "2020-06-25",
+      "averageTemperature": 26.62,
+      "totalPrecipitation": 0,
+      "kulkulupa": 15,
+      "ilmaiskavijat": 37,
+      "paasyliput": 1061,
+      "verkkokauppa_paasyliput": 241,
+      "vuosiliput": 206,
+      "total": 1545
+    },
+    {
+      "date": "2020-06-26",
+      "averageTemperature": 24.32,
+      "totalPrecipitation": 0,
+      "kulkulupa": 16,
+      "ilmaiskavijat": 30,
+      "paasyliput": 1254,
+      "verkkokauppa_paasyliput": 216,
+      "vuosiliput": 222,
+      "total": 1722
+    },
+    {
+      "date": "2020-06-27",
+      "averageTemperature": 25.67,
+      "totalPrecipitation": 0,
+      "kulkulupa": 29,
+      "ilmaiskavijat": 30,
+      "paasyliput": 2274,
+      "verkkokauppa_paasyliput": 551,
+      "vuosiliput": 280,
+      "total": 3135
+    },
+    {
+      "date": "2020-06-28",
+      "averageTemperature": 22.33,
+      "totalPrecipitation": 0,
+      "kulkulupa": 20,
+      "ilmaiskavijat": 40,
+      "paasyliput": 2126,
+      "verkkokauppa_paasyliput": 505,
+      "vuosiliput": 402,
+      "total": 3073
+    },
+    {
+      "date": "2020-06-29",
+      "averageTemperature": 19.35,
+      "totalPrecipitation": 0.4,
+      "kulkulupa": 24,
+      "ilmaiskavijat": 46,
+      "paasyliput": 2180,
+      "kampanjakavijat": 4,
+      "verkkokauppa_paasyliput": 523,
+      "vuosiliput": 406,
+      "total": 3159
+    },
+    {
+      "date": "2020-06-30",
+      "averageTemperature": 14.91,
+      "totalPrecipitation": 25.9,
+      "kulkulupa": 1,
+      "ilmaiskavijat": 3,
+      "paasyliput": 89,
+      "verkkokauppa_paasyliput": 7,
+      "vuosiliput": 43,
+      "total": 142
+    },
+    {
+      "date": "2020-07-01",
+      "averageTemperature": 16.74,
+      "totalPrecipitation": 2.6,
+      "kulkulupa": 2,
+      "ilmaiskavijat": 12,
+      "paasyliput": 1070,
+      "verkkokauppa_paasyliput": 145,
+      "vuosiliput": 131,
+      "total": 1358
+    },
+    {
+      "date": "2020-07-02",
+      "averageTemperature": 17.43,
+      "totalPrecipitation": 1.2,
+      "kulkulupa": 19,
+      "ilmaiskavijat": 67,
+      "paasyliput": 2245,
+      "verkkokauppa_paasyliput": 506,
+      "vuosiliput": 238,
+      "total": 3056
+    },
+    {
+      "date": "2020-07-03",
+      "averageTemperature": 18.03,
+      "totalPrecipitation": 0,
+      "kulkulupa": 14,
+      "ilmaiskavijat": 60,
+      "paasyliput": 3634,
+      "verkkokauppa_paasyliput": 1136,
+      "vuosiliput": 427,
+      "total": 5257
+    },
+    {
+      "date": "2020-07-04",
+      "averageTemperature": 15.8,
+      "totalPrecipitation": 2.5,
+      "kulkulupa": 16,
+      "ilmaiskavijat": 31,
+      "paasyliput": 1195,
+      "kampanjakavijat": 11,
+      "verkkokauppa_paasyliput": 170,
+      "vuosiliput": 190,
+      "total": 1597
+    },
+    {
+      "date": "2020-07-05",
+      "averageTemperature": 15.84,
+      "totalPrecipitation": 1.4,
+      "kulkulupa": 42,
+      "ilmaiskavijat": 54,
+      "paasyliput": 2014,
+      "kampanjakavijat": 27,
+      "verkkokauppa_paasyliput": 414,
+      "vuosiliput": 384,
+      "total": 2893
+    },
+    {
+      "date": "2020-07-06",
+      "averageTemperature": 16.8,
+      "totalPrecipitation": 0,
+      "kulkulupa": 64,
+      "ilmaiskavijat": 44,
+      "paasyliput": 2700,
+      "kampanjakavijat": 122,
+      "verkkokauppa_paasyliput": 640,
+      "vuosiliput": 275,
+      "total": 3781
+    },
+    {
+      "date": "2020-07-07",
+      "averageTemperature": 15.08,
+      "totalPrecipitation": 2.4,
+      "kulkulupa": 33,
+      "ilmaiskavijat": 51,
+      "paasyliput": 2117,
+      "kampanjakavijat": 198,
+      "verkkokauppa_paasyliput": 382,
+      "vuosiliput": 233,
+      "total": 2981
+    },
+    {
+      "date": "2020-07-08",
+      "averageTemperature": 15.41,
+      "totalPrecipitation": 0.7,
+      "kulkulupa": 68,
+      "ilmaiskavijat": 63,
+      "paasyliput": 2398,
+      "kampanjakavijat": 167,
+      "verkkokauppa_paasyliput": 460,
+      "vuosiliput": 222,
+      "total": 3310
+    },
+    {
+      "date": "2020-07-09",
+      "averageTemperature": 15.24,
+      "totalPrecipitation": 0.4,
+      "kulkulupa": 97,
+      "ilmaiskavijat": 72,
+      "paasyliput": 2844,
+      "kampanjakavijat": 422,
+      "verkkokauppa_paasyliput": 527,
+      "vuosiliput": 237,
+      "total": 4102
+    },
+    {
+      "date": "2020-07-10",
+      "averageTemperature": 16.58,
+      "totalPrecipitation": 0,
+      "kulkulupa": 160,
+      "ilmaiskavijat": 79,
+      "paasyliput": 4022,
+      "kampanjakavijat": 814,
+      "verkkokauppa_paasyliput": 1352,
+      "vuosiliput": 387,
+      "total": 6654
+    },
+    {
+      "date": "2020-07-11",
+      "averageTemperature": 14.79,
+      "totalPrecipitation": 6.1,
+      "kulkulupa": 2,
+      "ilmaiskavijat": 8,
+      "paasyliput": 401,
+      "kampanjakavijat": 129,
+      "verkkokauppa_paasyliput": 43,
+      "vuosiliput": 59,
+      "total": 640
+    },
+    {
+      "date": "2020-07-12",
+      "averageTemperature": 17.47,
+      "totalPrecipitation": 0,
+      "kulkulupa": 258,
+      "ilmaiskavijat": 69,
+      "paasyliput": 4421,
+      "kampanjakavijat": 1220,
+      "verkkokauppa_paasyliput": 1856,
+      "vuosiliput": 493,
+      "total": 8059
+    },
+    {
+      "date": "2020-07-13",
+      "averageTemperature": 15.65,
+      "totalPrecipitation": 2.6,
+      "kulkulupa": 50,
+      "ilmaiskavijat": 45,
+      "paasyliput": 2001,
+      "verkkokauppa_paasyliput": 477,
+      "vuosiliput": 256,
+      "total": 2779
+    },
+    {
+      "date": "2020-07-14",
+      "averageTemperature": 17.11,
+      "totalPrecipitation": 0,
+      "kulkulupa": 25,
+      "ilmaiskavijat": 113,
+      "paasyliput": 3962,
+      "kampanjakavijat": 2,
+      "verkkokauppa_paasyliput": 1247,
+      "vuosiliput": 287,
+      "total": 5611
+    },
+    {
+      "date": "2020-07-15",
+      "averageTemperature": 20.3,
+      "totalPrecipitation": 0,
+      "kulkulupa": 15,
+      "ilmaiskavijat": 111,
+      "paasyliput": 4115,
+      "verkkokauppa_paasyliput": 1412,
+      "vuosiliput": 335,
+      "total": 5973
+    },
+    {
+      "date": "2020-07-16",
+      "averageTemperature": 22.98,
+      "totalPrecipitation": 0,
+      "kulkulupa": 18,
+      "ilmaiskavijat": 91,
+      "paasyliput": 3384,
+      "verkkokauppa_paasyliput": 1071,
+      "vuosiliput": 279,
+      "total": 4825
+    },
+    {
+      "date": "2020-07-17",
+      "averageTemperature": 23.68,
+      "totalPrecipitation": 0,
+      "kulkulupa": 43,
+      "ilmaiskavijat": 91,
+      "paasyliput": 2871,
+      "verkkokauppa_paasyliput": 799,
+      "vuosiliput": 240,
+      "total": 4001
+    },
+    {
+      "date": "2020-07-18",
+      "averageTemperature": 22.05,
+      "totalPrecipitation": 0,
+      "kulkulupa": 121,
+      "ilmaiskavijat": 66,
+      "paasyliput": 3884,
+      "verkkokauppa_paasyliput": 1315,
+      "vuosiliput": 229,
+      "total": 5494
+    },
+    {
+      "date": "2020-07-19",
+      "averageTemperature": 21.68,
+      "totalPrecipitation": 0,
+      "kulkulupa": 7,
+      "ilmaiskavijat": 72,
+      "paasyliput": 3231,
+      "verkkokauppa_paasyliput": 770,
+      "vuosiliput": 246,
+      "total": 4319
+    },
+    {
+      "date": "2020-07-20",
+      "averageTemperature": 22.07,
+      "totalPrecipitation": 0,
+      "kulkulupa": 38,
+      "ilmaiskavijat": 84,
+      "paasyliput": 3627,
+      "verkkokauppa_paasyliput": 1032,
+      "vuosiliput": 310,
+      "total": 5053
+    },
+    {
+      "date": "2020-07-21",
+      "averageTemperature": 20.59,
+      "totalPrecipitation": 0,
+      "kulkulupa": 23,
+      "ilmaiskavijat": 70,
+      "paasyliput": 2455,
+      "verkkokauppa_paasyliput": 508,
+      "vuosiliput": 194,
+      "total": 3227
+    },
+    {
+      "date": "2020-07-22",
+      "averageTemperature": 17.89,
+      "totalPrecipitation": 0.3,
+      "kulkulupa": 9,
+      "ilmaiskavijat": 111,
+      "paasyliput": 3819,
+      "verkkokauppa_paasyliput": 1340,
+      "vuosiliput": 376,
+      "total": 5646
+    },
+    {
+      "date": "2020-07-23",
+      "averageTemperature": 15.43,
+      "totalPrecipitation": 0.8,
+      "kulkulupa": 14,
+      "ilmaiskavijat": 63,
+      "paasyliput": 2611,
+      "verkkokauppa_paasyliput": 563,
+      "vuosiliput": 187,
+      "total": 3424
+    },
+    {
+      "date": "2020-07-24",
+      "averageTemperature": 15.27,
+      "totalPrecipitation": 0.8,
+      "kulkulupa": 4,
+      "ilmaiskavijat": 12,
+      "paasyliput": 980,
+      "kampanjakavijat": 4,
+      "verkkokauppa_paasyliput": 148,
+      "vuosiliput": 108,
+      "total": 1252
+    },
+    {
+      "date": "2020-07-25",
+      "averageTemperature": 16.78,
+      "totalPrecipitation": 1.4,
+      "kulkulupa": 21,
+      "ilmaiskavijat": 43,
+      "paasyliput": 2625,
+      "verkkokauppa_paasyliput": 533,
+      "vuosiliput": 178,
+      "total": 3379
+    },
+    {
+      "date": "2020-07-26",
+      "averageTemperature": 19.79,
+      "totalPrecipitation": 0,
+      "kulkulupa": 10,
+      "ilmaiskavijat": 84,
+      "paasyliput": 4232,
+      "verkkokauppa_paasyliput": 1271,
+      "vuosiliput": 376,
+      "total": 5963
+    },
+    {
+      "date": "2020-07-27",
+      "averageTemperature": 20.42,
+      "totalPrecipitation": 0,
+      "kulkulupa": 75,
+      "ilmaiskavijat": 75,
+      "paasyliput": 3669,
+      "verkkokauppa_paasyliput": 1198,
+      "vuosiliput": 347,
+      "total": 5289
+    },
+    {
+      "date": "2020-07-28",
+      "averageTemperature": 17.83,
+      "totalPrecipitation": 2.9,
+      "kulkulupa": 2,
+      "ilmaiskavijat": 20,
+      "paasyliput": 1532,
+      "kampanjakavijat": 1,
+      "verkkokauppa_paasyliput": 247,
+      "vuosiliput": 129,
+      "total": 1929
+    },
+    {
+      "date": "2020-07-29",
+      "averageTemperature": 17.89,
+      "totalPrecipitation": 9.2,
+      "kulkulupa": 5,
+      "ilmaiskavijat": 38,
+      "paasyliput": 1619,
+      "verkkokauppa_paasyliput": 340,
+      "vuosiliput": 150,
+      "total": 2147
+    },
+    {
+      "date": "2020-07-30",
+      "averageTemperature": 17.31,
+      "totalPrecipitation": 0,
+      "kulkulupa": 34,
+      "ilmaiskavijat": 40,
+      "paasyliput": 1906,
+      "kampanjakavijat": 6,
+      "verkkokauppa_paasyliput": 367,
+      "vuosiliput": 213,
+      "total": 2532
+    },
+    {
+      "date": "2020-07-31",
+      "averageTemperature": 20.85,
+      "totalPrecipitation": 0,
+      "kulkulupa": 17,
+      "ilmaiskavijat": 57,
+      "paasyliput": 2861,
+      "verkkokauppa_paasyliput": 680,
+      "vuosiliput": 255,
+      "total": 3853
+    },
+    {
+      "date": "2020-08-01",
+      "averageTemperature": 18.9,
+      "totalPrecipitation": 0,
+      "kulkulupa": 3,
+      "ilmaiskavijat": 89,
+      "paasyliput": 4428,
+      "verkkokauppa_paasyliput": 1280,
+      "vuosiliput": 312,
+      "total": 6109
+    },
+    {
+      "date": "2020-08-02",
+      "averageTemperature": 18.34,
+      "totalPrecipitation": 1.1,
+      "kulkulupa": 13,
+      "ilmaiskavijat": 67,
+      "paasyliput": 2490,
+      "kampanjakavijat": 2,
+      "verkkokauppa_paasyliput": 589,
+      "vuosiliput": 315,
+      "total": 3463
+    },
+    {
+      "date": "2020-08-03",
+      "averageTemperature": 17.57,
+      "totalPrecipitation": 9.6,
+      "kulkulupa": 6,
+      "ilmaiskavijat": 26,
+      "paasyliput": 1212,
+      "kampanjakavijat": 1,
+      "verkkokauppa_paasyliput": 191,
+      "vuosiliput": 93,
+      "total": 1523
+    },
+    {
+      "date": "2020-08-04",
+      "averageTemperature": 17.16,
+      "totalPrecipitation": 0.2,
+      "kulkulupa": 8,
+      "ilmaiskavijat": 57,
+      "paasyliput": 2004,
+      "kampanjakavijat": 4,
+      "verkkokauppa_paasyliput": 433,
+      "vuosiliput": 169,
+      "total": 2667
+    },
+    {
+      "date": "2020-08-05",
+      "averageTemperature": 18.82,
+      "totalPrecipitation": 0,
+      "kulkulupa": 13,
+      "ilmaiskavijat": 80,
+      "paasyliput": 2814,
+      "verkkokauppa_paasyliput": 590,
+      "vuosiliput": 274,
+      "total": 3758
+    },
+    {
+      "date": "2020-08-06",
+      "averageTemperature": 18.25,
+      "totalPrecipitation": 0,
+      "kulkulupa": 7,
+      "ilmaiskavijat": 60,
+      "paasyliput": 2069,
+      "kampanjakavijat": 3,
+      "verkkokauppa_paasyliput": 544,
+      "vuosiliput": 154,
+      "total": 2830
+    },
+    {
+      "date": "2020-08-07",
+      "averageTemperature": 19.78,
+      "totalPrecipitation": 0,
+      "kulkulupa": 4,
+      "ilmaiskavijat": 56,
+      "paasyliput": 2098,
+      "verkkokauppa_paasyliput": 423,
+      "vuosiliput": 229,
+      "total": 2806
+    },
+    {
+      "date": "2020-08-08",
+      "averageTemperature": 24.13,
+      "totalPrecipitation": 0,
+      "kulkulupa": 26,
+      "ilmaiskavijat": 97,
+      "paasyliput": 3169,
+      "verkkokauppa_paasyliput": 812,
+      "vuosiliput": 216,
+      "total": 4294
+    },
+    {
+      "date": "2020-08-09",
+      "averageTemperature": 23.72,
+      "totalPrecipitation": 0,
+      "kulkulupa": 5,
+      "ilmaiskavijat": 32,
+      "paasyliput": 2089,
+      "verkkokauppa_paasyliput": 475,
+      "vuosiliput": 231,
+      "total": 2827
+    },
+    {
+      "date": "2020-08-10",
+      "averageTemperature": 21.58,
+      "totalPrecipitation": 0,
+      "kulkulupa": 4,
+      "ilmaiskavijat": 32,
+      "paasyliput": 1621,
+      "kampanjakavijat": 2,
+      "verkkokauppa_paasyliput": 265,
+      "vuosiliput": 188,
+      "total": 2108
+    },
+    {
+      "date": "2020-08-11",
+      "averageTemperature": 18.55,
+      "totalPrecipitation": 0,
+      "kulkulupa": 10,
+      "ilmaiskavijat": 43,
+      "paasyliput": 1530,
+      "verkkokauppa_paasyliput": 318,
+      "vuosiliput": 145,
+      "total": 2036
+    },
+    {
+      "date": "2020-08-12",
+      "averageTemperature": 16.96,
+      "totalPrecipitation": 0,
+      "kulkulupa": 14,
+      "ilmaiskavijat": 56,
+      "paasyliput": 1205,
+      "kampanjakavijat": 4,
+      "verkkokauppa_paasyliput": 188,
+      "vuosiliput": 174,
+      "total": 1627
+    },
+    {
+      "date": "2020-08-13",
+      "averageTemperature": 16.12,
+      "totalPrecipitation": 0,
+      "kulkulupa": 4,
+      "ilmaiskavijat": 19,
+      "paasyliput": 683,
+      "verkkokauppa_paasyliput": 66,
+      "vuosiliput": 104,
+      "total": 872
+    },
+    {
+      "date": "2020-08-14",
+      "averageTemperature": 18.33,
+      "totalPrecipitation": 0,
+      "kulkulupa": 1,
+      "ilmaiskavijat": 49,
+      "paasyliput": 866,
+      "kampanjakavijat": 2,
+      "verkkokauppa_paasyliput": 250,
+      "vuosiliput": 154,
+      "total": 1321
+    },
+    {
+      "date": "2020-08-15",
+      "averageTemperature": 21,
+      "totalPrecipitation": 0,
+      "kulkulupa": 3,
+      "ilmaiskavijat": 76,
+      "paasyliput": 2594,
+      "kampanjakavijat": 2,
+      "verkkokauppa_paasyliput": 602,
+      "vuosiliput": 300,
+      "total": 3574
+    },
+    {
+      "date": "2020-08-16",
+      "averageTemperature": 24.84,
+      "totalPrecipitation": 0,
+      "kulkulupa": 9,
+      "ilmaiskavijat": 47,
+      "paasyliput": 1810,
+      "kampanjakavijat": 5,
+      "verkkokauppa_paasyliput": 360,
+      "vuosiliput": 313,
+      "total": 2535
+    },
+    {
+      "date": "2020-08-17",
+      "averageTemperature": 21.23,
+      "totalPrecipitation": 0,
+      "kulkulupa": 2,
+      "ilmaiskavijat": 14,
+      "paasyliput": 694,
+      "verkkokauppa_paasyliput": 111,
+      "vuosiliput": 166,
+      "total": 985
+    },
+    {
+      "date": "2020-08-18",
+      "averageTemperature": 20.3,
+      "totalPrecipitation": 0,
+      "kulkulupa": 4,
+      "ilmaiskavijat": 10,
+      "paasyliput": 722,
+      "verkkokauppa_paasyliput": 72,
+      "vuosiliput": 149,
+      "total": 953
+    },
+    {
+      "date": "2020-08-19",
+      "averageTemperature": 20.7,
+      "totalPrecipitation": 0,
+      "ilmaiskavijat": 23,
+      "paasyliput": 678,
+      "kampanjakavijat": 2,
+      "verkkokauppa_paasyliput": 117,
+      "vuosiliput": 126,
+      "total": 946
+    },
+    {
+      "date": "2020-08-20",
+      "averageTemperature": 21.76,
+      "totalPrecipitation": 0,
+      "kulkulupa": 10,
+      "ilmaiskavijat": 28,
+      "paasyliput": 771,
+      "verkkokauppa_paasyliput": 156,
+      "vuosiliput": 128,
+      "total": 1083
+    },
+    {
+      "date": "2020-08-21",
+      "averageTemperature": 22.19,
+      "totalPrecipitation": 0,
+      "kulkulupa": 6,
+      "ilmaiskavijat": 40,
+      "paasyliput": 961,
+      "kampanjakavijat": 4,
+      "verkkokauppa_paasyliput": 236,
+      "vuosiliput": 166,
+      "total": 1407
+    },
+    {
+      "date": "2020-08-22",
+      "averageTemperature": 18.14,
+      "totalPrecipitation": 5.2,
+      "kulkulupa": 25,
+      "ilmaiskavijat": 22,
+      "paasyliput": 1369,
+      "kampanjakavijat": 2,
+      "verkkokauppa_paasyliput": 86,
+      "vuosiliput": 66,
+      "total": 1545
+    },
+    {
+      "date": "2020-08-23",
+      "averageTemperature": 20.78,
+      "totalPrecipitation": 0,
+      "kulkulupa": 39,
+      "ilmaiskavijat": 71,
+      "paasyliput": 2035,
+      "verkkokauppa_paasyliput": 292,
+      "vuosiliput": 365,
+      "total": 2763
+    },
+    {
+      "date": "2020-08-24",
+      "averageTemperature": 18.56,
+      "totalPrecipitation": 4.5,
+      "kulkulupa": 1,
+      "ilmaiskavijat": 15,
+      "paasyliput": 394,
+      "kampanjakavijat": 5,
+      "verkkokauppa_paasyliput": 34,
+      "vuosiliput": 94,
+      "total": 542
+    },
+    {
+      "date": "2020-08-25",
+      "averageTemperature": 17.06,
+      "totalPrecipitation": 2.8,
+      "ilmaiskavijat": 6,
+      "paasyliput": 329,
+      "verkkokauppa_paasyliput": 29,
+      "vuosiliput": 86,
+      "total": 450
+    },
+    {
+      "date": "2020-08-26",
+      "averageTemperature": 17.59,
+      "totalPrecipitation": 0.1,
+      "kulkulupa": 1,
+      "ilmaiskavijat": 35,
+      "paasyliput": 571,
+      "verkkokauppa_paasyliput": 46,
+      "vuosiliput": 99,
+      "total": 751
+    },
+    {
+      "date": "2020-08-27",
+      "averageTemperature": 16.51,
+      "totalPrecipitation": 0,
+      "kulkulupa": 1,
+      "ilmaiskavijat": 912,
+      "paasyliput": 528,
+      "verkkokauppa_paasyliput": 42,
+      "vuosiliput": 98,
+      "total": 1580
+    },
+    {
+      "date": "2020-08-28",
+      "averageTemperature": 16.78,
+      "totalPrecipitation": 0,
+      "kulkulupa": 3,
+      "ilmaiskavijat": 232,
+      "paasyliput": 542,
+      "verkkokauppa_paasyliput": 99,
+      "vuosiliput": 139,
+      "total": 1012
+    },
+    {
+      "date": "2020-08-29",
+      "averageTemperature": 16.84,
+      "totalPrecipitation": 0,
+      "kulkulupa": 40,
+      "ilmaiskavijat": 89,
+      "paasyliput": 1760,
+      "kampanjakavijat": 2,
+      "verkkokauppa_paasyliput": 300,
+      "vuosiliput": 313,
+      "total": 2464
+    },
+    {
+      "date": "2020-08-30",
+      "averageTemperature": 13.95,
+      "totalPrecipitation": 6.5,
+      "ilmaiskavijat": 24,
+      "paasyliput": 654,
+      "verkkokauppa_paasyliput": 52,
+      "vuosiliput": 218,
+      "total": 948
+    },
+    {
+      "date": "2020-08-31",
+      "averageTemperature": 14.35,
+      "totalPrecipitation": 1,
+      "ilmaiskavijat": 12,
+      "paasyliput": 182,
+      "verkkokauppa_paasyliput": 29,
+      "vuosiliput": 55,
+      "total": 278
+    },
+    {
+      "date": "2020-09-01",
+      "averageTemperature": 17.01,
+      "totalPrecipitation": 0,
+      "kulkulupa": 1,
+      "ilmaiskavijat": 11,
+      "paasyliput": 324,
+      "verkkokauppa_paasyliput": 16,
+      "vuosiliput": 93,
+      "total": 444
+    },
+    {
+      "date": "2020-09-02",
+      "averageTemperature": 16.17,
+      "totalPrecipitation": 0,
+      "ilmaiskavijat": 28,
+      "paasyliput": 287,
+      "kampanjakavijat": 2,
+      "verkkokauppa_paasyliput": 97,
+      "vuosiliput": 92,
+      "total": 506
+    },
+    {
+      "date": "2020-09-03",
+      "averageTemperature": 17,
+      "totalPrecipitation": 0,
+      "ilmaiskavijat": 5,
+      "paasyliput": 126,
+      "verkkokauppa_paasyliput": 12,
+      "vuosiliput": 30,
+      "total": 173
+    },
+    {
+      "date": "2020-09-04",
+      "averageTemperature": 17.07,
+      "totalPrecipitation": 0.9,
+      "kulkulupa": 38,
+      "ilmaiskavijat": 21,
+      "paasyliput": 424,
+      "verkkokauppa_paasyliput": 517,
+      "vuosiliput": 238,
+      "total": 1200
+    },
+    {
+      "date": "2020-09-05",
+      "averageTemperature": 16.45,
+      "totalPrecipitation": 6.1,
+      "kulkulupa": 12,
+      "ilmaiskavijat": 53,
+      "paasyliput": 1142,
+      "kampanjakavijat": 1,
+      "verkkokauppa_paasyliput": 597,
+      "vuosiliput": 335,
+      "total": 2128
+    },
+    {
+      "date": "2020-09-06",
+      "averageTemperature": 15.95,
+      "totalPrecipitation": 2,
+      "kulkulupa": 2,
+      "ilmaiskavijat": 33,
+      "paasyliput": 752,
+      "verkkokauppa_paasyliput": 106,
+      "vuosiliput": 309,
+      "total": 1200
+    },
+    {
+      "date": "2020-09-07",
+      "averageTemperature": 15.78,
+      "totalPrecipitation": 7.5,
+      "ilmaiskavijat": 3,
+      "paasyliput": 132,
+      "verkkokauppa_paasyliput": 15,
+      "vuosiliput": 50,
+      "total": 200
+    },
+    {
+      "date": "2020-09-08",
+      "averageTemperature": 14.37,
+      "totalPrecipitation": 8,
+      "kulkulupa": 1,
+      "ilmaiskavijat": 24,
+      "paasyliput": 44,
+      "verkkokauppa_paasyliput": 11,
+      "vuosiliput": 14,
+      "total": 93
+    },
+    {
+      "date": "2020-09-09",
+      "averageTemperature": 14.58,
+      "totalPrecipitation": 5.3,
+      "kulkulupa": 2,
+      "ilmaiskavijat": 10,
+      "paasyliput": 129,
+      "verkkokauppa_paasyliput": 56,
+      "vuosiliput": 46,
+      "total": 241
+    },
+    {
+      "date": "2020-09-10",
+      "averageTemperature": 13.97,
+      "totalPrecipitation": 0,
+      "kulkulupa": 3,
+      "ilmaiskavijat": 17,
+      "paasyliput": 148,
+      "verkkokauppa_paasyliput": 72,
+      "vuosiliput": 47,
+      "total": 284
+    },
+    {
+      "date": "2020-09-11",
+      "averageTemperature": 14.17,
+      "totalPrecipitation": 0,
+      "kulkulupa": 7,
+      "ilmaiskavijat": 82,
+      "paasyliput": 1060,
+      "verkkokauppa_paasyliput": 1493,
+      "vuosiliput": 663,
+      "total": 3298
+    },
+    {
+      "date": "2020-09-12",
+      "averageTemperature": 14.26,
+      "totalPrecipitation": 3.5,
+      "kulkulupa": 3,
+      "ilmaiskavijat": 34,
+      "paasyliput": 536,
+      "verkkokauppa_paasyliput": 581,
+      "vuosiliput": 250,
+      "total": 1401
+    },
+    {
+      "date": "2020-09-13",
+      "averageTemperature": 14.93,
+      "totalPrecipitation": 0,
+      "ilmaiskavijat": 87,
+      "paasyliput": 1494,
+      "verkkokauppa_paasyliput": 227,
+      "vuosiliput": 457,
+      "total": 2265
+    },
+    {
+      "date": "2020-09-14",
+      "averageTemperature": 15.94,
+      "totalPrecipitation": 0,
+      "ilmaiskavijat": 51,
+      "paasyliput": 305,
+      "verkkokauppa_paasyliput": 25,
+      "vuosiliput": 78,
+      "total": 459
+    },
+    {
+      "date": "2020-09-15",
+      "averageTemperature": 15.11,
+      "totalPrecipitation": 0,
+      "kulkulupa": 2,
+      "ilmaiskavijat": 10,
+      "paasyliput": 189,
+      "verkkokauppa_paasyliput": 21,
+      "vuosiliput": 82,
+      "total": 302
+    },
+    {
+      "date": "2020-09-16",
+      "averageTemperature": 15.34,
+      "totalPrecipitation": 0,
+      "kulkulupa": 1,
+      "ilmaiskavijat": 13,
+      "paasyliput": 97,
+      "verkkokauppa_paasyliput": 37,
+      "vuosiliput": 46,
+      "total": 193
+    },
+    {
+      "date": "2020-09-17",
+      "averageTemperature": 9.6,
+      "totalPrecipitation": 0,
+      "ilmaiskavijat": 5,
+      "paasyliput": 58,
+      "verkkokauppa_paasyliput": 38,
+      "vuosiliput": 8,
+      "total": 109
+    },
+    {
+      "date": "2020-09-18",
+      "averageTemperature": 12.17,
+      "totalPrecipitation": 0,
+      "kulkulupa": 16,
+      "ilmaiskavijat": 109,
+      "paasyliput": 1292,
+      "verkkokauppa_paasyliput": 1547,
+      "vuosiliput": 681,
+      "total": 3629
+    },
+    {
+      "date": "2020-09-19",
+      "averageTemperature": 13.45,
+      "totalPrecipitation": 0,
+      "kulkulupa": 23,
+      "ilmaiskavijat": 160,
+      "paasyliput": 2041,
+      "verkkokauppa_paasyliput": 2296,
+      "vuosiliput": 941,
+      "total": 5438
+    },
+    {
+      "date": "2020-09-20",
+      "averageTemperature": 13.28,
+      "totalPrecipitation": 0,
+      "kulkulupa": 4,
+      "ilmaiskavijat": 42,
+      "paasyliput": 1228,
+      "verkkokauppa_paasyliput": 167,
+      "vuosiliput": 342,
+      "total": 1779
+    },
+    {
+      "date": "2020-09-21",
+      "averageTemperature": 13.48,
+      "totalPrecipitation": 0,
+      "ilmaiskavijat": 29,
+      "paasyliput": 165,
+      "verkkokauppa_paasyliput": 2,
+      "vuosiliput": 61,
+      "total": 257
+    },
+    {
+      "date": "2020-09-22",
+      "averageTemperature": 13.27,
+      "totalPrecipitation": 0,
+      "ilmaiskavijat": 37,
+      "paasyliput": 167,
+      "verkkokauppa_paasyliput": 13,
+      "vuosiliput": 39,
+      "total": 256
+    },
+    {
+      "date": "2020-09-23",
+      "averageTemperature": 15.25,
+      "totalPrecipitation": 0,
+      "kulkulupa": 1,
+      "ilmaiskavijat": 14,
+      "paasyliput": 338,
+      "verkkokauppa_paasyliput": 22,
+      "vuosiliput": 85,
+      "total": 459
+    },
+    {
+      "date": "2020-09-24",
+      "averageTemperature": 17.65,
+      "totalPrecipitation": 0,
+      "kulkulupa": 1,
+      "ilmaiskavijat": 41,
+      "paasyliput": 75,
+      "kampanjakavijat": 219,
+      "verkkokauppa_paasyliput": 13,
+      "vuosiliput": 103,
+      "total": 451
+    },
+    {
+      "date": "2020-09-25",
+      "averageTemperature": 15.86,
+      "totalPrecipitation": 0.1,
+      "ilmaiskavijat": 29,
+      "paasyliput": 275,
+      "kampanjakavijat": 175,
+      "verkkokauppa_paasyliput": 47,
+      "vuosiliput": 82,
+      "total": 608
+    },
+    {
+      "date": "2020-09-26",
+      "averageTemperature": 15.69,
+      "totalPrecipitation": 0,
+      "kulkulupa": 1,
+      "ilmaiskavijat": 83,
+      "paasyliput": 500,
+      "kampanjakavijat": 1770,
+      "verkkokauppa_paasyliput": 138,
+      "vuosiliput": 348,
+      "total": 2839
+    },
+    {
+      "date": "2020-09-27",
+      "averageTemperature": 17.18,
+      "totalPrecipitation": 0,
+      "kulkulupa": 1,
+      "ilmaiskavijat": 66,
+      "paasyliput": 444,
+      "kampanjakavijat": 1812,
+      "verkkokauppa_paasyliput": 175,
+      "vuosiliput": 371,
+      "total": 2868
+    },
+    {
+      "date": "2020-09-28",
+      "averageTemperature": 14.87,
+      "totalPrecipitation": 0,
+      "ilmaiskavijat": 22,
+      "paasyliput": 247,
+      "verkkokauppa_paasyliput": 68,
+      "vuosiliput": 97,
+      "total": 434
+    },
+    {
+      "date": "2020-09-29",
+      "averageTemperature": 13.47,
+      "totalPrecipitation": 0.3,
+      "ilmaiskavijat": 3,
+      "paasyliput": 188,
+      "verkkokauppa_paasyliput": 21,
+      "vuosiliput": 36,
+      "total": 248
+    },
+    {
+      "date": "2020-09-30",
+      "averageTemperature": 13.98,
+      "totalPrecipitation": 0,
+      "ilmaiskavijat": 5,
+      "paasyliput": 189,
+      "verkkokauppa_paasyliput": 9,
+      "vuosiliput": 51,
+      "total": 254
+    },
+    {
+      "date": "2020-10-01",
+      "averageTemperature": 13.15,
+      "totalPrecipitation": 0,
+      "ilmaiskavijat": 108,
+      "paasyliput": 171,
+      "verkkokauppa_paasyliput": 18,
+      "vuosiliput": 42,
+      "total": 339
+    },
+    {
+      "date": "2020-10-02",
+      "averageTemperature": 14.06,
+      "totalPrecipitation": 0,
+      "ilmaiskavijat": 81,
+      "paasyliput": 508,
+      "verkkokauppa_paasyliput": 31,
+      "vuosiliput": 80,
+      "total": 700
+    },
+    {
+      "date": "2020-10-03",
+      "averageTemperature": 13.94,
+      "totalPrecipitation": 0,
+      "ilmaiskavijat": 68,
+      "paasyliput": 1410,
+      "verkkokauppa_paasyliput": 254,
+      "vuosiliput": 322,
+      "total": 2054
+    },
+    {
+      "date": "2020-10-04",
+      "averageTemperature": 13.17,
+      "totalPrecipitation": 0.9,
+      "ilmaiskavijat": 14,
+      "paasyliput": 344,
+      "verkkokauppa_paasyliput": 41,
+      "vuosiliput": 141,
+      "total": 540
+    },
+    {
+      "date": "2020-10-05",
+      "averageTemperature": 15.33,
+      "totalPrecipitation": 0,
+      "ilmaiskavijat": 19,
+      "paasyliput": 93,
+      "verkkokauppa_paasyliput": 10,
+      "vuosiliput": 57,
+      "total": 179
+    },
+    {
+      "date": "2020-10-06",
+      "averageTemperature": 14.58,
+      "totalPrecipitation": 0.8,
+      "ilmaiskavijat": 160,
+      "paasyliput": 81,
+      "verkkokauppa_paasyliput": 4,
+      "vuosiliput": 34,
+      "total": 279
+    },
+    {
+      "date": "2020-10-07",
+      "averageTemperature": 13.31,
+      "totalPrecipitation": 0,
+      "kulkulupa": 1,
+      "ilmaiskavijat": 126,
+      "paasyliput": 146,
+      "verkkokauppa_paasyliput": 12,
+      "vuosiliput": 49,
+      "total": 333
+    },
+    {
+      "date": "2020-10-08",
+      "averageTemperature": 13.53,
+      "totalPrecipitation": 0.9,
+      "ilmaiskavijat": 101,
+      "paasyliput": 98,
+      "verkkokauppa_paasyliput": 7,
+      "vuosiliput": 37,
+      "total": 243
+    },
+    {
+      "date": "2020-10-09",
+      "averageTemperature": 12.55,
+      "totalPrecipitation": 1.5,
+      "ilmaiskavijat": 39,
+      "paasyliput": 97,
+      "verkkokauppa_paasyliput": 14,
+      "vuosiliput": 41,
+      "total": 191
+    },
+    {
+      "date": "2020-10-10",
+      "averageTemperature": 13.05,
+      "totalPrecipitation": 0,
+      "kulkulupa": 7,
+      "ilmaiskavijat": 62,
+      "paasyliput": 1204,
+      "verkkokauppa_paasyliput": 202,
+      "vuosiliput": 424,
+      "total": 1892
+    },
+    {
+      "date": "2020-10-11",
+      "averageTemperature": 12.13,
+      "totalPrecipitation": 1.4,
+      "kulkulupa": 1,
+      "ilmaiskavijat": 11,
+      "paasyliput": 414,
+      "verkkokauppa_paasyliput": 64,
+      "vuosiliput": 191,
+      "total": 680
+    },
+    {
+      "date": "2020-10-12",
+      "averageTemperature": 11.79,
+      "totalPrecipitation": 1.2,
+      "kulkulupa": 1,
+      "ilmaiskavijat": 38,
+      "paasyliput": 551,
+      "verkkokauppa_paasyliput": 108,
+      "vuosiliput": 196,
+      "total": 893
+    },
+    {
+      "date": "2020-10-13",
+      "averageTemperature": 10.22,
+      "totalPrecipitation": 0,
+      "kulkulupa": 1,
+      "ilmaiskavijat": 72,
+      "paasyliput": 960,
+      "verkkokauppa_paasyliput": 184,
+      "vuosiliput": 192,
+      "total": 1408
+    },
+    {
+      "date": "2020-10-14",
+      "averageTemperature": 8.36,
+      "totalPrecipitation": 0,
+      "ilmaiskavijat": 63,
+      "paasyliput": 975,
+      "verkkokauppa_paasyliput": 198,
+      "vuosiliput": 181,
+      "total": 1417
+    },
+    {
+      "date": "2020-10-15",
+      "averageTemperature": 6.13,
+      "totalPrecipitation": 0,
+      "kulkulupa": 5,
+      "ilmaiskavijat": 50,
+      "paasyliput": 989,
+      "verkkokauppa_paasyliput": 207,
+      "vuosiliput": 296,
+      "total": 1542
+    },
+    {
+      "date": "2020-10-16",
+      "averageTemperature": 5.6,
+      "totalPrecipitation": 0,
+      "kulkulupa": 3,
+      "ilmaiskavijat": 74,
+      "paasyliput": 1050,
+      "verkkokauppa_paasyliput": 259,
+      "vuosiliput": 251,
+      "total": 1634
+    },
+    {
+      "date": "2020-10-17",
+      "averageTemperature": 8.4,
+      "totalPrecipitation": 0,
+      "kulkulupa": 8,
+      "ilmaiskavijat": 51,
+      "paasyliput": 1202,
+      "verkkokauppa_paasyliput": 231,
+      "vuosiliput": 387,
+      "total": 1871
+    },
+    {
+      "date": "2020-10-18",
+      "averageTemperature": 5.25,
+      "totalPrecipitation": 0,
+      "ilmaiskavijat": 30,
+      "paasyliput": 607,
+      "verkkokauppa_paasyliput": 80,
+      "vuosiliput": 344,
+      "total": 1061
+    },
+    {
+      "date": "2020-10-19",
+      "averageTemperature": 2.71,
+      "totalPrecipitation": 0,
+      "kulkulupa": 3,
+      "ilmaiskavijat": 695,
+      "paasyliput": 103,
+      "vuosiliput": 24,
+      "total": 822
+    },
+    {
+      "date": "2020-10-20",
+      "averageTemperature": 2.19,
+      "totalPrecipitation": 0,
+      "ilmaiskavijat": 127,
+      "paasyliput": 184,
+      "verkkokauppa_paasyliput": 25,
+      "vuosiliput": 79,
+      "total": 415
+    },
+    {
+      "date": "2020-10-21",
+      "averageTemperature": 7.17,
+      "totalPrecipitation": 1,
+      "ilmaiskavijat": 28,
+      "paasyliput": 72,
+      "verkkokauppa_paasyliput": 2,
+      "vuosiliput": 20,
+      "total": 122
+    },
+    {
+      "date": "2020-10-22",
+      "averageTemperature": 10.25,
+      "totalPrecipitation": 10.9,
+      "ilmaiskavijat": 149,
+      "paasyliput": 55,
+      "verkkokauppa_paasyliput": 2,
+      "vuosiliput": 3,
+      "total": 209
+    },
+    {
+      "date": "2020-10-23",
+      "averageTemperature": 9.03,
+      "totalPrecipitation": 0,
+      "ilmaiskavijat": 41,
+      "paasyliput": 188,
+      "verkkokauppa_paasyliput": 23,
+      "vuosiliput": 35,
+      "total": 287
+    },
+    {
+      "date": "2020-10-24",
+      "averageTemperature": 5.25,
+      "totalPrecipitation": 0.1,
+      "kulkulupa": 12,
+      "ilmaiskavijat": 27,
+      "paasyliput": 989,
+      "verkkokauppa_paasyliput": 109,
+      "vuosiliput": 349,
+      "total": 1474
+    },
+    {
+      "date": "2020-10-25",
+      "averageTemperature": 6.82,
+      "totalPrecipitation": 0,
+      "ilmaiskavijat": 40,
+      "paasyliput": 724,
+      "verkkokauppa_paasyliput": 74,
+      "vuosiliput": 394,
+      "total": 1232
+    },
+    {
+      "date": "2020-10-26",
+      "averageTemperature": 10.12,
+      "totalPrecipitation": 0.2,
+      "ilmaiskavijat": 8,
+      "paasyliput": 67,
+      "verkkokauppa_paasyliput": 6,
+      "vuosiliput": 44,
+      "total": 125
+    },
+    {
+      "date": "2020-10-27",
+      "averageTemperature": 11.56,
+      "totalPrecipitation": 2.4,
+      "ilmaiskavijat": 83,
+      "paasyliput": 41,
+      "verkkokauppa_paasyliput": 7,
+      "vuosiliput": 12,
+      "total": 143
+    },
+    {
+      "date": "2020-10-28",
+      "averageTemperature": 10.88,
+      "totalPrecipitation": 0,
+      "ilmaiskavijat": 14,
+      "paasyliput": 78,
+      "verkkokauppa_paasyliput": 5,
+      "vuosiliput": 52,
+      "total": 149
+    },
+    {
+      "date": "2020-10-29",
+      "averageTemperature": 10.88,
+      "totalPrecipitation": 0,
+      "ilmaiskavijat": 44,
+      "paasyliput": 195,
+      "verkkokauppa_paasyliput": 2,
+      "vuosiliput": 47,
+      "total": 288
+    },
+    {
+      "date": "2020-10-30",
+      "averageTemperature": 9.13,
+      "totalPrecipitation": 0.2,
+      "kulkulupa": 1,
+      "ilmaiskavijat": 57,
+      "paasyliput": 120,
+      "verkkokauppa_paasyliput": 5,
+      "vuosiliput": 68,
+      "total": 250
+    },
+    {
+      "date": "2020-10-31",
+      "averageTemperature": 7.84,
+      "totalPrecipitation": 1,
+      "ilmaiskavijat": 23,
+      "paasyliput": 475,
+      "verkkokauppa_paasyliput": 48,
+      "vuosiliput": 208,
+      "total": 754
+    },
+    {
+      "date": "2020-11-01",
+      "averageTemperature": 8.89,
+      "totalPrecipitation": 0,
+      "ilmaiskavijat": 29,
+      "paasyliput": 459,
+      "verkkokauppa_paasyliput": 46,
+      "vuosiliput": 268,
+      "total": 802
+    },
+    {
+      "date": "2020-11-02",
+      "averageTemperature": 8.15,
+      "totalPrecipitation": 0.2,
+      "ilmaiskavijat": 2,
+      "paasyliput": 27,
+      "verkkokauppa_paasyliput": 1,
+      "vuosiliput": 24,
+      "total": 54
+    },
+    {
+      "date": "2020-11-03",
+      "averageTemperature": 11.31,
+      "totalPrecipitation": 0,
+      "ilmaiskavijat": 52,
+      "paasyliput": 87,
+      "verkkokauppa_paasyliput": 7,
+      "vuosiliput": 51,
+      "total": 197
+    },
+    {
+      "date": "2020-11-04",
+      "averageTemperature": 8.58,
+      "totalPrecipitation": 2.4,
+      "ilmaiskavijat": 20,
+      "paasyliput": 80,
+      "verkkokauppa_paasyliput": 2,
+      "vuosiliput": 36,
+      "total": 138
+    },
+    {
+      "date": "2020-11-05",
+      "averageTemperature": 9.03,
+      "totalPrecipitation": 0,
+      "ilmaiskavijat": 46,
+      "paasyliput": 52,
+      "verkkokauppa_paasyliput": 8,
+      "vuosiliput": 47,
+      "total": 153
+    },
+    {
+      "date": "2020-11-06",
+      "averageTemperature": 9.89,
+      "totalPrecipitation": 0,
+      "ilmaiskavijat": 22,
+      "paasyliput": 156,
+      "verkkokauppa_paasyliput": 17,
+      "vuosiliput": 109,
+      "total": 304
+    },
+    {
+      "date": "2020-11-07",
+      "averageTemperature": 9.47,
+      "totalPrecipitation": 0,
+      "kulkulupa": 6,
+      "ilmaiskavijat": 40,
+      "paasyliput": 738,
+      "verkkokauppa_paasyliput": 113,
+      "vuosiliput": 398,
+      "total": 1289
+    },
+    {
+      "date": "2020-11-08",
+      "averageTemperature": 4.53,
+      "totalPrecipitation": 0,
+      "kulkulupa": 8,
+      "ilmaiskavijat": 24,
+      "paasyliput": 719,
+      "verkkokauppa_paasyliput": 76,
+      "vuosiliput": 417,
+      "total": 1236
+    },
+    {
+      "date": "2020-11-09",
+      "averageTemperature": 6.56,
+      "totalPrecipitation": 0,
+      "ilmaiskavijat": 98,
+      "paasyliput": 76,
+      "verkkokauppa_paasyliput": 6,
+      "vuosiliput": 56,
+      "total": 236
+    },
+    {
+      "date": "2020-11-10",
+      "averageTemperature": 2.04,
+      "totalPrecipitation": 0,
+      "ilmaiskavijat": 37,
+      "paasyliput": 69,
+      "verkkokauppa_paasyliput": 3,
+      "vuosiliput": 50,
+      "total": 159
+    },
+    {
+      "date": "2020-11-11",
+      "averageTemperature": 6.5,
+      "totalPrecipitation": 4,
+      "ilmaiskavijat": 23,
+      "paasyliput": 50,
+      "verkkokauppa_paasyliput": 2,
+      "vuosiliput": 25,
+      "total": 100
+    },
+    {
+      "date": "2020-11-12",
+      "averageTemperature": 7.18,
+      "totalPrecipitation": 0,
+      "kulkulupa": 1,
+      "ilmaiskavijat": 22,
+      "paasyliput": 137,
+      "vuosiliput": 53,
+      "total": 212
+    },
+    {
+      "date": "2020-11-13",
+      "averageTemperature": 5.81,
+      "totalPrecipitation": 0,
+      "ilmaiskavijat": 96,
+      "paasyliput": 104,
+      "vuosiliput": 51,
+      "total": 251
+    },
+    {
+      "date": "2020-11-14",
+      "averageTemperature": 4.82,
+      "totalPrecipitation": 0,
+      "ilmaiskavijat": 22,
+      "paasyliput": 714,
+      "verkkokauppa_paasyliput": 67,
+      "vuosiliput": 372,
+      "total": 1175
+    },
+    {
+      "date": "2020-11-15",
+      "averageTemperature": 4.22,
+      "totalPrecipitation": 0,
+      "kulkulupa": 1,
+      "ilmaiskavijat": 27,
+      "paasyliput": 615,
+      "verkkokauppa_paasyliput": 43,
+      "vuosiliput": 473,
+      "total": 1158
+    },
+    {
+      "date": "2020-11-16",
+      "averageTemperature": 4.98,
+      "totalPrecipitation": 0,
+      "ilmaiskavijat": 327,
+      "paasyliput": 98,
+      "vuosiliput": 43,
+      "total": 468
+    },
+    {
+      "date": "2020-11-17",
+      "averageTemperature": 6.01,
+      "totalPrecipitation": 1.2,
+      "ilmaiskavijat": 2,
+      "paasyliput": 22,
+      "verkkokauppa_paasyliput": 1,
+      "vuosiliput": 16,
+      "total": 41
+    },
+    {
+      "date": "2020-11-18",
+      "averageTemperature": 10.15,
+      "totalPrecipitation": 0.4,
+      "ilmaiskavijat": 15,
+      "paasyliput": 98,
+      "verkkokauppa_paasyliput": 3,
+      "vuosiliput": 81,
+      "total": 197
+    },
+    {
+      "date": "2020-11-19",
+      "averageTemperature": 9.66,
+      "totalPrecipitation": 3.5,
+      "ilmaiskavijat": 39,
+      "paasyliput": 12,
+      "vuosiliput": 7,
+      "total": 58
+    },
+    {
+      "date": "2020-11-20",
+      "averageTemperature": 1.02,
+      "totalPrecipitation": 0,
+      "ilmaiskavijat": 25,
+      "paasyliput": 105,
+      "verkkokauppa_paasyliput": 2,
+      "vuosiliput": 88,
+      "total": 220
+    },
+    {
+      "date": "2020-11-21",
+      "averageTemperature": 4.65,
+      "totalPrecipitation": 1.7,
+      "ilmaiskavijat": 18,
+      "paasyliput": 333,
+      "verkkokauppa_paasyliput": 9,
+      "vuosiliput": 305,
+      "total": 665
+    },
+    {
+      "date": "2020-11-22",
+      "averageTemperature": 7.18,
+      "totalPrecipitation": 0,
+      "kulkulupa": 8,
+      "ilmaiskavijat": 35,
+      "paasyliput": 714,
+      "verkkokauppa_paasyliput": 41,
+      "vuosiliput": 724,
+      "total": 1514
+    },
+    {
+      "date": "2020-11-23",
+      "averageTemperature": 5.63,
+      "totalPrecipitation": 0.2,
+      "ilmaiskavijat": 9,
+      "paasyliput": 78,
+      "verkkokauppa_paasyliput": 2,
+      "vuosiliput": 100,
+      "total": 189
+    },
+    {
+      "date": "2020-11-24",
+      "averageTemperature": 3.4,
+      "totalPrecipitation": 0,
+      "kulkulupa": 1,
+      "ilmaiskavijat": 67,
+      "paasyliput": 64,
+      "verkkokauppa_paasyliput": 29,
+      "vuosiliput": 59,
+      "total": 219
+    },
+    {
+      "date": "2020-11-25",
+      "averageTemperature": 5.57,
+      "totalPrecipitation": 4.7,
+      "ilmaiskavijat": 13,
+      "paasyliput": 49,
+      "verkkokauppa_paasyliput": 2,
+      "vuosiliput": 16,
+      "total": 80
+    },
+    {
+      "date": "2020-11-26",
+      "averageTemperature": 6.03,
+      "totalPrecipitation": 0.5,
+      "ilmaiskavijat": 104,
+      "paasyliput": 38,
+      "vuosiliput": 44,
+      "total": 186
+    },
+    {
+      "date": "2020-11-27",
+      "averageTemperature": 1.35,
+      "totalPrecipitation": 0,
+      "ilmaiskavijat": 9,
+      "paasyliput": 56,
+      "verkkokauppa_paasyliput": 4,
+      "vuosiliput": 67,
+      "total": 136
+    },
+    {
+      "date": "2020-11-28",
+      "averageTemperature": 1.9,
+      "totalPrecipitation": 0,
+      "kulkulupa": 2,
+      "ilmaiskavijat": 24,
+      "paasyliput": 247,
+      "verkkokauppa_paasyliput": 8,
+      "vuosiliput": 393,
+      "total": 672
+    },
+    {
+      "date": "2020-11-29",
+      "averageTemperature": 0.69,
+      "totalPrecipitation": 2.2,
+      "kulkulupa": 4,
+      "ilmaiskavijat": 14,
+      "paasyliput": 171,
+      "verkkokauppa_paasyliput": 20,
+      "vuosiliput": 285,
+      "total": 490
+    },
+    {
+      "date": "2020-11-30",
+      "averageTemperature": 1.5,
+      "totalPrecipitation": 0.8,
+      "ilmaiskavijat": 2,
+      "paasyliput": 5,
+      "vuosiliput": 8,
+      "total": 15
+    },
+    {
+      "date": "2020-12-01",
+      "averageTemperature": 5.6,
+      "totalPrecipitation": 1.9,
+      "ilmaiskavijat": 25,
+      "paasyliput": 5,
+      "vuosiliput": 1,
+      "total": 31
+    },
+    {
+      "date": "2020-12-02",
+      "averageTemperature": 2.94,
+      "totalPrecipitation": 0,
+      "ilmaiskavijat": 23,
+      "paasyliput": 9,
+      "vuosiliput": 2,
+      "total": 34
+    },
+    {
+      "date": "2020-12-03",
+      "averageTemperature": 0.34,
+      "totalPrecipitation": 0,
+      "ilmaiskavijat": 2,
+      "paasyliput": 8,
+      "vuosiliput": 1,
+      "total": 11
+    },
+    {
+      "date": "2020-12-04",
+      "averageTemperature": 1.47,
+      "totalPrecipitation": 2.1,
+      "ilmaiskavijat": 2,
+      "paasyliput": 6,
+      "total": 8
+    },
+    {
+      "date": "2020-12-05",
+      "averageTemperature": 4.57,
+      "totalPrecipitation": 0,
+      "paasyliput": 2,
+      "vuosiliput": 2,
+      "total": 4
+    },
+    {
+      "date": "2020-12-06",
+      "averageTemperature": 4.02,
+      "totalPrecipitation": 0,
+      "paasyliput": 11,
+      "vuosiliput": 5,
+      "total": 16
+    },
+    {
+      "date": "2020-12-07",
+      "averageTemperature": 2.54,
+      "totalPrecipitation": 0,
+      "ilmaiskavijat": 4,
+      "paasyliput": 4,
+      "total": 8
+    },
+    {
+      "date": "2020-12-08",
+      "averageTemperature": 0.31,
+      "totalPrecipitation": 0,
+      "ilmaiskavijat": 2,
+      "paasyliput": 5,
+      "total": 7
+    },
+    {
+      "date": "2020-12-09",
+      "averageTemperature": -1.35,
+      "totalPrecipitation": 0,
+      "ilmaiskavijat": 32,
+      "paasyliput": 17,
+      "total": 49
+    },
+    {
+      "date": "2020-12-10",
+      "averageTemperature": -1.02,
+      "totalPrecipitation": 0,
+      "ilmaiskavijat": 2,
+      "paasyliput": 7,
+      "total": 9
+    },
+    {
+      "date": "2020-12-11",
+      "averageTemperature": -0.19,
+      "totalPrecipitation": 0.2,
+      "ilmaiskavijat": 2,
+      "paasyliput": 9,
+      "vuosiliput": 2,
+      "total": 13
+    },
+    {
+      "date": "2020-12-12",
+      "averageTemperature": 1.91,
+      "totalPrecipitation": 0,
+      "paasyliput": 4,
+      "total": 4
+    },
+    {
+      "date": "2020-12-13",
+      "averageTemperature": -0.29,
+      "totalPrecipitation": 0,
+      "paasyliput": 1,
+      "vuosiliput": 1,
+      "total": 2
+    },
+    {
+      "date": "2020-12-14",
+      "averageTemperature": -0.52,
+      "totalPrecipitation": 0,
+      "ilmaiskavijat": 2,
+      "paasyliput": 6,
+      "vuosiliput": 4,
+      "total": 12
+    },
+    {
+      "date": "2020-12-15",
+      "averageTemperature": 2.72,
+      "totalPrecipitation": 0.3,
+      "paasyliput": 2,
+      "vuosiliput": 3,
+      "total": 5
+    },
+    {
+      "date": "2020-12-16",
+      "averageTemperature": 3.94,
+      "totalPrecipitation": 1.4,
+      "ilmaiskavijat": 2,
+      "paasyliput": 10,
+      "vuosiliput": 5,
+      "total": 17
+    },
+    {
+      "date": "2020-12-17",
+      "averageTemperature": 0.85,
+      "totalPrecipitation": 0.1,
+      "ilmaiskavijat": 2,
+      "paasyliput": 8,
+      "total": 10
+    },
+    {
+      "date": "2020-12-18",
+      "averageTemperature": 3.36,
+      "totalPrecipitation": 0.6,
+      "ilmaiskavijat": 2,
+      "paasyliput": 8,
+      "vuosiliput": 1,
+      "total": 11
+    },
+    {
+      "date": "2020-12-19",
+      "averageTemperature": 4.92,
+      "totalPrecipitation": 0,
+      "ilmaiskavijat": 2,
+      "paasyliput": 10,
+      "vuosiliput": 4,
+      "total": 16
+    },
+    {
+      "date": "2020-12-20",
+      "averageTemperature": 4.64,
+      "totalPrecipitation": 0,
+      "paasyliput": 10,
+      "total": 10
+    },
+    {
+      "date": "2020-12-21",
+      "averageTemperature": 3.64,
+      "totalPrecipitation": 0.9,
+      "ilmaiskavijat": 2,
+      "paasyliput": 11,
+      "vuosiliput": 9,
+      "total": 22
+    },
+    {
+      "date": "2020-12-22",
+      "averageTemperature": 4.47,
+      "totalPrecipitation": 0,
+      "ilmaiskavijat": 2,
+      "paasyliput": 14,
+      "vuosiliput": 5,
+      "total": 21
+    },
+    {
+      "date": "2020-12-23",
+      "averageTemperature": 2.97,
+      "totalPrecipitation": 1.3,
+      "vuosiliput": 8,
+      "total": 8
+    },
+    {
+      "date": "2020-12-24",
+      "averageTemperature": 2.45,
+      "totalPrecipitation": 0,
+      "paasyliput": 2,
+      "total": 2
+    },
+    {
+      "date": "2020-12-25",
+      "averageTemperature": 0.93,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2020-12-26",
+      "averageTemperature": -1.33,
+      "totalPrecipitation": 0
+    },
+    {
+      "date": "2020-12-27",
+      "averageTemperature": 1.41,
+      "totalPrecipitation": 0.1,
+      "paasyliput": 6,
+      "vuosiliput": 3,
+      "total": 9
+    },
+    {
+      "date": "2020-12-28",
+      "averageTemperature": 0.57,
+      "totalPrecipitation": 0,
+      "vuosiliput": 3,
+      "total": 3
+    },
+    {
+      "date": "2020-12-29",
+      "averageTemperature": 1.27,
+      "totalPrecipitation": 0.6
+    },
+    {
+      "date": "2020-12-30",
+      "averageTemperature": 4.07,
+      "totalPrecipitation": 2.3
+    },
+    {
+      "date": "2020-12-31",
+      "averageTemperature": 2.05,
+      "totalPrecipitation": 1.5,
+      "vuosiliput": 6,
+      "total": 6
+    }
+]
