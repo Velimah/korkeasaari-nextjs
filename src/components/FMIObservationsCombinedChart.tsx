@@ -13,10 +13,24 @@ import {
   Brush,
 } from 'recharts';
 import EnkoraFMIData from "@/assets/FormattedVisitorFMI.json";
+import { LoadingSpinner } from './ui/loading-spinner';
+
+interface DataItem {
+  date: string;
+  kulkulupa?: number;
+  ilmaiskavijat?: number;
+  paasyliput?: number;
+  verkkokauppa_paasyliput?: number;
+  kampanjakavijat?: number;
+  vuosiliput?: number;
+  total?: number;
+  averageTemperature?: number | null;
+  totalPrecipitation?: number;
+}
 
 // Define the WeatherData component
 export default function WeatherHistoricalData() {
-  const [weatherData, setWeatherData] = useState<any | null>(EnkoraFMIData);
+  const [weatherData, setWeatherData] = useState<DataItem[]>(EnkoraFMIData);
 
   // Fetch weather data on client side
   useEffect(() => {
@@ -25,17 +39,17 @@ export default function WeatherHistoricalData() {
 
   const chartConfig = {
     averageTemperature: {
-      label: "Average Temperature (°C)",
+      label: "Keskilämpötila (°C)",
       color: "#25582b",
     },
     totalPrecipitation: {
-      label: "Total Precipitation (mm)",
+      label: "Sademäärä (mm)",
       color: "#aac929",
     },
   } satisfies ChartConfig
 
   if (!weatherData) {
-    return <p>Loading...</p>;
+    return <LoadingSpinner />;
   }
 
   return (
@@ -43,10 +57,10 @@ export default function WeatherHistoricalData() {
       <Card className='dark:bg-slate-800 bg-secondary' >
         <CardHeader>
           <CardTitle>
-            Weather data for 2023
+            Keskilämpötila ja Sademäärä 10.00-20.00
           </CardTitle>
           <CardDescription>
-            Average Temperature and Daily Precipitation.
+            2019-2024
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -94,12 +108,12 @@ export default function WeatherHistoricalData() {
                   (dataMin: number) => Math.floor(dataMin - 2),
                   (dataMax: number) => Math.ceil(dataMax + 2),
                 ]}
-                label={{ value: 'Temperature (°C)', angle: -90, position: 'insideLeft' }}
+                label={{ value: 'Keskilämpötila (°C)', angle: -90, position: 'insideLeft' }}
               />
               <YAxis
                 yAxisId="right"
                 orientation="right"
-                label={{ value: 'Precipitation (mm)', angle: 90, position: 'insideRight' }}
+                label={{ value: 'Sademäärä (mm)', angle: 90, position: 'insideRight' }}
               />
               <Bar
                 yAxisId="right"
