@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { ChartConfig, ChartContainer, ChartLegend, ChartLegendContent, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Bar, CartesianGrid, ComposedChart, XAxis, YAxis } from "recharts";
+import { LoadingSpinner } from "./ui/loading-spinner";
 
 export default function EnkoraData() {
 
@@ -98,12 +99,13 @@ export default function EnkoraData() {
   } satisfies ChartConfig
 
   if (!visitorData) {
-    return <p>Loading...</p>;
+    return <LoadingSpinner />;
   }
 
   return (
     <section className="m-6 text-center">
       <div>
+
         <Card className='dark:bg-slate-800 bg-secondary' >
           <CardHeader>
             <CardTitle>Korkeasaaren Kävijämäärät</CardTitle>

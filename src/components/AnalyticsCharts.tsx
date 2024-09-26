@@ -10,7 +10,6 @@ import AnalyticsScatterChart from "./AnalyticsScatterChart";
 import AnalyticsAnalyticsComposedChartChart from "./AnalyticsComposedChart";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "./ui/select";
-
 interface DataItem {
     date: string;
     kulkulupa?: number;
@@ -120,10 +119,6 @@ export default function EnkoraDataStatic() {
         setEnkoraFMIData(filteredData); // Update state with filtered data
         setSelectedYear(selectedYear); // Update the selected year state
         processWeatherData(filteredData); // Process the weather data for the filtered year
-    }
-
-    if (!EnkoraFMIData2) {
-        return <p>Loading...</p>;
     }
 
     return (
