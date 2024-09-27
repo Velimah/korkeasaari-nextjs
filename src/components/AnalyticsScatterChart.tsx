@@ -93,7 +93,6 @@ export default function AnalyticsScatterChart({ EnkoraFMIData2, selectedYear, ch
                                 cursor={true}
                                 defaultIndex={1}
                             />
-                            <ChartLegend content={<ChartLegendContent />} />
                             <XAxis dataKey="total" type="number" name="Kävijämäärä" />
                             <YAxis dataKey={selectedDataKey} type="number" name={selectedDataKey == "totalPrecipitation" ? "Sademäärä" : "Lämpötila"} unit={selectedDataKey == "totalPrecipitation" ? " mm" : "°C"} />
                             <Scatter name="Kävijät/Sade" data={EnkoraFMIData2} fill="#B14D97" stroke="black" />

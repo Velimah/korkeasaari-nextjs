@@ -12,7 +12,7 @@ import {
 
 export default function Navbar() {
   return (
-    <header className="sticky top-0 z-10">
+    <header className="sticky top-0 z-10 bg-white dark:bg-black">
       <div className="mx-auto flex max-w-6xl flex-wrap justify-between gap-3 px-3 py-4">
         <Image className="pt-2" alt="logo of the website" src={zoolytics} height={50} />
         <NavigationMenu>
@@ -20,17 +20,17 @@ export default function Navbar() {
             <NavigationMenuItem className="flex gap-6">
               <Link href="/">
                 <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                  Home
+                  Koti
                 </NavigationMenuLink>
               </Link>
               <Link href="/analytics">
                 <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                  Analytics
+                  Analyysit
                 </NavigationMenuLink>
               </Link>
               <Link href="/forecasts">
                 <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                  Forecasts
+                  Ennusteet
                 </NavigationMenuLink>
               </Link>
             </NavigationMenuItem>

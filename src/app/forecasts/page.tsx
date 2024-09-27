@@ -3,8 +3,8 @@ import FMIForecastCombinedChart from "@/components/FMIForecastCombinedChart";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Forecasts",
-  description: "Weather Forecast and Ticket Pricing.",
+  title: "Ennusteet",
+  description: "Sääennuste ja Hinnoittelu.",
 };
 
 
@@ -14,7 +14,7 @@ export default function Forecasts() {
       <section className="px-1 py-8">
         <section className="items-center flex justify-center px-8">
           <div className="space-y-3">
-            <H2 className="text-center sm:text-start"> Weather Forecast and Pricing</H2>
+            <H2 className="text-center sm:text-start"> Sääennuste ja Hinnoittelu</H2>
           </div>
         </section>
       </section>

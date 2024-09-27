@@ -14,9 +14,6 @@ interface AnalyticsPieChartProps {
 export default function AnalyticsPieChart({ visitorTotals, selectedYear, chartConfig }: AnalyticsPieChartProps) {
 
     return (
-        <>
-
-
             <Card className='dark:bg-slate-800 bg-secondary' >
                 <CardHeader className="items-center pb-0">
                     <CardTitle>Kävijöiden jakauma lipputyypin mukaan</CardTitle>
@@ -25,7 +22,7 @@ export default function AnalyticsPieChart({ visitorTotals, selectedYear, chartCo
                 <CardContent className="flex-1 pb-0">
                     <ChartContainer
                         config={chartConfig}
-                        className="mx-auto aspect-square max-h-[400px]"
+                        className="h-[400px] w-full"
                     >
                         <PieChart>
                             <ChartTooltip
@@ -37,6 +34,5 @@ export default function AnalyticsPieChart({ visitorTotals, selectedYear, chartCo
                     </ChartContainer>
                 </CardContent>
             </Card>
-        </>
     );
 }

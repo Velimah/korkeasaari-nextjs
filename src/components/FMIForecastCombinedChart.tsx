@@ -38,11 +38,11 @@ export default function WeatherData() {
 
   const chartConfig = {
     temperature: {
-      label: "Temperature (°C)",
+      label: "Lämpötila (°C)",
       color: "#25582b",
     },
     precipitation: {
-      label: "Precipitation (mm)",
+      label: "Sademäärä (mm)",
       color: "#aac929",
     },
   } satisfies ChartConfig
@@ -53,10 +53,10 @@ export default function WeatherData() {
         <Card className='dark:bg-slate-800 bg-secondary' >
           <CardHeader>
             <CardTitle>
-              Weather Forecast
+              Sääennuste
             </CardTitle>
             <CardDescription>
-              Temperature and Precipitation for the next 60 Hours.
+              Lämpötila ja Sademäärä Seuraavalle 60 Tunnille.
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -104,13 +104,13 @@ export default function WeatherData() {
                     (dataMin: number) => Math.floor(dataMin - 2),
                     (dataMax: number) => Math.ceil(dataMax + 2),
                   ]}
-                  label={{ value: 'Temperature (°C)', angle: -90, position: 'insideLeft' }}
+                  label={{ value: 'Lämpötila (°C)', angle: -90, position: 'insideLeft' }}
                 />
                 <YAxis
                   yAxisId="right"
                   orientation="right"
-                  label={{ value: 'Precipitation (mm)', angle: 90, position: 'insideRight' }}
-                  domain={[0, (dataMax: number) => Math.ceil(dataMax + 10)]} // Ensures that the max value is slightly above the data max
+                  label={{ value: 'Sademäärä (mm)', angle: 90, position: 'insideRight' }}
+                  domain={[0, (dataMax: number) => Math.ceil(dataMax + 2)]} // Ensures that the max value is slightly above the data max
                 />
                 <Bar
                   yAxisId="right"
