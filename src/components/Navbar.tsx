@@ -18,21 +18,16 @@ export default function Navbar() {
         <NavigationMenu>
           <NavigationMenuList>
             <NavigationMenuItem className="flex gap-6">
-              <Link href="/">
-                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                  Koti
-                </NavigationMenuLink>
-              </Link>
-              <Link href="/analytics">
-                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                  Analyysit
-                </NavigationMenuLink>
-              </Link>
-              <Link href="/forecasts">
-                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                  Ennusteet
-                </NavigationMenuLink>
-              </Link>
+              <NavigationMenuLink href="/" className={navigationMenuTriggerStyle()}>
+                Koti
+              </NavigationMenuLink>
+
+              <NavigationMenuLink href="/analytics" className={navigationMenuTriggerStyle()}>
+                Analyysit
+              </NavigationMenuLink>
+              <NavigationMenuLink href="/forecasts" className={navigationMenuTriggerStyle()}>
+                Ennusteet
+              </NavigationMenuLink>
             </NavigationMenuItem>
           </NavigationMenuList>
         </NavigationMenu>

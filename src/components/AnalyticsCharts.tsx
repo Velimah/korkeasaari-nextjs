@@ -8,6 +8,7 @@ import AnalyticsScatterChart from "@/components/AnalyticsScatterChart";
 import AnalyticsAnalyticsComposedChartChart from "@/components/AnalyticsComposedChart";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import LinearRegression from "./MultipleLinearRegressionCalc";
 interface DataItem {
     date: string;
     kulkulupa?: number;
@@ -100,7 +101,6 @@ export default function EnkoraDataStatic() {
 
         // Sort aggregatedData by value (smallest first)
         aggregatedData.sort((a, b) => a.value - b.value);
-        console.log('aggregatedData', aggregatedData);
         // Set the state with the sorted data
         setVisitorTotals(aggregatedData);
     }
@@ -127,8 +127,8 @@ export default function EnkoraDataStatic() {
 
 
     return (
-        <section className="flex">
-
+        <section className="flex flex-col">
+            <LinearRegression />
             <Tabs defaultValue="composedchart" className="w-full">
                 <TabsList className="grid w-full grid-cols-3">
                     <TabsTrigger value="composedchart">Composed Chart</TabsTrigger>
