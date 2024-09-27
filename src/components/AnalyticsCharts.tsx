@@ -25,7 +25,7 @@ interface DataItem {
 
 export default function EnkoraDataStatic() {
 
-    const years = [2019, 2020, 2021, 2022, 2023, 2024];
+    const years = [2000, 2019, 2020, 2021, 2022, 2023, 2024];
     const [selectedYear, setSelectedYear] = useState<number>(2024);
 
     const [EnkoraFMIData2, setEnkoraFMIData] = useState<DataItem[]>([]);
@@ -108,18 +108,25 @@ export default function EnkoraDataStatic() {
     }
 
     function handleYearChange(event: React.ChangeEvent<HTMLSelectElement>) {
-        const selectedYear = Number(event.target.value); // Get the selected year from the event
+    const selectedYear = Number(event.target.value); // Get the selected year from the event
+    let filteredData;
 
+    if (selectedYear === 2000) {
+        // If the selected year is 2000, skip filtering and use the full data set
+        filteredData = EnkoraFMIData;
+    } else {
         // Filter data based on the selected year
-        const filteredData = EnkoraFMIData.filter((item: DataItem) => {
+        filteredData = EnkoraFMIData.filter((item: DataItem) => {
             const itemYear = new Date(item.date).getFullYear(); // Extract the year from the date
             return itemYear === selectedYear;
         });
-
-        setEnkoraFMIData(filteredData); // Update state with filtered data
-        setSelectedYear(selectedYear); // Update the selected year state
-        processWeatherData(filteredData); // Process the weather data for the filtered year
     }
+
+    setEnkoraFMIData(filteredData); // Update state with filtered data
+    setSelectedYear(selectedYear); // Update the selected year state
+    processWeatherData(filteredData); // Process the weather data for the filtered year
+}
+
 
     return (
         <section className="flex">
@@ -140,7 +147,7 @@ export default function EnkoraDataStatic() {
                             <SelectGroup>
                                 {years.map((year) => (
                                     <SelectItem key={year} value={year.toString()}>
-                                        {year}
+                                        {year === 2000 ? "Kaikki vuodet" : year}
                                     </SelectItem>
                                 ))}
                             </SelectGroup>
