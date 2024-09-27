@@ -62,8 +62,9 @@ export default function AnalyticsScatterChart({ EnkoraFMIData2, selectedYear, ch
                                             if (dataPoint) {
                                                 return new Date(dataPoint.date).toLocaleDateString("fi-FI", {
                                                     day: "numeric",
-                                                    month: "long",
+                                                    month: "short",
                                                     year: "numeric",
+                                                    weekday: "short",
                                                 });
                                             }
                                             return "";
@@ -95,7 +96,7 @@ export default function AnalyticsScatterChart({ EnkoraFMIData2, selectedYear, ch
                             />
                             <XAxis dataKey="total" type="number" name="Kävijämäärä" />
                             <YAxis dataKey={selectedDataKey} type="number" name={selectedDataKey == "totalPrecipitation" ? "Sademäärä" : "Lämpötila"} unit={selectedDataKey == "totalPrecipitation" ? " mm" : "°C"} />
-                            <Scatter name="Kävijät/Sade" data={EnkoraFMIData2} fill="#B14D97" stroke="black" />
+                            <Scatter name="Kävijät/Sade" data={EnkoraFMIData2} fill={selectedDataKey == "totalPrecipitation" ? "#B14D97" : "#AAC929"} stroke="black" />
                         </ScatterChart>
                     </ChartContainer>
 

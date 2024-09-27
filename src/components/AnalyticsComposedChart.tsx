@@ -46,8 +46,9 @@ export default function AnalyticsAnalyticsComposedChartChart({ EnkoraFMIData2, s
                                     labelFormatter={(value) => {
                                         return new Date(value).toLocaleDateString("fi-FI", {
                                             day: "numeric",
-                                            month: "long",
+                                            month: "short",
                                             year: "numeric",
+                                            weekday: "short",
                                         })
                                     }}
                                     formatter={(value, name) => (

@@ -130,8 +130,9 @@ export default function EnkoraData() {
                       labelFormatter={(value) => {
                         return new Date(value).toLocaleDateString("fi-FI", {
                           day: "numeric",
-                          month: "long",
+                          month: "short",
                           year: "numeric",
+                          weekday: "short",
                         })
                       }}
                       formatter={(value, name, item, index) => (
