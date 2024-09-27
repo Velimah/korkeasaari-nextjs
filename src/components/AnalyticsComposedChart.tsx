@@ -1,5 +1,5 @@
-import { ChartConfig, ChartContainer, ChartLegend, ChartLegendContent, ChartTooltip, ChartTooltipContent } from "./ui/chart";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./ui/card";
+import { ChartConfig, ChartContainer, ChartLegend, ChartLegendContent, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Bar, Brush, CartesianGrid, ComposedChart, Line, XAxis, YAxis } from "recharts";
 
 interface AnalyticsScatterChart {

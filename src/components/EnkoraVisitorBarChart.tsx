@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { ChartConfig, ChartContainer, ChartLegend, ChartLegendContent, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Bar, CartesianGrid, ComposedChart, XAxis, YAxis } from "recharts";
-import { LoadingSpinner } from "./ui/loading-spinner";
+import { LoadingSpinner } from "@/components/ui/loading-spinner";
 
 export default function EnkoraData() {
 

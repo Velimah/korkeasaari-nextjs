@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { ChartConfig, ChartContainer, ChartLegend, ChartLegendContent, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import {
   Line,
   XAxis,
@@ -12,8 +12,8 @@ import {
   Bar,
   Brush,
 } from 'recharts';
-import EnkoraFMIData from "@/assets/FormattedVisitorFMI.json";
-import { LoadingSpinner } from './ui/loading-spinner';
+import EnkoraFMIData from "@/assets/FormattedEnkoraFMI.json";
+import { LoadingSpinner } from '@/components/ui/loading-spinner';
 
 interface DataItem {
   date: string;
@@ -68,40 +68,40 @@ export default function WeatherHistoricalData() {
             <ComposedChart accessibilityLayer data={weatherData}>
               <CartesianGrid vertical={false} />
               <ChartTooltip
-                  content={
-                      <ChartTooltipContent
-                          labelFormatter={(value) => {
-                              return new Date(value).toLocaleDateString("fi-FI", {
-                                  day: "numeric",
-                                  month: "short",
-                                  year: "numeric",
-                                  weekday: "short",
-                              })
-                          }}
-                          formatter={(value, name) => (
-                              <>
-                                  <div className="flex items-center justify-between min-w-[130px] w-full gap-4 text-xs text-muted-foreground">
-                                      <div className="flex items-center gap-2">
-                                          <div
-                                              className="h-2.5 w-2.5 shrink-0 rounded-[2px] bg-[--color-bg]"
-                                              style={
-                                                  {
-                                                      "--color-bg": `var(--color-${name})`,
-                                                  } as React.CSSProperties
-                                              }
-                                          />
-                                          {chartConfig[name as keyof typeof chartConfig]?.label || name}
-                                      </div>
-                                      <div className="flex items-center gap-0.5 font-mono font-medium text-right text-foreground">
-                                          {value}
-                                      </div>
-                                  </div>
-                              </>
-                          )}
-                      />
-                  }
-                  cursor={true}
-                  defaultIndex={1}
+                content={
+                  <ChartTooltipContent
+                    labelFormatter={(value) => {
+                      return new Date(value).toLocaleDateString("fi-FI", {
+                        day: "numeric",
+                        month: "short",
+                        year: "numeric",
+                        weekday: "short",
+                      })
+                    }}
+                    formatter={(value, name) => (
+                      <>
+                        <div className="flex items-center justify-between min-w-[130px] w-full gap-4 text-xs text-muted-foreground">
+                          <div className="flex items-center gap-2">
+                            <div
+                              className="h-2.5 w-2.5 shrink-0 rounded-[2px] bg-[--color-bg]"
+                              style={
+                                {
+                                  "--color-bg": `var(--color-${name})`,
+                                } as React.CSSProperties
+                              }
+                            />
+                            {chartConfig[name as keyof typeof chartConfig]?.label || name}
+                          </div>
+                          <div className="flex items-center gap-0.5 font-mono font-medium text-right text-foreground">
+                            {value}
+                          </div>
+                        </div>
+                      </>
+                    )}
+                  />
+                }
+                cursor={true}
+                defaultIndex={1}
               />
               <ChartLegend content={<ChartLegendContent />} />
               <XAxis

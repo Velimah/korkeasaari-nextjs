@@ -1,15 +1,13 @@
 "use client";  // Ensure this component is treated as a client component
 
 import { useEffect, useState } from "react";
-import { ChartConfig, ChartContainer, ChartLegend, ChartLegendContent, ChartTooltip, ChartTooltipContent } from "./ui/chart";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./ui/card";
-import { Bar, Brush, CartesianGrid, ComposedChart, Line, Pie, PieChart, Scatter, ScatterChart, XAxis, YAxis } from "recharts";
-import EnkoraFMIData from "@/assets/FormattedVisitorFMI.json";
-import AnalyticsPieChart from "./AnalyticsPieChart";
-import AnalyticsScatterChart from "./AnalyticsScatterChart";
-import AnalyticsAnalyticsComposedChartChart from "./AnalyticsComposedChart";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
-import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "./ui/select";
+import { ChartConfig } from "@/components/ui/chart";
+import EnkoraFMIData from "@/assets/FormattedEnkoraFMI.json";
+import AnalyticsPieChart from "@/components/AnalyticsPieChart";
+import AnalyticsScatterChart from "@/components/AnalyticsScatterChart";
+import AnalyticsAnalyticsComposedChartChart from "@/components/AnalyticsComposedChart";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 interface DataItem {
     date: string;
     kulkulupa?: number;
@@ -108,24 +106,24 @@ export default function EnkoraDataStatic() {
     }
 
     function handleYearChange(event: React.ChangeEvent<HTMLSelectElement>) {
-    const selectedYear = Number(event.target.value); // Get the selected year from the event
-    let filteredData;
+        const selectedYear = Number(event.target.value); // Get the selected year from the event
+        let filteredData;
 
-    if (selectedYear === 2000) {
-        // If the selected year is 2000, skip filtering and use the full data set
-        filteredData = EnkoraFMIData;
-    } else {
-        // Filter data based on the selected year
-        filteredData = EnkoraFMIData.filter((item: DataItem) => {
-            const itemYear = new Date(item.date).getFullYear(); // Extract the year from the date
-            return itemYear === selectedYear;
-        });
+        if (selectedYear === 2000) {
+            // If the selected year is 2000, skip filtering and use the full data set
+            filteredData = EnkoraFMIData;
+        } else {
+            // Filter data based on the selected year
+            filteredData = EnkoraFMIData.filter((item: DataItem) => {
+                const itemYear = new Date(item.date).getFullYear(); // Extract the year from the date
+                return itemYear === selectedYear;
+            });
+        }
+
+        setEnkoraFMIData(filteredData); // Update state with filtered data
+        setSelectedYear(selectedYear); // Update the selected year state
+        processWeatherData(filteredData); // Process the weather data for the filtered year
     }
-
-    setEnkoraFMIData(filteredData); // Update state with filtered data
-    setSelectedYear(selectedYear); // Update the selected year state
-    processWeatherData(filteredData); // Process the weather data for the filtered year
-}
 
 
     return (
