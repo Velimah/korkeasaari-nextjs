@@ -3,6 +3,8 @@ import EnkoraFMIData from "@/assets/FormattedEnkoraFMI.json";
 import MultivariateLinearRegression from 'ml-regression-multivariate-linear';
 import { useEffect, useState } from "react";
 import { WeatherData as WeatherDataType } from '@/utils/fetchFMIForecastData';
+import { Card } from "./ui/card";
+import { H2 } from "./ui/H2";
 
 interface PredictionResults {
     date: string;
@@ -73,16 +75,24 @@ export default function MultivariateLinearRegressionCalculator({ weatherData }: 
             const dateObject = new Date(averageWeatherData[i].date);
             const month = dateObject.getMonth() + 1; // Get month index (0 for January, 11 for December)
 
+            // Calculate the weight multiplier for weekends
+            const weightedTotalWeekday = weekdayVisitorCounts[month] / weekdayCount[month];
+            const weightedTotalWeekend = weekendVisitorCounts[month] / weekendCount[month];
+            const weightendresult = weightedTotalWeekend / weightedTotalWeekday;
+
+            // remove the day of the week from the visitor data to clean it up for the regression model
+            const formattedMonthlyDataVisitors = monthlyDataVisitors[month].map((data) => {
+                return [data[0]]; // Keep only the first item
+            });
+
             // Create a regression model using  the historical weather data and visitor counts for the month
-            const regression = new MultivariateLinearRegression(monthlyDataWeather[month], monthlyDataVisitors[month]);
+            const regression = new MultivariateLinearRegression(monthlyDataWeather[month], formattedMonthlyDataVisitors);
+            console.log('Regression:', regression);
 
             // Predict the visitor count for the day using average temperature and precipitation forecast for the day
             let result = regression.predict([averageWeatherData[i].avgTemperature, averageWeatherData[i].avgPrecipitation])[0];
 
-            // Calculate the weighted average for weekends and check if the day is a weekend
-            const weightedTotalWeekday = weekdayVisitorCounts[month] / weekdayCount[month];
-            const weightedTotalWeekend = weekendVisitorCounts[month] / weekendCount[month];
-            const weightendresult = weightedTotalWeekend / weightedTotalWeekday;
+            // Check if the day is a weekend and adjust the prediction accordingly
             if (dateObject.getDay() === 0 || dateObject.getDay() === 6) {
                 result = result * weightendresult;
             }
@@ -142,15 +152,19 @@ export default function MultivariateLinearRegressionCalculator({ weatherData }: 
 
     return (
         <div className="p-6">
-            <h1>Multiple Linear Regression</h1>
-            <div className="flex justify-center">
+            <H2 className="p-4">Multivariate Linear Regression</H2>
+            <div className="flex justify-center gap-2">
                 {predictionResults?.map((result, index) => (
-                    <div className="p-4" key={index}>
-                        <p>{new Date(result.date).toLocaleDateString('FI-fi')}</p>
-                        <p>Lämpötila: {result.temperature.toFixed(1)} C</p>
-                        <p>Sademäärä: {result.precipitation.toFixed(1)} mm</p>
-                        <p>Ennuste: {result.predictedVisitors.toFixed(0)} Kävijää</p>
+
+                    <div key={index}>
+                        <Card className="p-4 flex flex-col gap-1">
+                            <p>{new Date(result.date).toLocaleDateString('FI-fi', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}</p>
+                            <p>Keskiämpötila: {result.temperature.toFixed(1)} °C</p>
+                            <p>Sademäärä: {result.precipitation.toFixed(1)} mm</p>
+                            <p>Ennuste: {result.predictedVisitors.toFixed(0)} Kävijää</p>
+                        </Card>
                     </div>
+
                 ))}
             </div>
         </div>
