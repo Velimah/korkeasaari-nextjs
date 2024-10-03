@@ -4,64 +4,102 @@ import MultivariateLinearRegression from 'ml-regression-multivariate-linear';
 import { useEffect, useState } from "react";
 import { WeatherData as WeatherDataType } from '@/utils/fetchFMIForecastData';
 
+interface PredictionResults {
+    date: string;
+    temperature: number;
+    precipitation: number;
+    predictedVisitors: number;
+}
+
 export default function MultivariateLinearRegressionCalculator({ weatherData }: { weatherData: WeatherDataType[] }) {
 
-    const [predictedVisitors, setPredictedVisitors] = useState<number>(0);
-    const [temperature, setTemperature] = useState<number>(0);
-    const [precipitation, setPrecipitation] = useState<number>(0);
-    const [averages, setAverages] = useState<{ date: any; avgTemperature: number; avgPrecipitation: number }[] | null>(null);
+    const [predictionResults, setPredictionresults] = useState<PredictionResults[]>();
 
-    useEffect(() => {
-        const averageWeatherData = getAveragesFromForecast(weatherData);
-        setAverages(averageWeatherData);
+    const monthlyDataWeather: number[][][] = Array.from({ length: 12 }, () => []); // Create 12 empty arrays for each month
+    const monthlyDataVisitors: number[][][] = Array.from({ length: 12 }, () => []); // Create 12 empty arrays for each month
+    const weekdayVisitorCounts: number[] = Array.from({ length: 12 }, () => 0); // Track weekday visitors for each month
+    const weekendVisitorCounts: number[] = Array.from({ length: 12 }, () => 0); // Track weekend visitors for each month
+    const weekdayCount: number[] = Array.from({ length: 12 }, () => 0); // Count of weekdays for each month
+    const weekendCount: number[] = Array.from({ length: 12 }, () => 0); // Count of weekends for each month
 
-        const monthlyDataWeather: number[][][] = Array.from({ length: 12 }, () => []); // Create 12 empty arrays for each month
-        const monthlyDataVisitors: number[][][] = Array.from({ length: 12 }, () => []); // Create 12 empty arrays for each month
-        const weekdayVisitorCounts: number[] = Array.from({ length: 12 }, () => 0); // Track weekday visitors for each month
-        const weekendVisitorCounts: number[] = Array.from({ length: 12 }, () => 0); // Track weekend visitors for each month
-        const weekdayCount: number[] = Array.from({ length: 12 }, () => 0); // Count of weekdays for each month
-        const weekendCount: number[] = Array.from({ length: 12 }, () => 0); // Count of weekends for each month
+    function getAveragesFromForecast(weatherData: WeatherDataType[]) {
 
-        function getAveragesFromForecast(weatherData: WeatherDataType[]) {
+        // Filter data to include times between 10:00 and 20:00
+        const filteredData = weatherData.filter((entry: WeatherDataType) => {
+            const date = new Date(entry.time);
+            const hour = date.getUTCHours();
+            return hour >= 10 && hour <= 20;
+        });
 
-            const filteredData = weatherData.filter((entry: WeatherDataType) => {
-                const date = new Date(entry.time);
-                const hour = date.getUTCHours();
-                return hour >= 10 && hour <= 20;
-            });
+        // group the data by day and add together the temperature, precipitation and count the entries
+        const groupedDataByDay = filteredData.reduce((acc: any, entry: { time: string; temperature: number; precipitation: number }) => {
+            const date = entry.time.split('T')[0]; // Assuming 'time' is in ISO format, extract the date part
 
-            if (filteredData.length === 0) {
-                return null;  // No data in the range
+            if (!acc[date]) {
+                acc[date] = {
+                    date,
+                    totalTemperature: 0,
+                    totalPrecipitation: 0,
+                    count: 0, // To track how many entries per day for averaging
+                };
             }
 
-            const groupedDataByDay = filteredData.reduce((acc: any, entry: { time: string; temperature: number; precipitation: number }) => {
-                const date = entry.time.split('T')[0]; // Assuming 'time' is in ISO format, extract the date part
+            acc[date].totalTemperature += entry.temperature;
+            acc[date].totalPrecipitation += entry.precipitation;
+            acc[date].count += 1;
 
-                if (!acc[date]) {
-                    acc[date] = {
-                        date,
-                        totalTemperature: 0,
-                        totalPrecipitation: 0,
-                        count: 0, // To track how many entries per day for averaging
-                    };
-                }
+            return acc;
+        }, {});
 
-                acc[date].totalTemperature += entry.temperature;
-                acc[date].totalPrecipitation += entry.precipitation;
-                acc[date].count += 1;
+        // Calculate the average temperature and total precipitation for each day
+        const result = Object.values(groupedDataByDay).map((date: any) => ({
+            date: date.date,
+            avgTemperature: date.totalTemperature / date.count,
+            avgPrecipitation: date.totalPrecipitation,
+        }));
 
-                return acc;
-            }, {});
+        //return array of objects with date, average temperature and total precipitation
+        return result;
+    }
 
-            const result = Object.values(groupedDataByDay).map((day: any) => ({
-                date: day.date,
-                avgTemperature: day.totalTemperature / day.count,
-                avgPrecipitation: day.totalPrecipitation / day.count,
-            }));
+    // Function to predict visitor counts using the multivariate linear regression model
+    function PredictVisitorCounts() {
+        // Get the average weather forecast data for each day
+        const averageWeatherData = getAveragesFromForecast(weatherData);
+        const predictions = [];
 
-            console.log('Grouped data by day:', result);
-            return result;
+        //loop through the average weather forecast data for each day and predict the visitor counts
+        for (let i = 0; i < averageWeatherData.length; i++) {
+            const dateObject = new Date(averageWeatherData[i].date);
+            const month = dateObject.getMonth() + 1; // Get month index (0 for January, 11 for December)
+
+            // Create a regression model using  the historical weather data and visitor counts for the month
+            const regression = new MultivariateLinearRegression(monthlyDataWeather[month], monthlyDataVisitors[month]);
+
+            // Predict the visitor count for the day using average temperature and precipitation forecast for the day
+            let result = regression.predict([averageWeatherData[i].avgTemperature, averageWeatherData[i].avgPrecipitation])[0];
+
+            // Calculate the weighted average for weekends and check if the day is a weekend
+            const weightedTotalWeekday = weekdayVisitorCounts[month] / weekdayCount[month];
+            const weightedTotalWeekend = weekendVisitorCounts[month] / weekendCount[month];
+            const weightendresult = weightedTotalWeekend / weightedTotalWeekday;
+            if (dateObject.getDay() === 0 || dateObject.getDay() === 6) {
+                result = result * weightendresult;
+            }
+
+            //add object with date, predicted visitor count, temperature and precipitation
+            predictions[i] = {
+                date: averageWeatherData[i].date,
+                temperature: averageWeatherData[i].avgTemperature,
+                precipitation: averageWeatherData[i].avgPrecipitation,
+                predictedVisitors: result,
+            }
         }
+        //return array of prediction objects
+        return predictions;
+    }
+
+    useEffect(() => {
 
         EnkoraFMIData.forEach(({ averageTemperature, totalPrecipitation, date }) => {
             // Create a Date object from the date string
@@ -95,25 +133,26 @@ export default function MultivariateLinearRegressionCalculator({ weatherData }: 
             ]);
         });
 
-        const weightedTotalWeekday = weekdayVisitorCounts[10] / weekdayCount[10];
-        const weightedTotalWeekend = weekendVisitorCounts[10] / weekendCount[10];
-        const weightendresult = weightedTotalWeekend / weightedTotalWeekday;
+        const predictionResults = PredictVisitorCounts();
+        console.log('Prediction results:', predictionResults);
+        setPredictionresults(predictionResults);
+        //setPredictionresults(predictionResults);
 
-
-        const regression = new MultivariateLinearRegression(monthlyDataWeather[10], monthlyDataVisitors[10]);
-
-        const result = regression.predict([weatherData[0].temperature, weatherData[0].precipitation])[0];
-        const result2 = result * weightendresult;
-        setPredictedVisitors(result);
-
-    }, []); // Empty dependency array ensures this runs only once after the initial render
+    }, [weatherData]); // useEffect will run whenever weather forecast data changes
 
     return (
         <div className="p-6">
             <h1>Multiple Linear Regression</h1>
-            <p>Lämpötila nyt: {temperature} C</p>
-            <p>Sademäärä nyt: {precipitation} mm</p>
-            <p>Kävijämääräennuste: {predictedVisitors.toFixed(0)} Kävijää</p>
+            <div className="flex justify-center">
+                {predictionResults?.map((result, index) => (
+                    <div className="p-4" key={index}>
+                        <p>{new Date(result.date).toLocaleDateString('FI-fi')}</p>
+                        <p>Lämpötila: {result.temperature.toFixed(1)} C</p>
+                        <p>Sademäärä: {result.precipitation.toFixed(1)} mm</p>
+                        <p>Ennuste: {result.predictedVisitors.toFixed(0)} Kävijää</p>
+                    </div>
+                ))}
+            </div>
         </div>
     );
 }

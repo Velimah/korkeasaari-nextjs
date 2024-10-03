@@ -1,6 +1,5 @@
 "use client";  // Ensure this component is treated as a client component
 
-
 import { WeatherData as WeatherDataType } from '@/utils/fetchFMIForecastData';
 import { ChartConfig, ChartContainer, ChartLegend, ChartLegendContent, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -12,7 +11,6 @@ import {
   ComposedChart,
   Bar,
 } from 'recharts';
-import LinearRegression from './MultivariateLinearRegressionCalculator';
 
 
 // Define the WeatherData component
@@ -117,7 +115,6 @@ export default function ForecastsFMIObservationsCombinedChart({ weatherData }: {
           </CardContent>
         </Card>
       </div>
-      <LinearRegression weatherData={weatherData} />
     </section>
   );
 }
