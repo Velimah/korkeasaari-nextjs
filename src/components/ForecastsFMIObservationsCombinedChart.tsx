@@ -1,7 +1,7 @@
 "use client";  // Ensure this component is treated as a client component
 
-import { useEffect, useState } from 'react';
-import { fetchFMIForecastData, WeatherData as WeatherDataType } from '@/utils/fetchFMIForecastData';
+
+import { WeatherData as WeatherDataType } from '@/utils/fetchFMIForecastData';
 import { ChartConfig, ChartContainer, ChartLegend, ChartLegendContent, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import {
@@ -12,26 +12,11 @@ import {
   ComposedChart,
   Bar,
 } from 'recharts';
-import LinearRegression from './MultipleLinearRegressionCalc';
+import LinearRegression from './MultivariateLinearRegressionCalculator';
 
 
 // Define the WeatherData component
-export default function WeatherData() {
-  const [weatherData, setWeatherData] = useState<WeatherDataType[]>();
-
-  // Fetch weather data on client side
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const data = await fetchFMIForecastData();
-        setWeatherData(data);
-      } catch (error) {
-        console.error('Error fetching weather data:', error);
-      }
-    }
-
-    fetchData();
-  }, []);
+export default function ForecastsFMIObservationsCombinedChart({ weatherData }: { weatherData: WeatherDataType[] }) {
 
   if (!weatherData) {
     return <p>Loading...</p>;
