@@ -1,6 +1,7 @@
 import { H2 } from "@/components/ui/H2";
 import FMIForecastCombinedChart from "@/components/FMIForecastCombinedChart";
 import { Metadata } from "next";
+import LinearRegression from "@/components/MultipleLinearRegressionCalc";
 
 export const metadata: Metadata = {
   title: "Ennusteet",

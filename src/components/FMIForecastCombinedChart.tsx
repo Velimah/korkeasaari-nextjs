@@ -12,11 +12,12 @@ import {
   ComposedChart,
   Bar,
 } from 'recharts';
+import LinearRegression from './MultipleLinearRegressionCalc';
 
 
 // Define the WeatherData component
 export default function WeatherData() {
-  const [weatherData, setWeatherData] = useState<WeatherDataType[] | null>(null);
+  const [weatherData, setWeatherData] = useState<WeatherDataType[]>();
 
   // Fetch weather data on client side
   useEffect(() => {
@@ -131,6 +132,7 @@ export default function WeatherData() {
           </CardContent>
         </Card>
       </div>
+      <LinearRegression weatherData={weatherData} />
     </section>
   );
 }
