@@ -29,8 +29,8 @@ export default function MultivariateLinearRegressionCalculator({ weatherData }: 
         // Filter data to include times between 10:00 and 20:00
         const filteredData = weatherData.filter((entry: WeatherDataType) => {
             const date = new Date(entry.time);
-            const hour = date.getUTCHours();
-            return hour >= 10 && hour <= 20;
+            const finnishHour = new Date(date.toLocaleString('en-US', { timeZone: 'Europe/Helsinki' })).getHours();
+            return finnishHour >= 10 && finnishHour <= 20; // Filtering for 10:00 to 20:00 Finnish time
         });
 
         // group the data by day and add together the temperature, precipitation and count the entries
@@ -52,6 +52,7 @@ export default function MultivariateLinearRegressionCalculator({ weatherData }: 
 
             return acc;
         }, {});
+        console.log('Grouped data by day:', groupedDataByDay);
 
         // Calculate the average temperature and total precipitation for each day
         const result = Object.values(groupedDataByDay).map((date: any) => ({
@@ -92,7 +93,7 @@ export default function MultivariateLinearRegressionCalculator({ weatherData }: 
 
             // Create a regression model using  the historical weather data and visitor counts for the month
             const regression = new MultivariateLinearRegression(monthlyDataWeather[month], formattedMonthlyDataVisitors);
-            console.log('Regression:', regression);
+            console.log(`Regression ${i + 1}:`, regression);
 
             // Predict the visitor count for the day using average temperature and precipitation forecast for the day
             let result = regression.predict([averageWeatherData[i].avgTemperature, averageWeatherData[i].avgPrecipitation])[0];
@@ -160,9 +161,8 @@ export default function MultivariateLinearRegressionCalculator({ weatherData }: 
     }, [weatherData]); // useEffect will run whenever weather forecast data changes
 
     return (
-        <div className="p-6">
-            <H2 className="p-4">Multivariate Linear Regression Proto</H2>
-            <p>FMI ei anna oikeita sademääriä</p>
+        <div className="">
+            <H2 className="p-8">Multivariate Linear Regression Proto</H2>
             <div className="flex justify-center gap-2">
                 {predictionResults?.map((result, index) => (
 

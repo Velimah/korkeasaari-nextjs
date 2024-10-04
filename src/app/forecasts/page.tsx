@@ -1,6 +1,6 @@
 "use client";
 import { H2 } from "@/components/ui/H2";
-import ForecastsFMIObservationsCombinedChart from "@/components/ForecastsFMIObservationsCombinedChart";
+import ForecastsFMICombinedChart from "@/components/ForecastsFMICombinedChart";
 import { Metadata } from "next";
 import { fetchFMIForecastData, WeatherData as WeatherDataType } from '@/utils/fetchFMIForecastData';
 import { useEffect, useState } from "react";
@@ -45,7 +45,7 @@ export default function WeatherData() {
         </section>
       </section>
       <section className="space-y-3 text-center">
-        <ForecastsFMIObservationsCombinedChart weatherData={weatherData} />
+        <ForecastsFMICombinedChart weatherData={weatherData} />
         <MultivariateLinearRegressionCalculator weatherData={weatherData} />
       </section>
     </>

@@ -19,8 +19,8 @@ export default function Dashboard() {
         </section>
       </section>
       <section className="space-y-3 text-center">
-        <FMIObservationsCombinedChart />
         <EnkoraVisitorBarChart />
+        <FMIObservationsCombinedChart />
       </section>
     </>
   );

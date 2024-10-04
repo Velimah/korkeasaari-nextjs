@@ -15,10 +15,7 @@ import { LoadingSpinner } from './ui/loading-spinner';
 
 
 // Define the WeatherData component
-export default function ForecastsFMIObservationsCombinedChart({ weatherData }: { weatherData: WeatherDataType[] }) {
-
-  console.log(weatherData);
-
+export default function ForecastsFMICombinedChart({ weatherData }: { weatherData: WeatherDataType[] }) {
 
   const chartConfig = {
     temperature: {
@@ -98,8 +95,14 @@ export default function ForecastsFMIObservationsCombinedChart({ weatherData }: {
                   tickLine={false}
                   tickMargin={10}
                   axisLine={false}
-                  tickFormatter={(value) => new Date(value).toLocaleTimeString('fi-FI')}
+                  tickFormatter={(value) => {
+                    const date = new Date(value);
+                    const dayOfWeek = date.toLocaleDateString('fi-FI', { weekday: 'short' }); // e.g., "Ma" for Monday in Finnish
+                    const hour = date.toLocaleTimeString('fi-FI', { hour: '2-digit', minute: '2-digit', hour12: false }); // e.g., "20:00"
+                    return `${dayOfWeek} ${hour}`;
+                  }}
                 />
+
                 <YAxis
                   yAxisId="left"
                   domain={[
