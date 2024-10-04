@@ -4,8 +4,8 @@ import ForecastsFMICombinedChart from "@/components/ForecastsFMICombinedChart";
 import { Metadata } from "next";
 import { fetchFMIForecastData, WeatherData as WeatherDataType } from '@/utils/fetchFMIForecastData';
 import { useEffect, useState } from "react";
-import MultivariateLinearRegressionCalculator from "@/components/MultivariateLinearRegressionCalculator";
 import { LoadingSpinner } from "@/components/ui/loading-spinner";
+import ForecastPredictedVisitorsBarChart from "@/components/ForecastPredictedVisitorsBarChart";
 
 /*
 export const metadata: Metadata = {
@@ -13,6 +13,7 @@ export const metadata: Metadata = {
   description: "Sääennuste ja Hinnoittelu.",
 };
 */
+
 // Define the WeatherData component
 export default function WeatherData() {
   const [weatherData, setWeatherData] = useState<WeatherDataType[]>();
@@ -46,7 +47,7 @@ export default function WeatherData() {
       </section>
       <section className="space-y-3 text-center">
         <ForecastsFMICombinedChart weatherData={weatherData} />
-        <MultivariateLinearRegressionCalculator weatherData={weatherData} />
+        <ForecastPredictedVisitorsBarChart weatherData={weatherData} />
       </section>
     </>
   );
