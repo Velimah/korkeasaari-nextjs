@@ -11,14 +11,14 @@ import {
   ComposedChart,
   Bar,
 } from 'recharts';
+import { LoadingSpinner } from './ui/loading-spinner';
 
 
 // Define the WeatherData component
 export default function ForecastsFMIObservationsCombinedChart({ weatherData }: { weatherData: WeatherDataType[] }) {
 
-  if (!weatherData) {
-    return <p>Loading...</p>;
-  }
+  console.log(weatherData);
+
 
   const chartConfig = {
     temperature: {
@@ -30,6 +30,10 @@ export default function ForecastsFMIObservationsCombinedChart({ weatherData }: {
       color: "#aac929",
     },
   } satisfies ChartConfig
+
+  if (!weatherData) {
+    return <LoadingSpinner />;
+  }
 
   return (
     <section className="m-6 text-center">
@@ -51,6 +55,19 @@ export default function ForecastsFMIObservationsCombinedChart({ weatherData }: {
                 <ChartTooltip
                   content={
                     <ChartTooltipContent
+                      // Access the 'payload' to get the full data object, including the 'date'
+                      labelFormatter={(_, payload) => {
+                        const dataPoint = payload && payload[0] ? payload[0].payload : null;
+                        if (dataPoint) {
+                          return new Date(dataPoint.time).toLocaleTimeString("fi-FI", {
+                            day: "numeric",
+                            month: "short",
+                            year: "numeric",
+                            weekday: "short",
+                          });
+                        }
+                        return "";
+                      }}
                       formatter={(value, name) => (
                         <>
                           <div className="flex items-center justify-between min-w-[130px] w-full gap-4 text-xs text-muted-foreground">
@@ -65,7 +82,7 @@ export default function ForecastsFMIObservationsCombinedChart({ weatherData }: {
                               />
                               {chartConfig[name as keyof typeof chartConfig]?.label || name}
                             </div>
-                            <div className="flex items-center font-mono font-medium text-right text-foreground">
+                            <div className="flex items-center gap-0.5 font-mono font-medium text-right text-foreground">
                               {value}
                             </div>
                           </div>
@@ -81,6 +98,7 @@ export default function ForecastsFMIObservationsCombinedChart({ weatherData }: {
                   tickLine={false}
                   tickMargin={10}
                   axisLine={false}
+                  tickFormatter={(value) => new Date(value).toLocaleTimeString('fi-FI')}
                 />
                 <YAxis
                   yAxisId="left"

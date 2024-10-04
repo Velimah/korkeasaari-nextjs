@@ -10,7 +10,7 @@ export default function EnkoraData() {
 
   const [visitorData, setVisitorData] = useState<any | null>(null);
   const [startDate, setStartDate] = useState<string>('2024-09-20');
-  const [endDate, setEndDate] = useState<string>('2024-09-24');
+  const [endDate, setEndDate] = useState<string>('2024-10-30');
 
   useEffect(() => {
     async function fetchData() {

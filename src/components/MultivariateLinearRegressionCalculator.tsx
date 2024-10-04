@@ -81,8 +81,13 @@ export default function MultivariateLinearRegressionCalculator({ weatherData }: 
             const weightendresult = weightedTotalWeekend / weightedTotalWeekday;
 
             // remove the day of the week from the visitor data to clean it up for the regression model
+            // flatten the weekend visitors to the weekday visitors ???
             const formattedMonthlyDataVisitors = monthlyDataVisitors[month].map((data) => {
-                return [data[0]]; // Keep only the first item
+                if (data[1] === 0 || data[1] === 6) {
+                    return [data[0]]; // Keep only the first item
+                }
+                const removeWeekendweight = data[0] / weightendresult;
+                return [data[0]]; // retun the visitor count or the visitor count divided by the weekend weight???
             });
 
             // Create a regression model using  the historical weather data and visitor counts for the month
@@ -95,6 +100,11 @@ export default function MultivariateLinearRegressionCalculator({ weatherData }: 
             // Check if the day is a weekend and adjust the prediction accordingly
             if (dateObject.getDay() === 0 || dateObject.getDay() === 6) {
                 result = result * weightendresult;
+            }
+
+            // Ensure the result is not negative
+            if (result < 0) {
+                result = 0;
             }
 
             //add object with date, predicted visitor count, temperature and precipitation
@@ -144,15 +154,15 @@ export default function MultivariateLinearRegressionCalculator({ weatherData }: 
         });
 
         const predictionResults = PredictVisitorCounts();
-        console.log('Prediction results:', predictionResults);
         setPredictionresults(predictionResults);
-        //setPredictionresults(predictionResults);
+        console.log('Prediction results:', predictionResults);
 
     }, [weatherData]); // useEffect will run whenever weather forecast data changes
 
     return (
         <div className="p-6">
-            <H2 className="p-4">Multivariate Linear Regression</H2>
+            <H2 className="p-4">Multivariate Linear Regression Proto</H2>
+            <p>FMI ei anna oikeita sademääriä</p>
             <div className="flex justify-center gap-2">
                 {predictionResults?.map((result, index) => (
 

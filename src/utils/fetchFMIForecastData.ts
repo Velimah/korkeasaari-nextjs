@@ -19,12 +19,13 @@ export interface WeatherData {
   precipitation: number,
 }
 
+
 // Fetch and process the weather data
 export const fetchFMIForecastData = async (): Promise<WeatherData[]> => {
   try {
     const endTime = getEndTime();
     const response = await fetch(
-      `https://opendata.fmi.fi/wfs?service=WFS&version=2.0.0&request=getFeature&storedquery_id=fmi::forecast::harmonie::surface::point::timevaluepair&place=korkeasaari&endtime=${endTime}&`
+      `https://opendata.fmi.fi/wfs?service=WFS&version=2.0.0&request=getFeature&storedquery_id=fmi::forecast::edited::weather::scandinavia::point::timevaluepair&place=korkeasaari&endtime=${endTime}&`
     );
 
     if (!response.ok) {
@@ -70,7 +71,7 @@ export const fetchFMIForecastData = async (): Promise<WeatherData[]> => {
         });
       }
 
-      if (observedProperty.includes("PrecipitationAmount")) {
+      if (observedProperty.includes("Precipitation1h")) {
         precipitationAmountData = currentSeriesData;
       } else if (observedProperty.includes("Temperature")) {
         temperatureData = currentSeriesData;
@@ -96,8 +97,8 @@ export const fetchFMIForecastData = async (): Promise<WeatherData[]> => {
         precipitation: precipitationEntry ? parseFloat(precipitationEntry.value.toFixed(1)) : 0,
       };
     });
-
     return combinedData;
+    
   } catch (error) {
     console.error("Error fetching or processing data:", error);
     throw error;

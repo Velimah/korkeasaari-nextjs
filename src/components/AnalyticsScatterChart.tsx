@@ -46,7 +46,7 @@ export default function AnalyticsScatterChart({ EnkoraFMIData2, selectedYear, ch
                 <CardHeader>
                     <CardTitle>Kävijämäärä / {selectedDataKey == "totalPrecipitation" ? "Sademäärä" : "Lämpötila"}</CardTitle>
                     <CardDescription>
-                        {selectedYear}
+                        {selectedYear === 0 ? "Kaikki vuodet" : selectedYear}
                     </CardDescription>
                 </CardHeader>
                 <CardContent>

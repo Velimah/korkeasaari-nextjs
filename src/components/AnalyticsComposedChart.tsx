@@ -26,7 +26,7 @@ export default function AnalyticsAnalyticsComposedChartChart({ EnkoraFMIData2, s
             <CardHeader>
                 <CardTitle>Kävijämäärät ja Keskilämpötila</CardTitle>
                 <CardDescription>
-                    {selectedYear}
+                    {selectedYear === 0 ? "Kaikki vuodet" : selectedYear}
                 </CardDescription>
             </CardHeader>
             <CardContent>

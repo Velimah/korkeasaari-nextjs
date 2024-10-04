@@ -5,6 +5,7 @@ import { Metadata } from "next";
 import { fetchFMIForecastData, WeatherData as WeatherDataType } from '@/utils/fetchFMIForecastData';
 import { useEffect, useState } from "react";
 import MultivariateLinearRegressionCalculator from "@/components/MultivariateLinearRegressionCalculator";
+import { LoadingSpinner } from "@/components/ui/loading-spinner";
 
 /*
 export const metadata: Metadata = {
@@ -31,7 +32,7 @@ export default function WeatherData() {
   }, []);
 
   if (!weatherData) {
-    return <p>Loading...</p>;
+    return <LoadingSpinner />;
   }
 
   return (

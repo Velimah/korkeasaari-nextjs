@@ -23,11 +23,11 @@ interface DataItem {
 
 export default function EnkoraDataStatic() {
 
-    const years = [2000, 2019, 2020, 2021, 2022, 2023, 2024];
+    const years = [0, 2019, 2020, 2021, 2022, 2023, 2024];
     const [selectedYear, setSelectedYear] = useState<number>(2024);
 
     const [EnkoraFMIData2, setEnkoraFMIData] = useState<DataItem[]>([]);
-    const [visitorTotals, setVisitorTotals] = useState<any | null>(null);
+    const [visitorTotals, setVisitorTotals] = useState<{ name: string; value: number; fill: string }[]>([]);
 
 
     useEffect(() => {
@@ -108,8 +108,8 @@ export default function EnkoraDataStatic() {
         const selectedYear = Number(event.target.value); // Get the selected year from the event
         let filteredData;
 
-        if (selectedYear === 2000) {
-            // If the selected year is 2000, skip filtering and use the full data set
+        if (selectedYear === 0) {
+            // If the selected year is 0, skip filtering and use the full data set
             filteredData = EnkoraFMIData;
         } else {
             // Filter data based on the selected year
@@ -143,7 +143,7 @@ export default function EnkoraDataStatic() {
                             <SelectGroup>
                                 {years.map((year) => (
                                     <SelectItem key={year} value={year.toString()}>
-                                        {year === 2000 ? "Kaikki vuodet" : year}
+                                        {year === 0 ? "Kaikki vuodet" : year}
                                     </SelectItem>
                                 ))}
                             </SelectGroup>
