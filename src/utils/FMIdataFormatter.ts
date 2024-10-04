@@ -1,3 +1,4 @@
+/*
 const filteredData = data.map((item) => {
     const year = item["Year"];
     const month = String(item["Month"]).padStart(2, '0'); // Ensure two digits for month
@@ -30,3 +31,4 @@ const precipitations = filteredData.map(item => item.precipitation);
 const meanTemperature = calculateMean(temperatures);
 const meanCloudCover = calculateMean(cloudCovers);
 const meanPrecipitation = calculateMean(precipitations);
+*/
