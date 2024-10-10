@@ -39,10 +39,10 @@ export default function ForecastPredictedVisitorsBarChart({ weatherData }: { wea
   }
 
   return (
-    <section className="m-6 text-center">
+    <section className="m-6 text-center flex flex-col justify-center items-center">
 
-      <div className="">
-        <H2 className="p-8">Multivariate Linear Regression Proto</H2>
+      <div className="p-4">
+        <H2 className="p-4">MLR prototype, sää ja kävijäennuste</H2>
         <div className="flex justify-center gap-2">
           {visitorData?.map((result, index) => (
 
@@ -58,15 +58,15 @@ export default function ForecastPredictedVisitorsBarChart({ weatherData }: { wea
         </div>
       </div>
 
-      <div className="flex justify-center p-4">
-        <Card className='dark:bg-slate-800 bg-secondary w-1/2' >
+      <div className="flex justify-center p-4 w-full max-w-[300px]">
+        <Card className='dark:bg-slate-800 bg-secondary' >
           <CardHeader>
             <CardTitle>Korkeasaaren Ennustetut Kävijämäärät</CardTitle>
             <CardDescription>
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <ChartContainer config={chartConfig} className="h-[300px] pe-6">
+            <ChartContainer config={chartConfig} className="h-[200px] pe-6">
               <ComposedChart accessibilityLayer data={visitorData}>
                 <CartesianGrid vertical={false} />
                 <ChartLegend content={<ChartLegendContent />} />
@@ -83,7 +83,7 @@ export default function ForecastPredictedVisitorsBarChart({ weatherData }: { wea
                       }}
                       formatter={(value, name) => (
                         <>
-                          <div className="flex items-center justify-between min-w-[130px] w-full gap-4 text-xs text-muted-foreground">
+                          <div className="flex items-center justify-between w-full gap-4 text-xs text-muted-foreground">
                             <div className="flex items-center gap-2">
                               <div
                                 className="h-2.5 w-2.5 shrink-0 rounded-[2px] bg-[--color-bg]"
