@@ -42,14 +42,14 @@ export default function ForecastPredictedVisitorsBarChart({ weatherData }: { wea
     <section className="m-6 text-center flex flex-col justify-center items-center">
 
       <div className="p-4">
-        <H2 className="p-4">MLR prototype, sää ja kävijäennuste</H2>
-        <div className="flex justify-center gap-2">
+        <H2 className="p-4">Sää- ja kävijäennuste</H2>
+        <div className="flex gap-2">
           {visitorData?.map((result, index) => (
 
-            <div key={index}>
+            <div className="w-full min-w-[200px]" key={index}>
               <Card className="p-4 flex flex-col gap-1">
-                <p>{new Date(result.date).toLocaleDateString('FI-fi', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}</p>
-                <p>Keskiämpötila: {result.temperature.toFixed(1)} °C</p>
+                <p>{new Date(result.date).toLocaleDateString('FI-fi', { weekday: 'short', day: 'numeric', month: 'numeric', year: 'numeric' })}</p>
+                <p>Lämpötila: {result.temperature.toFixed(1)} °C</p>
                 <p>Sademäärä: {result.precipitation.toFixed(1)} mm</p>
               </Card>
             </div>
@@ -77,7 +77,7 @@ export default function ForecastPredictedVisitorsBarChart({ weatherData }: { wea
                       labelFormatter={(_, payload) => {
                         const dataPoint = payload && payload[0] ? payload[0].payload : null;
                         if (dataPoint) {
-                          return new Date(dataPoint.date).toLocaleDateString('FI-fi', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+                          return new Date(dataPoint.date).toLocaleDateString('FI-fi', { weekday: 'short', day: 'numeric', month: 'long', year: 'numeric' });
                         }
                         return "";
                       }}
