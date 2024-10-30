@@ -12,7 +12,7 @@ import {
   Bar,
   Brush,
 } from 'recharts';
-import EnkoraFMIData from "@/assets/FormattedEnkoraFMI.json";
+import EnkoraFMIData from "@/assets/FormattedEnkoraFMI2.json";
 import { LoadingSpinner } from '@/components/ui/loading-spinner';
 
 interface DataItem {

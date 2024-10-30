@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { ChartConfig } from "@/components/ui/chart";
-import EnkoraFMIData from "@/assets/FormattedEnkoraFMI.json";
+import EnkoraFMIData from "@/assets/FormattedEnkoraFMI2.json";
 import AnalyticsPieChart from "@/components/AnalyticsPieChart";
 import AnalyticsScatterChart from "@/components/AnalyticsScatterChart";
 import AnalyticsAnalyticsComposedChartChart from "@/components/AnalyticsComposedChart";

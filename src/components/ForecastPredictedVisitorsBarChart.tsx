@@ -13,6 +13,7 @@ interface PredictionResults {
   date: string;
   temperature: number;
   precipitation: number;
+  cloudCover: number;
   predictedVisitors: number;
 }
 
@@ -51,6 +52,8 @@ export default function ForecastPredictedVisitorsBarChart({ weatherData }: { wea
                 <p>{new Date(result.date).toLocaleDateString('FI-fi', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}</p>
                 <p>Keskiämpötila: {result.temperature.toFixed(1)} °C</p>
                 <p>Sademäärä: {result.precipitation.toFixed(1)} mm</p>
+                <p>Pilvisyys: {result.cloudCover.toFixed(1)} %</p>
+                <p>Ennustettu kävijämäärä: {result.predictedVisitors.toFixed(0)} kävijää</p>
               </Card>
             </div>
 

@@ -177,3 +177,101 @@ export const fetchWeatherHistoricalData = (): AggregatedWeatherRecord[] => {
     const first400Items = EnkoraFMIData.slice(0, 400);
     
   */
+
+    /* formatting cloudcoverdata from fmi donwload service
+
+    import pilvisyysData from "@/assets/pilvisyys.json";
+    import weatherData from "@/assets/FormattedEnkoraFMI.json";
+    
+    type PilvisyysEntry = {
+      Havaintoasema: string;
+      Vuosi: number;
+      Kuukausi: number;
+      Päivä: number;
+      Aika: string;
+      Pilvisyys: string;
+    };
+    
+    type WeatherData = {
+      date: string;
+      averageTemperature: number;
+      totalPrecipitation: number;
+      kulkulupa: number;
+      paasyliput: number;
+      kampanjakavijat: number;
+      verkkokauppa_paasyliput: number;
+      vuosiliput: number;
+      total: number;
+      averagePilvisyysPercentage?: number; // optional to add the new property
+    };
+    
+    type CloudinessData = {
+      date: string;
+      averagePilvisyysPercentage: number;
+    };
+    
+    const pilvisyysDataa: PilvisyysEntry[] = pilvisyysData as PilvisyysEntry[];
+    const weatherDataa: WeatherData[] = weatherData as WeatherData[];
+    
+    
+    function formatCloudiness(pilvisyys: string): number | null {
+      const match = pilvisyys.match(/\((\d+)\/(\d+)\)/);
+      if (match) {
+        const numerator = parseInt(match[1], 10);
+        const denominator = parseInt(match[2], 10);
+        return (numerator / denominator) * 100;
+      }
+      return null; // Return null if the format is unexpected
+    }
+    
+    // Filter data to include only entries from 10:00 to 20:00
+    const filteredData = pilvisyysDataa
+      .filter((entry: any) => {
+        const hour = parseInt(entry.Aika.split(":")[0], 10);
+        return hour >= 10 && hour <= 20;
+      })
+      .map((entry: any) => ({
+        ...entry,
+        PilvisyysPercentage: formatCloudiness(entry.Pilvisyys)
+      }));
+    
+    // Calculate daily averages
+    const dailyAverages = filteredData.reduce((acc: any, entry: any) => {
+      const dateKey = `${entry.Vuosi}-${entry.Kuukausi}-${entry.Päivä}`;
+      if (!acc[dateKey]) {
+        acc[dateKey] = { totalCloudiness: 0, count: 0 };
+      }
+      acc[dateKey].totalCloudiness += entry.PilvisyysPercentage || 0;
+      acc[dateKey].count += 1;
+      return acc;
+    }, {});
+    
+    // Convert daily totals to averages
+    const result = Object.entries(dailyAverages).map(([date, data]: [string, any]) => ({
+      date,
+      averagePilvisyysPercentage: data.totalCloudiness / data.count
+    }));
+    
+    console.log('tulokseet', result);
+    
+    
+    function formatDate(dateStr: string): string {
+      const [year, month, day] = dateStr.split("-");
+      return `${year}-${month.padStart(2, "0")}-${day.padStart(2, "0")}`;
+    }
+    
+    
+    // Merging the data
+    const mergedData = weatherDataa.map((weather) => {
+      const cloudiness = result.find(
+        (cloud) => formatDate(cloud.date) === formatDate(weather.date)
+      );
+      return {
+        ...weather,
+        cloudCover: cloudiness ? Number(cloudiness.averagePilvisyysPercentage.toFixed(0)) : null,
+      };
+    });
+    
+    console.log('lopputulokset', mergedData);
+
+    */
