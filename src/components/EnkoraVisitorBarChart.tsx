@@ -9,7 +9,7 @@ import { LoadingSpinner } from "@/components/ui/loading-spinner";
 export default function EnkoraData() {
 
   const [visitorData, setVisitorData] = useState<any | null>(null);
-  const [startDate, setStartDate] = useState<string>('2024-09-20');
+  const [startDate, setStartDate] = useState<string>('2024-09-30');
   const [endDate, setEndDate] = useState<string>('2024-10-30');
 
   useEffect(() => {
@@ -168,7 +168,7 @@ export default function EnkoraData() {
                   cursor={true}
                   defaultIndex={1}
                 />
-                <ChartLegend content={<ChartLegendContent />} />
+                <ChartLegend className="" content={<ChartLegendContent />} />
                 <YAxis
                   label={{ value: 'Kävijämäärä', angle: -90, position: 'insideLeft' }} />
                 <Bar

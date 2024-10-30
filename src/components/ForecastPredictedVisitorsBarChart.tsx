@@ -40,17 +40,17 @@ export default function ForecastPredictedVisitorsBarChart({ weatherData }: { wea
   }
 
   return (
-    <section className="m-6 text-center">
+    <section className="m-6 text-center flex flex-col justify-center items-center">
 
-      <div className="">
-        <H2 className="p-8">Multivariate Linear Regression Proto</H2>
-        <div className="flex justify-center gap-2">
+      <div className="p-4">
+        <H2 className="p-4">Sää- ja kävijäennuste</H2>
+        <div className="flex gap-2">
           {visitorData?.map((result, index) => (
 
-            <div key={index}>
+            <div className="w-full min-w-[200px]" key={index}>
               <Card className="p-4 flex flex-col gap-1">
-                <p>{new Date(result.date).toLocaleDateString('FI-fi', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}</p>
-                <p>Keskiämpötila: {result.temperature.toFixed(1)} °C</p>
+                <p>{new Date(result.date).toLocaleDateString('FI-fi', { weekday: 'short', day: 'numeric', month: 'numeric', year: 'numeric' })}</p>
+                <p>Lämpötila: {result.temperature.toFixed(1)} °C</p>
                 <p>Sademäärä: {result.precipitation.toFixed(1)} mm</p>
                 <p>Pilvisyys: {result.cloudCover.toFixed(1)} %</p>
                 <p>Ennustettu kävijämäärä: {result.predictedVisitors.toFixed(0)} kävijää</p>
@@ -61,15 +61,15 @@ export default function ForecastPredictedVisitorsBarChart({ weatherData }: { wea
         </div>
       </div>
 
-      <div className="flex justify-center p-4">
-        <Card className='dark:bg-slate-800 bg-secondary w-1/2' >
+      <div className="flex justify-center p-4 w-full max-w-[300px]">
+        <Card className='dark:bg-slate-800 bg-secondary' >
           <CardHeader>
             <CardTitle>Korkeasaaren Ennustetut Kävijämäärät</CardTitle>
             <CardDescription>
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <ChartContainer config={chartConfig} className="h-[300px] pe-6">
+            <ChartContainer config={chartConfig} className="h-[200px] pe-6">
               <ComposedChart accessibilityLayer data={visitorData}>
                 <CartesianGrid vertical={false} />
                 <ChartLegend content={<ChartLegendContent />} />
@@ -80,13 +80,13 @@ export default function ForecastPredictedVisitorsBarChart({ weatherData }: { wea
                       labelFormatter={(_, payload) => {
                         const dataPoint = payload && payload[0] ? payload[0].payload : null;
                         if (dataPoint) {
-                          return new Date(dataPoint.date).toLocaleDateString('FI-fi', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+                          return new Date(dataPoint.date).toLocaleDateString('FI-fi', { weekday: 'short', day: 'numeric', month: 'long', year: 'numeric' });
                         }
                         return "";
                       }}
                       formatter={(value, name) => (
                         <>
-                          <div className="flex items-center justify-between min-w-[130px] w-full gap-4 text-xs text-muted-foreground">
+                          <div className="flex items-center justify-between w-full gap-4 text-xs text-muted-foreground">
                             <div className="flex items-center gap-2">
                               <div
                                 className="h-2.5 w-2.5 shrink-0 rounded-[2px] bg-[--color-bg]"

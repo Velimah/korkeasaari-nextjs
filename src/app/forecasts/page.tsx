@@ -41,7 +41,7 @@ export default function WeatherData() {
       <section className="px-1 py-8">
         <section className="items-center flex justify-center px-8">
           <div className="space-y-3">
-            <H2 className="text-center sm:text-start"> Sääennuste ja Hinnoittelu</H2>
+            <H2 className="text-center sm:text-start"> Sää- ja Kävijämääräennuste</H2>
           </div>
         </section>
       </section>
