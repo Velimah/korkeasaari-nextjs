@@ -8,27 +8,43 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
   navigationMenuTriggerStyle,
-} from "@/components/ui/navigation-menu"
+} from "@/components/ui/navigation-menu";
 
 export default function Navbar() {
   return (
     <header className="sticky top-0 z-10 bg-white dark:bg-black">
       <div className="mx-auto flex max-w-6xl flex-wrap justify-between gap-3 px-3 py-4">
-        <Image className="pt-2" alt="logo of the website" src={zoolytics} height={50} />
+        <Image
+          className="pt-2"
+          alt="logo of the website"
+          src={zoolytics}
+          height={50}
+        />
         <NavigationMenu>
           <NavigationMenuList>
             <NavigationMenuItem className="flex gap-6">
-              <NavigationMenuLink href="/" className={navigationMenuTriggerStyle()}>
+              <NavigationMenuLink
+                href="/"
+                className={navigationMenuTriggerStyle()}
+              >
                 Koti
               </NavigationMenuLink>
-              <NavigationMenuLink href="/charts" className={navigationMenuTriggerStyle()}>
+              <NavigationMenuLink
+                href="/charts"
+                className={navigationMenuTriggerStyle()}
+              >
                 Charts
               </NavigationMenuLink>
-
-              <NavigationMenuLink href="/analytics" className={navigationMenuTriggerStyle()}>
+              <NavigationMenuLink
+                href="/analytics"
+                className={navigationMenuTriggerStyle()}
+              >
                 Analyysit
               </NavigationMenuLink>
-              <NavigationMenuLink href="/forecasts" className={navigationMenuTriggerStyle()}>
+              <NavigationMenuLink
+                href="/forecasts"
+                className={navigationMenuTriggerStyle()}
+              >
                 Ennusteet
               </NavigationMenuLink>
             </NavigationMenuItem>
