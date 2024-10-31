@@ -1,11 +1,11 @@
 "use client";
 import { H2 } from "@/components/ui/H2";
-import ForecastsFMICombinedChart from "@/components/ForecastsFMICombinedChart";
+import ForecastsFMICombinedChart from "@/app/forecasts/ForecastsFMICombinedChart";
 import { Metadata } from "next";
 import { fetchFMIForecastData, WeatherData as WeatherDataType } from '@/utils/fetchFMIForecastData';
 import { useEffect, useState } from "react";
 import { LoadingSpinner } from "@/components/ui/loading-spinner";
-import ForecastPredictedVisitorsBarChart from "@/components/ForecastPredictedVisitorsBarChart";
+import ForecastPredictedVisitorsBarChart from "@/app/forecasts/ForecastPredictedVisitorsBarChart";
 
 /*
 export const metadata: Metadata = {

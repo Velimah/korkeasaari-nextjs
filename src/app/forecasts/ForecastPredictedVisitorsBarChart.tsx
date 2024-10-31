@@ -5,9 +5,9 @@ import { ChartConfig, ChartContainer, ChartLegend, ChartLegendContent, ChartTool
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Bar, CartesianGrid, ComposedChart, XAxis, YAxis } from "recharts";
 import { LoadingSpinner } from "@/components/ui/loading-spinner";
-import MultivariateLinearRegressionCalculator from "../utils/MultivariateLinearRegressionCalculator";
+import MultivariateLinearRegressionCalculator from "../../utils/MultivariateLinearRegressionCalculator";
 import { WeatherData as WeatherDataType } from '@/utils/fetchFMIForecastData';
-import { H2 } from "./ui/H2";
+import { H2 } from "../../components/ui/H2";
 
 interface PredictionResults {
   date: string;

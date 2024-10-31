@@ -11,7 +11,7 @@ import {
   ComposedChart,
   Bar,
 } from 'recharts';
-import { LoadingSpinner } from './ui/loading-spinner';
+import { LoadingSpinner } from '../../components/ui/loading-spinner';
 
 
 // Define the WeatherData component

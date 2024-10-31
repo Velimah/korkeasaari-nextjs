@@ -2,7 +2,7 @@ import { XMLParser } from "fast-xml-parser";  // Import the XMLParser from fast-
 
 const getEndTime = (): string => {
   const currentDate = new Date();
-  const futureDate = new Date(currentDate.getTime() + 60 * 60 * 1000 * 60); // Adding 60 hours
+  const futureDate = new Date(currentDate.getTime() + 60 * 60 * 1000 * 240); // Adding 60 hours
   return futureDate.toISOString().split(".")[0] + "Z"; // Formatting to 'YYYY-MM-DDTHH:mm:ssZ'
 };
 
@@ -34,6 +34,7 @@ export const fetchFMIForecastData = async (): Promise<WeatherData[]> => {
 
     const responseText = await response.text();
 
+    console.log("ennuste", responseText);
     // Initialize the XML parser
     const parser = new XMLParser({
       ignoreAttributes: false,  // Preserve attributes
@@ -97,6 +98,7 @@ export const fetchFMIForecastData = async (): Promise<WeatherData[]> => {
         precipitation: precipitationEntry ? parseFloat(precipitationEntry.value.toFixed(1)) : 0,
       };
     });
+    console.log("combinedData", combinedData);
     return combinedData;
     
   } catch (error) {

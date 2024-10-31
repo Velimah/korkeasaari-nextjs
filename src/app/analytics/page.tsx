@@ -1,5 +1,5 @@
 import { H2 } from "@/components/ui/H2";
-import AnalyticsCharts from "@/components/AnalyticsCharts";
+import AnalyticsCharts from "@/app/analytics/AnalyticsCharts";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {

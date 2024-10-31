@@ -21,6 +21,9 @@ export default function Navbar() {
               <NavigationMenuLink href="/" className={navigationMenuTriggerStyle()}>
                 Koti
               </NavigationMenuLink>
+              <NavigationMenuLink href="/charts" className={navigationMenuTriggerStyle()}>
+                Charts
+              </NavigationMenuLink>
 
               <NavigationMenuLink href="/analytics" className={navigationMenuTriggerStyle()}>
                 Analyysit

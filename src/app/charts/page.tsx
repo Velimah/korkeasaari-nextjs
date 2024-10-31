@@ -1,22 +1,23 @@
 import { H2 } from "@/components/ui/H2";
 import { Metadata } from "next";
+import FMIObservationsCombinedChart from "@/app/charts/FMIObservationsCombinedChart";
+import EnkoraVisitorBarChart from "@/app/charts/EnkoraVisitorBarChart";
 
 export const metadata: Metadata = {
-  title: "Koti",
+  title: "Charts",
   description: "Tervetuloa.",
 };
 
-export default function Home() {
+export default function Charts() {
   return (
     <>
       <section className="px-1 py-8">
         <section className="items-center flex justify-center px-8">
-          <div className="space-y-3">
-            <H2 className="text-center sm:text-start">LANDING PAGE! Tervetuloa</H2>
-          </div>
         </section>
       </section>
       <section className="space-y-3 text-center">
+        <FMIObservationsCombinedChart />
+        <EnkoraVisitorBarChart />
       </section>
     </>
   );

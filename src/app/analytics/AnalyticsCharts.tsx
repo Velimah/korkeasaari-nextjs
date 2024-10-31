@@ -3,9 +3,9 @@
 import { useEffect, useState } from "react";
 import { ChartConfig } from "@/components/ui/chart";
 import EnkoraFMIData from "@/assets/FormattedEnkoraFMI2.json";
-import AnalyticsPieChart from "@/components/AnalyticsPieChart";
-import AnalyticsScatterChart from "@/components/AnalyticsScatterChart";
-import AnalyticsAnalyticsComposedChartChart from "@/components/AnalyticsComposedChart";
+import AnalyticsPieChart from "@/app/analytics/AnalyticsPieChart";
+import AnalyticsScatterChart from "@/app/analytics/AnalyticsScatterChart";
+import AnalyticsAnalyticsComposedChartChart from "@/app/analytics/AnalyticsComposedChart";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 interface DataItem {
