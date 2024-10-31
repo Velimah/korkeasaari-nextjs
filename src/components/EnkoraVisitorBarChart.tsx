@@ -11,6 +11,7 @@ export default function EnkoraData() {
   const [visitorData, setVisitorData] = useState<any | null>(null);
   const [startDate, setStartDate] = useState<string>('2024-09-30');
   const [endDate, setEndDate] = useState<string>('2024-10-30');
+  const [selectedCategory, setSelectedCategory] = useState<string[]>(["Kulkulupa", "Ilmaiskävijät", "Pääsyliput", "Verkkokauppa_Pääsyliput", "Vuosiliput"]);
 
   useEffect(() => {
     async function fetchData() {
@@ -98,6 +99,13 @@ export default function EnkoraData() {
     },
   } satisfies ChartConfig
 
+  // Function to toggle the selected category
+  const toggleCategory = (category: string) => {
+    setSelectedCategory((prev) => 
+      prev.includes(category) ? prev.filter((c) => c !== category) : [...prev, category]
+    );
+  };
+
   if (!visitorData) {
     return <LoadingSpinner />;
   }
@@ -105,7 +113,23 @@ export default function EnkoraData() {
   return (
     <section className="m-6 text-center">
       <div>
-
+        {/*Checkboxes*/}
+        <div className="checkboxHome">
+          <h3>Valitse lipputyypit:</h3>
+          <div className="flex justify-center space-x-4">
+            {Object.keys(chartConfig).map((category) => (
+              <label key={category} className="flex items-center space-x-2">
+                <input
+                  type="checkbox"
+                  checked={selectedCategory.includes(category)}
+                  onChange={() => toggleCategory(category)}
+                />
+                <span>{chartConfig[category as keyof typeof chartConfig].label}</span>
+              </label>
+            ))}
+          </div>
+        </div>
+      
         <Card className='dark:bg-slate-800 bg-secondary' >
           <CardHeader>
             <CardTitle>Korkeasaaren Kävijämäärät</CardTitle>
@@ -170,37 +194,17 @@ export default function EnkoraData() {
                 />
                 <ChartLegend className="" content={<ChartLegendContent />} />
                 <YAxis
-                  label={{ value: 'Kävijämäärä', angle: -90, position: 'insideLeft' }} />
-                <Bar
-                  dataKey="Kulkulupa"
-                  stackId="a"
-                  fill="var(--color-Kulkulupa)"
-                  radius={[0, 0, 0, 0]}
-                />
-                <Bar
-                  dataKey="Ilmaiskävijät"
-                  stackId="a"
-                  fill="var(--color-Ilmaiskävijät)"
-                  radius={[0, 0, 0, 0]}
-                />
-                <Bar
-                  dataKey="Vuosiliput"
-                  stackId="a"
-                  fill="var(--color-Vuosiliput)"
-                  radius={[0, 0, 0, 0]}
-                />
-                <Bar
-                  dataKey="Verkkokauppa_Pääsyliput"
-                  stackId="a"
-                  fill="var(--color-Verkkokauppa_Pääsyliput)"
-                  radius={[0, 0, 0, 0]}
-                />
-                <Bar
-                  dataKey="Pääsyliput"
-                  stackId="a"
-                  fill="var(--color-Pääsyliput)"
-                  radius={[0, 0, 0, 0]}
-                />
+                  label={{value: 'Kävijämäärä', angle: -90, position: 'insideLeft'}} />
+                {/*Render selected tickets*/}
+                {selectedCategory.map((category) => (
+                  <Bar
+                    key={category}
+                    dataKey={category}
+                    stackId="a"
+                    fill={`var(--color-${category})`}
+                    radius={[0, 0, 0, 0]}
+                  />
+                ))}
               </ComposedChart>
             </ChartContainer>
           </CardContent>
