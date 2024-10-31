@@ -1,12 +1,25 @@
-"use client";  // Ensure this component is treated as a client component
+"use client"; // Ensure this component is treated as a client component
 
 import { useEffect, useState } from "react";
-import { ChartConfig, ChartContainer, ChartLegend, ChartLegendContent, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  ChartConfig,
+  ChartContainer,
+  ChartLegend,
+  ChartLegendContent,
+  ChartTooltip,
+  ChartTooltipContent,
+} from "@/components/ui/chart";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Bar, CartesianGrid, ComposedChart, XAxis, YAxis } from "recharts";
 import { LoadingSpinner } from "@/components/ui/loading-spinner";
 import MultivariateLinearRegressionCalculator from "../../utils/MultivariateLinearRegressionCalculator";
-import { WeatherData as WeatherDataType } from '@/utils/fetchFMIForecastData';
+import { WeatherData as WeatherDataType } from "@/utils/fetchFMIForecastData";
 import { H2 } from "../../components/ui/H2";
 
 interface PredictionResults {
@@ -17,8 +30,11 @@ interface PredictionResults {
   predictedVisitors: number;
 }
 
-export default function ForecastPredictedVisitorsBarChart({ weatherData }: { weatherData: WeatherDataType[] }) {
-
+export default function ForecastPredictedVisitorsBarChart({
+  weatherData,
+}: {
+  weatherData: WeatherDataType[];
+}) {
   const [visitorData, setVisitorData] = useState<PredictionResults[]>([]);
 
   useEffect(() => {
@@ -33,40 +49,46 @@ export default function ForecastPredictedVisitorsBarChart({ weatherData }: { wea
       label: "Kävijämäärä",
       color: "#AAC929",
     },
-  } satisfies ChartConfig
+  } satisfies ChartConfig;
 
   if (!visitorData) {
     return <LoadingSpinner />;
   }
 
   return (
-    <section className="m-6 text-center flex flex-col justify-center items-center">
-
+    <section className="m-6 flex flex-col items-center justify-center text-center">
       <div className="p-4">
         <H2 className="p-4">Sää- ja kävijäennuste</H2>
         <div className="flex gap-2">
           {visitorData?.map((result, index) => (
-
             <div className="w-full min-w-[200px]" key={index}>
-              <Card className="p-4 flex flex-col gap-1">
-                <p>{new Date(result.date).toLocaleDateString('FI-fi', { weekday: 'short', day: 'numeric', month: 'numeric', year: 'numeric' })}</p>
+              <Card className="flex flex-col gap-1 p-4">
+                <p>
+                  {new Date(result.date).toLocaleDateString("FI-fi", {
+                    weekday: "short",
+                    day: "numeric",
+                    month: "numeric",
+                    year: "numeric",
+                  })}
+                </p>
                 <p>Lämpötila: {result.temperature.toFixed(1)} °C</p>
                 <p>Sademäärä: {result.precipitation.toFixed(1)} mm</p>
                 <p>Pilvisyys: {result.cloudCover.toFixed(1)} %</p>
-                <p>Ennustettu kävijämäärä: {result.predictedVisitors.toFixed(0)} kävijää</p>
+                <p>
+                  Ennustettu kävijämäärä: {result.predictedVisitors.toFixed(0)}{" "}
+                  kävijää
+                </p>
               </Card>
             </div>
-
           ))}
         </div>
       </div>
 
-      <div className="flex justify-center p-4 w-full max-w-[300px]">
-        <Card className='dark:bg-slate-800 bg-secondary' >
+      <div className="flex w-full max-w-[300px] justify-center p-4">
+        <Card className="bg-secondary dark:bg-slate-800">
           <CardHeader>
             <CardTitle>Korkeasaaren Ennustetut Kävijämäärät</CardTitle>
-            <CardDescription>
-            </CardDescription>
+            <CardDescription></CardDescription>
           </CardHeader>
           <CardContent>
             <ChartContainer config={chartConfig} className="h-[200px] pe-6">
@@ -78,15 +100,24 @@ export default function ForecastPredictedVisitorsBarChart({ weatherData }: { wea
                     <ChartTooltipContent
                       // Access the 'payload' to get the full data object, including the 'date'
                       labelFormatter={(_, payload) => {
-                        const dataPoint = payload && payload[0] ? payload[0].payload : null;
+                        const dataPoint =
+                          payload && payload[0] ? payload[0].payload : null;
                         if (dataPoint) {
-                          return new Date(dataPoint.date).toLocaleDateString('FI-fi', { weekday: 'short', day: 'numeric', month: 'long', year: 'numeric' });
+                          return new Date(dataPoint.date).toLocaleDateString(
+                            "FI-fi",
+                            {
+                              weekday: "short",
+                              day: "numeric",
+                              month: "long",
+                              year: "numeric",
+                            },
+                          );
                         }
                         return "";
                       }}
                       formatter={(value, name) => (
                         <>
-                          <div className="flex items-center justify-between w-full gap-4 text-xs text-muted-foreground">
+                          <div className="flex w-full items-center justify-between gap-4 text-xs text-muted-foreground">
                             <div className="flex items-center gap-2">
                               <div
                                 className="h-2.5 w-2.5 shrink-0 rounded-[2px] bg-[--color-bg]"
@@ -96,9 +127,10 @@ export default function ForecastPredictedVisitorsBarChart({ weatherData }: { wea
                                   } as React.CSSProperties
                                 }
                               />
-                              {chartConfig[name as keyof typeof chartConfig]?.label || name}
+                              {chartConfig[name as keyof typeof chartConfig]
+                                ?.label || name}
                             </div>
-                            <div className="flex items-center gap-0.5 font-mono font-medium text-right text-foreground">
+                            <div className="flex items-center gap-0.5 text-right font-mono font-medium text-foreground">
                               {value}
                             </div>
                           </div>
@@ -114,7 +146,14 @@ export default function ForecastPredictedVisitorsBarChart({ weatherData }: { wea
                   tickLine={false}
                   tickMargin={10}
                   axisLine={false}
-                  tickFormatter={(value) => new Date(value).toLocaleDateString('FI-fi', { weekday: 'short', day: 'numeric', month: 'numeric', year: 'numeric' })}
+                  tickFormatter={(value) =>
+                    new Date(value).toLocaleDateString("FI-fi", {
+                      weekday: "short",
+                      day: "numeric",
+                      month: "numeric",
+                      year: "numeric",
+                    })
+                  }
                 />
                 <YAxis />
                 <Bar
@@ -126,7 +165,6 @@ export default function ForecastPredictedVisitorsBarChart({ weatherData }: { wea
             </ChartContainer>
           </CardContent>
         </Card>
-
       </div>
     </section>
   );
