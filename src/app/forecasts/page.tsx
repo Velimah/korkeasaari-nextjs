@@ -5,7 +5,7 @@ import { Metadata } from "next";
 import { fetchFMIForecastData, WeatherData as WeatherDataType } from '@/utils/fetchFMIForecastData';
 import { useEffect, useState } from "react";
 import { LoadingSpinner } from "@/components/ui/loading-spinner";
-import ForecastPredictedVisitorsBarChart from "@/app/forecasts/ForecastPredictedVisitorsBarChart";
+import ForecastAndPriceTable from "@/app/forecasts/ForecastAndPriceTable";
 
 /*
 export const metadata: Metadata = {
@@ -47,7 +47,7 @@ export default function WeatherData() {
       </section>
       <section className="space-y-3 text-center">
         <ForecastsFMICombinedChart weatherData={weatherData} />
-        <ForecastPredictedVisitorsBarChart weatherData={weatherData} />
+        <ForecastAndPriceTable weatherData={weatherData} />
       </section>
     </>
   );
