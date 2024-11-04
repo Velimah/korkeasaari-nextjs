@@ -29,14 +29,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
-        <ThemeProvider attribute="class">
-          <Navbar />
-          <main className="mx-auto max-w-6xl pb-6 pt-0">{children}</main>
-          <Footer />
-        </ThemeProvider>
+      <html lang="en">
+      <body className={`${inter.className} min-h-screen`}>
+      <ThemeProvider attribute="class">
+        <div className="flex flex-col min-h-screen">
+          <div className="flex-grow max-w-6xl mx-auto w-full">
+            <Navbar />
+            <main className="flex-grow pb-6 pt-0">{children}</main>
+          </div>
+          <footer className="w-full">
+            <Footer />
+          </footer>
+        </div>
+      </ThemeProvider>
       </body>
-    </html>
+      </html>
   );
 }
