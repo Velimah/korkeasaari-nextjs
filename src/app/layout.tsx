@@ -28,21 +28,19 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return (
-      <html lang="en">
-      <body className={`${inter.className} min-h-screen`}>
-      <ThemeProvider attribute="class">
-        <div className="flex flex-col min-h-screen">
-          <div className="flex-grow max-w-6xl mx-auto w-full">
-            <Navbar />
-            <main className="flex-grow pb-6 pt-0">{children}</main>
-          </div>
-          <footer className="w-full">
-            <Footer />
-          </footer>
-        </div>
-      </ThemeProvider>
-      </body>
-      </html>
-  );
+    return (
+        <html lang="en">
+        <body className={`${inter.className} min-h-screen`}>
+        <ThemeProvider attribute="class">
+            <div className="flex flex-col min-h-screen">
+                <Navbar />
+                <main className="flex-grow m-auto max-w-[80em] w-full">{children}</main>
+                <footer className="w-full">
+                    <Footer />
+                </footer>
+            </div>
+        </ThemeProvider>
+        </body>
+        </html>
+    );
 }
