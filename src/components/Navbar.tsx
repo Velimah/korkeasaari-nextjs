@@ -17,17 +17,18 @@ export default function Navbar() {
   const pathname = usePathname();
   const isHomePage = pathname === "/";
 
-  return (
-      <header className="sticky top-0 z-20 bg-white dark:bg-black">
+  return  (
+      <header
+          className="sticky top-0 z-20 bg-white dark:bg-black border-b-4"
+          style={{ borderBottomColor: "#AAC929" }}
+      >
         <div className="mx-auto flex max-w-6xl flex-wrap justify-between items-center gap-3 px-3 py-4">
-          <Link href="/">
             <Image
-                className="pt-2 cursor-pointer"
+                className="pt-2"
                 alt="logo of the website"
                 src={zoolytics}
                 height={50}
             />
-          </Link>
           {!isHomePage && (
               <NavigationMenu>
                 <NavigationMenuList>

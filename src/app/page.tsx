@@ -1,4 +1,4 @@
-import { H2 } from "@/components/ui/H2";
+import {H1} from "@/components/ui/H1";
 import { Metadata } from "next";
 import kuva from './kuva.png';
 import Link from "next/link";
@@ -15,12 +15,12 @@ export default function Home() {
                 className="absolute inset-0 flex justify-around items-center"
                 style={{ backgroundColor: "#AAC929", zIndex: 10 }}
             >
-                <div className="flex flex-col gap-10 items-center justify-center">
-                    <H2 className="text-white text-center pb-6 max-w-[75%] border-b-4 border-white">
+                <div className="flex flex-col w-1/2 gap-10 items-center justify-center">
+                    <H1 className="text-white text-center pb-6 max-w-[75%] border-b-4 border-white">
                         Tervetuloa Zoolytics! Datan analysointi sivu juuri sopiva sinulle!
-                    </H2>
+                    </H1>
                     <Link href="/analytics">
-                        <button className="flex items-center bg-green-700 hover:bg-green-600 transition text-white font-bold py-2 px-4 rounded">
+                        <button className="flex items-center text-xl bg-green-700 hover:bg-green-600 transition text-white font-bold py-2 px-4 rounded">
                             Aloita tästä!
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -34,7 +34,7 @@ export default function Home() {
                         </button>
                     </Link>
                 </div>
-                <div className="text-white text-center flex items-center justify-center">
+                <div className="text-white text-center w-1/2 flex items-center justify-center">
                     <img
                         src={kuva.src}
                         alt=""
