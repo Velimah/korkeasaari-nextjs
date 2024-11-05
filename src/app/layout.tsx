@@ -34,7 +34,7 @@ export default function RootLayout({
         <ThemeProvider attribute="class">
             <div className="flex flex-col min-h-screen">
                 <Navbar />
-                <main className="flex-grow m-auto max-w-[80em] w-full">{children}</main>
+                <main className="flex-grow m-auto max-w-[80em] pb-10 w-full">{children}</main>
                 <footer className="w-full">
                     <Footer />
                 </footer>
