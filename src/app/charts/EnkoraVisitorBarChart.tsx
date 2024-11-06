@@ -113,27 +113,8 @@ export default function EnkoraData() {
 
   return (
     <section className="m-6 text-center">
-      <div>
-        {/*Checkboxes*/}
-        <div className="checkboxGroupHome">
-          <h3>Valitse lipputyypit:</h3>
-          <div className="flex justify-center space-x-4">
-            {Object.keys(chartConfig).map((category) => (
-              <div key={category} className="flex items-center space-x-2">
-                <Checkbox
-                  checked={selectedCategory.includes(category)}
-                  onCheckedChange={() => toggleCategory(category)}
-                  id={category}
-                />
-                <label htmlFor={category} className="cursor-pointer">
-                  {chartConfig[category as keyof typeof chartConfig].label}
-                </label>
-              </div>
-            ))}
-          </div>
-        </div>
-      
-        <Card className='dark:bg-slate-800 bg-secondary' >
+      <div className="flex justify-between items-center">
+        <Card className='dark:bg-slate-800 bg-secondary flex-1'>
           <CardHeader>
             <CardTitle>Korkeasaaren Kävijämäärät</CardTitle>
             <CardDescription>
@@ -212,7 +193,24 @@ export default function EnkoraData() {
             </ChartContainer>
           </CardContent>
         </Card>
-
+        <div className="checkboxGroupHome ml-6 text-left">
+          <h3 className="font-bold">Valitse lipputyypit:</h3>
+          <p className="text-gray-500">Valitse haluamasi lipputyypit</p>
+          <div className="flex flex-col space-y-4 mt-4">
+            {Object.keys(chartConfig).map((category) => (
+              <div key={category} className="flex items-center space-x-2">
+                <Checkbox
+                  checked={selectedCategory.includes(category)}
+                  onCheckedChange={() => toggleCategory(category)}
+                  id={category}
+                />
+                <label htmlFor={category} className="cursor-pointer">
+                  {chartConfig[category as keyof typeof chartConfig].label}
+                </label>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   );
