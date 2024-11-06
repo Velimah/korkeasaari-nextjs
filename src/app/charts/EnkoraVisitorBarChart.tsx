@@ -127,7 +127,7 @@ export default function EnkoraData() {
 
   return (
     <section className="m-6 text-center">
-      <div className="flex justify-between items-center">
+      <div className="flex justify-between items-start">
         <Card className='dark:bg-slate-800 bg-secondary flex-1'>
           <CardHeader>
             <CardTitle>Korkeasaaren Kävijämäärät</CardTitle>
@@ -187,8 +187,6 @@ export default function EnkoraData() {
                       )}
                     />
                   }
-                  cursor={true}
-                  defaultIndex={1}
                 />
                 <ChartLegend className="" content={<ChartLegendContent />} />
                 <YAxis
