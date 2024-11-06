@@ -5,6 +5,7 @@ import { ChartConfig, ChartContainer, ChartLegend, ChartLegendContent, ChartTool
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Bar, CartesianGrid, ComposedChart, XAxis, YAxis } from "recharts";
 import { LoadingSpinner } from "@/components/ui/loading-spinner";
+import {Checkbox} from "@/components/ui/checkbox";
 
 export default function EnkoraData() {
 
@@ -29,7 +30,7 @@ export default function EnkoraData() {
           });
 
           if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
+              throw new Error(`HTTP error! status: ${response.status}`);
           }
 
           const data = await response.json();
@@ -114,18 +115,20 @@ export default function EnkoraData() {
     <section className="m-6 text-center">
       <div>
         {/*Checkboxes*/}
-        <div className="checkboxHome">
+        <div className="checkboxGroupHome">
           <h3>Valitse lipputyypit:</h3>
           <div className="flex justify-center space-x-4">
             {Object.keys(chartConfig).map((category) => (
-              <label key={category} className="flex items-center space-x-2">
-                <input
-                  type="checkbox"
+              <div key={category} className="flex items-center space-x-2">
+                <Checkbox
                   checked={selectedCategory.includes(category)}
-                  onChange={() => toggleCategory(category)}
+                  onCheckedChange={() => toggleCategory(category)}
+                  id={category}
                 />
-                <span>{chartConfig[category as keyof typeof chartConfig].label}</span>
-              </label>
+                <label htmlFor={category} className="cursor-pointer">
+                  {chartConfig[category as keyof typeof chartConfig].label}
+                </label>
+              </div>
             ))}
           </div>
         </div>
