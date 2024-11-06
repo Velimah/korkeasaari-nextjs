@@ -1,10 +1,18 @@
 "use client";  // Ensure this component is treated as a client component
 
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ChartConfig, ChartContainer, ChartLegend, ChartLegendContent, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Bar, CartesianGrid, ComposedChart, XAxis, YAxis } from "recharts";
 import { LoadingSpinner } from "@/components/ui/loading-spinner";
+import {Checkbox} from "@/components/ui/checkbox";
+import {Calendar} from "@/components/ui/calendar";
+import {DateRange} from "react-day-picker";
+import {addDays, format, parseISO} from "date-fns";
+import {Popover, PopoverContent, PopoverTrigger} from "@/components/ui/popover";
+import {Button} from "@/components/ui/button";
+import {CalendarIcon} from "lucide-react";
+import {cn} from "@/lib/utils";
 
 export default function EnkoraData() {
 
@@ -12,6 +20,13 @@ export default function EnkoraData() {
   const [startDate, setStartDate] = useState<string>('2024-09-30');
   const [endDate, setEndDate] = useState<string>('2024-10-30');
   const [selectedCategory, setSelectedCategory] = useState<string[]>(["Kulkulupa", "Ilmaiskävijät", "Pääsyliput", "Verkkokauppa_Pääsyliput", "Vuosiliput"]);
+  const initialStartDate = parseISO(startDate);
+  const initialEndDate = parseISO(endDate);
+
+  const [date, setDate] = useState<DateRange | undefined>({
+    from: initialStartDate,
+    to: initialEndDate,
+  });
 
   useEffect(() => {
     async function fetchData() {
@@ -29,7 +44,7 @@ export default function EnkoraData() {
           });
 
           if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
+              throw new Error(`HTTP error! status: ${response.status}`);
           }
 
           const data = await response.json();
@@ -112,25 +127,8 @@ export default function EnkoraData() {
 
   return (
     <section className="m-6 text-center">
-      <div>
-        {/*Checkboxes*/}
-        <div className="checkboxHome">
-          <h3>Valitse lipputyypit:</h3>
-          <div className="flex justify-center space-x-4">
-            {Object.keys(chartConfig).map((category) => (
-              <label key={category} className="flex items-center space-x-2">
-                <input
-                  type="checkbox"
-                  checked={selectedCategory.includes(category)}
-                  onChange={() => toggleCategory(category)}
-                />
-                <span>{chartConfig[category as keyof typeof chartConfig].label}</span>
-              </label>
-            ))}
-          </div>
-        </div>
-      
-        <Card className='dark:bg-slate-800 bg-secondary' >
+      <div className="flex justify-between items-start">
+        <Card className='dark:bg-slate-800 bg-secondary flex-1'>
           <CardHeader>
             <CardTitle>Korkeasaaren Kävijämäärät</CardTitle>
             <CardDescription>
@@ -189,8 +187,6 @@ export default function EnkoraData() {
                       )}
                     />
                   }
-                  cursor={true}
-                  defaultIndex={1}
                 />
                 <ChartLegend className="" content={<ChartLegendContent />} />
                 <YAxis
@@ -209,7 +205,62 @@ export default function EnkoraData() {
             </ChartContainer>
           </CardContent>
         </Card>
-
+        {/*Checkbox group*/}
+        <div className="checkboxGroupHome ml-6 text-left">
+          {/*Date picker*/}
+          <Popover>
+            <PopoverTrigger asChild>
+              <Button
+                id="date"
+                variant={"outline"}
+                className={cn(
+                  "w-[300px] justify-start text-left font-normal",
+                  !date && "text-muted-foreground"
+                )}
+              >
+                <CalendarIcon />
+                {date?.from ? (
+                  date.to ? (
+                    <>
+                      {format(date.from, "LLL dd, y")} -{" "}
+                      {format(date.to, "LLL dd, y")}
+                    </>
+                  ) : (
+                    format(date.from, "LLL dd, y")
+                  )
+                ) : (
+                  <span>Pick a date</span>
+                )}
+              </Button>
+            </PopoverTrigger>
+            <PopoverContent className="w-auto p-0" align="start">
+              <Calendar
+                initialFocus
+                mode="range"
+                defaultMonth={date?.from}
+                selected={date}
+                onSelect={setDate}
+                numberOfMonths={2}
+              />
+            </PopoverContent>
+          </Popover>
+          <h3 className="font-bold mt-8">Valitse lipputyypit:</h3>
+          <p className="text-gray-500">Valitse haluamasi lipputyypit</p>
+          <div className="flex flex-col space-y-4 mt-4">
+            {Object.keys(chartConfig).map((category) => (
+              <div key={category} className="flex items-center space-x-2">
+                <Checkbox
+                  checked={selectedCategory.includes(category)}
+                  onCheckedChange={() => toggleCategory(category)}
+                  id={category}
+                />
+                <label htmlFor={category} className="cursor-pointer">
+                  {chartConfig[category as keyof typeof chartConfig].label}
+                </label>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   );
