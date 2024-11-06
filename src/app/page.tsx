@@ -38,7 +38,7 @@ export default function Home() {
                     <img
                         src={kuva.src}
                         alt=""
-                        className="max-w-[100%] h-auto"
+                        className="max-w-[100%] w-[30em] h-auto"
                     />
                 </div>
             </section>

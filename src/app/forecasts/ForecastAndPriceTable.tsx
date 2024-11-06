@@ -74,10 +74,10 @@ export default function ForecastAndPriceTable({ weatherData }: { weatherData: We
 
       <div className="p-4">
         <H2 className="p-4">Sää- ja kävijäennuste</H2>
-        <div className="flex gap-2">
+        <div className="flex gap-5 flex-wrap justify-center">
           {visitorData?.map((result, index) => (
 
-            <div className="w-full min-w-[200px]" key={index}>
+            <div className="w-full min-w-[200px] max-w-[200px]" key={index}>
               <Card className="p-4 flex flex-col gap-1">
                 <p>{new Date(result.date).toLocaleDateString('FI-fi', { weekday: 'short', day: 'numeric', month: 'numeric', year: 'numeric' })}</p>
                 <p>Lämpötila: {result.temperature.toFixed(1)} °C</p>
@@ -158,15 +158,15 @@ export default function ForecastAndPriceTable({ weatherData }: { weatherData: We
         </div>
       </div>
 
-      <div className="flex justify-center p-4 w-full max-w-[300px]">
-        <Card className='dark:bg-slate-800 bg-secondary' >
+      <div className="flex justify-center w-full max-w-[100%]">
+        <Card className='dark:bg-slate-800 bg-secondary m-10' >
           <CardHeader>
             <CardTitle>Korkeasaaren Ennustetut Kävijämäärät</CardTitle>
             <CardDescription>
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <ChartContainer config={chartConfig} className="h-[200px] pe-6">
+            <ChartContainer config={chartConfig} className="h-[400px] pe-6">
               <ComposedChart accessibilityLayer data={visitorData}>
                 <CartesianGrid vertical={false} />
                 <ChartLegend content={<ChartLegendContent />} />
