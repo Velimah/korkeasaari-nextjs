@@ -2,7 +2,7 @@ import { XMLParser } from "fast-xml-parser"; // Import the XMLParser from fast-x
 
 const getEndTime = (): string => {
   const currentDate = new Date();
-  const futureDate = new Date(currentDate.getTime() + 60 * 60 * 1000 * 240); // Adding 60 hours
+  const futureDate = new Date(currentDate.getTime() + 60 * 60 * 1000 * 120); // Adding 120 hours / 5 days
   return futureDate.toISOString().split(".")[0] + "Z"; // Formatting to 'YYYY-MM-DDTHH:mm:ssZ'
 };
 

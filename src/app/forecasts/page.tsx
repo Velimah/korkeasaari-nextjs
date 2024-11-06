@@ -38,14 +38,7 @@ export default function WeatherData() {
 
   return (
     <>
-      <section className="px-1 py-8">
-        <section className="items-center flex justify-center px-8">
-          <div className="space-y-3">
-            <H2 className="text-center sm:text-start"> Sää- ja Kävijämääräennuste</H2>
-          </div>
-        </section>
-      </section>
-      <section className="space-y-3 text-center">
+      <section className="flex flex-col w-full">
         <ForecastsFMICombinedChart weatherData={weatherData} />
         <ForecastAndPriceTable weatherData={weatherData} />
       </section>
