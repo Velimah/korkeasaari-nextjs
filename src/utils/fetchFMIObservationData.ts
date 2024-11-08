@@ -1,10 +1,5 @@
 import { XMLParser } from "fast-xml-parser"; // Import the XMLParser from fast-xml-parser
-
-const getEndTime = (): string => {
-  const currentDate = new Date();
-  const futureDate = new Date(currentDate.getTime() + 60 * 60 * 1000 * 120); // Adding 120 hours / 5 days
-  return futureDate.toISOString().split(".")[0] + "Z"; // Formatting to 'YYYY-MM-DDTHH:mm:ssZ'
-};
+import { processWeatherObservationData } from "./FMIdataFormatter";
 
 // Define the interfaces for the data structures
 interface MeasurementTVP {
@@ -20,17 +15,19 @@ export interface WeatherData {
 }
 
 // Fetch and process the weather data
-export const fetchFMIForecastData = async (): Promise<WeatherData[]> => {
+export const fetchFMIObservationData = async (
+  startDate: string,
+  endDate: string,
+): Promise<WeatherData> => {
   try {
-    const endTime = getEndTime();
     const response = await fetch(
-      `https://opendata.fmi.fi/wfs?service=WFS&version=2.0.0&request=getFeature&storedquery_id=fmi::forecast::edited::weather::scandinavia::point::timevaluepair&parameters=Precipitation1h,Temperature,TotalCloudCover&place=korkeasaari&endtime=${endTime}&`,
+      `http://opendata.fmi.fi/wfs?service=WFS&version=2.0.0&request=getFeature&storedquery_id=fmi::observations::weather::timevaluepair&place=korkeasaari&timestep=60&parameters=t2m,r_1h,n_man&starttime=${startDate}&endtime=${endDate}&`,
     );
 
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
-
+    console.log("response", response);
     const responseText = await response.text();
 
     //console.log("ennuste", responseText);
@@ -78,11 +75,11 @@ export const fetchFMIForecastData = async (): Promise<WeatherData[]> => {
         });
       }
 
-      if (observedProperty.includes("Precipitation1h")) {
+      if (observedProperty.includes("r_1h")) {
         precipitationAmountData = currentSeriesData;
-      } else if (observedProperty.includes("Temperature")) {
+      } else if (observedProperty.includes("t2m")) {
         temperatureData = currentSeriesData;
-      } else if (observedProperty.includes("TotalCloudCover")) {
+      } else if (observedProperty.includes("n_man")) {
         totalCloudCoverData = currentSeriesData;
       }
     });
@@ -99,17 +96,18 @@ export const fetchFMIForecastData = async (): Promise<WeatherData[]> => {
 
       return {
         time: tempEntry.time,
-        temperature: parseFloat(tempEntry.value.toFixed(1)),
+        temperature: tempEntry.value,
         cloudCover: cloudCoverEntry
-          ? parseFloat(cloudCoverEntry.value.toFixed(1))
+          ? cloudCoverEntry.value * 12.5 // Convert to percentage
           : 0,
-        precipitation: precipitationEntry
-          ? parseFloat(precipitationEntry.value.toFixed(1))
-          : 0,
+        precipitation: precipitationEntry ? precipitationEntry.value : 0,
       };
     });
+
+    const result = processWeatherObservationData(combinedData);
+
     //console.log("combinedData", combinedData);
-    return combinedData;
+    return result;
   } catch (error) {
     console.error("Error fetching or processing data:", error);
     throw error;
