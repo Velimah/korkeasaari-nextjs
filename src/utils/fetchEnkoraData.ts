@@ -1,37 +1,41 @@
+import { processEnkoraVisitorData } from "./EnkoraDataFormatter";
+
+interface VisitorDataRow {
+  day: string;
+  service_group_id: string;
+  quantity: string;
+  unique_accounts_quantity: string;
+}
+
+interface EnkoraVisitorData {
+  validations: {
+    rows: VisitorDataRow[];
+  };
+}
+
 export const fetchEnkoraData = async (startDate: string, endDate: string) => {
-  const url = "https://oma.enkora.fi/korkeasaari/reports/validations/json";
-  const data = new URLSearchParams({
-    input_format: "post_data",
-    authentication: `${process.env.ENKORA_USER},${process.env.ENKORA_PASS}`,
-    clear_values: "1",
-    "values[timestamp]": `${startDate}--${endDate}`,  // Use dynamic date range
-    "values[group-0]": "day",
-    "values[group-1]": "service_group_id"
-  });
+  if (startDate && endDate) {
+    // Only fetch if both dates are provided
+    try {
+      const response = await fetch("/api/enkora", {
+        method: "POST", // Use POST method
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          startDate, // Send start date
+          endDate, // Send end date
+        }),
+      });
 
-  try {
-    const response = await fetch(url, {
-      method: "POST",
-      body: data,
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
-    });
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
 
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-
-    const jsonData = await response.json(); // Parse response as JSON
-    return jsonData; // Return the fetched JSON data
-  } catch (error) {
-    if (error instanceof Error) {
-      console.error("Error:", error.message);
-      throw error; // Rethrow the error to handle it later
-    } else {
-      console.error("Unexpected error:", error);
-      throw new Error("An unexpected error occurred");
+      const data: EnkoraVisitorData = await response.json();
+      return data;
+    } catch (error) {
+      console.error("Error fetching visitor data:", error);
     }
   }
 };
-  

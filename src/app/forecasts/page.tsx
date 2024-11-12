@@ -7,7 +7,8 @@ import { fetchFMIObservationData } from '@/utils/fetchFMIObservationData';
 import { useEffect, useState } from "react";
 import { LoadingSpinner } from "@/components/ui/loading-spinner";
 import ForecastAndPriceTable from "@/app/forecasts/ForecastAndPriceTable";
-import ForecastUpdateData from "./ForecastUpdateData";
+import UpdateFMIData from "./UpdateFMIData";
+import UpdateEnkoraData from "./UpdateEnkoraData";
 
 /*
 export const metadata: Metadata = {
@@ -44,7 +45,8 @@ export default function WeatherData() {
   return (
     <>
       <section className="flex flex-col w-full">
-        <ForecastUpdateData />
+        <UpdateFMIData />
+        <UpdateEnkoraData />
         <ForecastsFMICombinedChart weatherData={weatherData} />
         <ForecastAndPriceTable weatherData={weatherData} />
       </section>

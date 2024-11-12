@@ -1,9 +1,6 @@
-import { fetchEnkoraData } from "@/utils/fetchEnkoraData";
-
 export async function POST(request: Request) {
   try {
-    const { startDate, endDate } = await request.json(); // Get the body content
-    // Validate the date parameters
+    const { startDate, endDate } = await request.json();
     if (!startDate || !endDate) {
       return new Response(
         JSON.stringify({ error: "Missing startDate or endDate" }),
@@ -14,27 +11,38 @@ export async function POST(request: Request) {
       );
     }
 
-    // Call the fetch function with the provided dates
-    const data = await fetchEnkoraData(startDate, endDate);
-    return new Response(JSON.stringify(data), {
-      // Return the data as JSON
+    const url = "https://oma.enkora.fi/korkeasaari/reports/validations/json";
+    const params = new URLSearchParams({
+      input_format: "post_data",
+      authentication: `${process.env.ENKORA_USER},${process.env.ENKORA_PASS}`,
+      clear_values: "1",
+      "values[timestamp]": `${startDate}--${endDate}`,
+      "values[group-0]": "day",
+      "values[group-1]": "service_group_id",
+    });
+
+    const response = await fetch(url, {
+      method: "POST",
+      body: params,
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const jsonData = await response.json();
+
+    return new Response(JSON.stringify(jsonData), {
       status: 200,
       headers: { "Content-Type": "application/json" },
     });
-  } catch (error) {
-    if (error instanceof Error) {
-      return new Response(JSON.stringify({ error: error.message }), {
-        status: 500,
-        headers: { "Content-Type": "application/json" },
-      });
-    } else {
-      return new Response(
-        JSON.stringify({ error: "An unexpected error occurred" }),
-        {
-          status: 500,
-          headers: { "Content-Type": "application/json" },
-        },
-      );
-    }
+  } catch (error: any) {
+    const message =
+      error instanceof Error ? error.message : "An unexpected error occurred";
+    return new Response(JSON.stringify({ error: message }), {
+      status: 500,
+      headers: { "Content-Type": "application/json" },
+    });
   }
 }

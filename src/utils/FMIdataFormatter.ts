@@ -5,10 +5,17 @@ interface WeatherData {
   precipitation: number;
 }
 
+interface FormattedWeatherData {
+  date: string;
+  temperature: number;
+  cloudCover: number;
+  precipitation: number;
+}
+
 // Function to filter data and calculate mean values
 export function processWeatherObservationData(
   data: WeatherData[],
-): WeatherData {
+): FormattedWeatherData {
   // Filter entries between 10:00 and 20:00
   const filteredData = data.filter((entry) => {
     const hour = new Date(entry.time).getUTCHours();
@@ -33,7 +40,7 @@ export function processWeatherObservationData(
 
   // Return as a WeatherData object
   return {
-    time: data[1].time.split("T")[0], // Placeholder time, as this is a summary
+    date: data[1].time.split("T")[0],
     temperature: parseFloat(meanTemperature.toFixed(1)),
     cloudCover: parseFloat(meanCloudCover.toFixed(1)),
     precipitation: parseFloat(totalPrecipitation.toFixed(1)),

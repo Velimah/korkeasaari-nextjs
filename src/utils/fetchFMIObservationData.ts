@@ -18,7 +18,7 @@ export interface WeatherData {
 export const fetchFMIObservationData = async (
   startDate: string,
   endDate: string,
-): Promise<WeatherData> => {
+): Promise<WeatherData[]> => {
   try {
     const response = await fetch(
       `http://opendata.fmi.fi/wfs?service=WFS&version=2.0.0&request=getFeature&storedquery_id=fmi::observations::weather::timevaluepair&place=korkeasaari&timestep=60&parameters=t2m,r_1h,n_man&starttime=${startDate}&endtime=${endDate}&`,
@@ -104,10 +104,8 @@ export const fetchFMIObservationData = async (
       };
     });
 
-    const result = processWeatherObservationData(combinedData);
-
-    //console.log("combinedData", combinedData);
-    return result;
+    console.log("combinedData", combinedData);
+    return combinedData;
   } catch (error) {
     console.error("Error fetching or processing data:", error);
     throw error;

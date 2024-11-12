@@ -1,19 +1,18 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
-
+import { fetchFMIObservationData } from "@/utils/fetchFMIObservationData";
+import { processWeatherObservationData } from "@/utils/FMIdataFormatter";
 
 // Define the WeatherData component
-export default function ForecastUpdateData() {
-    const [startDate, setStartDate] = useState<string>('2024-10-01');
-    const [endDate, setEndDate] = useState<string>('2024-10-10');
+export default function UpdateFMIData() {
 
+    const startDate = '2024-10-01';
+    const endDate = '2024-10-03';
     async function fetchData() {
-        if (startDate && endDate) { // Only fetch if both dates are provided
+        if (startDate && endDate) {
             try {
-
-                const response = await fetch(`/api/weatherdata`, {
-                    method: 'GET', // Use GET method
+                const response = await fetch(`/api/fmi-database`, {
+                    method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
                     },
@@ -23,31 +22,34 @@ export default function ForecastUpdateData() {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
 
-                // Parse the response to get the existing dates from the database
                 const { weatherData } = await response.json();
                 const existingDates = weatherData.rows.map((entry: { date: string }) => {
                     return entry.date.split('T')[0];
                 });
-                console.log('existingDates', existingDates);
+                console.log('existingDates', weatherData);
 
                 const missingDates = getMissingDates(startDate, endDate, existingDates);
 
                 // Process missing dates sequentially
                 for (const date of missingDates) {
-                    const currentDateObj = new Date(date); // Parse the date string into a Date object
-                    currentDateObj.setUTCDate(currentDateObj.getUTCDate() + 1);
-                    const startDatePlusOne = currentDateObj.toISOString().split('T')[0];
-                    const formattedDate = `${date}T00:00:00Z`;
-                    const formattedStartDatePlusOne = `${startDatePlusOne}T00:00:00Z`;
+                    const formattedStartTime = `${date}T00:00:00Z`;
+                    const formattedEndTime = `${date}T23:00:00Z`;
 
-                    const response2 = await fetch('/api/weatherdata', {
+                    // Fetch data for the date
+                    const combinedData = await fetchFMIObservationData(formattedStartTime, formattedEndTime);
+
+                    // Process the fetched data to calculate mean values
+                    const result = processWeatherObservationData(combinedData);
+
+
+                    // POST data for the missing date
+                    const response2 = await fetch('/api/fmi-database', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
                         },
                         body: JSON.stringify({
-                            formattedDate, // Send start date
-                            formattedStartDatePlusOne, // Send end date
+                            result,
                         }),
                     });
 
@@ -61,6 +63,7 @@ export default function ForecastUpdateData() {
             }
         }
     }
+
 
     // Function to generate a range of dates
     const getMissingDates = (start: string, end: string, existingDates: string[]) => {
