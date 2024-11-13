@@ -19,12 +19,11 @@ export async function GET(request: Request) {
 export async function POST(request: Request) {
   try {
     const weatherData = await request.json(); // Get the body content
-    console.log("weatherData", weatherData);
 
     // Insert each entry into the database
     await sql`
         INSERT INTO weatherdata (date, temperature, precipitation, cloudCover)
-        VALUES (${weatherData.result.date}, ${weatherData.result.temperature}, ${weatherData.result.precipitation}, ${weatherData.result.cloudCover})
+        VALUES (${weatherData.date}, ${weatherData.temperature}, ${weatherData.precipitation}, ${weatherData.cloudCover})
         ON CONFLICT (date) DO NOTHING;
       `;
 

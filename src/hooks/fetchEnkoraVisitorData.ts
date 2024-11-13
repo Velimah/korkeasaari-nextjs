@@ -31,6 +31,7 @@ export const fetchEnkoraData = async (startDate: string, endDate: string) => {
       }
 
       const data: EnkoraVisitorData = await response.json();
+      console.log("Fetching Enkora data...", data);
       return data;
     } catch (error) {
       console.error("Error fetching visitor data:", error);

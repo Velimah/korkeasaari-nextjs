@@ -1,19 +1,10 @@
 "use client";
 import ForecastsFMICombinedChart from "@/app/forecasts/ForecastsFMICombinedChart";
-import { Metadata } from "next";
 import { fetchFMIForecastData } from '@/hooks/fetchFMIForecastData';
 import { useEffect, useState } from "react";
 import { LoadingSpinner } from "@/components/ui/loading-spinner";
 import ForecastAndPriceTable from "@/app/forecasts/ForecastAndPriceTable";
-import UpdateFMIData from "./UpdateFMIData";
-import UpdateEnkoraData from "./UpdateEnkoraData";
-
-/*
-export const metadata: Metadata = {
-  title: "Ennusteet",
-  description: "Sääennuste ja Hinnoittelu.",
-};
-*/
+import UpdateDatabaseAndBlob from "./UpdateDatabaseAndBlob";
 
 interface WeatherData {
   time: string;
@@ -24,9 +15,6 @@ interface WeatherData {
 
 export default function WeatherData() {
   const [weatherData, setWeatherData] = useState<WeatherData[]>();
-
-  const [startDate, setStartDate] = useState<string>('2020-03-28');
-  const [endDate, setEndDate] = useState<string>('2020-04-05');
 
   useEffect(() => {
     async function fetchData() {
@@ -39,7 +27,7 @@ export default function WeatherData() {
     }
 
     fetchData();
-  }, [startDate, endDate]);
+  }, []);
 
 
   if (!weatherData) {
@@ -48,9 +36,8 @@ export default function WeatherData() {
 
   return (
     <>
-      <div className="flex justify-center items-center w-full max-w-80 p-6">
-        <UpdateFMIData />
-        <UpdateEnkoraData />
+      <div className="flex justify-center items-center w-full p-6">
+        <UpdateDatabaseAndBlob />
       </div>
       <section className="flex flex-col w-full">
         <ForecastsFMICombinedChart weatherData={weatherData} />

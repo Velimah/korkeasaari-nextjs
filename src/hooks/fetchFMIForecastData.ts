@@ -1,23 +1,22 @@
 import { XMLParser } from "fast-xml-parser"; // Import the XMLParser from fast-xml-parser
 
-const getEndTime = (): string => {
-  const currentDate = new Date();
-  const futureDate = new Date(currentDate.getTime() + 60 * 60 * 1000 * 120); // Adding 120 hours / 5 days
-  return futureDate.toISOString().split(".")[0] + "Z"; // Formatting to 'YYYY-MM-DDTHH:mm:ssZ'
-};
-
-// Define the interfaces for the data structures
 interface MeasurementTVP {
   time: string;
   value: number;
 }
 
-export interface WeatherData {
+interface WeatherData {
   time: string;
   temperature: number;
   cloudCover: number;
   precipitation: number;
 }
+
+const getEndTime = (): string => {
+  const currentDate = new Date();
+  const futureDate = new Date(currentDate.getTime() + 60 * 60 * 1000 * 120); // Adding 120 hours / 5 days
+  return futureDate.toISOString().split(".")[0] + "Z"; // Formatting to 'YYYY-MM-DDTHH:mm:ssZ'
+};
 
 // Fetch and process the weather data
 export const fetchFMIForecastData = async (): Promise<WeatherData[]> => {
@@ -33,7 +32,6 @@ export const fetchFMIForecastData = async (): Promise<WeatherData[]> => {
 
     const responseText = await response.text();
 
-    //console.log("ennuste", responseText);
     // Initialize the XML parser
     const parser = new XMLParser({
       ignoreAttributes: false, // Preserve attributes
@@ -108,7 +106,7 @@ export const fetchFMIForecastData = async (): Promise<WeatherData[]> => {
           : 0,
       };
     });
-    //console.log("combinedData", combinedData);
+
     return combinedData;
   } catch (error) {
     console.error("Error fetching or processing data:", error);

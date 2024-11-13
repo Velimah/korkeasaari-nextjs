@@ -21,8 +21,8 @@ export async function POST(request: Request) {
     const visitorData = await request.json(); // Get the body content
 
     await sql`
-      INSERT INTO visitordata (date, kulkulupa, ilmaiskavijat, paasyliput, verkkokauppa, vuosiliput)
-      VALUES (${visitorData.date}, ${visitorData.kulkulupa}, ${visitorData.ilmaiskavijat}, ${visitorData.paasyliput}, ${visitorData.verkkokauppa}, ${visitorData.vuosiliput})
+      INSERT INTO visitordata (date, kulkulupa, ilmaiskavijat, paasyliput, kampanjakavijat, verkkokauppa, vuosiliput)
+      VALUES (${visitorData.date}, ${visitorData.kulkulupa}, ${visitorData.ilmaiskavijat}, ${visitorData.paasyliput}, ${visitorData.kampanjakavijat}, ${visitorData.verkkokauppa}, ${visitorData.vuosiliput})
       ON CONFLICT (date) DO NOTHING;
     `;
 
