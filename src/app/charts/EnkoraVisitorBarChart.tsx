@@ -13,8 +13,8 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { Button } from "@/components/ui/button";
 import { CalendarIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { fetchEnkoraData } from "@/utils/fetchEnkoraData";
-import { processEnkoraVisitorData } from "@/utils/EnkoraDataFormatter";
+import { fetchEnkoraData } from "@/hooks/fetchEnkoraVisitorData";
+import processEnkoraVisitorData from "@/utils/EnkoraDataFormatter";
 
 interface FormattedVisitorData {
   date: string;
@@ -31,7 +31,7 @@ export default function EnkoraData() {
   const [endDate, setEndDate] = useState<string>('2024-10-30');
 
   const [visitorData, setVisitorData] = useState<FormattedVisitorData[]>([]);
-  const [selectedCategory, setSelectedCategory] = useState<string[]>(["Kulkulupa", "Ilmaiskävijät", "Pääsyliput", "Verkkokauppa_Pääsyliput", "Vuosiliput"]);
+  const [selectedCategory, setSelectedCategory] = useState<string[]>(["kulkulupa", "ilmaiskavijat", "paasyliput", "verkkokauppa", "vuosiliput"]);
   const initialStartDate = parseISO(startDate);
   const initialEndDate = parseISO(endDate);
 
@@ -57,23 +57,23 @@ export default function EnkoraData() {
   }, [startDate, endDate]);
 
   const chartConfig = {
-    Kulkulupa: {
+    kulkulupa: {
       label: "Kulkulupa",
       color: "#000000",
     },
-    Ilmaiskävijät: {
+    ilmaiskavijat: {
       label: "Ilmaiskävijät",
       color: "#FF3B2F",
     },
-    Pääsyliput: {
+    paasyliput: {
       label: "Pääsyliput",
       color: "#AAC929",
     },
-    Verkkokauppa_Pääsyliput: {
+    verkkokauppa: {
       label: "Verkkokauppa Pääsyliput",
       color: "#25582b",
     },
-    Vuosiliput: {
+    vuosiliput: {
       label: "Vuosiliput",
       color: "#B14D97",
     },
@@ -144,7 +144,7 @@ export default function EnkoraData() {
                             <div className="mt-1.5 flex basis-full items-center border-t pt-1.5 text-xs font-medium text-foreground">
                               Yhteensä
                               <div className="ml-auto flex items-baseline gap-0.5 font-mono font-semibold tabular-nums text-foreground">
-                                {item.payload.Ilmaiskävijät + item.payload.Pääsyliput + item.payload.Verkkokauppa_Pääsyliput + item.payload.Vuosiliput}
+                                {item.payload.ilmaiskavijat + item.payload.paasyliput + item.payload.verkkokauppa + item.payload.vuosiliput}
                               </div>
                             </div>
                           )}

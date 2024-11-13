@@ -3,7 +3,8 @@ import { NextResponse } from "next/server";
 
 export async function GET(request: Request) {
   try {
-    const weatherData = await sql`SELECT * FROM weatherdata ORDER BY date ASC;`;
+    const weatherData =
+      await sql`SELECT date FROM weatherdata ORDER BY date ASC;`;
 
     return NextResponse.json({ weatherData }, { status: 200 });
   } catch (error) {

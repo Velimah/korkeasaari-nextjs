@@ -3,7 +3,8 @@ import { NextResponse } from "next/server";
 
 export async function GET(request: Request) {
   try {
-    const visitorData = await sql`SELECT * FROM visitordata ORDER BY date ASC;`;
+    const visitorData =
+      await sql`SELECT date FROM visitordata ORDER BY date ASC;`;
 
     return NextResponse.json({ visitorData }, { status: 200 });
   } catch (error) {

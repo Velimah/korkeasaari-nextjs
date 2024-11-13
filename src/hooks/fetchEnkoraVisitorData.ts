@@ -1,5 +1,3 @@
-import { processEnkoraVisitorData } from "./EnkoraDataFormatter";
-
 interface VisitorDataRow {
   day: string;
   service_group_id: string;

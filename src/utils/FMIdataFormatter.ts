@@ -13,13 +13,17 @@ interface FormattedWeatherData {
 }
 
 // Function to filter data and calculate mean values
-export function processWeatherObservationData(
+export default function processFMIWeatherData(
   data: WeatherData[],
 ): FormattedWeatherData {
-  // Filter entries between 10:00 and 20:00
+  // Filter entries between 10:00 and 20:00 local finnish time
   const filteredData = data.filter((entry) => {
-    const hour = new Date(entry.time).getUTCHours();
-    return hour >= 10 && hour <= 20;
+    const date = new Date(entry.time);
+    const finnishHour = new Date(
+      date.toLocaleString("en-US", { timeZone: "Europe/Helsinki" }),
+    ).getHours();
+
+    return finnishHour >= 10 && finnishHour <= 20;
   });
 
   // Calculate mean temperature, mean cloud cover, and total precipitation
@@ -38,7 +42,7 @@ export function processWeatherObservationData(
   const meanCloudCover = count ? summary.cloudCoverSum / count : 0;
   const totalPrecipitation = summary.precipitationSum;
 
-  // Return as a WeatherData object
+  // Return as a FormattedWeatherData object
   return {
     date: data[1].time.split("T")[0],
     temperature: parseFloat(meanTemperature.toFixed(1)),

@@ -1,12 +1,17 @@
-"use client";
 import EnkoraFMIData from "@/assets/FormattedEnkoraFMI2.json";
 import MultivariateLinearRegression from "ml-regression-multivariate-linear";
-import { WeatherData as WeatherDataType } from "@/utils/fetchFMIForecastData";
+
+interface WeatherData {
+  time: string;
+  temperature: number;
+  cloudCover: number;
+  precipitation: number;
+}
 
 export default function MultivariateLinearRegressionCalculator({
   weatherData,
 }: {
-  weatherData: WeatherDataType[];
+  weatherData: WeatherData[];
 }) {
   const monthlyDataWeather: number[][][] = Array.from({ length: 12 }, () => []); // Create 12 empty arrays for each month
   const monthlyDataVisitors: number[][][] = Array.from(
@@ -68,9 +73,9 @@ export default function MultivariateLinearRegressionCalculator({
     });
   }
 
-  function getAveragesFromForecast(weatherData: WeatherDataType[]) {
+  function getAveragesFromForecast(weatherData: WeatherData[]) {
     // Filter data to include times between 10:00 and 20:00
-    const filteredData = weatherData.filter((entry: WeatherDataType) => {
+    const filteredData = weatherData.filter((entry: WeatherData) => {
       const date = new Date(entry.time);
       const finnishHour = new Date(
         date.toLocaleString("en-US", { timeZone: "Europe/Helsinki" }),

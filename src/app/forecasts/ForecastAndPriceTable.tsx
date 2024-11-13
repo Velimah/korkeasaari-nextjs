@@ -5,8 +5,17 @@ import { ChartConfig, ChartContainer, ChartLegend, ChartLegendContent, ChartTool
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Bar, CartesianGrid, ComposedChart, XAxis, YAxis } from "recharts";
 import { LoadingSpinner } from "@/components/ui/loading-spinner";
-import MultivariateLinearRegressionCalculator from "../../utils/MultivariateLinearRegressionCalculator";
-import { WeatherData as WeatherDataType } from '@/utils/fetchFMIForecastData';
+import MultivariateLinearRegressionCalculator from "@/utils/multivariateLinearRegressionCalculator";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table"
 import {
   DrySunnyIcon,
   DryCloudyIcon,
@@ -39,19 +48,6 @@ import {
   SleetLightPartlySunnyIcon,
 } from "@/components/weathericons";
 
-import {
-  Table,
-  TableBody,
-  TableCaption,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table"
-
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-
-
 interface PredictionResults {
   date: string;
   temperature: number;
@@ -60,7 +56,14 @@ interface PredictionResults {
   predictedVisitors: number;
 }
 
-export default function ForecastAndPriceTable({ weatherData }: { weatherData: WeatherDataType[] }) {
+interface WeatherData {
+  time: string;
+  temperature: number;
+  cloudCover: number;
+  precipitation: number;
+}
+
+export default function ForecastAndPriceTable({ weatherData }: { weatherData: WeatherData[] }) {
   const [visitorData, setVisitorData] = useState<PredictionResults[]>([]);
 
   useEffect(() => {

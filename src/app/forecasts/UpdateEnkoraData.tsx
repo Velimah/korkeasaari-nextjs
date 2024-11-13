@@ -1,12 +1,13 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import { processEnkoraVisitorData } from "@/utils/EnkoraDataFormatter";
-import { fetchEnkoraData } from "@/utils/fetchEnkoraData";
+import processEnkoraVisitorData from "@/utils/EnkoraDataFormatter";
+import { getMissingDates } from "@/utils/findMissingDates";
+import { fetchEnkoraData } from "@/hooks/fetchEnkoraVisitorData";
 import { useState } from "react";
 
 export default function UpdateEnkoraData() {
-    const [startDate, setStartDate] = useState<string>('2024-10-09');
-    const [endDate, setEndDate] = useState<string>('2024-10-15');
+    const [startDate, setStartDate] = useState<string>('2024-10-01');
+    const [endDate, setEndDate] = useState<string>('2024-10-10');
 
     async function fetchData() {
         if (startDate && endDate) { // Only fetch if both dates are provided
@@ -45,12 +46,10 @@ export default function UpdateEnkoraData() {
                             result = result[0]; // Use the first object in the array
                         }
                     }
-                    console.log('result123', result);
-
 
                     // Ensure that result is not undefined and is of the correct type
                     if (result && 'date' in result) {
-                        console.log('Sending to database:', result);
+                        console.log('Sending Enkora to database:', result);
 
                         await fetch('/api/enkora-database', {
                             method: 'POST',
@@ -78,28 +77,7 @@ export default function UpdateEnkoraData() {
     }
 
 
-
-
-    // Function to generate a range of dates
-    const getMissingDates = (start: string, end: string, existingDates: string[]) => {
-        const missingDates: string[] = [];
-        let startDateObj = new Date(start);
-        const endDateObj = new Date(end);
-
-        while (startDateObj <= endDateObj) {
-            const currentDate = startDateObj.toISOString().split('T')[0];  // Format as YYYY-MM-DD
-            if (!existingDates.includes(currentDate)) {
-                missingDates.push(currentDate);
-            }
-            startDateObj.setDate(startDateObj.getDate() + 1);  // Move to the next day
-        }
-        console.log('missingDates', missingDates);
-        return missingDates;
-    };
-
     return (
-        <section className="flex justify-center w-full p-6">
-            <Button className="w-32 p-2" onClick={fetchData}>Update Enkora</Button>
-        </section>
+        <Button className="w-32 p-2 m-2" onClick={fetchData}>Update Enkora</Button>
     );
 }

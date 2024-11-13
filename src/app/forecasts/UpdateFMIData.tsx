@@ -1,13 +1,15 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import { fetchFMIObservationData } from "@/utils/fetchFMIObservationData";
-import { processWeatherObservationData } from "@/utils/FMIdataFormatter";
+import { fetchFMIObservationData } from "@/hooks/fetchFMIObservationData";
+import processFMIWeatherData from "@/utils/FMIdataFormatter";
+import { getMissingDates } from "@/utils/findMissingDates";
+import { useState } from "react";
 
 // Define the WeatherData component
 export default function UpdateFMIData() {
+    const [startDate, setStartDate] = useState<string>('2024-10-01');
+    const [endDate, setEndDate] = useState<string>('2024-10-20');
 
-    const startDate = '2024-10-01';
-    const endDate = '2024-10-03';
     async function fetchData() {
         if (startDate && endDate) {
             try {
@@ -26,11 +28,10 @@ export default function UpdateFMIData() {
                 const existingDates = weatherData.rows.map((entry: { date: string }) => {
                     return entry.date.split('T')[0];
                 });
-                console.log('existingDates', weatherData);
 
                 const missingDates = getMissingDates(startDate, endDate, existingDates);
 
-                // Process missing dates sequentially
+                // Process missing dates sequentially and add timestamps to fetch from FMI
                 for (const date of missingDates) {
                     const formattedStartTime = `${date}T00:00:00Z`;
                     const formattedEndTime = `${date}T23:00:00Z`;
@@ -39,7 +40,8 @@ export default function UpdateFMIData() {
                     const combinedData = await fetchFMIObservationData(formattedStartTime, formattedEndTime);
 
                     // Process the fetched data to calculate mean values
-                    const result = processWeatherObservationData(combinedData);
+                    const result = processFMIWeatherData(combinedData);
+                    console.log('Sending FMI to database:', result);
 
 
                     // POST data for the missing date
@@ -64,26 +66,7 @@ export default function UpdateFMIData() {
         }
     }
 
-
-    // Function to generate a range of dates
-    const getMissingDates = (start: string, end: string, existingDates: string[]) => {
-        const missingDates: string[] = [];
-        let startDateObj = new Date(start);
-        const endDateObj = new Date(end);
-
-        while (startDateObj <= endDateObj) {
-            const currentDate = startDateObj.toISOString().split('T')[0];  // Format as YYYY-MM-DD
-            if (!existingDates.includes(currentDate)) {
-                missingDates.push(currentDate);
-            }
-            startDateObj.setDate(startDateObj.getDate() + 1);  // Move to the next day
-        }
-        return missingDates;
-    };
-
     return (
-        <section className="flex justify-center w-full p-6">
-            <Button className="w-32 p-2" onClick={fetchData}>Update Database</Button>
-        </section>
+        <Button className="w-32 p-2 m-2" onClick={fetchData}>Update FMI</Button>
     );
 }

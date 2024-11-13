@@ -1,5 +1,5 @@
 import { XMLParser } from "fast-xml-parser"; // Import the XMLParser from fast-xml-parser
-import { processWeatherObservationData } from "./FMIdataFormatter";
+import processWeatherObservationData from "../utils/FMIdataFormatter";
 
 // Define the interfaces for the data structures
 interface MeasurementTVP {
@@ -27,7 +27,6 @@ export const fetchFMIObservationData = async (
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
-    console.log("response", response);
     const responseText = await response.text();
 
     //console.log("ennuste", responseText);
@@ -104,7 +103,6 @@ export const fetchFMIObservationData = async (
       };
     });
 
-    console.log("combinedData", combinedData);
     return combinedData;
   } catch (error) {
     console.error("Error fetching or processing data:", error);

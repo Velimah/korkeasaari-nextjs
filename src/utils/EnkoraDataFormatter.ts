@@ -29,7 +29,9 @@ const idMap: { [key: string]: string } = {
   "19": "vuosiliput",
 };
 
-export function processEnkoraVisitorData(visitorData: EnkoraVisitorData) {
+export default function processEnkoraVisitorData(
+  visitorData: EnkoraVisitorData,
+) {
   const output: FormattedVisitorData[] = [];
 
   visitorData.validations.rows.forEach((row) => {
@@ -60,6 +62,5 @@ export function processEnkoraVisitorData(visitorData: EnkoraVisitorData) {
         : 0) + parseInt(quantity);
   });
 
-  console.log("output", output);
   return output as FormattedVisitorData[];
 }

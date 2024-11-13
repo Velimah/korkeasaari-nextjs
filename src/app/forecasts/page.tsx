@@ -1,9 +1,7 @@
 "use client";
-import { H2 } from "@/components/ui/H2";
 import ForecastsFMICombinedChart from "@/app/forecasts/ForecastsFMICombinedChart";
 import { Metadata } from "next";
-import { fetchFMIForecastData, WeatherData as WeatherDataType } from '@/utils/fetchFMIForecastData';
-import { fetchFMIObservationData } from '@/utils/fetchFMIObservationData';
+import { fetchFMIForecastData } from '@/hooks/fetchFMIForecastData';
 import { useEffect, useState } from "react";
 import { LoadingSpinner } from "@/components/ui/loading-spinner";
 import ForecastAndPriceTable from "@/app/forecasts/ForecastAndPriceTable";
@@ -17,9 +15,15 @@ export const metadata: Metadata = {
 };
 */
 
-// Define the WeatherData component
+interface WeatherData {
+  time: string;
+  temperature: number;
+  cloudCover: number;
+  precipitation: number;
+}
+
 export default function WeatherData() {
-  const [weatherData, setWeatherData] = useState<WeatherDataType[]>();
+  const [weatherData, setWeatherData] = useState<WeatherData[]>();
 
   const [startDate, setStartDate] = useState<string>('2020-03-28');
   const [endDate, setEndDate] = useState<string>('2020-04-05');
@@ -44,9 +48,11 @@ export default function WeatherData() {
 
   return (
     <>
-      <section className="flex flex-col w-full">
+      <div className="flex justify-center items-center w-full max-w-80 p-6">
         <UpdateFMIData />
         <UpdateEnkoraData />
+      </div>
+      <section className="flex flex-col w-full">
         <ForecastsFMICombinedChart weatherData={weatherData} />
         <ForecastAndPriceTable weatherData={weatherData} />
       </section>

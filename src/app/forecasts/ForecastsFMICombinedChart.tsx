@@ -1,6 +1,5 @@
 "use client";  // Ensure this component is treated as a client component
 
-import { WeatherData as WeatherDataType } from '@/utils/fetchFMIForecastData';
 import { ChartConfig, ChartContainer, ChartLegend, ChartLegendContent, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import {
@@ -13,9 +12,15 @@ import {
 } from 'recharts';
 import { LoadingSpinner } from '../../components/ui/loading-spinner';
 
+interface WeatherData {
+  time: string;
+  temperature: number;
+  cloudCover: number;
+  precipitation: number;
+}
 
 // Define the WeatherData component
-export default function ForecastsFMICombinedChart({ weatherData }: { weatherData: WeatherDataType[] }) {
+export default function ForecastsFMICombinedChart({ weatherData }: { weatherData: WeatherData[] }) {
 
   const chartConfig = {
     temperature: {
