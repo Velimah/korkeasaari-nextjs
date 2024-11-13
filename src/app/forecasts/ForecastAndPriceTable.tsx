@@ -5,7 +5,7 @@ import { ChartConfig, ChartContainer, ChartLegend, ChartLegendContent, ChartTool
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Bar, CartesianGrid, ComposedChart, XAxis, YAxis } from "recharts";
 import { LoadingSpinner } from "@/components/ui/loading-spinner";
-import MultivariateLinearRegressionCalculator from "@/utils/multivariateLinearRegressionCalculator";
+import MLRCalculator from "@/utils/MLRCalculator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
   Table,
@@ -67,7 +67,7 @@ export default function ForecastAndPriceTable({ weatherData }: { weatherData: We
   const [visitorData, setVisitorData] = useState<PredictionResults[]>([]);
 
   useEffect(() => {
-    const data = MultivariateLinearRegressionCalculator({ weatherData });
+    const data = MLRCalculator({ weatherData });
     if (data) {
       setVisitorData(data);
     }

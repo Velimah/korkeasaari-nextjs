@@ -8,7 +8,7 @@ interface WeatherData {
   precipitation: number;
 }
 
-export default function MultivariateLinearRegressionCalculator({
+export default function MLRCalculator({
   weatherData,
 }: {
   weatherData: WeatherData[];
