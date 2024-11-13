@@ -87,7 +87,7 @@ export default function ForecastAndPriceTable({ weatherData }: { weatherData: We
   return (
     <section className="flex justify-center p-6">
 
-      <Tabs defaultValue="table" className="w-full w-[700px] max-w-[700px]">
+      <Tabs defaultValue="table" className="w-full xl:w-[700px] w-[610px] max-w-[700px]">
         <TabsList className="grid w-full grid-cols-2">
           <TabsTrigger value="table">Taulukko</TabsTrigger>
           <TabsTrigger value="chart">Kävijämäärät</TabsTrigger>
