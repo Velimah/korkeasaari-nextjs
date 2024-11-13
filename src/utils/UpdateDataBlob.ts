@@ -1,4 +1,4 @@
-export default async function UpdateCombinedDataBlob() {
+export default async function UpdateDataBlob() {
   try {
     // Fetch all data from database API
     const response = await fetch(`/api/database`, {

@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { LoadingSpinner } from "@/components/ui/loading-spinner";
 import ForecastAndPriceTable from "@/app/forecasts/ForecastAndPriceTable";
 import UpdateDatabaseAndBlob from "./UpdateDatabaseAndBlob";
+import { getBLOBData, BLOB } from "@/lib/utils";
 
 interface WeatherData {
   time: string;
@@ -15,7 +16,6 @@ interface WeatherData {
 
 export default function WeatherData() {
   const [weatherData, setWeatherData] = useState<WeatherData[]>();
-
   useEffect(() => {
     async function fetchData() {
       try {
@@ -25,8 +25,21 @@ export default function WeatherData() {
         console.error('Error fetching weather data:', error);
       }
     }
-
     fetchData();
+  }, []);
+
+  const [blobData, setBlobData] = useState<BLOB[]>([]);
+  useEffect(() => {
+    async function fetchBlobData() {
+      try {
+        const data = await getBLOBData();
+        setBlobData(data);
+        console.log('Blob data charts:', data);
+      } catch (error) {
+        console.error('Error fetching BLOB data:', error);
+      }
+    }
+    fetchBlobData();
   }, []);
 
 
@@ -36,9 +49,7 @@ export default function WeatherData() {
 
   return (
     <>
-      <div className="flex justify-center items-center w-full p-6">
-        <UpdateDatabaseAndBlob />
-      </div>
+      <UpdateDatabaseAndBlob />
       <section className="flex flex-col w-full">
         <ForecastsFMICombinedChart weatherData={weatherData} />
         <ForecastAndPriceTable weatherData={weatherData} />
