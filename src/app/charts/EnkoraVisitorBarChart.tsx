@@ -5,21 +5,33 @@ import { ChartConfig, ChartContainer, ChartLegend, ChartLegendContent, ChartTool
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Bar, CartesianGrid, ComposedChart, XAxis, YAxis } from "recharts";
 import { LoadingSpinner } from "@/components/ui/loading-spinner";
-import {Checkbox} from "@/components/ui/checkbox";
-import {Calendar} from "@/components/ui/calendar";
-import {DateRange} from "react-day-picker";
-import {addDays, format, parseISO} from "date-fns";
-import {Popover, PopoverContent, PopoverTrigger} from "@/components/ui/popover";
-import {Button} from "@/components/ui/button";
-import {CalendarIcon} from "lucide-react";
-import {cn} from "@/lib/utils";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Calendar } from "@/components/ui/calendar";
+import { DateRange } from "react-day-picker";
+import { addDays, format, parseISO } from "date-fns";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { Button } from "@/components/ui/button";
+import { CalendarIcon } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { fetchEnkoraData } from "@/hooks/fetchEnkoraVisitorData";
+import processEnkoraVisitorData from "@/utils/EnkoraDataFormatter";
+
+interface FormattedVisitorData {
+  date: string;
+  kulkulupa: number;
+  ilmaiskavijat: number;
+  paasyliput: number;
+  verkkokauppa: number;
+  vuosiliput: number;
+}
 
 export default function EnkoraData() {
 
-  const [visitorData, setVisitorData] = useState<any | null>(null);
   const [startDate, setStartDate] = useState<string>('2024-09-30');
   const [endDate, setEndDate] = useState<string>('2024-10-30');
-  const [selectedCategory, setSelectedCategory] = useState<string[]>(["Kulkulupa", "Ilmaiskävijät", "Pääsyliput", "Verkkokauppa_Pääsyliput", "Vuosiliput"]);
+
+  const [visitorData, setVisitorData] = useState<FormattedVisitorData[]>([]);
+  const [selectedCategory, setSelectedCategory] = useState<string[]>(["kulkulupa", "ilmaiskavijat", "paasyliput", "verkkokauppa", "vuosiliput"]);
   const initialStartDate = parseISO(startDate);
   const initialEndDate = parseISO(endDate);
 
@@ -28,87 +40,40 @@ export default function EnkoraData() {
     to: initialEndDate,
   });
 
+
   useEffect(() => {
     async function fetchData() {
-      if (startDate && endDate) { // Only fetch if both dates are provided
-        try {
-          const response = await fetch('/api/enkora', {
-            method: 'POST', // Use POST method
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              startDate, // Send start date
-              endDate,   // Send end date
-            }),
-          });
-
-          if (!response.ok) {
-              throw new Error(`HTTP error! status: ${response.status}`);
-          }
-
-          const data = await response.json();
-          setVisitorData(data);
-
-        } catch (error) {
-          console.error('Error fetching visitor data:', error);
+      try {
+        const data = await fetchEnkoraData(startDate, endDate);
+        if (data) {
+          const result = processEnkoraVisitorData(data);
+          setVisitorData(result);
         }
+      } catch (error) {
+        console.error('Error fetching visitor data:', error);
       }
     }
     fetchData();
   }, [startDate, endDate]);
 
-  const idMap = {
-    "2": "Kulkulupa",
-    "3": "Ilmaiskävijät",
-    "5": "Pääsyliput",
-    "18": "Verkkokauppa_Pääsyliput",
-    "19": "Vuosiliput"
-  };
-
-  // Transforming the input
-  interface OutputEntry {
-    date: string;
-    [key: string]: number | string;
-  }
-
-  if (visitorData && visitorData.validations && visitorData.validations.rows) {
-    const output: OutputEntry[] = [];
-    visitorData.validations.rows.forEach((row: { day: string; service_group_id: string; quantity: string }) => {
-      const { day, service_group_id, quantity } = row;
-      const activity = idMap[service_group_id as keyof typeof idMap];
-
-      // Find or create an entry for the date
-      let entry = output.find(e => e.date === day);
-      if (!entry) {
-        entry = { date: day };
-        output.push(entry);
-      }
-
-      // Sum the quantities for each activity
-      entry[activity] = (parseInt(entry[activity] as string) || 0) + parseInt(quantity);
-    });
-    setVisitorData(output);
-  }
-
   const chartConfig = {
-    Kulkulupa: {
+    kulkulupa: {
       label: "Kulkulupa",
       color: "#000000",
     },
-    Ilmaiskävijät: {
+    ilmaiskavijat: {
       label: "Ilmaiskävijät",
       color: "#FF3B2F",
     },
-    Pääsyliput: {
+    paasyliput: {
       label: "Pääsyliput",
       color: "#AAC929",
     },
-    Verkkokauppa_Pääsyliput: {
+    verkkokauppa: {
       label: "Verkkokauppa Pääsyliput",
       color: "#25582b",
     },
-    Vuosiliput: {
+    vuosiliput: {
       label: "Vuosiliput",
       color: "#B14D97",
     },
@@ -116,7 +81,7 @@ export default function EnkoraData() {
 
   // Function to toggle the selected category
   const toggleCategory = (category: string) => {
-    setSelectedCategory((prev) => 
+    setSelectedCategory((prev) =>
       prev.includes(category) ? prev.filter((c) => c !== category) : [...prev, category]
     );
   };
@@ -179,7 +144,7 @@ export default function EnkoraData() {
                             <div className="mt-1.5 flex basis-full items-center border-t pt-1.5 text-xs font-medium text-foreground">
                               Yhteensä
                               <div className="ml-auto flex items-baseline gap-0.5 font-mono font-semibold tabular-nums text-foreground">
-                                {item.payload.Ilmaiskävijät + item.payload.Pääsyliput + item.payload.Verkkokauppa_Pääsyliput + item.payload.Vuosiliput}
+                                {item.payload.ilmaiskavijat + item.payload.paasyliput + item.payload.verkkokauppa + item.payload.vuosiliput}
                               </div>
                             </div>
                           )}
@@ -190,7 +155,7 @@ export default function EnkoraData() {
                 />
                 <ChartLegend className="" content={<ChartLegendContent />} />
                 <YAxis
-                  label={{value: 'Kävijämäärä', angle: -90, position: 'insideLeft'}} />
+                  label={{ value: 'Kävijämäärä', angle: -90, position: 'insideLeft' }} />
                 {/*Render selected tickets*/}
                 {selectedCategory.map((category) => (
                   <Bar

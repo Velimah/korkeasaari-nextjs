@@ -24,7 +24,7 @@ export const fetchFMIForecastData = async (): Promise<WeatherData[]> => {
   try {
     const endTime = getEndTime();
     const response = await fetch(
-      `https://opendata.fmi.fi/wfs?service=WFS&version=2.0.0&request=getFeature&storedquery_id=fmi::forecast::edited::weather::scandinavia::point::timevaluepair&place=korkeasaari&endtime=${endTime}&`,
+      `https://opendata.fmi.fi/wfs?service=WFS&version=2.0.0&request=getFeature&storedquery_id=fmi::forecast::edited::weather::scandinavia::point::timevaluepair&parameters=Precipitation1h,Temperature,TotalCloudCover&place=korkeasaari&endtime=${endTime}&`,
     );
 
     if (!response.ok) {

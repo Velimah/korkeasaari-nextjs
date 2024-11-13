@@ -1,34 +1,52 @@
-/*
-const filteredData = data.map((item) => {
-    const year = item["Year"];
-    const month = String(item["Month"]).padStart(2, '0'); // Ensure two digits for month
-    const day = String(item["Day"]).padStart(2, '0'); // Ensure two digits for day
-    const time = item["Time [Local time]"];
+interface WeatherData {
+  time: string;
+  temperature: number;
+  cloudCover: number;
+  precipitation: number;
+}
 
-    // Construct the full ISO date (e.g., 2024-10-03T00:00:00)
-    const fullDate = `${year}-${month}-${day}T${time}:00`;
-    const hour = parseInt(time.split(":")[0], 10); // Extract the hour from the time
+interface FormattedWeatherData {
+  date: string;
+  temperature: number;
+  cloudCover: number;
+  precipitation: number;
+}
 
-    return {
-      date: new Date(fullDate).toISOString(),
-      temperature: item["Air temperature mean [°C]"],
-      cloudCover: item["Cloud cover [1/8]"],
-      precipitation: item["Precipitation amount mean [mm]"],
-      hour: hour // Save the hour to filter later
-    };
-  })
-  .filter((item) => item.hour >= 10 && item.hour <= 20); // Filter by time between 10:00 and 20:00
+// Function to filter data and calculate mean values
+export default function processFMIWeatherData(
+  data: WeatherData[],
+): FormattedWeatherData {
+  // Filter entries between 10:00 and 20:00 local finnish time
+  const filteredData = data.filter((entry) => {
+    const date = new Date(entry.time);
+    const finnishHour = new Date(
+      date.toLocaleString("en-US", { timeZone: "Europe/Helsinki" }),
+    ).getHours();
 
-// Function to calculate mean of a numeric array
-const calculateMean = (array: number[]) => array.reduce((a, b) => a + b, 0) / array.length;
+    return finnishHour >= 10 && finnishHour <= 20;
+  });
 
-// Extract temperature, cloud cover, and precipitation for calculations
-const temperatures = filteredData.map(item => item.temperature);
-const cloudCovers = filteredData.map(item => parseFloat(item.cloudCover.split('(')[1].split('/')[0])); // Extract numeric cloud cover
-const precipitations = filteredData.map(item => item.precipitation);
+  // Calculate mean temperature, mean cloud cover, and total precipitation
+  const summary = filteredData.reduce(
+    (acc, entry) => {
+      acc.temperatureSum += entry.temperature;
+      acc.cloudCoverSum += entry.cloudCover;
+      acc.precipitationSum += entry.precipitation;
+      return acc;
+    },
+    { temperatureSum: 0, cloudCoverSum: 0, precipitationSum: 0 },
+  );
 
-// Calculate means
-const meanTemperature = calculateMean(temperatures);
-const meanCloudCover = calculateMean(cloudCovers);
-const meanPrecipitation = calculateMean(precipitations);
-*/
+  const count = filteredData.length;
+  const meanTemperature = count ? summary.temperatureSum / count : 0;
+  const meanCloudCover = count ? summary.cloudCoverSum / count : 0;
+  const totalPrecipitation = summary.precipitationSum;
+
+  // Return as a FormattedWeatherData object
+  return {
+    date: data[1].time.split("T")[0],
+    temperature: parseFloat(meanTemperature.toFixed(1)),
+    cloudCover: parseFloat(meanCloudCover.toFixed(1)),
+    precipitation: parseFloat(totalPrecipitation.toFixed(1)),
+  };
+}
