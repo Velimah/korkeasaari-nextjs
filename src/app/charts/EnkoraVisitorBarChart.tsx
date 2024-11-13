@@ -8,11 +8,12 @@ import { LoadingSpinner } from "@/components/ui/loading-spinner";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Calendar } from "@/components/ui/calendar";
 import { DateRange } from "react-day-picker";
-import { addDays, format, parseISO, subDays } from "date-fns";
+import { format, parseISO, subDays } from "date-fns";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
 import { CalendarIcon } from "lucide-react";
-import { cn } from "@/lib/utils";
+import {cn} from "@/lib/utils";
+import {fi} from "date-fns/locale"
 import { fetchEnkoraData } from "@/hooks/fetchEnkoraVisitorData";
 import processEnkoraVisitorData from "@/utils/EnkoraDataFormatter";
 
@@ -29,9 +30,6 @@ export default function EnkoraData() {
   const today = new Date();
   const lastMonth = subDays(today, 30);
 
-  //const [startDate, setStartDate] = useState<string>('2024-09-30');
-  //const [endDate, setEndDate] = useState<string>('2024-10-30');
-
   const [startDate, setStartDate] = useState<string>(lastMonth.toISOString().split('T')[0]);
   const [endDate, setEndDate] = useState<string>(today.toISOString().split('T')[0]);
 
@@ -45,7 +43,6 @@ export default function EnkoraData() {
     from: initialStartDate,
     to: initialEndDate,
   });
-
 
   useEffect(() => {
     async function fetchData() {
@@ -62,6 +59,7 @@ export default function EnkoraData() {
     fetchData();
   }, [startDate, endDate]);
 
+  // Handles the date range selection
   const handleDateRange = (range: DateRange | undefined) => {
     if (range?.from && range?.to) {
       const start = range.from;
@@ -69,22 +67,9 @@ export default function EnkoraData() {
       setStartDate(start.toISOString().split('T')[0]);
       setEndDate(end.toISOString().split('T')[0]);
       setDate(range);
-    }
+      console.log('Date range selected:', start, end, range);
+    } 
   };
-
-  /** 
-  const handleDateRange = (dates: [Date, Date]) => {
-    const [start, end] = dates;
-    setStartDate(start.toISOString().split('T')[0]);
-    setEndDate(end.toISOString().split('T')[0]);
-    setDate({from: start, to: end});
-    
-    const formattedData = visitorData.filter((item) => {
-      const date = parseISO(item.date);
-      return date >= start && date <= end;
-    }); 
-    setVisitorData(formattedData);
-  }; */
 
   const chartConfig = {
     kulkulupa: {
@@ -210,33 +195,39 @@ export default function EnkoraData() {
                 id="date"
                 variant={"outline"}
                 className={cn(
-                  "w-[300px] justify-start text-left font-normal",
+                  "w-[250px] justify-start text-left font-normal",
                   !date && "text-muted-foreground"
                 )}
               >
-                <CalendarIcon />
+                <CalendarIcon className="mr-2"/>
                 {date?.from ? (
                   date.to ? (
                     <>
-                      {format(date.from, "LLL dd, y")} -{" "}
-                      {format(date.to, "LLL dd, y")}
+                      {format(date.from, "d.M.y", {locale: fi})} -{" "}
+                      {format(date.to, "d.M.y", {locale: fi})}
                     </>
                   ) : (
-                    format(date.from, "LLL dd, y")
+                    format(date.from, "d.M.y", {locale: fi})
                   )
                 ) : (
-                  <span>Pick a date</span>
+                  <span>Valitse päivämäärät</span>
                 )}
               </Button>
             </PopoverTrigger>
             <PopoverContent className="w-auto p-0" align="start">
               <Calendar
+                locale={fi}
+                weekStartsOn={1}
+                captionLayout="buttons"
                 initialFocus
                 mode="range"
                 defaultMonth={date?.from}
                 selected={date}
                 onSelect={handleDateRange}
                 numberOfMonths={2}
+                disabled={(date) => 
+                  date > new Date() || date < new Date("2000-01-01")
+                }
               />
             </PopoverContent>
           </Popover>
