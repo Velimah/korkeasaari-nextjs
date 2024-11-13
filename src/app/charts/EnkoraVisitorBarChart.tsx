@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { ChartConfig, ChartContainer, ChartLegend, ChartLegendContent, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Bar, CartesianGrid, ComposedChart, XAxis, YAxis } from "recharts";
+import { Bar, Brush, CartesianGrid, ComposedChart, XAxis, YAxis } from "recharts";
 import { LoadingSpinner } from "@/components/ui/loading-spinner";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Calendar } from "@/components/ui/calendar";
@@ -166,6 +166,7 @@ export default function EnkoraData() {
                     radius={[0, 0, 0, 0]}
                   />
                 ))}
+                <Brush travellerWidth={20} stroke="#25582b" height={30} />
               </ComposedChart>
             </ChartContainer>
           </CardContent>
