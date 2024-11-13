@@ -8,7 +8,7 @@ import { LoadingSpinner } from "@/components/ui/loading-spinner";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Calendar } from "@/components/ui/calendar";
 import { DateRange } from "react-day-picker";
-import { addDays, format, parseISO } from "date-fns";
+import { addDays, format, parseISO, subDays } from "date-fns";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
 import { CalendarIcon } from "lucide-react";
@@ -26,12 +26,18 @@ interface FormattedVisitorData {
 }
 
 export default function EnkoraData() {
+  const today = new Date();
+  const lastMonth = subDays(today, 30);
 
-  const [startDate, setStartDate] = useState<string>('2024-09-30');
-  const [endDate, setEndDate] = useState<string>('2024-10-30');
+  //const [startDate, setStartDate] = useState<string>('2024-09-30');
+  //const [endDate, setEndDate] = useState<string>('2024-10-30');
+
+  const [startDate, setStartDate] = useState<string>(lastMonth.toISOString().split('T')[0]);
+  const [endDate, setEndDate] = useState<string>(today.toISOString().split('T')[0]);
 
   const [visitorData, setVisitorData] = useState<FormattedVisitorData[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string[]>(["kulkulupa", "ilmaiskavijat", "paasyliput", "verkkokauppa", "vuosiliput"]);
+  
   const initialStartDate = parseISO(startDate);
   const initialEndDate = parseISO(endDate);
 
@@ -55,6 +61,30 @@ export default function EnkoraData() {
     }
     fetchData();
   }, [startDate, endDate]);
+
+  const handleDateRange = (range: DateRange | undefined) => {
+    if (range?.from && range?.to) {
+      const start = range.from;
+      const end = range.to;
+      setStartDate(start.toISOString().split('T')[0]);
+      setEndDate(end.toISOString().split('T')[0]);
+      setDate(range);
+    }
+  };
+
+  /** 
+  const handleDateRange = (dates: [Date, Date]) => {
+    const [start, end] = dates;
+    setStartDate(start.toISOString().split('T')[0]);
+    setEndDate(end.toISOString().split('T')[0]);
+    setDate({from: start, to: end});
+    
+    const formattedData = visitorData.filter((item) => {
+      const date = parseISO(item.date);
+      return date >= start && date <= end;
+    }); 
+    setVisitorData(formattedData);
+  }; */
 
   const chartConfig = {
     kulkulupa: {
@@ -205,7 +235,7 @@ export default function EnkoraData() {
                 mode="range"
                 defaultMonth={date?.from}
                 selected={date}
-                onSelect={setDate}
+                onSelect={handleDateRange}
                 numberOfMonths={2}
               />
             </PopoverContent>
