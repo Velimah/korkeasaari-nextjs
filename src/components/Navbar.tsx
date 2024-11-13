@@ -13,7 +13,7 @@ import {
 
 export default function Navbar() {
   const pathname = usePathname();
-  const isHomePage = pathname === "/";
+  const isHomePage = pathname === "/landingpage";
 
   return  (
       <header
@@ -31,6 +31,12 @@ export default function Navbar() {
               <NavigationMenu>
                 <NavigationMenuList>
                   <NavigationMenuItem className="flex gap-6">
+                      <NavigationMenuLink
+                          href="/homepage"
+                          className={navigationMenuTriggerStyle()}
+                      >
+                          Koti
+                      </NavigationMenuLink>
                     <NavigationMenuLink
                         href="/charts"
                         className={navigationMenuTriggerStyle()}
