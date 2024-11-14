@@ -3,14 +3,14 @@ import { fetchEnkoraData } from "@/hooks/fetchEnkoraVisitorData";
 import processEnkoraVisitorData from "./EnkoraDataFormatter";
 
 export default async function UpdateEnkoraDatabase() {
-  const startDate = "2024-11-01";
+  const startDate = "2024-11-01"; //Database has all the data before this date
   const endDate = new Date();
   endDate.setDate(endDate.getDate() - 1);
   const currentDayMinusOne = endDate.toISOString().split("T")[0]; // Format it as YYYY-MM-DD
 
   if (startDate && currentDayMinusOne) {
     try {
-      // Fetch all dates that are in the database
+      // Fetch all dates from database date column
       const response = await fetch(`/api/enkora-database`, {
         method: "GET", // Use GET method
         headers: {
@@ -34,7 +34,7 @@ export default async function UpdateEnkoraDatabase() {
         existingDates,
       );
 
-      // Process missing dates sequentially and add timestamps to fetch from Enkora API
+      // Process missing dates sequentially to fetch from Enkora API
       for (const date of missingDates) {
         const data = await fetchEnkoraData(date, date);
         let result;

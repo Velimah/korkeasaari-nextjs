@@ -4,14 +4,14 @@ import { getMissingDates } from "@/utils/findMissingDates";
 
 // Define the WeatherData component
 export default async function UpdateFMIDatabase() {
-  const startDate = "2024-11-01";
+  const startDate = "2024-11-01"; //Database has all the data before this date
   const endDate = new Date();
   endDate.setDate(endDate.getDate() - 1);
   const currentDayMinusOne = endDate.toISOString().split("T")[0]; // Format it as YYYY-MM-DD
 
   if (startDate && currentDayMinusOne) {
     try {
-      // Fetch all dates that are in the database
+      // Fetch all dates from database date column
       const response = await fetch(`/api/fmi-database`, {
         method: "GET",
         headers: {

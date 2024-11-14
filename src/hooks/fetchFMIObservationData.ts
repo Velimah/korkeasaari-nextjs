@@ -1,5 +1,4 @@
 import { XMLParser } from "fast-xml-parser"; // Import the XMLParser from fast-xml-parser
-import processWeatherObservationData from "../utils/FMIdataFormatter";
 
 // Define the interfaces for the data structures
 interface MeasurementTVP {

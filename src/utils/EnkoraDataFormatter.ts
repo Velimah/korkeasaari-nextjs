@@ -1,14 +1,14 @@
+interface EnkoraVisitorData {
+  validations: {
+    rows: VisitorDataRow[];
+  };
+}
+
 interface VisitorDataRow {
   day: string;
   service_group_id: string;
   quantity: string;
   unique_accounts_quantity: string;
-}
-
-interface EnkoraVisitorData {
-  validations: {
-    rows: VisitorDataRow[];
-  };
 }
 
 interface FormattedVisitorData {
@@ -31,6 +31,7 @@ const idMap: { [key: string]: string } = {
   "19": "vuosiliput",
 };
 
+// combines data from Enkora API into a single object and names the keys according to the service_group_id
 export default function processEnkoraVisitorData(
   visitorData: EnkoraVisitorData,
 ) {

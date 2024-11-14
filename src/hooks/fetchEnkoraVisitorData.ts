@@ -1,14 +1,14 @@
+interface EnkoraVisitorData {
+  validations: {
+    rows: VisitorDataRow[];
+  };
+}
+
 interface VisitorDataRow {
   day: string;
   service_group_id: string;
   quantity: string;
   unique_accounts_quantity: string;
-}
-
-interface EnkoraVisitorData {
-  validations: {
-    rows: VisitorDataRow[];
-  };
 }
 
 export const fetchEnkoraData = async (startDate: string, endDate: string) => {
