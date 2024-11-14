@@ -168,7 +168,7 @@ export default function WeatherHistoricalData() {
                 yAxisId="right"
                 dataKey="precipitation"
                 fill="var(--color-precipitation)"
-                radius={4}
+                radius={[2, 2, 0, 0]}
               />
               <Line
                 yAxisId="left"

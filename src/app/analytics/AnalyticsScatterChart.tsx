@@ -23,21 +23,26 @@ interface AnalyticsCharts {
 }
 
 export default function AnalyticsScatterChart({ EnkoraFMIData, selectedYear, chartConfig }: AnalyticsCharts) {
-
     const [selectedDataKey, setSelectedDataKey] = useState<string>("temperature");
 
     return (
-
         <>
             <div className="py-4">
                 <Select onValueChange={(value) => setSelectedDataKey(value)} value={selectedDataKey.toString()}>
                     <SelectTrigger className="w-[250px]">
-                        <SelectValue placeholder={selectedDataKey == "precipitation" ? "Sademäärä" : "Lämpötila"} />
+                        <SelectValue placeholder={
+                            selectedDataKey === "precipitation"
+                                ? "Sademäärä"
+                                : selectedDataKey === "cloudcover"
+                                    ? "Pilvisyys"
+                                    : "Lämpötila"
+                        } />
                     </SelectTrigger>
                     <SelectContent>
                         <SelectGroup>
                             <SelectItem value="temperature">Lämpötila</SelectItem>
                             <SelectItem value="precipitation">Sademäärä</SelectItem>
+                            <SelectItem value="cloudcover">Pilvisyys</SelectItem>
                         </SelectGroup>
                     </SelectContent>
                 </Select>
@@ -45,7 +50,11 @@ export default function AnalyticsScatterChart({ EnkoraFMIData, selectedYear, cha
 
             <Card className='dark:bg-slate-800 bg-secondary' >
                 <CardHeader>
-                    <CardTitle>Kävijämäärä / {selectedDataKey == "precipitation" ? "Sademäärä" : "Lämpötila"}</CardTitle>
+                    <CardTitle>Kävijämäärä / {selectedDataKey === "precipitation"
+                        ? "Sademäärä"
+                        : selectedDataKey === "cloudcover"
+                            ? "Pilvisyys"
+                            : "Lämpötila"}</CardTitle>
                     <CardDescription>
                         {selectedYear === 0 ? "Kaikki vuodet" : selectedYear}
                     </CardDescription>
@@ -76,11 +85,9 @@ export default function AnalyticsScatterChart({ EnkoraFMIData, selectedYear, cha
                                                     <div className="flex items-center gap-2">
                                                         <div
                                                             className="h-2.5 w-2.5 shrink-0 rounded-[2px] bg-[--color-bg]"
-                                                            style={
-                                                                {
-                                                                    "--color-bg": `var(--color-${name})`,
-                                                                } as React.CSSProperties
-                                                            }
+                                                            style={{
+                                                                "--color-bg": `var(--color-${name})`,
+                                                            } as React.CSSProperties}
                                                         />
                                                         {chartConfig[name as keyof typeof chartConfig]?.label || name}
                                                     </div>
@@ -96,11 +103,36 @@ export default function AnalyticsScatterChart({ EnkoraFMIData, selectedYear, cha
                                 defaultIndex={1}
                             />
                             <XAxis dataKey="totalvisitors" type="number" name="Kävijämäärä" />
-                            <YAxis dataKey={selectedDataKey} type="number" name={selectedDataKey == "precipitation" ? "Sademäärä" : "Lämpötila"} unit={selectedDataKey == "precipitation" ? " mm" : "°C"} />
-                            <Scatter name="Kävijät/Sade" data={EnkoraFMIData} fill={selectedDataKey == "precipitation" ? "#B14D97" : "#AAC929"} stroke="black" />
+                            <YAxis
+                                dataKey={selectedDataKey}
+                                type="number"
+                                name={
+                                    selectedDataKey === "precipitation"
+                                        ? "Sademäärä"
+                                        : selectedDataKey === "cloudcover"
+                                            ? "Pilvisyys"
+                                            : "Lämpötila"
+                                }
+                                unit={
+                                    selectedDataKey === "precipitation"
+                                        ? " mm"
+                                        : selectedDataKey === "cloudcover"
+                                            ? "%"
+                                            : "°C"
+                                }
+                            />
+                            <Scatter
+                                name="Kävijät/Sade"
+                                data={EnkoraFMIData}
+                                fill={selectedDataKey === "precipitation"
+                                    ? "var(--color-precipitation)"
+                                    : selectedDataKey === "cloudcover"
+                                        ? "var(--color-cloudcover)"  // A color for cloud cover
+                                        : "var(--color-temperature)"}
+                                stroke="black"
+                            />
                         </ScatterChart>
                     </ChartContainer>
-
                 </CardContent>
             </Card>
         </>

@@ -122,6 +122,14 @@ export default function EnkoraDataStatic() {
       label: "Keskimääräinen Lämpötila",
       color: "#AAC929",
     },
+    precipitation: {
+      label: "Sademäärä",
+      color: "#4e86ff",
+    },
+    cloudcover: {
+      label: "Pilvisyys",
+      color: "#00c0d4",
+    },
   } satisfies ChartConfig;
 
   return (
