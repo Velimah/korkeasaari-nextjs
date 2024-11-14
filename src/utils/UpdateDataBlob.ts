@@ -1,6 +1,6 @@
 export default async function UpdateDataBlob() {
   try {
-    // Fetch all data from database API
+    // Fetch all Enkora and FMI data from database API
     const response = await fetch(`/api/database`, {
       method: "GET",
       headers: {

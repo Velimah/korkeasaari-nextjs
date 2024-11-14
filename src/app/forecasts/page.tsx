@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { LoadingSpinner } from "@/components/ui/loading-spinner";
 import ForecastAndPriceTable from "@/app/forecasts/ForecastAndPriceTable";
 import UpdateDatabaseAndBlob from "./UpdateDatabaseAndBlob";
-import { getBLOBData, BLOB } from "@/lib/utils";
+import { getBLOBData, BLOB } from "@/hooks/fetchBLobData";
 
 interface WeatherData {
   time: string;
@@ -18,12 +18,8 @@ export default function WeatherData() {
   const [weatherData, setWeatherData] = useState<WeatherData[]>();
   useEffect(() => {
     async function fetchData() {
-      try {
-        const data = await fetchFMIForecastData();
-        setWeatherData(data);
-      } catch (error) {
-        console.error('Error fetching weather data:', error);
-      }
+      const data = await fetchFMIForecastData();
+      setWeatherData(data);
     }
     fetchData();
   }, []);
@@ -31,13 +27,9 @@ export default function WeatherData() {
   const [blobData, setBlobData] = useState<BLOB[]>([]);
   useEffect(() => {
     async function fetchBlobData() {
-      try {
-        const data = await getBLOBData();
-        setBlobData(data);
-        console.log('Blob data charts:', data);
-      } catch (error) {
-        console.error('Error fetching BLOB data:', error);
-      }
+      const data = await getBLOBData();
+      setBlobData(data);
+      console.log('BLOB:', data);
     }
     fetchBlobData();
   }, []);

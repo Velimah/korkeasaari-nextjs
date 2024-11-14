@@ -1,6 +1,7 @@
 import { put } from "@vercel/blob";
+import { NextRequest, NextResponse } from "next/server";
 
-export async function PUT(request: Request) {
+export async function PUT(request: NextRequest) {
   try {
     // Parse the JSON body from the request
     const jsonData = await request.json();
@@ -15,15 +16,12 @@ export async function PUT(request: Request) {
     });
 
     // Return the URL as a JSON response
-    return new Response(JSON.stringify({ url }), {
-      status: 200,
-      headers: { "Content-Type": "application/json" },
-    });
+    return NextResponse.json({ url }, { status: 200 });
   } catch (error) {
-    console.error("Upload error:", error); // Log the error for easier debugging
-    return new Response(JSON.stringify({ error: (error as Error).message }), {
-      status: 500,
-      headers: { "Content-Type": "application/json" },
-    });
+    console.error("Upload error:", error);
+    return NextResponse.json(
+      { error: "Failed to upload data" },
+      { status: 500 },
+    );
   }
 }

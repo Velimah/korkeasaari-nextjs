@@ -1,13 +1,12 @@
-export async function POST(request: Request) {
+import { NextRequest, NextResponse } from "next/server";
+
+export async function POST(request: NextRequest) {
   try {
     const { startDate, endDate } = await request.json();
     if (!startDate || !endDate) {
-      return new Response(
-        JSON.stringify({ error: "Missing startDate or endDate" }),
-        {
-          status: 400,
-          headers: { "Content-Type": "application/json" },
-        },
+      return NextResponse.json(
+        { error: "Missing startDate or endDate" },
+        { status: 400 },
       );
     }
 
@@ -33,16 +32,12 @@ export async function POST(request: Request) {
 
     const jsonData = await response.json();
 
-    return new Response(JSON.stringify(jsonData), {
-      status: 200,
-      headers: { "Content-Type": "application/json" },
-    });
-  } catch (error: any) {
-    const message =
-      error instanceof Error ? error.message : "An unexpected error occurred";
-    return new Response(JSON.stringify({ error: message }), {
-      status: 500,
-      headers: { "Content-Type": "application/json" },
-    });
+    return NextResponse.json(jsonData, { status: 200 });
+  } catch (error) {
+    console.error("Error fetching Enkora data:", error);
+    return NextResponse.json(
+      { error: "Failed to get visitor data" },
+      { status: 500 },
+    );
   }
 }
