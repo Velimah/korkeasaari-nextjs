@@ -23,30 +23,37 @@ interface VisitorTotal {
 }
 
 export default function EnkoraDataStatic() {
-  const [blobData, setBlobData] = useState<BLOB[]>([]);
-  useEffect(() => {
-    async function fetchBlobData() {
-      const data = await getBLOBData();
-      setBlobData(data);
-      console.log('BLOB:', data);
-    }
-    fetchBlobData();
-  }, []);
-
   const [EnkoraFMIData, setEnkoraFMIData] = useState<BLOB[]>([]);
   const years = [0, 2019, 2020, 2021, 2022, 2023, 2024];
   const [selectedYear, setSelectedYear] = useState<number>(2024);
   const [visitorTotals, setVisitorTotals] = useState<VisitorTotal[]>([]);
-
+  const [blobData, setBlobData] = useState<BLOB[]>([]);
 
   useEffect(() => {
-    const filteredData = blobData.filter((item: BLOB) => {
-      const itemYear = new Date(item.date).getFullYear(); // Extract the year from the date
-      return itemYear === selectedYear;
-    });
-    setEnkoraFMIData(filteredData); // Update state with filtered data
-    calculateYearlyVisitors(filteredData);
+    async function fetchBlobData() {
+      const data = await getBLOBData();
+      console.log('BLOBBYDATA:', data);
+      setBlobData(data);
+      applyYearFilter(selectedYear, data); // Apply initial filter
+    }
+    fetchBlobData();
   }, []);
+
+  function handleYearChange(event: React.ChangeEvent<HTMLSelectElement>) {
+    const year = Number(event.target.value);
+    setSelectedYear(year);
+    applyYearFilter(year, blobData);
+  }
+
+  function applyYearFilter(year: number, data: BLOB[]) {
+    const filteredData = year === 0
+      ? data
+      : data.filter((item) => new Date(item.date).getFullYear() === year);
+
+    setEnkoraFMIData(filteredData);
+    calculateYearlyVisitors(filteredData);
+  }
+
 
   // counts and sorts the total visitors for each category for the selected year/years
   function calculateYearlyVisitors(filteredData: BLOB[]) {
@@ -80,25 +87,6 @@ export default function EnkoraDataStatic() {
     aggregatedData.sort((a, b) => a.value - b.value);
     // Set the state with the sorted data
     setVisitorTotals(aggregatedData);
-  }
-
-  function handleYearChange(event: React.ChangeEvent<HTMLSelectElement>) {
-    const selectedYear = Number(event.target.value); // Get the selected year from the event
-    let filteredData;
-
-    if (selectedYear === 0) {
-      // If the selected year is 0, skip filtering and use the full data set
-      filteredData = blobData;
-    } else {
-      // Filter data based on the selected year
-      filteredData = blobData.filter((item: BLOB) => {
-        const itemYear = new Date(item.date).getFullYear(); // Extract the year from the date
-        return itemYear === selectedYear;
-      });
-    }
-    setEnkoraFMIData(filteredData); // Update state with filtered data
-    setSelectedYear(selectedYear); // Update the selected year state
-    calculateYearlyVisitors(filteredData); // Calculate the total visitors for the selected year
   }
 
   const chartConfig = {

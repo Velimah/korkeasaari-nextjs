@@ -12,48 +12,89 @@ import {
   Bar,
   Brush,
 } from 'recharts';
-import EnkoraFMIData from "@/assets/FormattedEnkoraFMI2.json";
 import { LoadingSpinner } from '@/components/ui/loading-spinner';
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { BLOB, getBLOBData } from '@/hooks/fetchBLobData';
 
-interface DataItem {
-  date: string;
-  kulkulupa?: number;
-  ilmaiskavijat?: number;
-  paasyliput?: number;
-  verkkokauppa_paasyliput?: number;
-  kampanjakavijat?: number;
-  vuosiliput?: number;
-  total?: number;
-  averageTemperature?: number | null;
-  totalPrecipitation?: number;
-}
-
-// Define the WeatherData component
 export default function WeatherHistoricalData() {
-  const [weatherData, setWeatherData] = useState<DataItem[]>(EnkoraFMIData);
+  const [selectedYear, setSelectedYear] = useState<number>(2024);
+  const years = [0, 2019, 2020, 2021, 2022, 2023, 2024];
+  const [blobData, setBlobData] = useState<BLOB[]>([]);
+  const [EnkoraFMIData, setEnkoraFMIData] = useState<BLOB[]>([]);
 
-  // Fetch weather data on client side
+
   useEffect(() => {
-    setWeatherData(EnkoraFMIData);
+    async function fetchBlobData() {
+      const data = await getBLOBData();
+      console.log('BLOBBYDATA:', data);
+      setBlobData(data);
+      applyYearFilter(selectedYear, data); // Apply initial filter
+    }
+    fetchBlobData();
   }, []);
 
+  function handleYearChange(event: React.ChangeEvent<HTMLSelectElement>) {
+    const year = Number(event.target.value);
+    setSelectedYear(year);
+    applyYearFilter(year, blobData);
+  }
+
+  function applyYearFilter(year: number, data: BLOB[]) {
+    const filteredData = year === 0
+      ? data
+      : data.filter((item) => new Date(item.date).getFullYear() === year);
+
+    setEnkoraFMIData(filteredData);
+  }
+
   const chartConfig = {
-    averageTemperature: {
+    temperature: {
       label: "Keskilämpötila (°C)",
       color: "#25582b",
     },
-    totalPrecipitation: {
+    precipitation: {
       label: "Sademäärä (mm)",
       color: "#aac929",
     },
   } satisfies ChartConfig
 
-  if (!weatherData) {
+  if (!EnkoraFMIData) {
     return <LoadingSpinner />;
   }
 
   return (
     <section className="m-6 text-center">
+
+      <div className='py-2'>
+        <Select
+          onValueChange={(value) =>
+            handleYearChange({
+              target: { value },
+            } as React.ChangeEvent<HTMLSelectElement>)
+          }
+          value={selectedYear.toString()}
+        >
+          <SelectTrigger className="w-[250px]">
+            <SelectValue placeholder="Select a year" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectGroup>
+              {years.map((year) => (
+                <SelectItem key={year} value={year.toString()}>
+                  {year === 0 ? "Kaikki vuodet" : year}
+                </SelectItem>
+              ))}
+            </SelectGroup>
+          </SelectContent>
+        </Select>
+      </div>
       <Card className='dark:bg-slate-800 bg-secondary' >
         <CardHeader>
           <CardTitle>
@@ -65,7 +106,7 @@ export default function WeatherHistoricalData() {
         </CardHeader>
         <CardContent>
           <ChartContainer config={chartConfig} className="h-[400px] w-full">
-            <ComposedChart accessibilityLayer data={weatherData}>
+            <ComposedChart accessibilityLayer data={EnkoraFMIData}>
               <CartesianGrid vertical={false} />
               <ChartTooltip
                 content={
@@ -125,15 +166,15 @@ export default function WeatherHistoricalData() {
               />
               <Bar
                 yAxisId="right"
-                dataKey="totalPrecipitation"
-                fill="var(--color-totalPrecipitation)"
+                dataKey="precipitation"
+                fill="var(--color-precipitation)"
                 radius={4}
               />
               <Line
                 yAxisId="left"
-                dataKey="averageTemperature"
+                dataKey="temperature"
                 type="natural"
-                stroke="var(--color-averageTemperature)"
+                stroke="var(--color-temperature)"
                 strokeWidth={2}
                 dot={false}
               />
@@ -142,6 +183,6 @@ export default function WeatherHistoricalData() {
           </ChartContainer>
         </CardContent>
       </Card>
-    </section>
+    </section >
   );
 }
