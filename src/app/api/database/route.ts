@@ -4,13 +4,31 @@ import { NextRequest, NextResponse } from "next/server";
 export async function GET(request: NextRequest) {
   try {
     const jsonData = await sql`
-      SELECT w.date AS date, 
-        w.temperature, w.precipitation, w.cloudcover,
-        v.kulkulupa, v.ilmaiskavijat, v.paasyliput, v.kampanjakavijat, v.verkkokauppa, v.vuosiliput
-      FROM weatherdata w
-      LEFT JOIN visitordata v ON w.date = v.date
-      ORDER BY w.date ASC
-      LIMIT 5000;
+SELECT 
+    w.date AS date, 
+    w.temperature, 
+    w.precipitation, 
+    w.cloudcover,
+    v.kulkulupa, 
+    v.ilmaiskavijat, 
+    v.paasyliput, 
+    v.kampanjakavijat, 
+    v.verkkokauppa, 
+    v.vuosiliput,
+    (COALESCE(v.ilmaiskavijat, 0) + 
+     COALESCE(v.paasyliput, 0) + 
+     COALESCE(v.kampanjakavijat, 0) + 
+     COALESCE(v.verkkokauppa, 0) + 
+     COALESCE(v.vuosiliput, 0)) AS totalvisitors
+    FROM 
+        weatherdata w
+    LEFT JOIN 
+        visitordata v 
+    ON 
+        w.date = v.date
+    ORDER BY 
+        w.date ASC
+    LIMIT 5000;
     `;
 
     return NextResponse.json(jsonData.rows, { status: 200 });

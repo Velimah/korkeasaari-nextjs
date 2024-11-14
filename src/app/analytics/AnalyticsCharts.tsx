@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { ChartConfig } from "@/components/ui/chart";
-import EnkoraFMIData from "@/assets/FormattedEnkoraFMI2.json";
 import AnalyticsPieChart from "@/app/analytics/AnalyticsPieChart";
 import AnalyticsScatterChart from "@/app/analytics/AnalyticsScatterChart";
 import AnalyticsAnalyticsComposedChartChart from "@/app/analytics/AnalyticsComposedChart";
@@ -15,37 +14,92 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-interface DataItem {
-  date: string;
-  kulkulupa?: number;
-  ilmaiskavijat?: number;
-  paasyliput?: number;
-  verkkokauppa_paasyliput?: number;
-  kampanjakavijat?: number;
-  vuosiliput?: number;
-  total?: number;
-  averageTemperature?: number | null;
-  totalPrecipitation?: number;
+import { getBLOBData, BLOB } from "@/hooks/fetchBLobData";
+
+interface VisitorTotal {
+  name: string;
+  value: number;
+  fill: string;
 }
 
 export default function EnkoraDataStatic() {
+  const [blobData, setBlobData] = useState<BLOB[]>([]);
+  useEffect(() => {
+    async function fetchBlobData() {
+      const data = await getBLOBData();
+      setBlobData(data);
+      console.log('BLOB:', data);
+    }
+    fetchBlobData();
+  }, []);
+
+  const [EnkoraFMIData, setEnkoraFMIData] = useState<BLOB[]>([]);
   const years = [0, 2019, 2020, 2021, 2022, 2023, 2024];
   const [selectedYear, setSelectedYear] = useState<number>(2024);
+  const [visitorTotals, setVisitorTotals] = useState<VisitorTotal[]>([]);
 
-  const [EnkoraFMIData2, setEnkoraFMIData] = useState<DataItem[]>([]);
-  const [visitorTotals, setVisitorTotals] = useState<
-    { name: string; value: number; fill: string }[]
-  >([]);
 
   useEffect(() => {
-    const filteredData = EnkoraFMIData.filter((item: DataItem) => {
+    const filteredData = blobData.filter((item: BLOB) => {
       const itemYear = new Date(item.date).getFullYear(); // Extract the year from the date
       return itemYear === selectedYear;
     });
-
     setEnkoraFMIData(filteredData); // Update state with filtered data
-    processWeatherData(filteredData);
-  }, []); // Empty dependency array ensures this runs only once when the component mounts
+    calculateYearlyVisitors(filteredData);
+  }, []);
+
+  // counts and sorts the total visitors for each category for the selected year/years
+  function calculateYearlyVisitors(filteredData: BLOB[]) {
+    const aggregatedData = [
+      { name: "kulkulupa", value: 0, fill: "var(--color-kulkulupa)" },
+      { name: "ilmaiskavijat", value: 0, fill: "var(--color-ilmaiskavijat)" },
+      { name: "paasyliput", value: 0, fill: "var(--color-paasyliput)" },
+      {
+        name: "verkkokauppa",
+        value: 0,
+        fill: "var(--color-verkkokauppa)",
+      },
+      {
+        name: "kampanjakavijat",
+        value: 0,
+        fill: "var(--color-kampanjakavijat)",
+      },
+      { name: "vuosiliput", value: 0, fill: "var(--color-vuosiliput)" },
+    ];
+
+    filteredData.forEach((item) => {
+      aggregatedData[0].value += item.kulkulupa ?? 0;
+      aggregatedData[1].value += item.ilmaiskavijat ?? 0;
+      aggregatedData[2].value += item.paasyliput ?? 0;
+      aggregatedData[3].value += item.verkkokauppa ?? 0;
+      aggregatedData[4].value += item.kampanjakavijat ?? 0;
+      aggregatedData[5].value += item.vuosiliput ?? 0;
+    });
+
+    // Sort aggregatedData by value (smallest first)
+    aggregatedData.sort((a, b) => a.value - b.value);
+    // Set the state with the sorted data
+    setVisitorTotals(aggregatedData);
+  }
+
+  function handleYearChange(event: React.ChangeEvent<HTMLSelectElement>) {
+    const selectedYear = Number(event.target.value); // Get the selected year from the event
+    let filteredData;
+
+    if (selectedYear === 0) {
+      // If the selected year is 0, skip filtering and use the full data set
+      filteredData = blobData;
+    } else {
+      // Filter data based on the selected year
+      filteredData = blobData.filter((item: BLOB) => {
+        const itemYear = new Date(item.date).getFullYear(); // Extract the year from the date
+        return itemYear === selectedYear;
+      });
+    }
+    setEnkoraFMIData(filteredData); // Update state with filtered data
+    setSelectedYear(selectedYear); // Update the selected year state
+    calculateYearlyVisitors(filteredData); // Calculate the total visitors for the selected year
+  }
 
   const chartConfig = {
     kulkulupa: {
@@ -64,7 +118,7 @@ export default function EnkoraDataStatic() {
       label: "Pääsyliput",
       color: "#AAC929",
     },
-    verkkokauppa_paasyliput: {
+    verkkokauppa: {
       label: "Verkkokauppa Pääsyliput",
       color: "#25582b",
     },
@@ -72,81 +126,15 @@ export default function EnkoraDataStatic() {
       label: "Vuosiliput",
       color: "#B14D97",
     },
-    total: {
+    totalvisitors: {
       label: "Kävijämäärä",
       color: "#25582b",
     },
-    averageTemperature: {
+    temperature: {
       label: "Keskimääräinen Lämpötila",
       color: "#AAC929",
     },
-    weightedTotal: {
-      label: "testiarvo",
-      color: "#FF3B2F",
-    },
   } satisfies ChartConfig;
-
-  function processWeatherData(filteredData: DataItem[]) {
-    const aggregatedData = [
-      { name: "kulkulupa", value: 0, fill: "var(--color-kulkulupa)" },
-      { name: "ilmaiskavijat", value: 0, fill: "var(--color-ilmaiskavijat)" },
-      { name: "paasyliput", value: 0, fill: "var(--color-paasyliput)" },
-      {
-        name: "verkkokauppa_paasyliput",
-        value: 0,
-        fill: "var(--color-verkkokauppa_paasyliput)",
-      },
-      {
-        name: "kampanjakavijat",
-        value: 0,
-        fill: "var(--color-kampanjakavijat)",
-      },
-      { name: "vuosiliput", value: 0, fill: "var(--color-vuosiliput)" },
-    ];
-
-    filteredData.forEach(
-      (item: {
-        kulkulupa?: number;
-        ilmaiskavijat?: number;
-        paasyliput?: number;
-        verkkokauppa_paasyliput?: number;
-        kampanjakavijat?: number;
-        vuosiliput?: number;
-      }) => {
-        aggregatedData[0].value += item.kulkulupa || 0;
-        aggregatedData[1].value += item.ilmaiskavijat || 0;
-        aggregatedData[2].value += item.paasyliput || 0;
-        aggregatedData[3].value += item.verkkokauppa_paasyliput || 0;
-        aggregatedData[4].value += item.kampanjakavijat || 0;
-        aggregatedData[5].value += item.vuosiliput || 0;
-      },
-    );
-
-    // Sort aggregatedData by value (smallest first)
-    aggregatedData.sort((a, b) => a.value - b.value);
-    // Set the state with the sorted data
-    setVisitorTotals(aggregatedData);
-  }
-
-  function handleYearChange(event: React.ChangeEvent<HTMLSelectElement>) {
-    const selectedYear = Number(event.target.value); // Get the selected year from the event
-    let filteredData;
-
-    if (selectedYear === 0) {
-      // If the selected year is 0, skip filtering and use the full data set
-      filteredData = EnkoraFMIData;
-    } else {
-      // Filter data based on the selected year
-      filteredData = EnkoraFMIData.filter((item: DataItem) => {
-        const itemYear = new Date(item.date).getFullYear(); // Extract the year from the date
-        return itemYear === selectedYear;
-      });
-    }
-
-    setEnkoraFMIData(filteredData); // Update state with filtered data
-    setSelectedYear(selectedYear); // Update the selected year state
-    processWeatherData(filteredData); // Process the weather data for the filtered year
-  }
 
   return (
     <section className="flex flex-col">
@@ -183,14 +171,14 @@ export default function EnkoraDataStatic() {
 
         <TabsContent value="composedchart">
           <AnalyticsAnalyticsComposedChartChart
-            EnkoraFMIData2={EnkoraFMIData2}
+            EnkoraFMIData={EnkoraFMIData}
             selectedYear={selectedYear}
             chartConfig={chartConfig}
           />
         </TabsContent>
         <TabsContent value="scatterchart">
           <AnalyticsScatterChart
-            EnkoraFMIData2={EnkoraFMIData2}
+            EnkoraFMIData={EnkoraFMIData}
             selectedYear={selectedYear}
             chartConfig={chartConfig}
           />

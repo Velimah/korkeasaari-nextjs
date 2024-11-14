@@ -2,24 +2,25 @@ import { ChartConfig, ChartContainer, ChartLegend, ChartLegendContent, ChartTool
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Bar, Brush, CartesianGrid, ComposedChart, Line, XAxis, YAxis } from "recharts";
 
-interface AnalyticsScatterChart {
-    EnkoraFMIData2: Array<{
+interface AnalyticsCharts {
+    EnkoraFMIData: Array<{
         date: string;
-        kulkulupa?: number;
-        ilmaiskavijat?: number;
-        paasyliput?: number;
-        verkkokauppa_paasyliput?: number;
-        kampanjakavijat?: number;
-        vuosiliput?: number;
-        total?: number;
-        averageTemperature?: number | null;
-        totalPrecipitation?: number;
+        kulkulupa: number | null;
+        ilmaiskavijat: number | null;
+        paasyliput: number | null;
+        verkkokauppa: number | null;
+        kampanjakavijat: number | null;
+        vuosiliput: number | null;
+        temperature: number | null;
+        precipitation: number | null;
+        cloudcover: number | null;
+        totalvisitors: number | null;
     }>;
     selectedYear: number;
     chartConfig: ChartConfig;
 }
 
-export default function AnalyticsAnalyticsComposedChartChart({ EnkoraFMIData2, selectedYear, chartConfig }: AnalyticsScatterChart) {
+export default function AnalyticsAnalyticsComposedChartChart({ EnkoraFMIData, selectedYear, chartConfig }: AnalyticsCharts) {
 
     return (
         <Card className='dark:bg-slate-800 bg-secondary' >
@@ -31,7 +32,7 @@ export default function AnalyticsAnalyticsComposedChartChart({ EnkoraFMIData2, s
             </CardHeader>
             <CardContent>
                 <ChartContainer config={chartConfig} className="h-[400px] w-full">
-                    <ComposedChart accessibilityLayer data={EnkoraFMIData2}>
+                    <ComposedChart accessibilityLayer data={EnkoraFMIData}>
                         <CartesianGrid vertical={false} />
                         <XAxis
                             dataKey="date"
@@ -91,17 +92,17 @@ export default function AnalyticsAnalyticsComposedChartChart({ EnkoraFMIData2, s
                             label={{ value: 'Lämpötila (°C)', angle: -90, position: 'insideLeft' }}
                         />
                         <Bar
-                            dataKey="total"
+                            dataKey="totalvisitors"
                             yAxisId="right"
                             stackId="a"
-                            fill="var(--color-total)"
+                            fill="var(--color-totalvisitors)"
                             radius={[0, 0, 0, 0]}
                         />
                         <Line
                             yAxisId="left"
-                            dataKey="averageTemperature"
+                            dataKey="temperature"
                             type="natural"
-                            stroke="var(--color-averageTemperature)"
+                            stroke="var(--color-temperature)"
                             strokeWidth={2}
                             dot={false}
                         />

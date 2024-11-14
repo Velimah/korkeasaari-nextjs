@@ -4,13 +4,13 @@ import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from "
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Pie, PieChart } from "recharts";
 
-interface AnalyticsPieChartProps {
+interface AnalyticsPieChart {
     visitorTotals: Array<{ name: string; value: number }>;
     selectedYear: number;
     chartConfig: ChartConfig;
 }
 
-export default function AnalyticsPieChart({ visitorTotals, selectedYear, chartConfig }: AnalyticsPieChartProps) {
+export default function AnalyticsPieChart({ visitorTotals, selectedYear, chartConfig }: AnalyticsPieChart) {
 
     return (
         <Card className='dark:bg-slate-800 bg-secondary' >

@@ -4,26 +4,27 @@ import { CartesianGrid, Scatter, ScatterChart, XAxis, YAxis } from "recharts";
 import { useState } from "react";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
-interface AnalyticsScatterChart {
-    EnkoraFMIData2: Array<{
+interface AnalyticsCharts {
+    EnkoraFMIData: Array<{
         date: string;
-        kulkulupa?: number;
-        ilmaiskavijat?: number;
-        paasyliput?: number;
-        verkkokauppa_paasyliput?: number;
-        kampanjakavijat?: number;
-        vuosiliput?: number;
-        total?: number;
-        averageTemperature?: number | null;
-        totalPrecipitation?: number;
+        kulkulupa: number | null;
+        ilmaiskavijat: number | null;
+        paasyliput: number | null;
+        verkkokauppa: number | null;
+        kampanjakavijat: number | null;
+        vuosiliput: number | null;
+        temperature: number | null;
+        precipitation: number | null;
+        cloudcover: number | null;
+        totalvisitors: number | null;
     }>;
     selectedYear: number;
     chartConfig: ChartConfig;
 }
 
-export default function AnalyticsScatterChart({ EnkoraFMIData2, selectedYear, chartConfig }: AnalyticsScatterChart) {
+export default function AnalyticsScatterChart({ EnkoraFMIData, selectedYear, chartConfig }: AnalyticsCharts) {
 
-    const [selectedDataKey, setSelectedDataKey] = useState<string>("averageTemperature");
+    const [selectedDataKey, setSelectedDataKey] = useState<string>("temperature");
 
     return (
 
@@ -31,12 +32,12 @@ export default function AnalyticsScatterChart({ EnkoraFMIData2, selectedYear, ch
             <div className="py-4">
                 <Select onValueChange={(value) => setSelectedDataKey(value)} value={selectedDataKey.toString()}>
                     <SelectTrigger className="w-[250px]">
-                        <SelectValue placeholder={selectedDataKey == "totalPrecipitation" ? "Sademäärä" : "Lämpötila"} />
+                        <SelectValue placeholder={selectedDataKey == "precipitation" ? "Sademäärä" : "Lämpötila"} />
                     </SelectTrigger>
                     <SelectContent>
                         <SelectGroup>
-                            <SelectItem value="averageTemperature">Lämpötila</SelectItem>
-                            <SelectItem value="totalPrecipitation">Sademäärä</SelectItem>
+                            <SelectItem value="temperature">Lämpötila</SelectItem>
+                            <SelectItem value="precipitation">Sademäärä</SelectItem>
                         </SelectGroup>
                     </SelectContent>
                 </Select>
@@ -44,14 +45,14 @@ export default function AnalyticsScatterChart({ EnkoraFMIData2, selectedYear, ch
 
             <Card className='dark:bg-slate-800 bg-secondary' >
                 <CardHeader>
-                    <CardTitle>Kävijämäärä / {selectedDataKey == "totalPrecipitation" ? "Sademäärä" : "Lämpötila"}</CardTitle>
+                    <CardTitle>Kävijämäärä / {selectedDataKey == "precipitation" ? "Sademäärä" : "Lämpötila"}</CardTitle>
                     <CardDescription>
                         {selectedYear === 0 ? "Kaikki vuodet" : selectedYear}
                     </CardDescription>
                 </CardHeader>
                 <CardContent>
                     <ChartContainer config={chartConfig} className="h-[400px] w-full">
-                        <ScatterChart accessibilityLayer data={EnkoraFMIData2}>
+                        <ScatterChart accessibilityLayer data={EnkoraFMIData}>
                             <CartesianGrid vertical={false} />
                             <ChartTooltip
                                 content={
@@ -94,9 +95,9 @@ export default function AnalyticsScatterChart({ EnkoraFMIData2, selectedYear, ch
                                 cursor={true}
                                 defaultIndex={1}
                             />
-                            <XAxis dataKey="total" type="number" name="Kävijämäärä" />
-                            <YAxis dataKey={selectedDataKey} type="number" name={selectedDataKey == "totalPrecipitation" ? "Sademäärä" : "Lämpötila"} unit={selectedDataKey == "totalPrecipitation" ? " mm" : "°C"} />
-                            <Scatter name="Kävijät/Sade" data={EnkoraFMIData2} fill={selectedDataKey == "totalPrecipitation" ? "#B14D97" : "#AAC929"} stroke="black" />
+                            <XAxis dataKey="totalvisitors" type="number" name="Kävijämäärä" />
+                            <YAxis dataKey={selectedDataKey} type="number" name={selectedDataKey == "precipitation" ? "Sademäärä" : "Lämpötila"} unit={selectedDataKey == "precipitation" ? " mm" : "°C"} />
+                            <Scatter name="Kävijät/Sade" data={EnkoraFMIData} fill={selectedDataKey == "precipitation" ? "#B14D97" : "#AAC929"} stroke="black" />
                         </ScatterChart>
                     </ChartContainer>
 
