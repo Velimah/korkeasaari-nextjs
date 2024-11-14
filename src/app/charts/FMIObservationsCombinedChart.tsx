@@ -124,10 +124,10 @@ export default function WeatherHistoricalData() {
       <Card className='dark:bg-slate-800 bg-secondary'>
         <CardHeader>
           <CardTitle>
-            Säähavainnot 2019-2024
+            {selectedDataKey === "precipitation" ? "Lämpötila ja Sademäärä" : "Lämpötila ja Pilvisyys"}
           </CardTitle>
           <CardDescription>
-            {selectedDataKey === "precipitation" ? "Lämpötila ja Sademäärä" : "Lämpötila ja Pilvisyys"}
+            {selectedYear === 0 ? "Kaikki vuodet" : selectedYear}
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -202,6 +202,7 @@ export default function WeatherHistoricalData() {
                 strokeWidth={2}
                 dot={false}
               />
+              <Brush travellerWidth={20} stroke="#25582b" height={30} />
             </ComposedChart>
           </ChartContainer>
         </CardContent>

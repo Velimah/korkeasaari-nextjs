@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { LoadingSpinner } from "@/components/ui/loading-spinner";
 import ForecastAndPriceTable from "@/app/forecasts/ForecastAndPriceTable";
 import UpdateDatabaseAndBlob from "./UpdateDatabaseAndBlob";
+import { H2 } from "@/components/ui/H2";
 
 interface WeatherData {
   time: string;
@@ -23,17 +24,16 @@ export default function WeatherData() {
     fetchData();
   }, []);
 
-  if (!weatherData) {
-    return <LoadingSpinner />;
-  }
-
   return (
     <>
-      <UpdateDatabaseAndBlob />
+      <div className="flex justify-center items-center py-8">
+        <H2 className="text-center sm:text-start">Sään ja Kävijämäärien ennusteet</H2>
+      </div>
       <section className="flex flex-col w-full">
-        <ForecastsFMICombinedChart weatherData={weatherData} />
-        <ForecastAndPriceTable weatherData={weatherData} />
+        {weatherData && weatherData.length > 0 ? <ForecastsFMICombinedChart weatherData={weatherData} /> : <div className=" p-48"> <LoadingSpinner /></div>}
+        {weatherData && weatherData.length > 0 ? <ForecastAndPriceTable weatherData={weatherData} /> : <div className="p-48"> <LoadingSpinner /></div>}
       </section>
+      <UpdateDatabaseAndBlob />
     </>
   );
 }

@@ -11,7 +11,6 @@ import {
   Bar,
 } from 'recharts';
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { LoadingSpinner } from '../../components/ui/loading-spinner';
 import { useState } from "react";
 
 interface WeatherData {
@@ -45,10 +44,6 @@ export default function ForecastsFMICombinedChart({ weatherData }: { weatherData
       color: "#00c0d4",
     },
   } satisfies ChartConfig;
-
-  if (!weatherData) {
-    return <LoadingSpinner />;
-  }
 
   return (
     <section className="flex flex-col justify-center p-6">

@@ -132,7 +132,7 @@ export default function EnkoraDataStatic() {
   } satisfies ChartConfig;
 
   return (
-    <section className="flex flex-col">
+    <section className="flex flex-col py-6">
       <Tabs defaultValue="composedchart" className="w-full">
         <TabsList className="grid w-full grid-cols-3">
           <TabsTrigger value="composedchart">Composed Chart</TabsTrigger>

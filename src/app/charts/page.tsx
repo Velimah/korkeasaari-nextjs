@@ -11,10 +11,9 @@ export const metadata: Metadata = {
 export default function Charts() {
   return (
     <>
-      <section className="px-1 py-8">
-        <section className="items-center flex justify-center px-8">
-        </section>
-      </section>
+      <div className="flex justify-center items-center py-8">
+        <H2 className="text-center sm:text-start">Keksikää joku nimi :D</H2>
+      </div>
       <section className="space-y-3 text-center">
         <EnkoraVisitorBarChart />
         <FMIObservationsCombinedChart />
