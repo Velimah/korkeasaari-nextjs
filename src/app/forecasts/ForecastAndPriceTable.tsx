@@ -16,8 +16,8 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import * as WeatherIcons from "@/components/weathericons";
 import { BLOB, getBLOBData } from "@/hooks/fetchBLobData";
+import { getWeatherIcon } from "./ForecastWeatherIcons";
 
 interface PredictionResults {
   date: string;
@@ -36,17 +36,15 @@ interface WeatherData {
 
 export default function ForecastAndPriceTable({ weatherData }: { weatherData: WeatherData[] }) {
   const [visitorData, setVisitorData] = useState<PredictionResults[]>([]);
-  const [blobData, setBlobData] = useState<BLOB[]>([]);
 
   useEffect(() => {
     async function fetchBlobDataAndCalculate() {
       // Fetch BLOB data
-      const data = await getBLOBData();
-      setBlobData(data);
+      const blobData = await getBLOBData();
 
       // Run MLRCalculator if both weatherData and blobData are available
-      if (weatherData.length > 0 && data.length > 0) {
-        const result = MLRCalculator({ weatherData, blobData: data });
+      if (weatherData.length > 0 && blobData.length > 0) {
+        const result = MLRCalculator({ weatherData, blobData });
         if (result) {
           setVisitorData(result);
         }
@@ -56,7 +54,7 @@ export default function ForecastAndPriceTable({ weatherData }: { weatherData: We
   }, [weatherData]); // Runs when weatherData changes
 
   const chartConfig = {
-    predictedVisitors: {
+    predictedvisitors: {
       label: "Kävijämäärä",
       color: "#AAC929",
     },
@@ -72,7 +70,7 @@ export default function ForecastAndPriceTable({ weatherData }: { weatherData: We
       <Tabs defaultValue="table" className="xl:w-[700px] w-[610px] max-w-[700px]">
         <TabsList className="grid w-full grid-cols-2">
           <TabsTrigger value="table">Taulukko</TabsTrigger>
-          <TabsTrigger value="chart">Kävijämäärät</TabsTrigger>
+          <TabsTrigger value="chart">Kävijäennustegraafi</TabsTrigger>
         </TabsList>
 
         <TabsContent value="table">
@@ -86,8 +84,8 @@ export default function ForecastAndPriceTable({ weatherData }: { weatherData: We
                   <TableHead></TableHead>
                   <TableHead className="text-center">Lämpötila</TableHead>
                   <TableHead className="text-center">Sademäärä</TableHead>
-                  <TableHead className="text-center">Pilvisyys</TableHead>
-                  <TableHead className="text-center">Kävijämäärä</TableHead>
+                  <TableHead className="text-center pe-10">Pilvisyys</TableHead>
+                  <TableHead className="text-center">Kävijäennuste</TableHead>
                   <TableHead className="text-center">Hinta</TableHead>
                 </TableRow>
               </TableHeader>
@@ -95,77 +93,23 @@ export default function ForecastAndPriceTable({ weatherData }: { weatherData: We
                 {visitorData?.slice(0, 5).map((result, index) => (
 
                   <TableRow className="w-full" key={index}>
-                    <TableCell className="font-medium pe-4">{new Date(result.date).toLocaleDateString('FI-fi', { weekday: 'short', day: 'numeric', month: 'numeric', year: 'numeric' })}</TableCell>
+                    <TableCell className="pe-4">
+                      {new Date(result.date)
+                        .toLocaleDateString('FI-fi', {
+                          weekday: 'short',
+                          day: 'numeric',
+                          month: 'numeric',
+                          year: 'numeric',
+                        })
+                        .replace(/\b\w/g, (char) => char.toUpperCase())}
+                    </TableCell>
                     <TableCell>
                       {/* Icons for weather forecast */}
-                      {result.precipitation == 0 && result.temperature > 2 && result.cloudcover < 10 ? (
-                        <WeatherIcons.DrySunnyIcon />
-                      ) : result.precipitation == 0 && result.temperature > 2 && result.cloudcover < 25 ? (
-                        <WeatherIcons.DryMostlySunnyIcon />
-                      ) : result.precipitation == 0 && result.temperature > 2 && result.cloudcover < 50 ? (
-                        <WeatherIcons.DryPartlySunnyIcon />
-                      ) : result.precipitation == 0 && result.temperature > 2 && result.cloudcover < 75 ? (
-                        <WeatherIcons.DryMostlyCloudyIcon />
-                      ) : result.precipitation == 0 && result.temperature > 2 && result.cloudcover > 75 ? (
-                        <WeatherIcons.DryCloudyIcon />
-
-                      ) : result.precipitation < 2 && result.temperature > 2 && result.cloudcover < 50 ? (
-                        <WeatherIcons.RainLightPartlySunnyIcon />
-                      ) : result.precipitation < 2 && result.temperature > 2 && result.cloudcover < 75 ? (
-                        <WeatherIcons.RainLightMostlyCloudyIcon />
-                      ) : result.precipitation < 2 && result.temperature > 2 && result.cloudcover > 75 ? (
-                        <WeatherIcons.RainLightCloudyIcon />
-                      ) : result.precipitation < 4 && result.temperature > 2 && result.cloudcover < 50 ? (
-                        <WeatherIcons.RainAveragePartlySunny />
-                      ) : result.precipitation < 4 && result.temperature > 2 && result.cloudcover < 75 ? (
-                        <WeatherIcons.RainAverageMostlyCloudyIcon />
-                      ) : result.precipitation < 4 && result.temperature > 2 && result.cloudcover > 75 ? (
-                        <WeatherIcons.RainAverageCloudyIcon />
-                      ) : result.precipitation > 4 && result.temperature > 2 && result.cloudcover < 50 ? (
-                        <WeatherIcons.RainHeavyPartlySunnyIcon />
-                      ) : result.precipitation > 4 && result.temperature > 2 && result.cloudcover < 75 ? (
-                        <WeatherIcons.RainHeavyMostlyCloudyIcon />
-                      ) : result.precipitation > 4 && result.temperature > 2 && result.cloudcover > 75 ? (
-                        <WeatherIcons.RainHeavyCloudyIcon />
-
-                      ) : result.precipitation < 2 && result.temperature >= -1 && result.temperature <= 2 && result.cloudcover < 75 ? (
-                        <WeatherIcons.SleetLightPartlySunnyIcon />
-                      ) : result.precipitation < 2 && result.temperature >= -1 && result.temperature <= 2 && result.cloudcover > 75 ? (
-                        <WeatherIcons.SleetLightCloudyIcon />
-                      ) : result.precipitation < 4 && result.temperature >= -1 && result.temperature <= 2 && result.cloudcover < 75 ? (
-                        <WeatherIcons.SleetAveragePartlySunny />
-                      ) : result.precipitation < 4 && result.temperature >= -1 && result.temperature <= 2 && result.cloudcover > 75 ? (
-                        <WeatherIcons.SleetAverageCloudyIcon />
-                      ) : result.precipitation > 4 && result.temperature >= -1 && result.temperature <= 2 && result.cloudcover < 75 ? (
-                        <WeatherIcons.SleetHeavyPartlySunnyIcon />
-                      ) : result.precipitation > 4 && result.temperature >= -1 && result.temperature <= 2 && result.cloudcover > 75 ? (
-                        <WeatherIcons.SleetHeavyCloudyIcon />
-
-                      ) : result.precipitation < 2 && result.temperature < -1 && result.cloudcover < 50 ? (
-                        <WeatherIcons.SnowLightPartlySunnyIcon />
-                      ) : result.precipitation < 2 && result.temperature < -1 && result.cloudcover < 75 ? (
-                        <WeatherIcons.SnowLightMostlyCloudyIcon />
-                      ) : result.precipitation < 2 && result.temperature < -1 && result.cloudcover > 75 ? (
-                        <WeatherIcons.SnowLightCloudyIcon />
-                      ) : result.precipitation < 4 && result.temperature < -1 && result.cloudcover < 50 ? (
-                        <WeatherIcons.SnowAveragePartlySunny />
-                      ) : result.precipitation < 4 && result.temperature < -1 && result.cloudcover < 75 ? (
-                        <WeatherIcons.SnowAverageMostlyCloudyIcon />
-                      ) : result.precipitation < 4 && result.temperature < -1 && result.cloudcover > 75 ? (
-                        <WeatherIcons.SnowAverageCloudyIcon />
-                      ) : result.precipitation > 4 && result.temperature < -1 && result.cloudcover < 50 ? (
-                        <WeatherIcons.SnowHeavyPartlySunnyIcon />
-                      ) : result.precipitation > 4 && result.temperature < -1 && result.cloudcover < 75 ? (
-                        <WeatherIcons.SnowHeavyMostlyCloudyIcon />
-                      ) : result.precipitation > 4 && result.temperature < -1 && result.cloudcover > 75 ? (
-                        <WeatherIcons.SnowHeavyCloudyIcon />
-                      ) : (
-                        <LoadingSpinner />
-                      )}
+                      {getWeatherIcon(result.precipitation, result.temperature, result.cloudcover)}
                     </TableCell>
                     <TableCell className="text-center">{result.temperature.toFixed(1)} °C</TableCell>
                     <TableCell className="text-center">{result.precipitation.toFixed(1)} mm</TableCell>
-                    <TableCell className="text-center">{result.cloudcover.toFixed(1)} %</TableCell>
+                    <TableCell className="text-center pe-10">{result.cloudcover.toFixed(1)} %</TableCell>
                     <TableCell className="text-center">{result.predictedvisitors.toFixed(0)}</TableCell>
                     <TableCell className="text-center font-medium">20 €</TableCell>
                   </TableRow>
@@ -231,9 +175,9 @@ export default function ForecastAndPriceTable({ weatherData }: { weatherData: We
                   />
                   <YAxis />
                   <Bar
-                    dataKey="predictedVisitors"
-                    fill="var(--color-predictedVisitors)"
-                    radius={4}
+                    dataKey="predictedvisitors"
+                    fill="var(--color-predictedvisitors)"
+                    radius={[2, 2, 0, 0]}
                     barSize={50}
                   />
                 </ComposedChart>

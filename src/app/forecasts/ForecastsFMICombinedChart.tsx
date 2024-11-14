@@ -10,7 +10,9 @@ import {
   ComposedChart,
   Bar,
 } from 'recharts';
+import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { LoadingSpinner } from '../../components/ui/loading-spinner';
+import { useState } from "react";
 
 interface WeatherData {
   time: string;
@@ -21,31 +23,57 @@ interface WeatherData {
 
 // Define the WeatherData component
 export default function ForecastsFMICombinedChart({ weatherData }: { weatherData: WeatherData[] }) {
+  const [selectedDataKey, setSelectedDataKey] = useState<string>("precipitation");
+
+  // Map selectedDataKey to labels and color variables
+  const yAxisLabel = selectedDataKey === "precipitation"
+    ? "Sademäärä (mm)"
+    : "Pilvisyys (%)";
+
 
   const chartConfig = {
     temperature: {
-      label: "Lämpötila (°C)",
-      color: "#25582b",
+      label: "Keskimääräinen Lämpötila",
+      color: "#AAC929",
     },
     precipitation: {
-      label: "Sademäärä (mm)",
-      color: "#aac929",
+      label: "Sademäärä",
+      color: "#4e86ff",
     },
-  } satisfies ChartConfig
+    cloudcover: {
+      label: "Pilvisyys",
+      color: "#00c0d4",
+    },
+  } satisfies ChartConfig;
 
   if (!weatherData) {
     return <LoadingSpinner />;
   }
 
   return (
-    <section className="flex justify-center p-6">
+    <section className="flex flex-col justify-center p-6">
+
+      <div className="py-4">
+        <Select onValueChange={(value) => setSelectedDataKey(value)} value={selectedDataKey.toString()}>
+          <SelectTrigger className="w-[250px]">
+            <SelectValue placeholder={yAxisLabel} />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectGroup>
+              <SelectItem value="precipitation">Sademäärä</SelectItem>
+              <SelectItem value="cloudcover">Pilvisyys</SelectItem>
+            </SelectGroup>
+          </SelectContent>
+        </Select>
+      </div>
+
       <Card className='w-full text-center'>
         <CardHeader>
           <CardTitle>
             Sääennuste
           </CardTitle>
           <CardDescription>
-            Lämpötila ja Sademäärä Seuraavalle 60 Tunnille.
+            Lämpötila ja Sademäärä
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -56,7 +84,6 @@ export default function ForecastsFMICombinedChart({ weatherData }: { weatherData
               <ChartTooltip
                 content={
                   <ChartTooltipContent
-                    // Access the 'payload' to get the full data object, including the 'date'
                     labelFormatter={(_, payload) => {
                       const dataPoint = payload && payload[0] ? payload[0].payload : null;
                       if (dataPoint) {
@@ -70,24 +97,20 @@ export default function ForecastsFMICombinedChart({ weatherData }: { weatherData
                       return "";
                     }}
                     formatter={(value, name) => (
-                      <>
-                        <div className="flex items-center justify-between min-w-[130px] w-full gap-4 text-xs text-muted-foreground">
-                          <div className="flex items-center gap-2">
-                            <div
-                              className="h-2.5 w-2.5 shrink-0 rounded-[2px] bg-[--color-bg]"
-                              style={
-                                {
-                                  "--color-bg": `var(--color-${name})`,
-                                } as React.CSSProperties
-                              }
-                            />
-                            {chartConfig[name as keyof typeof chartConfig]?.label || name}
-                          </div>
-                          <div className="flex items-center gap-0.5 font-mono font-medium text-right text-foreground">
-                            {value}
-                          </div>
+                      <div className="flex items-center justify-between min-w-[130px] w-full gap-4 text-xs text-muted-foreground">
+                        <div className="flex items-center gap-2">
+                          <div
+                            className="h-2.5 w-2.5 shrink-0 rounded-[2px] bg-[--color-bg]"
+                            style={{
+                              "--color-bg": `var(--color-${name})`,
+                            } as React.CSSProperties}
+                          />
+                          {chartConfig[name as keyof typeof chartConfig]?.label || name}
                         </div>
-                      </>
+                        <div className="flex items-center gap-0.5 font-mono font-medium text-right text-foreground">
+                          {value}
+                        </div>
+                      </div>
                     )}
                   />
                 }
@@ -101,8 +124,8 @@ export default function ForecastsFMICombinedChart({ weatherData }: { weatherData
                 axisLine={false}
                 tickFormatter={(value) => {
                   const date = new Date(value);
-                  const dayOfWeek = date.toLocaleDateString('fi-FI', { weekday: 'short' }); // e.g., "Ma" for Monday in Finnish
-                  const hour = date.toLocaleTimeString('fi-FI', { hour: '2-digit', minute: '2-digit', hour12: false }); // e.g., "20:00"
+                  const dayOfWeek = date.toLocaleDateString('fi-FI', { weekday: 'short' });
+                  const hour = date.toLocaleTimeString('fi-FI', { hour: '2-digit', minute: '2-digit', hour12: false });
                   return `${dayOfWeek} ${hour}`;
                 }}
               />
@@ -118,15 +141,20 @@ export default function ForecastsFMICombinedChart({ weatherData }: { weatherData
               <YAxis
                 yAxisId="right"
                 orientation="right"
-                label={{ value: 'Sademäärä (mm)', angle: 90, position: 'insideRight' }}
-                domain={[0, (dataMax: number) => Math.ceil(dataMax + 2)]} // Ensures that the max value is slightly above the data max
+                label={{ value: yAxisLabel, angle: 90, position: 'insideRight' }}
+                domain={[0, (dataMax: number) => Math.ceil(dataMax + 2)]}
               />
-              <Bar
-                yAxisId="right"
-                dataKey="precipitation"
-                fill="var(--color-precipitation)"
-                radius={4}
-              />
+
+              {/* Conditionally render Bar based on selectedDataKey */}
+              {selectedDataKey === "precipitation" || selectedDataKey === "cloudcover" ? (
+                <Bar
+                  yAxisId="right"
+                  dataKey={selectedDataKey}
+                  fill={`var(--color-${selectedDataKey})`}
+                  radius={[2, 2, 0, 0]}
+                />
+              ) : null}
+
               <Line
                 yAxisId="left"
                 dataKey="temperature"
@@ -142,4 +170,5 @@ export default function ForecastsFMICombinedChart({ weatherData }: { weatherData
     </section>
   );
 }
+
 
