@@ -15,7 +15,7 @@ import { LoadingSpinner } from '../../components/ui/loading-spinner';
 interface WeatherData {
   time: string;
   temperature: number;
-  cloudCover: number;
+  cloudcover: number;
   precipitation: number;
 }
 

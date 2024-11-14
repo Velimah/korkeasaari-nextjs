@@ -3,12 +3,12 @@ import { fetchFMIForecastData } from '@/hooks/fetchFMIForecastData';
 import { useEffect, useState } from "react";
 import { LoadingSpinner } from "@/components/ui/loading-spinner";
 import ForecastAndPriceTable from "@/app/forecasts/ForecastAndPriceTable";
-import {H2} from "@/components/ui/H2";
+import { H2 } from "@/components/ui/H2";
 
 interface WeatherData {
     time: string;
     temperature: number;
-    cloudCover: number;
+    cloudcover: number;
     precipitation: number;
 }
 
@@ -41,13 +41,13 @@ export default function WeatherData() {
             <section className="flex justify-center pt-5 w-full">
                 <div className="xl:w-1/3 w-1/2 flex flex-col">
                     <H2 className="p-5">
-                    Tarkkaa Dataa vuoden ympäri!
-                </H2>
+                        Tarkkaa Dataa vuoden ympäri!
+                    </H2>
                     <div className="flex flex-col">
-                <p className="pl-5 pt-10 font-bold">Hallinnoi dataasi tarkasti Zoolyticsin filtteröinnin avulla.</p></div>
-                <p className="pl-5 pt-2 pb-10">Filtteröi tarkka ajanjakso miltä haluat dataa.</p>
+                        <p className="pl-5 pt-10 font-bold">Hallinnoi dataasi tarkasti Zoolyticsin filtteröinnin avulla.</p></div>
+                    <p className="pl-5 pt-2 pb-10">Filtteröi tarkka ajanjakso miltä haluat dataa.</p>
                     <div className="flex justify-center">
-                    <p className="w-[100%] flex rounded border-b-8" style={{ borderColor: '#AAC929' }}></p>
+                        <p className="w-[100%] flex rounded border-b-8" style={{ borderColor: '#AAC929' }}></p>
                     </div>
                     <p className="pl-5 pt-10 font-bold"> Tarkat ennusteet
                     </p>

@@ -32,7 +32,6 @@ export default function EnkoraDataStatic() {
   useEffect(() => {
     async function fetchBlobData() {
       const data = await getBLOBData();
-      console.log('BLOBBYDATA:', data);
       setBlobData(data);
       applyYearFilter(selectedYear, data); // Apply initial filter
     }

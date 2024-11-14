@@ -16,62 +16,44 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import {
-  DrySunnyIcon,
-  DryCloudyIcon,
-  DryMostlyCloudyIcon,
-  DryMostlySunnyIcon,
-  DryPartlySunnyIcon,
-  RainAverageCloudyIcon,
-  RainAverageMostlyCloudyIcon,
-  RainAveragePartlySunny,
-  RainHeavyMostlyCloudyIcon,
-  RainHeavyCloudyIcon,
-  RainHeavyPartlySunnyIcon,
-  RainLightPartlySunnyIcon,
-  RainLightMostlyCloudyIcon,
-  RainLightCloudyIcon,
-  SnowAverageCloudyIcon,
-  SnowAverageMostlyCloudyIcon,
-  SnowAveragePartlySunny,
-  SnowHeavyCloudyIcon,
-  SnowHeavyMostlyCloudyIcon,
-  SnowHeavyPartlySunnyIcon,
-  SnowLightCloudyIcon,
-  SnowLightMostlyCloudyIcon,
-  SnowLightPartlySunnyIcon,
-  SleetAverageCloudyIcon,
-  SleetAveragePartlySunny,
-  SleetHeavyCloudyIcon,
-  SleetHeavyPartlySunnyIcon,
-  SleetLightCloudyIcon,
-  SleetLightPartlySunnyIcon,
-} from "@/components/weathericons";
+import * as WeatherIcons from "@/components/weathericons";
+import { BLOB, getBLOBData } from "@/hooks/fetchBLobData";
 
 interface PredictionResults {
   date: string;
   temperature: number;
   precipitation: number;
-  cloudCover: number;
-  predictedVisitors: number;
+  cloudcover: number;
+  predictedvisitors: number;
 }
 
 interface WeatherData {
   time: string;
   temperature: number;
-  cloudCover: number;
+  cloudcover: number;
   precipitation: number;
 }
 
 export default function ForecastAndPriceTable({ weatherData }: { weatherData: WeatherData[] }) {
   const [visitorData, setVisitorData] = useState<PredictionResults[]>([]);
+  const [blobData, setBlobData] = useState<BLOB[]>([]);
 
   useEffect(() => {
-    const data = MLRCalculator({ weatherData });
-    if (data) {
-      setVisitorData(data);
+    async function fetchBlobDataAndCalculate() {
+      // Fetch BLOB data
+      const data = await getBLOBData();
+      setBlobData(data);
+
+      // Run MLRCalculator if both weatherData and blobData are available
+      if (weatherData.length > 0 && data.length > 0) {
+        const result = MLRCalculator({ weatherData, blobData: data });
+        if (result) {
+          setVisitorData(result);
+        }
+      }
     }
-  }, [weatherData]); // Only run when weatherData changes
+    fetchBlobDataAndCalculate();
+  }, [weatherData]); // Runs when weatherData changes
 
   const chartConfig = {
     predictedVisitors: {
@@ -116,75 +98,75 @@ export default function ForecastAndPriceTable({ weatherData }: { weatherData: We
                     <TableCell className="font-medium pe-4">{new Date(result.date).toLocaleDateString('FI-fi', { weekday: 'short', day: 'numeric', month: 'numeric', year: 'numeric' })}</TableCell>
                     <TableCell>
                       {/* Icons for weather forecast */}
-                      {result.precipitation == 0 && result.temperature > 2 && result.cloudCover < 10 ? (
-                        <DrySunnyIcon />
-                      ) : result.precipitation == 0 && result.temperature > 2 && result.cloudCover < 25 ? (
-                        <DryMostlySunnyIcon />
-                      ) : result.precipitation == 0 && result.temperature > 2 && result.cloudCover < 50 ? (
-                        <DryPartlySunnyIcon />
-                      ) : result.precipitation == 0 && result.temperature > 2 && result.cloudCover < 75 ? (
-                        <DryMostlyCloudyIcon />
-                      ) : result.precipitation == 0 && result.temperature > 2 && result.cloudCover > 75 ? (
-                        <DryCloudyIcon />
+                      {result.precipitation == 0 && result.temperature > 2 && result.cloudcover < 10 ? (
+                        <WeatherIcons.DrySunnyIcon />
+                      ) : result.precipitation == 0 && result.temperature > 2 && result.cloudcover < 25 ? (
+                        <WeatherIcons.DryMostlySunnyIcon />
+                      ) : result.precipitation == 0 && result.temperature > 2 && result.cloudcover < 50 ? (
+                        <WeatherIcons.DryPartlySunnyIcon />
+                      ) : result.precipitation == 0 && result.temperature > 2 && result.cloudcover < 75 ? (
+                        <WeatherIcons.DryMostlyCloudyIcon />
+                      ) : result.precipitation == 0 && result.temperature > 2 && result.cloudcover > 75 ? (
+                        <WeatherIcons.DryCloudyIcon />
 
-                      ) : result.precipitation < 2 && result.temperature > 2 && result.cloudCover < 50 ? (
-                        <RainLightPartlySunnyIcon />
-                      ) : result.precipitation < 2 && result.temperature > 2 && result.cloudCover < 75 ? (
-                        <RainLightMostlyCloudyIcon />
-                      ) : result.precipitation < 2 && result.temperature > 2 && result.cloudCover > 75 ? (
-                        <RainLightCloudyIcon />
-                      ) : result.precipitation < 4 && result.temperature > 2 && result.cloudCover < 50 ? (
-                        <RainAveragePartlySunny />
-                      ) : result.precipitation < 4 && result.temperature > 2 && result.cloudCover < 75 ? (
-                        <RainAverageMostlyCloudyIcon />
-                      ) : result.precipitation < 4 && result.temperature > 2 && result.cloudCover > 75 ? (
-                        <RainAverageCloudyIcon />
-                      ) : result.precipitation > 4 && result.temperature > 2 && result.cloudCover < 50 ? (
-                        <RainHeavyPartlySunnyIcon />
-                      ) : result.precipitation > 4 && result.temperature > 2 && result.cloudCover < 75 ? (
-                        <RainHeavyMostlyCloudyIcon />
-                      ) : result.precipitation > 4 && result.temperature > 2 && result.cloudCover > 75 ? (
-                        <RainHeavyCloudyIcon />
+                      ) : result.precipitation < 2 && result.temperature > 2 && result.cloudcover < 50 ? (
+                        <WeatherIcons.RainLightPartlySunnyIcon />
+                      ) : result.precipitation < 2 && result.temperature > 2 && result.cloudcover < 75 ? (
+                        <WeatherIcons.RainLightMostlyCloudyIcon />
+                      ) : result.precipitation < 2 && result.temperature > 2 && result.cloudcover > 75 ? (
+                        <WeatherIcons.RainLightCloudyIcon />
+                      ) : result.precipitation < 4 && result.temperature > 2 && result.cloudcover < 50 ? (
+                        <WeatherIcons.RainAveragePartlySunny />
+                      ) : result.precipitation < 4 && result.temperature > 2 && result.cloudcover < 75 ? (
+                        <WeatherIcons.RainAverageMostlyCloudyIcon />
+                      ) : result.precipitation < 4 && result.temperature > 2 && result.cloudcover > 75 ? (
+                        <WeatherIcons.RainAverageCloudyIcon />
+                      ) : result.precipitation > 4 && result.temperature > 2 && result.cloudcover < 50 ? (
+                        <WeatherIcons.RainHeavyPartlySunnyIcon />
+                      ) : result.precipitation > 4 && result.temperature > 2 && result.cloudcover < 75 ? (
+                        <WeatherIcons.RainHeavyMostlyCloudyIcon />
+                      ) : result.precipitation > 4 && result.temperature > 2 && result.cloudcover > 75 ? (
+                        <WeatherIcons.RainHeavyCloudyIcon />
 
-                      ) : result.precipitation < 2 && result.temperature >= -1 && result.temperature <= 2 && result.cloudCover < 75 ? (
-                        <SleetLightPartlySunnyIcon />
-                      ) : result.precipitation < 2 && result.temperature >= -1 && result.temperature <= 2 && result.cloudCover > 75 ? (
-                        <SleetLightCloudyIcon />
-                      ) : result.precipitation < 4 && result.temperature >= -1 && result.temperature <= 2 && result.cloudCover < 75 ? (
-                        <SleetAveragePartlySunny />
-                      ) : result.precipitation < 4 && result.temperature >= -1 && result.temperature <= 2 && result.cloudCover > 75 ? (
-                        <SleetAverageCloudyIcon />
-                      ) : result.precipitation > 4 && result.temperature >= -1 && result.temperature <= 2 && result.cloudCover < 75 ? (
-                        <SleetHeavyPartlySunnyIcon />
-                      ) : result.precipitation > 4 && result.temperature >= -1 && result.temperature <= 2 && result.cloudCover > 75 ? (
-                        <SleetHeavyCloudyIcon />
+                      ) : result.precipitation < 2 && result.temperature >= -1 && result.temperature <= 2 && result.cloudcover < 75 ? (
+                        <WeatherIcons.SleetLightPartlySunnyIcon />
+                      ) : result.precipitation < 2 && result.temperature >= -1 && result.temperature <= 2 && result.cloudcover > 75 ? (
+                        <WeatherIcons.SleetLightCloudyIcon />
+                      ) : result.precipitation < 4 && result.temperature >= -1 && result.temperature <= 2 && result.cloudcover < 75 ? (
+                        <WeatherIcons.SleetAveragePartlySunny />
+                      ) : result.precipitation < 4 && result.temperature >= -1 && result.temperature <= 2 && result.cloudcover > 75 ? (
+                        <WeatherIcons.SleetAverageCloudyIcon />
+                      ) : result.precipitation > 4 && result.temperature >= -1 && result.temperature <= 2 && result.cloudcover < 75 ? (
+                        <WeatherIcons.SleetHeavyPartlySunnyIcon />
+                      ) : result.precipitation > 4 && result.temperature >= -1 && result.temperature <= 2 && result.cloudcover > 75 ? (
+                        <WeatherIcons.SleetHeavyCloudyIcon />
 
-                      ) : result.precipitation < 2 && result.temperature < -1 && result.cloudCover < 50 ? (
-                        <SnowLightPartlySunnyIcon />
-                      ) : result.precipitation < 2 && result.temperature < -1 && result.cloudCover < 75 ? (
-                        <SnowLightMostlyCloudyIcon />
-                      ) : result.precipitation < 2 && result.temperature < -1 && result.cloudCover > 75 ? (
-                        <SnowLightCloudyIcon />
-                      ) : result.precipitation < 4 && result.temperature < -1 && result.cloudCover < 50 ? (
-                        <SnowAveragePartlySunny />
-                      ) : result.precipitation < 4 && result.temperature < -1 && result.cloudCover < 75 ? (
-                        <SnowAverageMostlyCloudyIcon />
-                      ) : result.precipitation < 4 && result.temperature < -1 && result.cloudCover > 75 ? (
-                        <SnowAverageCloudyIcon />
-                      ) : result.precipitation > 4 && result.temperature < -1 && result.cloudCover < 50 ? (
-                        <SnowHeavyPartlySunnyIcon />
-                      ) : result.precipitation > 4 && result.temperature < -1 && result.cloudCover < 75 ? (
-                        <SnowHeavyMostlyCloudyIcon />
-                      ) : result.precipitation > 4 && result.temperature < -1 && result.cloudCover > 75 ? (
-                        <SnowHeavyCloudyIcon />
+                      ) : result.precipitation < 2 && result.temperature < -1 && result.cloudcover < 50 ? (
+                        <WeatherIcons.SnowLightPartlySunnyIcon />
+                      ) : result.precipitation < 2 && result.temperature < -1 && result.cloudcover < 75 ? (
+                        <WeatherIcons.SnowLightMostlyCloudyIcon />
+                      ) : result.precipitation < 2 && result.temperature < -1 && result.cloudcover > 75 ? (
+                        <WeatherIcons.SnowLightCloudyIcon />
+                      ) : result.precipitation < 4 && result.temperature < -1 && result.cloudcover < 50 ? (
+                        <WeatherIcons.SnowAveragePartlySunny />
+                      ) : result.precipitation < 4 && result.temperature < -1 && result.cloudcover < 75 ? (
+                        <WeatherIcons.SnowAverageMostlyCloudyIcon />
+                      ) : result.precipitation < 4 && result.temperature < -1 && result.cloudcover > 75 ? (
+                        <WeatherIcons.SnowAverageCloudyIcon />
+                      ) : result.precipitation > 4 && result.temperature < -1 && result.cloudcover < 50 ? (
+                        <WeatherIcons.SnowHeavyPartlySunnyIcon />
+                      ) : result.precipitation > 4 && result.temperature < -1 && result.cloudcover < 75 ? (
+                        <WeatherIcons.SnowHeavyMostlyCloudyIcon />
+                      ) : result.precipitation > 4 && result.temperature < -1 && result.cloudcover > 75 ? (
+                        <WeatherIcons.SnowHeavyCloudyIcon />
                       ) : (
                         <LoadingSpinner />
                       )}
                     </TableCell>
                     <TableCell className="text-center">{result.temperature.toFixed(1)} °C</TableCell>
                     <TableCell className="text-center">{result.precipitation.toFixed(1)} mm</TableCell>
-                    <TableCell className="text-center">{result.cloudCover.toFixed(1)} %</TableCell>
-                    <TableCell className="text-center">{result.predictedVisitors.toFixed(0)}</TableCell>
+                    <TableCell className="text-center">{result.cloudcover.toFixed(1)} %</TableCell>
+                    <TableCell className="text-center">{result.predictedvisitors.toFixed(0)}</TableCell>
                     <TableCell className="text-center font-medium">20 €</TableCell>
                   </TableRow>
                 ))}

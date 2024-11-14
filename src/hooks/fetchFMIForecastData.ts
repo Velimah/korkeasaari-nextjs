@@ -8,7 +8,7 @@ interface MeasurementTVP {
 interface WeatherData {
   time: string;
   temperature: number;
-  cloudCover: number;
+  cloudcover: number;
   precipitation: number;
 }
 
@@ -23,7 +23,7 @@ export const fetchFMIForecastData = async (): Promise<WeatherData[]> => {
   try {
     const endTime = getEndTime();
     const response = await fetch(
-      `https://opendata.fmi.fi/wfs?service=WFS&version=2.0.0&request=getFeature&storedquery_id=fmi::forecast::edited::weather::scandinavia::point::timevaluepair&parameters=Precipitation1h,Temperature,TotalCloudCover&place=korkeasaari&endtime=${endTime}&`,
+      `https://opendata.fmi.fi/wfs?service=WFS&version=2.0.0&request=getFeature&storedquery_id=fmi::forecast::edited::weather::scandinavia::point::timevaluepair&parameters=Precipitation1h,Temperature,Totalcloudcover&place=korkeasaari&endtime=${endTime}&`,
     );
 
     if (!response.ok) {
@@ -47,7 +47,7 @@ export const fetchFMIForecastData = async (): Promise<WeatherData[]> => {
 
     let temperatureData: MeasurementTVP[] = [];
     let precipitationAmountData: MeasurementTVP[] = [];
-    let totalCloudCoverData: MeasurementTVP[] = [];
+    let totalcloudcoverData: MeasurementTVP[] = [];
 
     measurementTimeseriesElements.forEach((member: any) => {
       const series =
@@ -80,14 +80,14 @@ export const fetchFMIForecastData = async (): Promise<WeatherData[]> => {
         precipitationAmountData = currentSeriesData;
       } else if (observedProperty.includes("Temperature")) {
         temperatureData = currentSeriesData;
-      } else if (observedProperty.includes("TotalCloudCover")) {
-        totalCloudCoverData = currentSeriesData;
+      } else if (observedProperty.includes("Totalcloudcover")) {
+        totalcloudcoverData = currentSeriesData;
       }
     });
 
     const combinedData = temperatureData.map((tempEntry) => {
       // Find the corresponding cloud cover entry
-      const cloudCoverEntry = totalCloudCoverData.find(
+      const cloudcoverEntry = totalcloudcoverData.find(
         (cloudEntry) => cloudEntry.time === tempEntry.time,
       );
 
@@ -97,13 +97,9 @@ export const fetchFMIForecastData = async (): Promise<WeatherData[]> => {
 
       return {
         time: tempEntry.time,
-        temperature: parseFloat(tempEntry.value.toFixed(1)),
-        cloudCover: cloudCoverEntry
-          ? parseFloat(cloudCoverEntry.value.toFixed(1))
-          : 0,
-        precipitation: precipitationEntry
-          ? parseFloat(precipitationEntry.value.toFixed(1))
-          : 0,
+        temperature: tempEntry.value ? tempEntry.value : 0,
+        cloudcover: cloudcoverEntry ? cloudcoverEntry.value : 0, // Cap at 8 to prevent overflow
+        precipitation: precipitationEntry ? precipitationEntry.value : 0,
       };
     });
 

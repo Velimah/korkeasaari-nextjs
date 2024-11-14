@@ -61,7 +61,7 @@ export default async function UpdateFMIDatabase() {
           body: JSON.stringify({
             date: proceccedFMIWeatherData.date,
             temperature: proceccedFMIWeatherData.temperature,
-            cloudCover: proceccedFMIWeatherData.cloudCover,
+            cloudcover: proceccedFMIWeatherData.cloudcover,
             precipitation: proceccedFMIWeatherData.precipitation,
           }),
         });

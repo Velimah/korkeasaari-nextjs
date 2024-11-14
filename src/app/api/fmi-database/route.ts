@@ -22,8 +22,8 @@ export async function POST(request: NextRequest) {
 
     // Insert each entry into the database
     await sql`
-        INSERT INTO weatherdata (date, temperature, precipitation, cloudCover)
-        VALUES (${weatherData.date}, ${weatherData.temperature}, ${weatherData.precipitation}, ${weatherData.cloudCover})
+        INSERT INTO weatherdata (date, temperature, precipitation, cloudcover)
+        VALUES (${weatherData.date}, ${weatherData.temperature}, ${weatherData.precipitation}, ${weatherData.cloudcover})
         ON CONFLICT (date) DO NOTHING;
       `;
 

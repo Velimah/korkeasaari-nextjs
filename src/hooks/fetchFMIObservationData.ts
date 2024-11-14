@@ -9,7 +9,7 @@ interface MeasurementTVP {
 export interface WeatherData {
   time: string;
   temperature: number;
-  cloudCover: number;
+  cloudcover: number;
   precipitation: number;
 }
 
@@ -43,7 +43,7 @@ export const fetchFMIObservationData = async (
 
     let temperatureData: MeasurementTVP[] = [];
     let precipitationAmountData: MeasurementTVP[] = [];
-    let totalCloudCoverData: MeasurementTVP[] = [];
+    let totalcloudcoverData: MeasurementTVP[] = [];
 
     measurementTimeseriesElements.forEach((member: any) => {
       const series =
@@ -77,13 +77,13 @@ export const fetchFMIObservationData = async (
       } else if (observedProperty.includes("t2m")) {
         temperatureData = currentSeriesData;
       } else if (observedProperty.includes("n_man")) {
-        totalCloudCoverData = currentSeriesData;
+        totalcloudcoverData = currentSeriesData;
       }
     });
 
     const combinedData = temperatureData.map((tempEntry) => {
       // Find the corresponding cloud cover entry
-      const cloudCoverEntry = totalCloudCoverData.find(
+      const cloudcoverEntry = totalcloudcoverData.find(
         (cloudEntry) => cloudEntry.time === tempEntry.time,
       );
 
@@ -94,9 +94,9 @@ export const fetchFMIObservationData = async (
       return {
         time: tempEntry.time,
         temperature: tempEntry.value ? tempEntry.value : 0,
-        cloudCover: cloudCoverEntry
-          ? cloudCoverEntry.value * 12.5 // Convert to percentage
-          : 0,
+        cloudcover: cloudcoverEntry
+          ? Math.min(cloudcoverEntry.value, 8) * 12.5
+          : 0, // Cap at 8 to prevent overflow
         precipitation: precipitationEntry ? precipitationEntry.value : 0,
       };
     });

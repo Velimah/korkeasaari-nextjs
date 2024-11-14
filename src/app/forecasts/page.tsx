@@ -5,12 +5,11 @@ import { useEffect, useState } from "react";
 import { LoadingSpinner } from "@/components/ui/loading-spinner";
 import ForecastAndPriceTable from "@/app/forecasts/ForecastAndPriceTable";
 import UpdateDatabaseAndBlob from "./UpdateDatabaseAndBlob";
-import { getBLOBData, BLOB } from "@/hooks/fetchBLobData";
 
 interface WeatherData {
   time: string;
   temperature: number;
-  cloudCover: number;
+  cloudcover: number;
   precipitation: number;
 }
 
@@ -23,17 +22,6 @@ export default function WeatherData() {
     }
     fetchData();
   }, []);
-
-  const [blobData, setBlobData] = useState<BLOB[]>([]);
-  useEffect(() => {
-    async function fetchBlobData() {
-      const data = await getBLOBData();
-      setBlobData(data);
-      console.log('BLOB:', data);
-    }
-    fetchBlobData();
-  }, []);
-
 
   if (!weatherData) {
     return <LoadingSpinner />;
