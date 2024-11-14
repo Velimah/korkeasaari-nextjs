@@ -16,6 +16,7 @@ interface FormattedVisitorData {
   kulkulupa: number;
   ilmaiskavijat: number;
   paasyliput: number;
+  kampanjakavijat: number;
   verkkokauppa: number;
   vuosiliput: number;
   [key: string]: number | string; // Add this line to allow dynamic indexing
@@ -25,6 +26,7 @@ const idMap: { [key: string]: string } = {
   "2": "kulkulupa",
   "3": "ilmaiskavijat",
   "5": "paasyliput",
+  "7": "kampanjakavijat",
   "18": "verkkokauppa",
   "19": "vuosiliput",
 };
@@ -45,6 +47,7 @@ export default function processEnkoraVisitorData(
         kulkulupa: 0,
         ilmaiskavijat: 0,
         paasyliput: 0,
+        kampanjakavijat: 0,
         verkkokauppa: 0,
         vuosiliput: 0,
       };

@@ -1,7 +1,7 @@
 import { sql } from "@vercel/postgres";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
-export async function GET(request: Request) {
+export async function GET(request: NextRequest) {
   try {
     const visitorData =
       await sql`SELECT date FROM visitordata ORDER BY date ASC;`;
@@ -16,13 +16,13 @@ export async function GET(request: Request) {
   }
 }
 
-export async function POST(request: Request) {
+export async function POST(request: NextRequest) {
   try {
     const visitorData = await request.json(); // Get the body content
 
     await sql`
-      INSERT INTO visitordata (date, kulkulupa, ilmaiskavijat, paasyliput, verkkokauppa, vuosiliput)
-      VALUES (${visitorData.date}, ${visitorData.kulkulupa}, ${visitorData.ilmaiskavijat}, ${visitorData.paasyliput}, ${visitorData.verkkokauppa}, ${visitorData.vuosiliput})
+      INSERT INTO visitordata (date, kulkulupa, ilmaiskavijat, paasyliput, kampanjakavijat, verkkokauppa, vuosiliput)
+      VALUES (${visitorData.date}, ${visitorData.kulkulupa}, ${visitorData.ilmaiskavijat}, ${visitorData.paasyliput}, ${visitorData.kampanjakavijat}, ${visitorData.verkkokauppa}, ${visitorData.vuosiliput})
       ON CONFLICT (date) DO NOTHING;
     `;
 

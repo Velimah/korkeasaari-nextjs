@@ -135,7 +135,6 @@ export default function MLRCalculator({
     // Get the average weather forecast data for each day
     const averageWeatherData = getAveragesFromForecast(weatherData);
     const predictions = [];
-    //console.log('weatherforecastGroupedByDay:', averageWeatherData);
 
     //loop through the average weather forecast data for each day and predict the visitor counts
     for (let i = 0; i < averageWeatherData.length; i++) {
@@ -165,7 +164,6 @@ export default function MLRCalculator({
         monthlyDataWeather[month],
         formattedMonthlyDataVisitors,
       );
-      //console.log(`Regression ${i + 1}:`, regression);
 
       // Predict the visitor count for the day using average temperature and precipitation forecast for the day
       let result = regression.predict([
@@ -196,8 +194,7 @@ export default function MLRCalculator({
     //return array of prediction objects
     return predictions;
   }
-
   const predictionResults = PredictVisitorCounts();
-  //console.log('Prediction results:', predictionResults);
+
   return predictionResults;
 }

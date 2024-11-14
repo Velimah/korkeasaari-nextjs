@@ -29,7 +29,6 @@ export const fetchFMIObservationData = async (
     }
     const responseText = await response.text();
 
-    //console.log("ennuste", responseText);
     // Initialize the XML parser
     const parser = new XMLParser({
       ignoreAttributes: false, // Preserve attributes
@@ -95,7 +94,7 @@ export const fetchFMIObservationData = async (
 
       return {
         time: tempEntry.time,
-        temperature: tempEntry.value,
+        temperature: tempEntry.value ? tempEntry.value : 0,
         cloudCover: cloudCoverEntry
           ? cloudCoverEntry.value * 12.5 // Convert to percentage
           : 0,
