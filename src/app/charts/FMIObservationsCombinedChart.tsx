@@ -117,94 +117,98 @@ export default function WeatherHistoricalData() {
 
       </div>
 
-      {EnkoraFMIData && EnkoraFMIData.length > 0 ?
-        <Card className='dark:bg-slate-800 bg-secondary'>
-          <CardHeader>
-            <CardTitle>
-              {selectedDataKey === "precipitation" ? "Lämpötila ja Sademäärä" : "Lämpötila ja Pilvisyys"}
-            </CardTitle>
-            <CardDescription>
-              {selectedYear === 0 ? "Kaikki vuodet" : selectedYear}
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <ChartContainer config={chartConfig} className="h-[400px] w-full">
-              <ComposedChart accessibilityLayer data={EnkoraFMIData}>
-                <CartesianGrid vertical={false} />
-                <ChartTooltip
-                  content={
-                    <ChartTooltipContent
-                      labelFormatter={(value) => {
-                        return new Date(value).toLocaleDateString("fi-FI", {
-                          day: "numeric",
-                          month: "short",
-                          year: "numeric",
-                          weekday: "short",
-                        });
-                      }}
-                      formatter={(value, name) => (
-                        <>
-                          <div className="flex items-center justify-between min-w-[130px] w-full gap-4 text-xs text-muted-foreground">
-                            <div className="flex items-center gap-2">
-                              <div
-                                className="h-2.5 w-2.5 shrink-0 rounded-[2px] bg-[--color-bg]"
-                                style={{
-                                  "--color-bg": `var(--color-${name})`,
-                                } as React.CSSProperties}
-                              />
-                              {chartConfig[name as keyof typeof chartConfig]?.label || name}
+
+      <Card className='dark:bg-slate-800 bg-secondary'>
+        {EnkoraFMIData && EnkoraFMIData.length > 0 ?
+          <>
+            <CardHeader>
+              <CardTitle>
+                {selectedDataKey === "precipitation" ? "Lämpötila ja Sademäärä" : "Lämpötila ja Pilvisyys"}
+              </CardTitle>
+              <CardDescription>
+                {selectedYear === 0 ? "Kaikki vuodet" : selectedYear}
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <ChartContainer config={chartConfig} className="h-[400px] w-full">
+                <ComposedChart accessibilityLayer data={EnkoraFMIData}>
+                  <CartesianGrid vertical={false} />
+                  <ChartTooltip
+                    content={
+                      <ChartTooltipContent
+                        labelFormatter={(value) => {
+                          return new Date(value).toLocaleDateString("fi-FI", {
+                            day: "numeric",
+                            month: "short",
+                            year: "numeric",
+                            weekday: "short",
+                          });
+                        }}
+                        formatter={(value, name) => (
+                          <>
+                            <div className="flex items-center justify-between min-w-[130px] w-full gap-4 text-xs text-muted-foreground">
+                              <div className="flex items-center gap-2">
+                                <div
+                                  className="h-2.5 w-2.5 shrink-0 rounded-[2px] bg-[--color-bg]"
+                                  style={{
+                                    "--color-bg": `var(--color-${name})`,
+                                  } as React.CSSProperties}
+                                />
+                                {chartConfig[name as keyof typeof chartConfig]?.label || name}
+                              </div>
+                              <div className="flex items-center gap-0.5 font-mono font-medium text-right text-foreground">
+                                {value}
+                              </div>
                             </div>
-                            <div className="flex items-center gap-0.5 font-mono font-medium text-right text-foreground">
-                              {value}
-                            </div>
-                          </div>
-                        </>
-                      )}
-                    />
-                  }
-                  cursor={true}
-                  defaultIndex={1}
-                />
-                <ChartLegend content={<ChartLegendContent />} />
-                <XAxis
-                  dataKey="date"
-                  tickLine={false}
-                  tickMargin={10}
-                  axisLine={false}
-                />
-                <YAxis
-                  yAxisId="left"
-                  domain={[
-                    (dataMin: number) => Math.floor(dataMin - 2),
-                    (dataMax: number) => Math.ceil(dataMax + 2),
-                  ]}
-                  label={{ value: 'Lämpötila (°C)', angle: -90, position: 'insideLeft' }}
-                />
-                <YAxis
-                  yAxisId="right"
-                  orientation="right"
-                  label={{ value: yAxisLabel, angle: 90, position: 'insideRight' }}
-                />
-                <Bar
-                  yAxisId="right"
-                  dataKey={selectedDataKey}
-                  fill={`var(--color-${selectedDataKey})`}
-                  radius={[2, 2, 0, 0]}
-                />
-                <Line
-                  yAxisId="left"
-                  dataKey="temperature"
-                  type="natural"
-                  stroke="var(--color-temperature)"
-                  strokeWidth={2}
-                  dot={false}
-                />
-                <Brush travellerWidth={20} stroke="#25582b" height={30} />
-              </ComposedChart>
-            </ChartContainer>
-          </CardContent>
-        </Card>
-        : <div className=" p-52"> <LoadingSpinner /></div>}
+                          </>
+                        )}
+                      />
+                    }
+                    cursor={true}
+                    defaultIndex={1}
+                  />
+                  <ChartLegend content={<ChartLegendContent />} />
+                  <XAxis
+                    dataKey="date"
+                    tickLine={false}
+                    tickMargin={10}
+                    axisLine={false}
+                  />
+                  <YAxis
+                    yAxisId="left"
+                    domain={[
+                      (dataMin: number) => Math.floor(dataMin - 2),
+                      (dataMax: number) => Math.ceil(dataMax + 2),
+                    ]}
+                    label={{ value: 'Lämpötila (°C)', angle: -90, position: 'insideLeft' }}
+                  />
+                  <YAxis
+                    yAxisId="right"
+                    orientation="right"
+                    label={{ value: yAxisLabel, angle: 90, position: 'insideRight' }}
+                  />
+                  <Bar
+                    yAxisId="right"
+                    dataKey={selectedDataKey}
+                    fill={`var(--color-${selectedDataKey})`}
+                    radius={[2, 2, 0, 0]}
+                  />
+                  <Line
+                    yAxisId="left"
+                    dataKey="temperature"
+                    type="natural"
+                    stroke="var(--color-temperature)"
+                    strokeWidth={2}
+                    dot={false}
+                  />
+                  <Brush travellerWidth={20} stroke="#25582b" height={30} />
+                </ComposedChart>
+              </ChartContainer>
+            </CardContent>
+          </>
+          : <div className="p-56"> <LoadingSpinner /></div>}
+      </Card>
+
     </section>
   );
 }

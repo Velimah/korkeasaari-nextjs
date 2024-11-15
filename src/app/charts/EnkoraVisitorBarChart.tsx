@@ -108,87 +108,91 @@ export default function EnkoraData() {
   return (
     <section className="m-6 text-center">
       <div className="flex justify-between items-start">
-        {/*show loading spinner until visitordata is loaded*/}
-        {visitorData && visitorData.length > 0 ?
-          <Card className='dark:bg-slate-800 bg-secondary flex-1'>
-            <CardHeader>
-              <CardTitle>Korkeasaaren Kävijämäärät</CardTitle>
-              <CardDescription>
-                {new Date(startDate).toLocaleDateString('fi-FI')} - {new Date(endDate).toLocaleDateString('fi-FI')}
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <ChartContainer config={chartConfig} className="h-[400px] w-full">
-                <ComposedChart accessibilityLayer data={visitorData}>
-                  <CartesianGrid vertical={false} />
-                  <XAxis
-                    dataKey="date"
-                    tickLine={false}
-                    tickMargin={10}
-                    axisLine={false}
-                    tickFormatter={(value) => new Date(value).toLocaleDateString('fi-FI')}
-                  />
-                  <ChartTooltip
-                    content={
-                      <ChartTooltipContent
-                        labelFormatter={(value) => {
-                          return new Date(value).toLocaleDateString("fi-FI", {
-                            day: "numeric",
-                            month: "short",
-                            year: "numeric",
-                            weekday: "short",
-                          })
-                        }}
-                        formatter={(value, name, item, index) => (
-                          <>
-                            <div className="flex items-center justify-between min-w-[130px] w-full gap-4 text-xs text-muted-foreground">
-                              <div className="flex items-center gap-2">
-                                <div
-                                  className="h-2.5 w-2.5 shrink-0 rounded-[2px] bg-[--color-bg]"
-                                  style={
-                                    {
-                                      "--color-bg": `var(--color-${name})`,
-                                    } as React.CSSProperties
-                                  }
-                                />
-                                {chartConfig[name as keyof typeof chartConfig]?.label || name}
-                              </div>
-                              <div className="flex items-center gap-0.5 font-mono font-medium text-right text-foreground">
-                                {value}
-                              </div>
-                            </div>
-                            {index === 4 && (
-                              <div className="mt-1.5 flex basis-full items-center border-t pt-1.5 text-xs font-medium text-foreground">
-                                Yhteensä
-                                <div className="ml-auto flex items-baseline gap-0.5 font-mono font-semibold tabular-nums text-foreground">
-                                  {item.payload.ilmaiskavijat + item.payload.paasyliput + item.payload.verkkokauppa + item.payload.vuosiliput}
+
+        <Card className='dark:bg-slate-800 bg-secondary flex-1'>
+          {/*show loading spinner until visitordata is loaded*/}
+          {visitorData && visitorData.length > 0 ?
+            <>
+              <CardHeader>
+                <CardTitle>Korkeasaaren Kävijämäärät</CardTitle>
+                <CardDescription>
+                  {new Date(startDate).toLocaleDateString('fi-FI')} - {new Date(endDate).toLocaleDateString('fi-FI')}
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <ChartContainer config={chartConfig} className="h-[400px] w-full">
+                  <ComposedChart accessibilityLayer data={visitorData}>
+                    <CartesianGrid vertical={false} />
+                    <XAxis
+                      dataKey="date"
+                      tickLine={false}
+                      tickMargin={10}
+                      axisLine={false}
+                      tickFormatter={(value) => new Date(value).toLocaleDateString('fi-FI')}
+                    />
+                    <ChartTooltip
+                      content={
+                        <ChartTooltipContent
+                          labelFormatter={(value) => {
+                            return new Date(value).toLocaleDateString("fi-FI", {
+                              day: "numeric",
+                              month: "short",
+                              year: "numeric",
+                              weekday: "short",
+                            })
+                          }}
+                          formatter={(value, name, item, index) => (
+                            <>
+                              <div className="flex items-center justify-between min-w-[130px] w-full gap-4 text-xs text-muted-foreground">
+                                <div className="flex items-center gap-2">
+                                  <div
+                                    className="h-2.5 w-2.5 shrink-0 rounded-[2px] bg-[--color-bg]"
+                                    style={
+                                      {
+                                        "--color-bg": `var(--color-${name})`,
+                                      } as React.CSSProperties
+                                    }
+                                  />
+                                  {chartConfig[name as keyof typeof chartConfig]?.label || name}
+                                </div>
+                                <div className="flex items-center gap-0.5 font-mono font-medium text-right text-foreground">
+                                  {value}
                                 </div>
                               </div>
-                            )}
-                          </>
-                        )}
-                      />
-                    }
-                  />
-                  <ChartLegend className="" content={<ChartLegendContent />} />
-                  <YAxis
-                    label={{ value: 'Kävijämäärä', angle: -90, position: 'insideLeft' }} />
-                  {/*Render selected tickets*/}
-                  {selectedCategory.map((category) => (
-                    <Bar
-                      key={category}
-                      dataKey={category}
-                      stackId="a"
-                      fill={`var(--color-${category})`}
-                      radius={[0, 0, 0, 0]}
+                              {index === 4 && (
+                                <div className="mt-1.5 flex basis-full items-center border-t pt-1.5 text-xs font-medium text-foreground">
+                                  Yhteensä
+                                  <div className="ml-auto flex items-baseline gap-0.5 font-mono font-semibold tabular-nums text-foreground">
+                                    {item.payload.ilmaiskavijat + item.payload.paasyliput + item.payload.verkkokauppa + item.payload.vuosiliput}
+                                  </div>
+                                </div>
+                              )}
+                            </>
+                          )}
+                        />
+                      }
                     />
-                  ))}
-                  <Brush travellerWidth={20} stroke="#25582b" height={30} />
-                </ComposedChart>
-              </ChartContainer>
-            </CardContent>
-          </Card>
-          : <div className="flex-1 justify-center items-center pt-32"> <LoadingSpinner /></div>}
+                    <ChartLegend className="" content={<ChartLegendContent />} />
+                    <YAxis
+                      label={{ value: 'Kävijämäärä', angle: -90, position: 'insideLeft' }} />
+                    {/*Render selected tickets*/}
+                    {selectedCategory.map((category) => (
+                      <Bar
+                        key={category}
+                        dataKey={category}
+                        stackId="a"
+                        fill={`var(--color-${category})`}
+                        radius={[0, 0, 0, 0]}
+                      />
+                    ))}
+                    <Brush travellerWidth={20} stroke="#25582b" height={30} />
+                  </ComposedChart>
+                </ChartContainer>
+              </CardContent>
+            </>
+            : <div className="flex-1 justify-center items-center p-56"> <LoadingSpinner /></div>}
+        </Card>
+
         {/*Checkbox group*/}
         <div className="checkboxGroupHome ml-6 text-left">
           {/*Date picker*/}

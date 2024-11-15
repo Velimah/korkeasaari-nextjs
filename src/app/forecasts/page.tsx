@@ -6,6 +6,7 @@ import { LoadingSpinner } from "@/components/ui/loading-spinner";
 import ForecastAndPriceTable from "@/app/forecasts/ForecastAndPriceTable";
 import UpdateDatabaseAndBlob from "./UpdateDatabaseAndBlob";
 import { H2 } from "@/components/ui/H2";
+import { Card } from "@/components/ui/card";
 
 interface WeatherData {
   time: string;
@@ -30,7 +31,7 @@ export default function WeatherData() {
         <H2 className="text-center sm:text-start">Sään ja Kävijämäärien ennusteet</H2>
       </div>
       <section className="flex flex-col w-full">
-        {weatherData && weatherData.length > 0 ? <ForecastsFMICombinedChart weatherData={weatherData} /> : <div className=" p-48"> <LoadingSpinner /></div>}
+        {weatherData && weatherData.length > 0 ? <ForecastsFMICombinedChart weatherData={weatherData} /> : <Card className="dark:bg-slate-800 bg-secondary"><div className=" p-48"> <LoadingSpinner /></div></Card>}
         {weatherData && weatherData.length > 0 ? <ForecastAndPriceTable weatherData={weatherData} /> : <div className="p-48"> <LoadingSpinner /></div>}
       </section>
       <UpdateDatabaseAndBlob />

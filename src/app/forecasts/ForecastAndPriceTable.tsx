@@ -60,10 +60,6 @@ export default function ForecastAndPriceTable({ weatherData }: { weatherData: We
     },
   } satisfies ChartConfig
 
-  if (!visitorData) {
-    return <LoadingSpinner />;
-  }
-
   return (
     <section className="flex justify-center p-6">
 
@@ -119,7 +115,7 @@ export default function ForecastAndPriceTable({ weatherData }: { weatherData: We
           </Card>
         </TabsContent>
         <TabsContent value="chart">
-          <Card className='h-full' >
+          <Card className='h-full dark:bg-slate-800 bg-secondary' >
             <CardHeader>
               <CardTitle className="text-center">Ennustetut Kävijämäärät</CardTitle>
               <CardDescription>

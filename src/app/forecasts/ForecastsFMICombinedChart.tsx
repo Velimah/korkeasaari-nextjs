@@ -62,7 +62,7 @@ export default function ForecastsFMICombinedChart({ weatherData }: { weatherData
         </Select>
       </div>
 
-      <Card className='w-full text-center'>
+      <Card className='w-full text-center dark:bg-slate-800 bg-secondary'>
         <CardHeader>
           <CardTitle>
             Sääennuste
