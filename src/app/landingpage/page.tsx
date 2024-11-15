@@ -18,7 +18,7 @@ export default function Page() {
             >
                 <div className="flex flex-col w-1/2 gap-10 items-center justify-center">
                     <H1 className="text-white text-center pb-6 max-w-[75%] border-b-4 border-white">
-                        Tervetuloa Zoolytics! Datan analysointi sivu juuri sopiva sinulle!
+                        Tervetuloa Zoolyticsiin. Analysoi tietoja juuri sinulle sopivalla sivustolla!
                     </H1>
                     <Link href="/homepage">
                         <button className="flex items-center text-xl bg-green-700 hover:bg-green-600 transition text-white font-bold py-2 px-4 rounded">
