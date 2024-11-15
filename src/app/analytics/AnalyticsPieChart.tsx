@@ -13,6 +13,7 @@ interface AnalyticsPieChart {
 export default function AnalyticsPieChart({ visitorTotals, selectedYear, chartConfig }: AnalyticsPieChart) {
 
   return (
+
     <Card className='dark:bg-slate-800 bg-secondary' >
       <CardHeader className="items-center pb-0">
         <CardTitle>Kävijöiden jakauma lipputyypin mukaan</CardTitle>

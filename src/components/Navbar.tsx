@@ -5,7 +5,6 @@ import { usePathname } from "next/navigation";
 import zoolytics from "@/assets/zoolytics.png";
 import {
   NavigationMenu,
-  NavigationMenuIndicator,
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
@@ -47,7 +46,7 @@ export default function Navbar() {
                   href="/charts"
                   className={navigationMenuTriggerStyle()}
                 >
-                  Charts
+                  Tilastot
                 </NavigationMenuLink>
                 <NavigationMenuLink
                   href="/analytics"

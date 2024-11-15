@@ -5,136 +5,136 @@ import { useState } from "react";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 interface AnalyticsCharts {
-    EnkoraFMIData: Array<{
-        date: string;
-        kulkulupa: number | null;
-        ilmaiskavijat: number | null;
-        paasyliput: number | null;
-        verkkokauppa: number | null;
-        kampanjakavijat: number | null;
-        vuosiliput: number | null;
-        temperature: number | null;
-        precipitation: number | null;
-        cloudcover: number | null;
-        totalvisitors: number | null;
-    }>;
-    selectedYear: number;
-    chartConfig: ChartConfig;
+  EnkoraFMIData: Array<{
+    date: string;
+    kulkulupa: number | null;
+    ilmaiskavijat: number | null;
+    paasyliput: number | null;
+    verkkokauppa: number | null;
+    kampanjakavijat: number | null;
+    vuosiliput: number | null;
+    temperature: number | null;
+    precipitation: number | null;
+    cloudcover: number | null;
+    totalvisitors: number | null;
+  }>;
+  selectedYear: number;
+  chartConfig: ChartConfig;
 }
 
 export default function AnalyticsScatterChart({ EnkoraFMIData, selectedYear, chartConfig }: AnalyticsCharts) {
-    const [selectedDataKey, setSelectedDataKey] = useState<string>("temperature");
+  const [selectedDataKey, setSelectedDataKey] = useState<string>("temperature");
 
-    return (
-        <>
-            <div className="py-4">
-                <Select onValueChange={(value) => setSelectedDataKey(value)} value={selectedDataKey.toString()}>
-                    <SelectTrigger className="w-[250px]">
-                        <SelectValue placeholder={
-                            selectedDataKey === "precipitation"
-                                ? "Sademäärä"
-                                : selectedDataKey === "cloudcover"
-                                    ? "Pilvisyys"
-                                    : "Lämpötila"
-                        } />
-                    </SelectTrigger>
-                    <SelectContent>
-                        <SelectGroup>
-                            <SelectItem value="temperature">Lämpötila</SelectItem>
-                            <SelectItem value="precipitation">Sademäärä</SelectItem>
-                            <SelectItem value="cloudcover">Pilvisyys</SelectItem>
-                        </SelectGroup>
-                    </SelectContent>
-                </Select>
-            </div>
+  return (
+    <>
+      <div className="py-4">
+        <Select onValueChange={(value) => setSelectedDataKey(value)} value={selectedDataKey.toString()}>
+          <SelectTrigger className="w-[250px]">
+            <SelectValue placeholder={
+              selectedDataKey === "precipitation"
+                ? "Sademäärä"
+                : selectedDataKey === "cloudcover"
+                  ? "Pilvisyys"
+                  : "Lämpötila"
+            } />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectGroup>
+              <SelectItem value="temperature">Lämpötila</SelectItem>
+              <SelectItem value="precipitation">Sademäärä</SelectItem>
+              <SelectItem value="cloudcover">Pilvisyys</SelectItem>
+            </SelectGroup>
+          </SelectContent>
+        </Select>
+      </div>
 
-            <Card className='dark:bg-slate-800 bg-secondary' >
-                <CardHeader>
-                    <CardTitle>Kävijämäärä / {selectedDataKey === "precipitation"
-                        ? "Sademäärä (mm)"
-                        : selectedDataKey === "cloudcover"
-                            ? "Pilvisyys (%)"
-                            : "Lämpötila (°C)"}</CardTitle>
-                    <CardDescription>
-                        {selectedYear === 0 ? "Kaikki vuodet" : selectedYear}
-                    </CardDescription>
-                </CardHeader>
-                <CardContent>
-                    <ChartContainer config={chartConfig} className="h-[400px] w-full">
-                        <ScatterChart accessibilityLayer data={EnkoraFMIData}>
-                            <CartesianGrid vertical={false} />
-                            <ChartTooltip
-                                content={
-                                    <ChartTooltipContent
-                                        // Access the 'payload' to get the full data object, including the 'date'
-                                        labelFormatter={(_, payload) => {
-                                            const dataPoint = payload && payload[0] ? payload[0].payload : null;
-                                            if (dataPoint) {
-                                                return new Date(dataPoint.date).toLocaleDateString("fi-FI", {
-                                                    day: "numeric",
-                                                    month: "short",
-                                                    year: "numeric",
-                                                    weekday: "short",
-                                                });
-                                            }
-                                            return "";
-                                        }}
-                                        formatter={(value, name) => (
-                                            <>
-                                                <div className="flex items-center justify-between min-w-[130px] w-full gap-4 text-xs text-muted-foreground">
-                                                    <div className="flex items-center gap-2">
-                                                        <div
-                                                            className="h-2.5 w-2.5 shrink-0 rounded-[2px] bg-[--color-bg]"
-                                                            style={{
-                                                                "--color-bg": `var(--color-${name})`,
-                                                            } as React.CSSProperties}
-                                                        />
-                                                        {chartConfig[name as keyof typeof chartConfig]?.label || name}
-                                                    </div>
-                                                    <div className="flex items-center gap-0.5 font-mono font-medium text-right text-foreground">
-                                                        {value}
-                                                    </div>
-                                                </div>
-                                            </>
-                                        )}
-                                    />
-                                }
-                                cursor={true}
-                                defaultIndex={1}
+      <Card className='dark:bg-slate-800 bg-secondary' >
+        <CardHeader>
+          <CardTitle>Kävijämäärä / {selectedDataKey === "precipitation"
+            ? "Sademäärä (mm)"
+            : selectedDataKey === "cloudcover"
+              ? "Pilvisyys (%)"
+              : "Lämpötila (°C)"}</CardTitle>
+          <CardDescription>
+            {selectedYear === 0 ? "Kaikki vuodet" : selectedYear}
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <ChartContainer config={chartConfig} className="h-[400px] w-full">
+            <ScatterChart accessibilityLayer data={EnkoraFMIData}>
+              <CartesianGrid vertical={false} />
+              <ChartTooltip
+                content={
+                  <ChartTooltipContent
+                    // Access the 'payload' to get the full data object, including the 'date'
+                    labelFormatter={(_, payload) => {
+                      const dataPoint = payload && payload[0] ? payload[0].payload : null;
+                      if (dataPoint) {
+                        return new Date(dataPoint.date).toLocaleDateString("fi-FI", {
+                          day: "numeric",
+                          month: "short",
+                          year: "numeric",
+                          weekday: "short",
+                        });
+                      }
+                      return "";
+                    }}
+                    formatter={(value, name) => (
+                      <>
+                        <div className="flex items-center justify-between min-w-[130px] w-full gap-4 text-xs text-muted-foreground">
+                          <div className="flex items-center gap-2">
+                            <div
+                              className="h-2.5 w-2.5 shrink-0 rounded-[2px] bg-[--color-bg]"
+                              style={{
+                                "--color-bg": `var(--color-${name})`,
+                              } as React.CSSProperties}
                             />
-                            <XAxis dataKey="totalvisitors" type="number" name="Kävijämäärä" />
-                            <YAxis
-                                dataKey={selectedDataKey}
-                                type="number"
-                                name={
-                                    selectedDataKey === "precipitation"
-                                        ? "Sademäärä"
-                                        : selectedDataKey === "cloudcover"
-                                            ? "Pilvisyys"
-                                            : "Lämpötila"
-                                }
-                                unit={
-                                    selectedDataKey === "precipitation"
-                                        ? " mm"
-                                        : selectedDataKey === "cloudcover"
-                                            ? "%"
-                                            : "°C"
-                                }
-                            />
-                            <Scatter
-                                name="Kävijät/Sade"
-                                data={EnkoraFMIData}
-                                fill={selectedDataKey === "precipitation"
-                                    ? "var(--color-precipitation)"
-                                    : selectedDataKey === "cloudcover"
-                                        ? "var(--color-cloudcover)"  // A color for cloud cover
-                                        : "var(--color-temperature)"}
-                                stroke="black"
-                            />
-                        </ScatterChart>
-                    </ChartContainer>
-                </CardContent>
-            </Card>
-        </>
-    );
+                            {chartConfig[name as keyof typeof chartConfig]?.label || name}
+                          </div>
+                          <div className="flex items-center gap-0.5 font-mono font-medium text-right text-foreground">
+                            {value}
+                          </div>
+                        </div>
+                      </>
+                    )}
+                  />
+                }
+                cursor={true}
+                defaultIndex={1}
+              />
+              <XAxis dataKey="totalvisitors" type="number" name="Kävijämäärä" />
+              <YAxis
+                dataKey={selectedDataKey}
+                type="number"
+                name={
+                  selectedDataKey === "precipitation"
+                    ? "Sademäärä"
+                    : selectedDataKey === "cloudcover"
+                      ? "Pilvisyys"
+                      : "Lämpötila"
+                }
+                unit={
+                  selectedDataKey === "precipitation"
+                    ? " mm"
+                    : selectedDataKey === "cloudcover"
+                      ? "%"
+                      : "°C"
+                }
+              />
+              <Scatter
+                name="Kävijät/Sade"
+                data={EnkoraFMIData}
+                fill={selectedDataKey === "precipitation"
+                  ? "var(--color-precipitation)"
+                  : selectedDataKey === "cloudcover"
+                    ? "var(--color-cloudcover)"  // A color for cloud cover
+                    : "var(--color-temperature)"}
+                stroke="black"
+              />
+            </ScatterChart>
+          </ChartContainer>
+        </CardContent>
+      </Card>
+    </>
+  );
 }
