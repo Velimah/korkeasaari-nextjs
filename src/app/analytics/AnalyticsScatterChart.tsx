@@ -48,7 +48,7 @@ export default function AnalyticsScatterChart({ EnkoraFMIData, selectedYear, cha
         </Select>
       </div>
 
-      <Card className='dark:bg-slate-800 bg-secondary' >
+      <Card>
         <CardHeader>
           <CardTitle>Kävijämäärä / {selectedDataKey === "precipitation"
             ? "Sademäärä (mm)"

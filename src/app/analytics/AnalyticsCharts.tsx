@@ -123,11 +123,11 @@ export default function EnkoraDataStatic() {
     },
     precipitation: {
       label: "Sademäärä (mm)",
-      color: "#4e86ff",
+      color: "#0007d1",
     },
     cloudcover: {
       label: "Pilvisyys (%)",
-      color: "#00c0d4",
+      color: "#00cfc8",
     },
   } satisfies ChartConfig;
 

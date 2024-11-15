@@ -109,7 +109,7 @@ export default function EnkoraData() {
     <section className="m-6 text-center">
       <div className="flex justify-between items-start">
 
-        <Card className='dark:bg-slate-800 bg-secondary flex-1'>
+        <Card className="flex-1">
           {/*show loading spinner until visitordata is loaded*/}
           {visitorData && visitorData.length > 0 ?
             <>

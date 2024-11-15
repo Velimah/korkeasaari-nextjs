@@ -73,7 +73,7 @@ export default function ForecastAndPriceTable({ weatherData }: { weatherData: We
 
           <Card className="p-4 w-full">
             <Table>
-              <TableCaption>Hinnat ovat placeholdereita toistaiseksi.</TableCaption>
+              <TableCaption>Hinnat ovat toistaiseksi placeholdereita.</TableCaption>
               <TableHeader>
                 <TableRow>
                   <TableHead className="text-center pe-4">Päivä</TableHead>
@@ -115,7 +115,7 @@ export default function ForecastAndPriceTable({ weatherData }: { weatherData: We
           </Card>
         </TabsContent>
         <TabsContent value="chart">
-          <Card className='h-full dark:bg-slate-800 bg-secondary' >
+          <Card className='h-full'>
             <CardHeader>
               <CardTitle className="text-center">Ennustetut Kävijämäärät</CardTitle>
               <CardDescription>

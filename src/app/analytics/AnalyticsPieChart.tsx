@@ -14,7 +14,7 @@ export default function AnalyticsPieChart({ visitorTotals, selectedYear, chartCo
 
   return (
 
-    <Card className='dark:bg-slate-800 bg-secondary' >
+    <Card>
       <CardHeader className="items-center pb-0">
         <CardTitle>Kävijöiden jakauma lipputyypin mukaan</CardTitle>
         <CardDescription>{selectedYear === 0 ? "Kaikki vuodet" : selectedYear}</CardDescription>

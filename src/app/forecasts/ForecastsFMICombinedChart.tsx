@@ -37,11 +37,11 @@ export default function ForecastsFMICombinedChart({ weatherData }: { weatherData
     },
     precipitation: {
       label: "Sademäärä (mm)",
-      color: "#4e86ff",
+      color: "#0007d1",
     },
     cloudcover: {
       label: "Pilvisyys (%)",
-      color: "#00c0d4",
+      color: "#00cfc8",
     },
   } satisfies ChartConfig;
 
@@ -62,7 +62,7 @@ export default function ForecastsFMICombinedChart({ weatherData }: { weatherData
         </Select>
       </div>
 
-      <Card className='w-full text-center dark:bg-slate-800 bg-secondary'>
+      <Card className='w-full text-center'>
         <CardHeader>
           <CardTitle>
             Sääennuste

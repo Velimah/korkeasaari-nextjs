@@ -65,11 +65,11 @@ export default function WeatherHistoricalData() {
     },
     precipitation: {
       label: "Sademäärä (mm)",
-      color: "#4e86ff",
+      color: "#0007d1",
     },
     cloudcover: {
       label: "Pilvisyys (%)",
-      color: "#00c0d4",
+      color: "#00cfc8",
     },
   } satisfies ChartConfig
 
@@ -118,7 +118,7 @@ export default function WeatherHistoricalData() {
       </div>
 
 
-      <Card className='dark:bg-slate-800 bg-secondary'>
+      <Card>
         {EnkoraFMIData && EnkoraFMIData.length > 0 ?
           <>
             <CardHeader>

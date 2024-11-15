@@ -56,7 +56,7 @@ export default function AnalyticsComposedChart({
         </Select>
       </div>
 
-      <Card className='dark:bg-slate-800 bg-secondary'>
+      <Card>
         {EnkoraFMIData && EnkoraFMIData.length > 0 ?
           <>
             <CardHeader>
