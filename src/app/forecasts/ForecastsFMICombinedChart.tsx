@@ -32,15 +32,15 @@ export default function ForecastsFMICombinedChart({ weatherData }: { weatherData
 
   const chartConfig = {
     temperature: {
-      label: "Keskimääräinen Lämpötila",
+      label: "Lämpötila (°C)",
       color: "#AAC929",
     },
     precipitation: {
-      label: "Sademäärä",
+      label: "Sademäärä (mm)",
       color: "#4e86ff",
     },
     cloudcover: {
-      label: "Pilvisyys",
+      label: "Pilvisyys (%)",
       color: "#00c0d4",
     },
   } satisfies ChartConfig;
@@ -68,7 +68,7 @@ export default function ForecastsFMICombinedChart({ weatherData }: { weatherData
             Sääennuste
           </CardTitle>
           <CardDescription>
-            Lämpötila ja Sademäärä
+            Lämpötila ja {selectedDataKey == "precipitation" ? "Sademäärä" : "Pilvisyys"}
           </CardDescription>
         </CardHeader>
         <CardContent>

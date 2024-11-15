@@ -12,7 +12,7 @@ export default function Charts() {
   return (
     <>
       <div className="flex justify-center items-center py-8">
-        <H2 className="text-center sm:text-start">Keksikää joku nimi :D</H2>
+        <H2 className="text-center sm:text-start">Sää- ja Kävijämäärätilastot</H2>
       </div>
       <section className="space-y-3 text-center">
         <EnkoraVisitorBarChart />

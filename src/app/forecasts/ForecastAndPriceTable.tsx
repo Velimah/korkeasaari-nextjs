@@ -55,7 +55,7 @@ export default function ForecastAndPriceTable({ weatherData }: { weatherData: We
 
   const chartConfig = {
     predictedvisitors: {
-      label: "Kävijämäärä",
+      label: "Ennustettu Kävijämäärä",
       color: "#AAC929",
     },
   } satisfies ChartConfig
@@ -109,9 +109,9 @@ export default function ForecastAndPriceTable({ weatherData }: { weatherData: We
                     </TableCell>
                     <TableCell className="text-center">{result.temperature.toFixed(1)} °C</TableCell>
                     <TableCell className="text-center">{result.precipitation.toFixed(1)} mm</TableCell>
-                    <TableCell className="text-center pe-10">{result.cloudcover.toFixed(1)} %</TableCell>
+                    <TableCell className="text-center pe-10">{result.cloudcover.toFixed(0)} %</TableCell>
                     <TableCell className="text-center">{result.predictedvisitors.toFixed(0)}</TableCell>
-                    <TableCell className="text-center font-medium">20 €</TableCell>
+                    <TableCell className="text-center font-semibold">20 €</TableCell>
                   </TableRow>
                 ))}
               </TableBody>
@@ -121,7 +121,7 @@ export default function ForecastAndPriceTable({ weatherData }: { weatherData: We
         <TabsContent value="chart">
           <Card className='h-full' >
             <CardHeader>
-              <CardTitle>Ennustetut Kävijämäärät</CardTitle>
+              <CardTitle className="text-center">Ennustetut Kävijämäärät</CardTitle>
               <CardDescription>
               </CardDescription>
             </CardHeader>

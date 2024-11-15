@@ -51,10 +51,10 @@ export default function AnalyticsScatterChart({ EnkoraFMIData, selectedYear, cha
             <Card className='dark:bg-slate-800 bg-secondary' >
                 <CardHeader>
                     <CardTitle>Kävijämäärä / {selectedDataKey === "precipitation"
-                        ? "Sademäärä"
+                        ? "Sademäärä (mm)"
                         : selectedDataKey === "cloudcover"
-                            ? "Pilvisyys"
-                            : "Lämpötila"}</CardTitle>
+                            ? "Pilvisyys (%)"
+                            : "Lämpötila (°C)"}</CardTitle>
                     <CardDescription>
                         {selectedYear === 0 ? "Kaikki vuodet" : selectedYear}
                     </CardDescription>
