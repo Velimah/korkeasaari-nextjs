@@ -3,7 +3,7 @@ import { fetchEnkoraData } from "@/hooks/fetchEnkoraVisitorData";
 import processEnkoraVisitorData from "./EnkoraDataFormatter";
 
 export default async function UpdateEnkoraDatabase() {
-  const startDate = "2024-11-01"; //Database has all the data before this date
+  const startDate = "2024-11-12"; //Database has all the data before this date
   const endDate = new Date();
   endDate.setDate(endDate.getDate() - 1);
   const currentDayMinusOne = endDate.toISOString().split("T")[0]; // Format it as YYYY-MM-DD
@@ -23,6 +23,7 @@ export default async function UpdateEnkoraDatabase() {
       }
 
       const { visitorData } = await response.json();
+      console.log("Visitor data from database:", visitorData);
       const existingDates = visitorData.rows.map((entry: { date: string }) => {
         return entry.date.split("T")[0];
       });
@@ -33,6 +34,7 @@ export default async function UpdateEnkoraDatabase() {
         currentDayMinusOne,
         existingDates,
       );
+      console.log("Missing dates enkora:", missingDates);
 
       // Process missing dates sequentially to fetch from Enkora API
       for (const date of missingDates) {

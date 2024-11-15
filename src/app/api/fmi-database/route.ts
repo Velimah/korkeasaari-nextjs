@@ -3,8 +3,12 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(request: NextRequest) {
   try {
-    const weatherData =
-      await sql`SELECT date FROM weatherdata ORDER BY date ASC;`;
+    const weatherData = await sql`
+    SELECT date 
+    FROM weatherdata 
+    WHERE date > '2024-11-11'
+    ORDER BY date ASC;
+  `;
 
     return NextResponse.json({ weatherData }, { status: 200 });
   } catch (error) {

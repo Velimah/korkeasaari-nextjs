@@ -3,8 +3,12 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(request: NextRequest) {
   try {
-    const visitorData =
-      await sql`SELECT date FROM visitordata ORDER BY date ASC;`;
+    const visitorData = await sql`
+    SELECT date 
+    FROM visitordata 
+    WHERE date > '2024-11-11'
+    ORDER BY date ASC;
+  `;
 
     return NextResponse.json({ visitorData }, { status: 200 });
   } catch (error) {

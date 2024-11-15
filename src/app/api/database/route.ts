@@ -26,12 +26,20 @@ SELECT
         visitordata v 
     ON 
         w.date = v.date
+    WHERE 
+      w.date > '2024-11-11'
     ORDER BY 
         w.date ASC
-    LIMIT 5000;
+    LIMIT 500;
     `;
 
-    return NextResponse.json(jsonData.rows, { status: 200 });
+    return NextResponse.json(jsonData.rows, {
+      status: 200,
+      headers: {
+        "Cache-Control":
+          "no-store, no-cache, must-revalidate, proxy-revalidate",
+      },
+    });
   } catch (error) {
     console.error("Error inserting visitor data:", error);
     return NextResponse.json(

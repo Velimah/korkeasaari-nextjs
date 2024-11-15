@@ -1,6 +1,6 @@
 "use client";  // Ensure this component is treated as a client component
 
-import React, { useEffect, useState } from "react";
+import React, { use, useEffect, useState } from "react";
 import { ChartConfig, ChartContainer, ChartLegend, ChartLegendContent, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Bar, Brush, CartesianGrid, ComposedChart, XAxis, YAxis } from "recharts";
@@ -8,7 +8,7 @@ import { LoadingSpinner } from "@/components/ui/loading-spinner";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Calendar } from "@/components/ui/calendar";
 import { DateRange } from "react-day-picker";
-import { format, parseISO, subDays } from "date-fns";
+import { format, parseISO, set, subDays } from "date-fns";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
 import { CalendarIcon } from "lucide-react";
@@ -16,12 +16,15 @@ import { cn } from "@/lib/utils";
 import { fi } from "date-fns/locale"
 import { fetchEnkoraData } from "@/hooks/fetchEnkoraVisitorData";
 import processEnkoraVisitorData from "@/utils/EnkoraDataFormatter";
+import { BLOB, getBLOBData } from "@/hooks/fetchBLobData";
+import { blob } from "stream/consumers";
 
 interface FormattedVisitorData {
   date: string;
   kulkulupa: number;
   ilmaiskavijat: number;
   paasyliput: number;
+  kampanjakavijat: number;
   verkkokauppa: number;
   vuosiliput: number;
 }
@@ -33,8 +36,9 @@ export default function EnkoraData() {
   const [startDate, setStartDate] = useState<string>(lastMonth.toISOString().split('T')[0]);
   const [endDate, setEndDate] = useState<string>(today.toISOString().split('T')[0]);
 
-  const [visitorData, setVisitorData] = useState<FormattedVisitorData[]>([]);
-  const [selectedCategory, setSelectedCategory] = useState<string[]>(["kulkulupa", "ilmaiskavijat", "paasyliput", "verkkokauppa", "vuosiliput"]);
+  const [blobData, setBlobData] = useState<BLOB[]>([]);
+  const [visitorData, setVisitorData] = useState<BLOB[]>([]);
+  const [selectedCategory, setSelectedCategory] = useState<string[]>(["kulkulupa", "ilmaiskavijat", "paasyliput", "kampanjakavijat", "verkkokauppa", "vuosiliput"]);
 
   const initialStartDate = parseISO(startDate);
   const initialEndDate = parseISO(endDate);
@@ -45,31 +49,41 @@ export default function EnkoraData() {
   });
 
   useEffect(() => {
-    async function fetchData() {
-      try {
-        const data = await fetchEnkoraData(startDate, endDate);
-        if (data) {
-          const result = processEnkoraVisitorData(data);
-          setVisitorData(result);
-        }
-      } catch (error) {
-        console.error('Error fetching visitor data:', error);
-      }
+    async function fetchBlobData() {
+      // Fetch the blob data
+      const data = await getBLOBData();
+      const newData = data.filter((item: BLOB) => {
+        const date = parseISO(item.date);  // Ensure item.date is in ISO format
+        return date >= parseISO(startDate) && date <= parseISO(endDate); // Compare dates
+      });
+      setVisitorData(newData);
+      setBlobData(data);
     }
-    fetchData();
-  }, [startDate, endDate]);
+    fetchBlobData();
+  }, []);
 
-  // Handles the date range selection
   const handleDateRange = (range: DateRange | undefined) => {
     if (range?.from && range?.to) {
+      // Convert `from` and `to` to Date objects
       const start = range.from;
       const end = range.to;
+      // Set the start and end dates as ISO strings
       setStartDate(start.toISOString().split('T')[0]);
       setEndDate(end.toISOString().split('T')[0]);
+      // Set the selected date range in state
       setDate(range);
+      // Filter the data within the selected date range
+      const newData = blobData.filter((item) => {
+        const date = parseISO(item.date);  // Ensure item.date is in ISO format
+        return date >= start && date <= end; // Compare dates
+      });
+      // Update the visitor data with the filtered data
+      setVisitorData(newData);
+      // Log the selected date range and data
       console.log('Date range selected:', start, end, range);
     }
   };
+
 
   const chartConfig = {
     kulkulupa: {
@@ -83,6 +97,10 @@ export default function EnkoraData() {
     paasyliput: {
       label: "Pääsyliput",
       color: "#AAC929",
+    },
+    kampanjakavijat: {
+      label: "Kampanjakävijät",
+      color: "blue",
     },
     verkkokauppa: {
       label: "Verkkokauppa Pääsyliput",
@@ -101,17 +119,13 @@ export default function EnkoraData() {
     );
   };
 
-  if (!visitorData) {
-    return <LoadingSpinner />;
-  }
-
   return (
     <section className="m-6 text-center">
       <div className="flex justify-between items-start">
 
         <Card className="flex-1">
           {/*show loading spinner until visitordata is loaded*/}
-          {visitorData && visitorData.length > 0 ?
+          {blobData && blobData.length > 0 ?
             <>
               <CardHeader>
                 <CardTitle>Korkeasaaren Kävijämäärät</CardTitle>
@@ -163,7 +177,7 @@ export default function EnkoraData() {
                                 <div className="mt-1.5 flex basis-full items-center border-t pt-1.5 text-xs font-medium text-foreground">
                                   Yhteensä
                                   <div className="ml-auto flex items-baseline gap-0.5 font-mono font-semibold tabular-nums text-foreground">
-                                    {item.payload.ilmaiskavijat + item.payload.paasyliput + item.payload.verkkokauppa + item.payload.vuosiliput}
+                                    {item.payload.ilmaiskavijat + item.payload.paasyliput + item.payload.kampanjakavijat + item.payload.verkkokauppa + item.payload.vuosiliput}
                                   </div>
                                 </div>
                               )}

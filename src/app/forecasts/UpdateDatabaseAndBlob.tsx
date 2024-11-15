@@ -12,11 +12,6 @@ export default function UpdateDatabaseAndBlob() {
     setLoading(true);
     await UpdateFMIDatabase();
     await UpdateEnkoraDatabase();
-    setLoading(false);
-  };
-
-  async function updateBLOB() {
-    setLoading(true);
     await UpdateDataBlob();
     setLoading(false);
   };
@@ -30,15 +25,6 @@ export default function UpdateDatabaseAndBlob() {
       >
         {loading ? "Updating..." : "Update Database"}
       </Button>
-
-      <Button
-        className={`w-48 p-2 m-2 ${loading ? 'bg-red-600 cursor-not-allowed' : 'bg-green-500 hover:bg-green-600'}`}
-        onClick={updateBLOB}
-        disabled={loading}
-      >
-        {loading ? "Updating..." : "Update BLOB"}
-      </Button>
-
     </div>
   );
 }
