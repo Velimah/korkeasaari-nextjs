@@ -12,7 +12,7 @@ export interface BLOB {
   totalvisitors: number | null; // 204
 }
 
-export async function getBLOBData() {
+export async function getBLOBData(): Promise<BLOB[] | { error: string }> {
   try {
     const response = await fetch(
       "https://yxkilu3yp1tkxpeo.public.blob.vercel-storage.com/data/mydata.json",

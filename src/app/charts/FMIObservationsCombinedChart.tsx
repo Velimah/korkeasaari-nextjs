@@ -32,9 +32,13 @@ export default function WeatherHistoricalData() {
 
   useEffect(() => {
     async function fetchBlobData() {
-      const data = await getBLOBData();
-      setBlobData(data);
-      applyYearFilter(selectedYear, data); // Apply initial filter
+      const response = await getBLOBData();
+      if ('error' in response) {
+        console.error(response.error);
+        return;
+      }
+      setBlobData(response);
+      applyYearFilter(selectedYear, response); // Apply initial filter
     }
     fetchBlobData();
   }, []);

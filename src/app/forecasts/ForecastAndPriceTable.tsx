@@ -40,11 +40,15 @@ export default function ForecastAndPriceTable({ weatherData }: { weatherData: We
   useEffect(() => {
     async function fetchBlobDataAndCalculate() {
       // Fetch BLOB data
-      const blobData = await getBLOBData();
+      const response = await getBLOBData();
+      if ('error' in response) {
+        console.error(response.error);
+        return;
+      }
 
       // Run MLRCalculator if both weatherData and blobData are available
-      if (weatherData.length > 0 && blobData.length > 0) {
-        const result = MLRCalculator({ weatherData, blobData });
+      if (weatherData.length > 0 && response.length > 0) {
+        const result = MLRCalculator({ weatherData, blobData: response });
         if (result) {
           setVisitorData(result);
         }

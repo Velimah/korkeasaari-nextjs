@@ -1,8 +1,10 @@
 import { sql } from "@vercel/postgres";
 import { NextRequest, NextResponse } from "next/server";
+import { unstable_noStore as noStore } from "next/cache";
 
 export async function GET(request: NextRequest) {
   try {
+    noStore(); // Ensure this component is treated as a dynamic component
     const jsonData = await sql`
 SELECT 
     w.date AS date, 

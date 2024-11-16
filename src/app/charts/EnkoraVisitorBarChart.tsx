@@ -14,20 +14,7 @@ import { Button } from "@/components/ui/button";
 import { CalendarIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { fi } from "date-fns/locale"
-import { fetchEnkoraData } from "@/hooks/fetchEnkoraVisitorData";
-import processEnkoraVisitorData from "@/utils/EnkoraDataFormatter";
 import { BLOB, getBLOBData } from "@/hooks/fetchBLobData";
-import { blob } from "stream/consumers";
-
-interface FormattedVisitorData {
-  date: string;
-  kulkulupa: number;
-  ilmaiskavijat: number;
-  paasyliput: number;
-  kampanjakavijat: number;
-  verkkokauppa: number;
-  vuosiliput: number;
-}
 
 export default function EnkoraData() {
   const today = new Date();
@@ -51,13 +38,18 @@ export default function EnkoraData() {
   useEffect(() => {
     async function fetchBlobData() {
       // Fetch the blob data
-      const data = await getBLOBData();
-      const newData = data.filter((item: BLOB) => {
+      const response = await getBLOBData();
+      if ('error' in response) {
+        console.error(response.error);
+        return;
+      }
+      // Filter the data within the selected date range
+      const filteredResponse = response.filter((item: BLOB) => {
         const date = parseISO(item.date);  // Ensure item.date is in ISO format
         return date >= parseISO(startDate) && date <= parseISO(endDate); // Compare dates
       });
-      setVisitorData(newData);
-      setBlobData(data);
+      setVisitorData(filteredResponse);
+      setBlobData(response);
     }
     fetchBlobData();
   }, []);
@@ -70,7 +62,6 @@ export default function EnkoraData() {
       // Set the start and end dates as ISO strings
       setStartDate(start.toISOString().split('T')[0]);
       setEndDate(end.toISOString().split('T')[0]);
-      // Set the selected date range in state
       setDate(range);
       // Filter the data within the selected date range
       const newData = blobData.filter((item) => {
@@ -79,8 +70,6 @@ export default function EnkoraData() {
       });
       // Update the visitor data with the filtered data
       setVisitorData(newData);
-      // Log the selected date range and data
-      console.log('Date range selected:', start, end, range);
     }
   };
 
