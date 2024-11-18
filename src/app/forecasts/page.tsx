@@ -7,6 +7,8 @@ import ForecastAndPriceTable from "@/app/forecasts/ForecastAndPriceTable";
 import UpdateDatabaseAndBlob from "./UpdateDatabaseAndBlob";
 import { H2 } from "@/components/ui/H2";
 import { Card } from "@/components/ui/card";
+import UpdatePredictionsToDatabase from "./UpdatePredictionsToDatabase";
+import PredictionsBarChart from "./PredictionsBarChart";
 
 interface WeatherData {
   time: string;
@@ -34,7 +36,9 @@ export default function WeatherData() {
         {weatherData && weatherData.length > 0 ? <ForecastsFMICombinedChart weatherData={weatherData} /> : <Card><div className=" p-48"> <LoadingSpinner /></div></Card>}
         {weatherData && weatherData.length > 0 ? <ForecastAndPriceTable weatherData={weatherData} /> : <div className="p-48"> <LoadingSpinner /></div>}
       </section>
+      <PredictionsBarChart />
       <UpdateDatabaseAndBlob />
+      <UpdatePredictionsToDatabase />
     </>
   );
 }

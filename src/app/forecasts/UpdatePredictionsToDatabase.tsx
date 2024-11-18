@@ -1,12 +1,12 @@
 
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
-import UpdateVisitorPrediction from "@/utils/UpdateVisitorPrediction";
+import { UpdateVisitorPrediction } from "@/hooks/UpdateVisitorPrediction";
 import { getBLOBData } from "@/hooks/fetchBLobData";
 import { fetchFMIForecastData } from "@/hooks/fetchFMIForecastData";
 import MLRCalculator from "@/utils/MLRCalculator";
 
-export default function UpdatePredictionsToDatabase() {
+export function UpdatePredictionsToDatabase() {
     const [loading, setLoading] = useState(false);
 
     async function updateDatabase() {
@@ -30,8 +30,10 @@ export default function UpdatePredictionsToDatabase() {
                 onClick={updateDatabase}
                 disabled={loading} // Optionally disable the button to prevent multiple clicks
             >
-                {loading ? "Updating..." : "Update Database"}
+                {loading ? "Updating..." : "Update Predictions"}
             </Button>
         </div>
     );
 }
+
+export default UpdatePredictionsToDatabase;

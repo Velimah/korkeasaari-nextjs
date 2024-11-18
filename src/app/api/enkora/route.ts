@@ -4,10 +4,7 @@ export async function POST(request: NextRequest) {
   try {
     const { date } = await request.json();
     if (!date) {
-      return NextResponse.json(
-        { error: "Missing startDate or endDate" },
-        { status: 400 },
-      );
+      return NextResponse.json({ error: "Missing date" }, { status: 400 });
     }
 
     const url = "https://oma.enkora.fi/korkeasaari/reports/validations/json";

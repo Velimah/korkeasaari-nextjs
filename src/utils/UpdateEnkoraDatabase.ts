@@ -1,4 +1,4 @@
-import { getMissingDates } from "./findMissingDates";
+import { getMissingDates } from "./DateHelperFunctions";
 import { fetchEnkoraData } from "@/hooks/fetchEnkoraVisitorData";
 import processEnkoraVisitorData from "./EnkoraDataFormatter";
 

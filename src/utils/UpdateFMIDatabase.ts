@@ -1,6 +1,6 @@
 import { fetchFMIObservationData } from "@/hooks/fetchFMIObservationData";
 import processFMIWeatherData from "@/utils/FMIdataFormatter";
-import { getMissingDates } from "@/utils/findMissingDates";
+import { getMissingDates } from "@/utils/DateHelperFunctions";
 
 // Define the WeatherData component
 export default async function UpdateFMIDatabase() {
