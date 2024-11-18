@@ -26,6 +26,22 @@ export async function POST(request: NextRequest) {
   try {
     const visitorData = await request.json(); // Get the body content
 
+    // Validate incoming data
+    if (
+      !visitorData.date ||
+      visitorData.kulkulupa == null ||
+      visitorData.ilmaiskavijat == null ||
+      visitorData.paasyliput == null ||
+      visitorData.kampanjakavijat == null ||
+      visitorData.verkkokauppa == null ||
+      visitorData.vuosiliput == null
+    ) {
+      return NextResponse.json(
+        { error: "Missing required fields" },
+        { status: 400 },
+      );
+    }
+
     await sql`
       INSERT INTO visitordata (date, kulkulupa, ilmaiskavijat, paasyliput, kampanjakavijat, verkkokauppa, vuosiliput)
       VALUES (${visitorData.date}, ${visitorData.kulkulupa}, ${visitorData.ilmaiskavijat}, ${visitorData.paasyliput}, ${visitorData.kampanjakavijat}, ${visitorData.verkkokauppa}, ${visitorData.vuosiliput})

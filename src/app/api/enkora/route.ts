@@ -2,8 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest) {
   try {
-    const { startDate, endDate } = await request.json();
-    if (!startDate || !endDate) {
+    const { date } = await request.json();
+    if (!date) {
       return NextResponse.json(
         { error: "Missing startDate or endDate" },
         { status: 400 },
@@ -15,7 +15,7 @@ export async function POST(request: NextRequest) {
       input_format: "post_data",
       authentication: `${process.env.ENKORA_USER},${process.env.ENKORA_PASS}`,
       clear_values: "1",
-      "values[timestamp]": `${startDate}--${endDate}`,
+      "values[timestamp]": `${date}`,
       "values[group-0]": "day",
       "values[group-1]": "service_group_id",
     });

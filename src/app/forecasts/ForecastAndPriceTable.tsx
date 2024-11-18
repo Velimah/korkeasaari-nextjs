@@ -50,6 +50,7 @@ export default function ForecastAndPriceTable({ weatherData }: { weatherData: We
       if (weatherData.length > 0 && response.length > 0) {
         const result = MLRCalculator({ weatherData, blobData: response });
         if (result) {
+          console.log("Visitor data calculated:", result);
           setVisitorData(result);
         }
       }

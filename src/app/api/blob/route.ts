@@ -1,5 +1,6 @@
 import { put } from "@vercel/blob";
 import { NextRequest, NextResponse } from "next/server";
+import { BLOB } from "@/hooks/fetchBLobData";
 
 export async function PUT(request: NextRequest) {
   try {
@@ -14,10 +15,10 @@ export async function PUT(request: NextRequest) {
     }
 
     // Parse the existing data (ensure the response is in JSON format)
-    const existingData = await response.json();
+    const existingData: BLOB[] = await response.json();
 
     // Step 2: Parse the new data from the request body
-    const newData = await request.json();
+    const newData: BLOB[] = await request.json();
 
     // Step 3: Combine the data while removing duplicates based on the 'date' field
     const existingDates = new Set(
@@ -30,7 +31,7 @@ export async function PUT(request: NextRequest) {
     );
 
     // Combine the existing data with the filtered new data
-    const updatedData = [...existingData, ...filteredNewData];
+    const updatedData: BLOB[] = [...existingData, ...filteredNewData];
 
     // Step 4: Convert the updated data back to JSON string
     const jsonString = JSON.stringify(updatedData);
@@ -43,10 +44,7 @@ export async function PUT(request: NextRequest) {
     });
 
     // Step 6: Return the URL as a JSON response
-    return NextResponse.json(
-      { url, existingData, newData, updatedData },
-      { status: 200 },
-    );
+    return NextResponse.json({ url }, { status: 200 });
   } catch (error) {
     console.error("Upload error:", error);
     return NextResponse.json(

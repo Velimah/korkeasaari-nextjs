@@ -3,8 +3,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { unstable_noStore as noStore } from "next/cache";
 
 export async function GET(request: NextRequest) {
+  noStore(); // Ensure this component is treated as a dynamic component
   try {
-    noStore(); // Ensure this component is treated as a dynamic component
     const weatherData = await sql`
     SELECT date 
     FROM weatherdata 
@@ -25,6 +25,19 @@ export async function GET(request: NextRequest) {
 export async function POST(request: NextRequest) {
   try {
     const weatherData = await request.json(); // Get the body content
+
+    // Validate incoming data
+    if (
+      !weatherData.date ||
+      weatherData.temperature == null ||
+      weatherData.precipitation == null ||
+      weatherData.cloudcover == null
+    ) {
+      return NextResponse.json(
+        { error: "Missing required fields" },
+        { status: 400 },
+      );
+    }
 
     // Insert each entry into the database
     await sql`
