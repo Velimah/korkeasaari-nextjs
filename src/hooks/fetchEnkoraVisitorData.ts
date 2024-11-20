@@ -11,7 +11,7 @@ interface VisitorDataRow {
   unique_accounts_quantity: string;
 }
 
-export const fetchEnkoraData = async (startDate: string, endDate: string) => {
+export const fetchEnkoraData = async (date: string) => {
   try {
     const response = await fetch("/api/enkora", {
       method: "POST",
@@ -19,8 +19,7 @@ export const fetchEnkoraData = async (startDate: string, endDate: string) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        startDate,
-        endDate,
+        date,
       }),
     });
 

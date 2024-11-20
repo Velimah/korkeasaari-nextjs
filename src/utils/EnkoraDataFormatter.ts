@@ -66,5 +66,5 @@ export default function processEnkoraVisitorData(
         : 0) + parseInt(quantity);
   });
 
-  return output as FormattedVisitorData[];
+  return output;
 }

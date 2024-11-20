@@ -1,4 +1,4 @@
-import { getMissingDates } from "./findMissingDates";
+import { getMissingDates } from "./DateHelperFunctions";
 import { fetchEnkoraData } from "@/hooks/fetchEnkoraVisitorData";
 import processEnkoraVisitorData from "./EnkoraDataFormatter";
 
@@ -38,7 +38,7 @@ export default async function UpdateEnkoraDatabase() {
 
       // Process missing dates sequentially to fetch from Enkora API
       for (const date of missingDates) {
-        const data = await fetchEnkoraData(date, date);
+        const data = await fetchEnkoraData(date);
         let result;
         if (data) {
           // Process the fetched data to calculate to change variable names and restructure the object by day

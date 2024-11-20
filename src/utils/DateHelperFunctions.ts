@@ -18,3 +18,16 @@ export const getMissingDates = (
   // Return an array of missing dates
   return missingDates;
 };
+
+// Helper function to calculate days ahead
+export function getDaysAhead(targetDate: string): number {
+  const target = new Date(targetDate);
+  const today = new Date();
+
+  // Clear time components for an accurate day difference
+  target.setHours(0, 0, 0, 0);
+  today.setHours(0, 0, 0, 0);
+
+  const diffTime = target.getTime() - today.getTime();
+  return Math.ceil(diffTime / (1000 * 60 * 60 * 24)); // Convert milliseconds to days
+}
