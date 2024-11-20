@@ -139,12 +139,12 @@ export default function EnkoraDataStatic() {
     <section className="flex flex-col py-6">
       <Tabs defaultValue="composedchart" className="w-full">
         <TabsList className="grid w-full grid-cols-3">
-          <TabsTrigger value="composedchart">Composed Chart</TabsTrigger>
-          <TabsTrigger value="scatterchart">Scatter Chart</TabsTrigger>
-          <TabsTrigger value="piechart">Pie Chart</TabsTrigger>
+          <TabsTrigger value="composedchart">Koostekaavio</TabsTrigger>
+          <TabsTrigger value="scatterchart">Hajontakaavio</TabsTrigger>
+          <TabsTrigger value="piechart">Kävijöiden jakauma</TabsTrigger>
         </TabsList>
 
-        <div className="pt-10">
+        <div className="pt-4">
           <Select
             onValueChange={(value) =>
               handleYearChange({
@@ -153,7 +153,7 @@ export default function EnkoraDataStatic() {
             }
             value={selectedYear.toString()}
           >
-            <SelectTrigger className="w-[250px]">
+            <SelectTrigger className="w-[150px]">
               <SelectValue placeholder="Select a year" />
             </SelectTrigger>
             <SelectContent>

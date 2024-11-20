@@ -3,7 +3,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Bar, Brush, CartesianGrid, ComposedChart, Line, XAxis, YAxis } from "recharts";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useState } from "react";
-import { LoadingSpinner } from "@/components/ui/loading-spinner";
+import {LoadingSpinner} from "@/components/ui/loading-spinner";
+import {DryCloudyIcon, DrySunnyIcon, RainHeavyCloudyIcon} from "@/components/weathericons";
 
 interface AnalyticsCharts {
   EnkoraFMIData: Array<{
@@ -39,25 +40,43 @@ export default function AnalyticsComposedChart({
 
   const lineOrBarColor = `var(--color-${selectedDataKey})`;
 
+  const handleCheckboxChange = (value: string) => {
+    setSelectedDataKey(value);
+  };
+
   return (
     <>
-      <div className="py-4">
-        <Select onValueChange={(value) => setSelectedDataKey(value)} value={selectedDataKey.toString()}>
-          <SelectTrigger className="w-[250px]">
-            <SelectValue placeholder={yAxisLabel} />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectGroup>
-              <SelectItem value="temperature">Lämpötila</SelectItem>
-              <SelectItem value="precipitation">Sademäärä</SelectItem>
-              <SelectItem value="cloudcover">Pilvisyys</SelectItem>
-            </SelectGroup>
-          </SelectContent>
-        </Select>
+      <div className="pb-2 flex justify-center space-x-10">
+        <label className="flex items-center space-x-2">
+          <input
+            type="checkbox"
+            checked={selectedDataKey.includes("temperature")}
+            onChange={() => handleCheckboxChange("temperature")}
+          />
+          <DrySunnyIcon />
+          <span>Lämpötila</span>
+        </label>
+        <label className="flex items-center space-x-2">
+          <input
+            type="checkbox"
+            checked={selectedDataKey.includes("precipitation")}
+            onChange={() => handleCheckboxChange("precipitation")}
+          />
+          <RainHeavyCloudyIcon />
+          <span>Sademäärä</span>
+        </label>
+        <label className="flex items-center space-x-2">
+          <input
+            type="checkbox"
+            checked={selectedDataKey.includes("cloudcover")}
+            onChange={() => handleCheckboxChange("cloudcover")}
+          />
+          <DryCloudyIcon />
+          <span>Pilvisyys</span>
+        </label>
       </div>
-
-      <Card>
-        {EnkoraFMIData && EnkoraFMIData.length > 0 ?
+      <Card className="flex-1">
+        {EnkoraFMIData && EnkoraFMIData.length > 0 ? (
           <>
             <CardHeader>
               <CardTitle>Kävijämäärä ja {yAxisLabel}</CardTitle>
@@ -158,10 +177,12 @@ export default function AnalyticsComposedChart({
               </ChartContainer>
             </CardContent>
           </>
-          : <div className="flex-1 justify-center items-center p-56"> <LoadingSpinner /></div>}
+        ) : (
+          <div className="flex-1 justify-center items-center p-56">
+            <LoadingSpinner />
+          </div>
+        )}
       </Card>
     </>
   );
 }
-
-

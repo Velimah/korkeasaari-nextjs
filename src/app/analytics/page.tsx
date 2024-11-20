@@ -12,11 +12,6 @@ export default function Analytics() {
 
   return (
     <>
-
-      <div className="flex justify-center items-center py-8">
-        <H2 className="text-center sm:text-start">Sään ja Kävijämäärien analyysit</H2>
-      </div>
-
       <section className="space-y-3 text-center">
         <AnalyticsCharts />
       </section>
