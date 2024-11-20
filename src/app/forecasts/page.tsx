@@ -37,8 +37,10 @@ export default function WeatherData() {
         {weatherData && weatherData.length > 0 ? <ForecastAndPriceTable weatherData={weatherData} /> : <div className="p-48"> <LoadingSpinner /></div>}
       </section>
       <PredictionsBarChart />
-      <UpdateDatabaseAndBlob />
-      <UpdatePredictionsToDatabase />
+      <div className="flex justify-center gap-4">
+        <UpdateDatabaseAndBlob />
+        <UpdatePredictionsToDatabase />
+      </div>
     </>
   );
 }

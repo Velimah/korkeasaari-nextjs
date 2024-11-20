@@ -58,7 +58,7 @@ export async function GET(request: NextRequest) {
       ON 
           v.date = p.predicted_date
       WHERE 
-          v.date > '2024-11-11'
+          v.date > '2024-11-18'
       GROUP BY 
           v.date 
       ORDER BY 

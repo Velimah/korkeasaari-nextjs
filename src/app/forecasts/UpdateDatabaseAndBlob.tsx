@@ -17,7 +17,7 @@ export default function UpdateDatabaseAndBlob() {
   };
 
   return (
-    <div className="p-6 flex w-full justify-center items-center">
+    <div className="flex justify-center items-center">
       <Button
         className={`w-48 p-2 m-2 ${loading ? 'bg-red-600 cursor-not-allowed' : 'bg-green-500 hover:bg-green-600'}`}
         onClick={updateDatabase}

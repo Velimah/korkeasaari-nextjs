@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { ChartConfig, ChartContainer, ChartLegend, ChartLegendContent, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Bar, CartesianGrid, ComposedChart, XAxis, YAxis } from "recharts";
-import { LoadingSpinner } from "@/components/ui/loading-spinner";
 import MLRCalculator from "@/utils/MLRCalculator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
@@ -16,7 +15,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import { BLOB, getBLOBData } from "@/hooks/fetchBLobData";
+import { getBLOBData } from "@/hooks/fetchBLobData";
 import { getWeatherIcon } from "./ForecastWeatherIcons";
 
 interface PredictionResults {
@@ -50,7 +49,6 @@ export default function ForecastAndPriceTable({ weatherData }: { weatherData: We
       if (weatherData.length > 0 && response.length > 0) {
         const result = MLRCalculator({ weatherData, blobData: response });
         if (result) {
-          console.log("Visitor data calculated:", result);
           setVisitorData(result);
         }
       }
@@ -128,7 +126,7 @@ export default function ForecastAndPriceTable({ weatherData }: { weatherData: We
             </CardHeader>
             <CardContent>
               <ChartContainer config={chartConfig} className="w-full">
-                <ComposedChart accessibilityLayer data={visitorData?.slice(0, 5)}>
+                <ComposedChart accessibilityLayer data={visitorData?.slice(1, 5)}>
                   <CartesianGrid vertical={false} />
                   <ChartLegend content={<ChartLegendContent />} />
                   <ChartTooltip

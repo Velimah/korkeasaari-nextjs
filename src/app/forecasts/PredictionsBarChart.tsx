@@ -24,8 +24,8 @@ import {
 export default function PredictionsBarChart() {
   const [blobData, setBlobData] = useState<BLOB[]>([]);
   const [enkoraFMIData, setEnkoraFMIData] = useState<BLOB[]>([]);
-  const [selectedYear, setSelectedYear] = useState<number>(2024);
-  const [selectedMonth, setSelectedMonth] = useState<number>(11); // 0 means "all months"
+  const [selectedYear, setSelectedYear] = useState<number>(0);
+  const [selectedMonth, setSelectedMonth] = useState<number>(0); // 0 means "all months"
   const months = [
     { label: "Kaikki kuukaudet", value: 0 },
     { label: "Tammikuu", value: 1 },
