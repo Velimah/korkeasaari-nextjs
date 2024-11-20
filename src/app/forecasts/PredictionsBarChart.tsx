@@ -43,11 +43,6 @@ export default function PredictionsBarChart() {
   ];
   const years = [
     { label: "Kaikki vuodet", value: 0 },
-    { label: "2019", value: 2019 },
-    { label: "2020", value: 2020 },
-    { label: "2021", value: 2021 },
-    { label: "2022", value: 2022 },
-    { label: "2023", value: 2023 },
     { label: "2024", value: 2024 },
     { label: "2025", value: 2025 },
   ];
@@ -63,11 +58,17 @@ export default function PredictionsBarChart() {
         return;
       }
 
+      // Filter BLOB data to include only entries from 2024-11-19 onwards
+      const filteredBlobResponse = blobResponse.filter((blob) => new Date(blob.date) >= new Date("2024-11-19"));
+
       // Merge BLOB and Prediction data by date
-      const mergedData = blobResponse.map((blob) => ({
+      const mergedData = filteredBlobResponse.map((blob) => ({
         ...blob,
         ...predictionResponse.find((pred) => pred.date === blob.date),
       }));
+
+      console.log("Merged Data", mergedData);
+
 
       setBlobData(mergedData);
       applyFilters(selectedYear, selectedMonth, mergedData);
