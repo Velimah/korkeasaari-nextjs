@@ -213,8 +213,6 @@ export default function PredictionsBarChart() {
                       />
                     }
                   />
-                  <ChartLegend content={<ChartLegendContent />} />
-
                   {/* Stacked Bar for Ticket Types */}
                   <Bar dataKey="kulkulupa" stackId="a" fill={chartConfig.kulkulupa.color} />
                   <Bar dataKey="ilmaiskavijat" stackId="a" fill={chartConfig.ilmaiskavijat.color} />

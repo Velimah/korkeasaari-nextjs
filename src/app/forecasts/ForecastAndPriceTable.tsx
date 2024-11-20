@@ -91,7 +91,7 @@ export default function ForecastAndPriceTable({ weatherData }: { weatherData: We
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {visitorData?.slice(0, 5).map((result, index) => (
+                {visitorData?.slice(1, 5).map((result, index) => (
 
                   <TableRow className="w-full" key={index}>
                     <TableCell className="pe-4">

@@ -97,9 +97,15 @@ export const fetchFMIForecastData = async (): Promise<WeatherData[]> => {
 
       return {
         time: tempEntry.time,
-        temperature: tempEntry.value ? tempEntry.value : 0,
-        cloudcover: cloudcoverEntry ? cloudcoverEntry.value : 0, // Cap at 8 to prevent overflow
-        precipitation: precipitationEntry ? precipitationEntry.value : 0,
+        temperature: tempEntry.value
+          ? parseFloat(tempEntry.value.toFixed(1))
+          : 0,
+        cloudcover: cloudcoverEntry
+          ? parseFloat(cloudcoverEntry.value.toFixed(0))
+          : 0, // Cap at 8 to prevent overflow
+        precipitation: precipitationEntry
+          ? parseFloat(precipitationEntry.value.toFixed(1))
+          : 0,
       };
     });
 
