@@ -3,6 +3,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { CartesianGrid, Scatter, ScatterChart, XAxis, YAxis } from "recharts";
 import { useState } from "react";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {DryCloudyIcon, DrySunnyIcon, RainHeavyCloudyIcon} from "@/components/weathericons";
 
 interface AnalyticsCharts {
   EnkoraFMIData: Array<{
@@ -25,29 +26,41 @@ interface AnalyticsCharts {
 export default function AnalyticsScatterChart({ EnkoraFMIData, selectedYear, chartConfig }: AnalyticsCharts) {
   const [selectedDataKey, setSelectedDataKey] = useState<string>("temperature");
 
+  const handleCheckboxChange = (value: string) => {
+    setSelectedDataKey(value);
+  };
+
   return (
     <>
-      <div className="py-4">
-        <Select onValueChange={(value) => setSelectedDataKey(value)} value={selectedDataKey.toString()}>
-          <SelectTrigger className="w-[250px]">
-            <SelectValue placeholder={
-              selectedDataKey === "precipitation"
-                ? "Sademäärä"
-                : selectedDataKey === "cloudcover"
-                  ? "Pilvisyys"
-                  : "Lämpötila"
-            } />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectGroup>
-              <SelectItem value="temperature">Lämpötila</SelectItem>
-              <SelectItem value="precipitation">Sademäärä</SelectItem>
-              <SelectItem value="cloudcover">Pilvisyys</SelectItem>
-            </SelectGroup>
-          </SelectContent>
-        </Select>
+      <div className="pb-4 flex justify-center space-x-10">
+        <label className="flex items-center space-x-2">
+          <input
+            type="checkbox"
+            checked={selectedDataKey.includes("temperature")}
+            onChange={() => handleCheckboxChange("temperature")}
+          />
+          <DrySunnyIcon />
+          <span>Lämpötila</span>
+        </label>
+        <label className="flex items-center space-x-2">
+          <input
+            type="checkbox"
+            checked={selectedDataKey.includes("precipitation")}
+            onChange={() => handleCheckboxChange("precipitation")}
+          />
+          <RainHeavyCloudyIcon />
+          <span>Sademäärä</span>
+        </label>
+        <label className="flex items-center space-x-2">
+          <input
+            type="checkbox"
+            checked={selectedDataKey.includes("cloudcover")}
+            onChange={() => handleCheckboxChange("cloudcover")}
+          />
+          <DryCloudyIcon />
+          <span>Pilvisyys</span>
+        </label>
       </div>
-
       <Card>
         <CardHeader>
           <CardTitle>Kävijämäärä / {selectedDataKey === "precipitation"
