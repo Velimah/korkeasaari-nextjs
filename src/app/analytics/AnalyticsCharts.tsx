@@ -24,10 +24,19 @@ interface VisitorTotal {
 
 export default function EnkoraDataStatic() {
   const [EnkoraFMIData, setEnkoraFMIData] = useState<BLOB[]>([]);
-  const years = [0, 2019, 2020, 2021, 2022, 2023, 2024];
   const [selectedYear, setSelectedYear] = useState<number>(2024);
   const [visitorTotals, setVisitorTotals] = useState<VisitorTotal[]>([]);
   const [blobData, setBlobData] = useState<BLOB[]>([]);
+  const years = [
+    { label: "Kaikki vuodet", value: 0 },
+    { label: "2019", value: 2019 },
+    { label: "2020", value: 2020 },
+    { label: "2021", value: 2021 },
+    { label: "2022", value: 2022 },
+    { label: "2023", value: 2023 },
+    { label: "2024", value: 2024 },
+    { label: "2025", value: 2025 },
+  ];
 
   useEffect(() => {
     async function fetchBlobData() {
@@ -159,8 +168,8 @@ export default function EnkoraDataStatic() {
             <SelectContent>
               <SelectGroup>
                 {years.map((year) => (
-                  <SelectItem key={year} value={year.toString()}>
-                    {year === 0 ? "Kaikki vuodet" : year}
+                  <SelectItem key={year.value} value={year.value.toString()}>
+                    {year.label}
                   </SelectItem>
                 ))}
               </SelectGroup>

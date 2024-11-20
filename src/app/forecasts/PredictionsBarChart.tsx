@@ -80,12 +80,12 @@ export default function PredictionsBarChart() {
     ilmaiskavijat: { label: "Ilmaiskävijät", color: "#FF3B2F" },
     paasyliput: { label: "Pääsyliput", color: "#AAC929" },
     kampanjakavijat: { label: "Kampanjakävijät", color: "blue" },
-    verkkokauppa: { label: "Verkkokauppa Pääsyliput", color: "#25582b" },
+    verkkokauppa: { label: "Verkkokauppa", color: "#25582b" },
     vuosiliput: { label: "Vuosiliput", color: "#B14D97" },
-    day1prediction: { label: "Päivän 1 ennuste", color: "#FFB3B3" },
-    day2prediction: { label: "Päivän 2 ennuste", color: "#C3E88D" },
-    day3prediction: { label: "Päivän 3 ennuste", color: "#82CFFA" },
-    day4prediction: { label: "Päivän 4 ennuste", color: "#FFEE99" },
+    day1prediction: { label: "Ennuste 1 päivän päähän", color: "#FFB3B3" },
+    day2prediction: { label: "Ennuste 2 päivän päähän", color: "#C3E88D" },
+    day3prediction: { label: "Ennuste 3 päivän päähän", color: "#82CFFA" },
+    day4prediction: { label: "Ennuste 4 päivän päähän", color: "#FFEE99" },
   };
 
   function handleYearChange(event: React.ChangeEvent<HTMLSelectElement>) {
@@ -159,7 +159,7 @@ export default function PredictionsBarChart() {
             </CardHeader>
             <CardContent>
               <ChartContainer config={chartConfig} className="h-[400px] w-full">
-                <ComposedChart data={enkoraFMIData}>
+                <ComposedChart data={enkoraFMIData} barGap={0} barCategoryGap="5%">
                   <CartesianGrid vertical={false} />
                   <XAxis
                     dataKey="date"
@@ -168,13 +168,47 @@ export default function PredictionsBarChart() {
                       new Date(value).toLocaleDateString("fi-FI")
                     }
                   />
-                  <YAxis />
+                  <YAxis
+                    label={{ value: 'Kävijämäärä', angle: -90, position: 'insideLeft' }} />
                   <ChartTooltip
                     content={
                       <ChartTooltipContent
-                        labelFormatter={(value) =>
-                          new Date(value).toLocaleDateString("fi-FI")
-                        }
+                        labelFormatter={(value) => {
+                          return new Date(value).toLocaleDateString("fi-FI", {
+                            day: "numeric",
+                            month: "short",
+                            year: "numeric",
+                            weekday: "short",
+                          })
+                        }}
+                        formatter={(value, name, item, index) => (
+                          <>
+                            <div className="flex items-center justify-between min-w-[130px] w-full gap-4 text-xs text-muted-foreground">
+                              <div className="flex items-center gap-2">
+                                <div
+                                  className="h-2.5 w-2.5 shrink-0 rounded-[2px] bg-[--color-bg]"
+                                  style={
+                                    {
+                                      "--color-bg": `var(--color-${name})`,
+                                    } as React.CSSProperties
+                                  }
+                                />
+                                {chartConfig[name as keyof typeof chartConfig]?.label || name}
+                              </div>
+                              <div className="flex items-center gap-0.5 font-mono font-medium text-right text-foreground">
+                                {value}
+                              </div>
+                            </div>
+                            {index === 5 && (
+                              <div className="mt-1.5 flex basis-full items-center border-t pt-1.5 text-xs font-medium text-foreground">
+                                Yhteensä
+                                <div className="ml-auto flex items-baseline gap-0.5 font-mono font-semibold tabular-nums text-foreground">
+                                  {item.payload.ilmaiskavijat + item.payload.paasyliput + item.payload.kampanjakavijat + item.payload.verkkokauppa + item.payload.vuosiliput}
+                                </div>
+                              </div>
+                            )}
+                          </>
+                        )}
                       />
                     }
                   />

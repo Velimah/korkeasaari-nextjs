@@ -92,7 +92,7 @@ export default function EnkoraData() {
       color: "blue",
     },
     verkkokauppa: {
-      label: "Verkkokauppa Pääsyliput",
+      label: "Verkkokauppa",
       color: "#25582b",
     },
     vuosiliput: {
@@ -162,7 +162,7 @@ export default function EnkoraData() {
                                   {value}
                                 </div>
                               </div>
-                              {index === 4 && (
+                              {index === 5 && (
                                 <div className="mt-1.5 flex basis-full items-center border-t pt-1.5 text-xs font-medium text-foreground">
                                   Yhteensä
                                   <div className="ml-auto flex items-baseline gap-0.5 font-mono font-semibold tabular-nums text-foreground">
