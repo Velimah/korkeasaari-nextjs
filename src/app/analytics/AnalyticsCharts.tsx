@@ -32,7 +32,7 @@ export default function EnkoraDataStatic() {
   useEffect(() => {
     async function fetchBlobData() {
       const response = await getBLOBData();
-      if ('error' in response) {
+      if ("error" in response) {
         console.error(response.error);
         return;
       }
@@ -49,14 +49,14 @@ export default function EnkoraDataStatic() {
   }
 
   function applyYearFilter(year: number, data: BLOB[]) {
-    const filteredData = year === 0
-      ? data
-      : data.filter((item) => new Date(item.date).getFullYear() === year);
+    const filteredData =
+      year === 0
+        ? data
+        : data.filter((item) => new Date(item.date).getFullYear() === year);
 
     setEnkoraFMIData(filteredData);
     calculateYearlyVisitors(filteredData);
   }
-
 
   // counts and sorts the total visitors for each category for the selected year/years
   function calculateYearlyVisitors(filteredData: BLOB[]) {
@@ -138,57 +138,61 @@ export default function EnkoraDataStatic() {
   return (
     <section className="flex flex-col py-6">
       <Tabs defaultValue="composedchart" className="w-full">
-        <TabsList className="grid w-full grid-cols-3">
-          <TabsTrigger value="composedchart">Koostekaavio</TabsTrigger>
-          <TabsTrigger value="scatterchart">Hajontakaavio</TabsTrigger>
-          <TabsTrigger value="piechart">Kävijöiden jakauma</TabsTrigger>
-        </TabsList>
-
-        <div className="pt-4">
-          <Select
-            onValueChange={(value) =>
-              handleYearChange({
-                target: { value },
-              } as React.ChangeEvent<HTMLSelectElement>)
-            }
-            value={selectedYear.toString()}
-          >
-            <SelectTrigger className="w-[150px]">
-              <SelectValue placeholder="Select a year" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectGroup>
-                {years.map((year) => (
-                  <SelectItem key={year} value={year.toString()}>
-                    {year === 0 ? "Kaikki vuodet" : year}
-                  </SelectItem>
-                ))}
-              </SelectGroup>
-            </SelectContent>
-          </Select>
+        <div className="flex">
+          <div className="mr-2">
+            <Select
+              onValueChange={(value) =>
+                handleYearChange({
+                  target: { value },
+                } as React.ChangeEvent<HTMLSelectElement>)
+              }
+              value={selectedYear.toString()}
+            >
+              <SelectTrigger className="w-[150px]">
+                <SelectValue placeholder="Select a year" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  {years.map((year) => (
+                    <SelectItem key={year} value={year.toString()}>
+                      {year === 0 ? "Kaikki vuodet" : year}
+                    </SelectItem>
+                  ))}
+                </SelectGroup>
+              </SelectContent>
+            </Select>
+          </div>
+          <div className="flex-grow">
+            <TabsList className="grid w-full grid-cols-3">
+              <TabsTrigger value="composedchart">Koostekaavio</TabsTrigger>
+              <TabsTrigger value="scatterchart">Hajontakaavio</TabsTrigger>
+              <TabsTrigger value="piechart">Kävijöiden jakauma</TabsTrigger>
+            </TabsList>
+          </div>
         </div>
-
-        <TabsContent value="composedchart">
-          <AnalyticsAnalyticsComposedChartChart
-            EnkoraFMIData={EnkoraFMIData}
-            selectedYear={selectedYear}
-            chartConfig={chartConfig}
-          />
-        </TabsContent>
-        <TabsContent value="scatterchart">
-          <AnalyticsScatterChart
-            EnkoraFMIData={EnkoraFMIData}
-            selectedYear={selectedYear}
-            chartConfig={chartConfig}
-          />
-        </TabsContent>
-        <TabsContent value="piechart">
-          <AnalyticsPieChart
-            visitorTotals={visitorTotals}
-            selectedYear={selectedYear}
-            chartConfig={chartConfig}
-          />
-        </TabsContent>
+        <div>
+          <TabsContent value="composedchart">
+            <AnalyticsAnalyticsComposedChartChart
+              EnkoraFMIData={EnkoraFMIData}
+              selectedYear={selectedYear}
+              chartConfig={chartConfig}
+            />
+          </TabsContent>
+          <TabsContent value="scatterchart">
+            <AnalyticsScatterChart
+              EnkoraFMIData={EnkoraFMIData}
+              selectedYear={selectedYear}
+              chartConfig={chartConfig}
+            />
+          </TabsContent>
+          <TabsContent value="piechart">
+            <AnalyticsPieChart
+              visitorTotals={visitorTotals}
+              selectedYear={selectedYear}
+              chartConfig={chartConfig}
+            />
+          </TabsContent>
+        </div>
       </Tabs>
     </section>
   );
