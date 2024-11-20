@@ -46,7 +46,7 @@ export default function AnalyticsComposedChart({
 
   return (
     <>
-      <div className="pb-2 flex justify-center space-x-10">
+      <div className="pb-4 flex justify-center space-x-10">
         <label className="flex items-center space-x-2">
           <input
             type="checkbox"
