@@ -110,7 +110,29 @@ export default function ForecastAndPriceTable({ weatherData }: { weatherData: We
                     <TableCell className="text-center">{result.precipitation.toFixed(1)} mm</TableCell>
                     <TableCell className="text-center pe-10">{result.cloudcover.toFixed(0)} %</TableCell>
                     <TableCell className="text-center">{result.predictedvisitors.toFixed(0)}</TableCell>
-                    <TableCell className="text-center font-semibold">20 €</TableCell>
+                    <TableCell className="text-center font-semibold">
+                      {(() => {
+                        const isGoodTemperature = result.temperature >= -5;
+                        const isGoodRain = result.precipitation <= 5;
+                        const isGoodVisitors = result.predictedvisitors >= 300;
+
+                        const goodConditionsCount =
+                            (isGoodTemperature ? 1 : 0) +
+                            (isGoodRain ? 1 : 0) +
+                            (isGoodVisitors ? 1 : 0);
+
+                        switch (goodConditionsCount) {
+                          case 3:
+                            return "20 €";
+                          case 2:
+                            return "17.5 €";
+                          case 1:
+                            return "15 €";
+                          default:
+                            return "15 €";
+                        }
+                      })()}
+                    </TableCell>
                   </TableRow>
                 ))}
               </TableBody>
