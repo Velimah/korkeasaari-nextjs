@@ -51,7 +51,6 @@ export default function PredictionsBarChart() {
     async function fetchData() {
       const blobResponse = await getBLOBData();
       const predictionResponse = await getVisitorPredictions();
-      console.log("predictionResponse", predictionResponse);
 
       if ("error" in blobResponse || "error" in predictionResponse) {
         console.error("Error fetching data");
@@ -66,10 +65,6 @@ export default function PredictionsBarChart() {
         ...blob,
         ...predictionResponse.find((pred) => pred.date === blob.date),
       }));
-
-      console.log("Merged Data", mergedData);
-
-
       setBlobData(mergedData);
       applyFilters(selectedYear, selectedMonth, mergedData);
     }
