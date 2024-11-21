@@ -1,7 +1,6 @@
 import { BLOB } from "@/hooks/fetchBLobData";
 import MultivariateLinearRegression from "ml-regression-multivariate-linear";
 import processFMIWeatherData from "./FMIdataFormatter";
-import { da } from "date-fns/locale";
 interface WeatherData {
   time: string;
   temperature: number;
@@ -37,37 +36,32 @@ export default function MLRCalculator({
     { length: 12 },
     () => [],
   );
+  const processedWeatherDataArray: FormattedWeatherData[] = [];
 
   // split the historical weather data and visitor counts into monthly arrays
-  function getMonthlyHistoricalData(blobData: BLOB[]) {
-    blobData.forEach(({ temperature, precipitation, cloudcover, date }) => {
-      const dateObj = new Date(date);
-      const dayOfWeek = dateObj.getDay(); // Get day of the week (0 for Sunday, 6 for Saturday)
-      const month = dateObj.getMonth(); // Get month index (0 for January, 11 for December)
-      // Push the values into the appropriate array for the month
-      monthlyDataWeather[month].push([
-        temperature ?? 0,
-        precipitation ?? 0,
-        cloudcover ?? 0,
-        dayOfWeek,
-      ]);
-    });
+  function getHistoricalData(blobData: BLOB[]) {
+    blobData.forEach(
+      ({ temperature, precipitation, cloudcover, date, totalvisitors }) => {
+        const dateObj = new Date(date);
+        const dayOfWeek = dateObj.getDay();
+        const month = dateObj.getMonth();
 
-    blobData.forEach(({ date, totalvisitors }) => {
-      const dateObj = new Date(date);
-      const dayOfWeek = dateObj.getDay(); // Get day of the week (0 for Sunday, 6 for Saturday)
-      const month = dateObj.getMonth(); // Get month index (0 for January, 11 for December)
+        // Add weather data
+        monthlyDataWeather[month].push([
+          temperature ?? 0,
+          precipitation ?? 0,
+          cloudcover ?? 0,
+          dayOfWeek,
+        ]);
 
-      // Push the visitor counts and day of week into the appropriate array for the month
-      monthlyDataVisitors[month].push([
-        totalvisitors ?? 0, // Default to 0 if null/undefined
-        dayOfWeek, // Store the day of the week
-      ]);
-    });
+        // Add visitor data
+        monthlyDataVisitors[month].push([totalvisitors ?? 0, dayOfWeek]);
+      },
+    );
   }
 
-  // group the hourly weather data by date
-  function getDailyWeatherData(weatherData: WeatherData[]) {
+  // group the hourly weather data by date and process it to get averages for each day
+  function getWeatherForecast(weatherData: WeatherData[]) {
     const dailyWeatherData: { [date: string]: WeatherData[] } = {};
     weatherData.forEach(({ time, temperature, precipitation, cloudcover }) => {
       // Extract the date part from the time string
@@ -91,20 +85,20 @@ export default function MLRCalculator({
         data: dailyWeatherData[date],
       }),
     );
-    return formattedDailyWeatherData;
-  }
 
-  // predict visitor counts using the multivariate linear regression model
-  function PredictVisitorCounts(dailyWeatherData: any) {
-    // arrays to store the prediction results
-    const processedWeatherDataArray: FormattedWeatherData[] = [];
-    const predictions: Prediction[] = [];
-
-    //process the grouped weather data to get averages for each day
-    for (const day of dailyWeatherData) {
+    //process the weather forecast data to get averages for each day
+    for (const day of formattedDailyWeatherData) {
       const processedWeatherData = processFMIWeatherData(day.data);
       processedWeatherDataArray.push(processedWeatherData);
     }
+  }
+
+  // predict visitor counts using the multivariate linear regression model
+  function PredictVisitorCounts(
+    processedWeatherDataArray: FormattedWeatherData[],
+  ) {
+    // arrays to store the prediction results
+    const predictions: Prediction[] = [];
 
     //loop through the average weather forecast data for each day and predict the visitor counts
     for (let i = 0; i < processedWeatherDataArray.length; i++) {
@@ -132,13 +126,11 @@ export default function MLRCalculator({
         weekdayDataWeather,
         weekdayDataVisitors,
       );
-      console.log("wr", weekdayRegression);
 
       const weekendRegression = new MultivariateLinearRegression(
         weekendDataWeather,
         weekendDataVisitors,
       );
-      console.log("wer", weekendRegression);
 
       // Predict visitor counts using the corresponding regression model
       let result;
@@ -172,13 +164,10 @@ export default function MLRCalculator({
     }
     return predictions;
   }
-
   //populate the monthly data arrays with historical weather data and visitor counts
-  getMonthlyHistoricalData(blobData);
+  getHistoricalData(blobData);
   //group the weather forecast data by date
-  const dailyWeatherData = getDailyWeatherData(weatherData);
+  getWeatherForecast(weatherData);
   //predict the visitor counts with monthly historical data and daily weather forecast data
-  const predictionResults = PredictVisitorCounts(dailyWeatherData);
-
-  return predictionResults;
+  return PredictVisitorCounts(processedWeatherDataArray);
 }
