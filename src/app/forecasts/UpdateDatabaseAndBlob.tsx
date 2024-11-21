@@ -10,8 +10,13 @@ export default function UpdateDatabaseAndBlob() {
 
   async function updateDatabase() {
     setLoading(true);
-    await UpdateFMIDatabase();
-    await UpdateEnkoraDatabase();
+    const isFMIUpToDate = await UpdateFMIDatabase();
+    const isEnkoraUpToDate = await UpdateEnkoraDatabase();
+    if (isFMIUpToDate && isEnkoraUpToDate) {
+      console.log("database is up to date")
+      setLoading(false);
+      return
+    }
     await UpdateDataBlob();
     setLoading(false);
   };

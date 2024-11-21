@@ -8,11 +8,12 @@ export default async function UpdateFMIDatabase() {
   const endDate = new Date();
   endDate.setDate(endDate.getDate() - 1);
   const currentDayMinusOne = endDate.toISOString().split("T")[0]; // Format it as YYYY-MM-DD
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000"; // Default to localhost
 
   if (startDate && currentDayMinusOne) {
     try {
       // Fetch all dates from database date column
-      const response = await fetch(`/api/fmi-database`, {
+      const response = await fetch(`${apiUrl}/api/fmi-database`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -37,6 +38,11 @@ export default async function UpdateFMIDatabase() {
       );
       console.log("Missing dates fmi:", missingDates);
 
+      if (missingDates.length === 0) {
+        console.log("No missing dates found, exiting...");
+        return true;
+      }
+
       // Process missing dates sequentially and add timestamps to fetch from FMI API
       for (const date of missingDates) {
         const formattedStartTime = `${date}T00:00:00Z`;
@@ -55,7 +61,7 @@ export default async function UpdateFMIDatabase() {
         );
 
         // Send the processed weather data to the database
-        await fetch("/api/fmi-database", {
+        await fetch(`${apiUrl}/api/enkora-database`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -68,6 +74,7 @@ export default async function UpdateFMIDatabase() {
           }),
         });
       }
+      return false;
     } catch (error) {
       console.error("Error fetching weather observation data:", error);
     }

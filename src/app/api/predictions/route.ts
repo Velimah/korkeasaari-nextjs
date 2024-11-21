@@ -1,10 +1,9 @@
 import { sql } from "@vercel/postgres";
 import { NextRequest, NextResponse } from "next/server";
-import { unstable_noStore as noStore } from "next/cache";
+import { unstable_noStore } from "next/cache";
 
 export async function POST(request: NextRequest) {
   try {
-    noStore(); // Ensure this component is treated as a dynamic component
     const predictionData = await request.json();
     console.log("Prediction data received:", predictionData);
 
@@ -41,8 +40,8 @@ export async function POST(request: NextRequest) {
 }
 
 export async function GET(request: NextRequest) {
+  unstable_noStore(); // Ensure this component is treated as a dynamic component
   try {
-    noStore(); // Ensure this component is treated as a dynamic component
     // Fetch predictions and visitor data
     const predictionData = await sql`
       SELECT 

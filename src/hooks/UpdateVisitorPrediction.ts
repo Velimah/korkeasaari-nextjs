@@ -1,5 +1,5 @@
 import { getDaysAhead } from "@/utils/DateHelperFunctions";
-import { unstable_noStore as noStore } from "next/cache";
+import { unstable_noStore } from "next/cache";
 interface PredictionEntry {
   date: string;
   predictedvisitors: number;
@@ -13,8 +13,9 @@ interface PredictionData {
   day4prediction: number;
 }
 
+const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000"; // Default to localhost
 export async function UpdateVisitorPrediction(predictions: PredictionEntry[]) {
-  noStore(); // Ensure this component is treated as a dynamic component
+  unstable_noStore(); // Ensure this component is treated as a dynamic component
   // Process only the day 2-5 predictions
   const result = predictions.slice(1, 5);
   console.log("Predictions to be saved:", result);
@@ -33,11 +34,8 @@ export async function UpdateVisitorPrediction(predictions: PredictionEntry[]) {
         daysAhead: daysAhead,
       };
 
-      // Log the data being sent
-      console.log("Sending data to /api/predictions:", dataToSend);
-
       // Send the prediction data to the API
-      await fetch("/api/predictions", {
+      await fetch(`${apiUrl}/api/predictions`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -53,9 +51,9 @@ export async function UpdateVisitorPrediction(predictions: PredictionEntry[]) {
 export async function getVisitorPredictions(): Promise<
   PredictionData[] | { error: string }
 > {
-  noStore(); // Ensure this component is treated as a dynamic component
+  unstable_noStore(); // Ensure this component is treated as a dynamic component
   try {
-    const response = await fetch("/api/predictions", {
+    const response = await fetch(`${apiUrl}/api/predictions`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

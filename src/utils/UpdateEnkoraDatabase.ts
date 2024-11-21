@@ -7,11 +7,12 @@ export default async function UpdateEnkoraDatabase() {
   const endDate = new Date();
   endDate.setDate(endDate.getDate() - 1);
   const currentDayMinusOne = endDate.toISOString().split("T")[0]; // Format it as YYYY-MM-DD
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000"; // Default to localhost
 
   if (startDate && currentDayMinusOne) {
     try {
       // Fetch all dates from database date column
-      const response = await fetch(`/api/enkora-database`, {
+      const response = await fetch(`${apiUrl}/api/enkora-database`, {
         method: "GET", // Use GET method
         headers: {
           "Content-Type": "application/json",
@@ -36,6 +37,11 @@ export default async function UpdateEnkoraDatabase() {
       );
       console.log("Missing dates enkora:", missingDates);
 
+      if (missingDates.length === 0) {
+        console.log("No missing dates found, exiting...");
+        return true;
+      }
+
       // Process missing dates sequentially to fetch from Enkora API
       for (const date of missingDates) {
         const data = await fetchEnkoraData(date);
@@ -54,7 +60,7 @@ export default async function UpdateEnkoraDatabase() {
           console.log("Sending Enkora visitor data to database:", result);
 
           // Send the processed visitor data to the database
-          await fetch("/api/enkora-database", {
+          await fetch(`${apiUrl}/api/enkora-database`, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -71,6 +77,7 @@ export default async function UpdateEnkoraDatabase() {
           });
         }
       }
+      return false;
     } catch (error) {
       console.error("Error fetching visitor observation data:", error);
     }

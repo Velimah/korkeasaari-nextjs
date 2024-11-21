@@ -3,13 +3,14 @@ import { NextRequest, NextResponse } from "next/server";
 import { unstable_noStore as noStore } from "next/cache";
 
 export async function GET(request: NextRequest) {
+  noStore(); // Ensure this component is treated as a dynamic component
   try {
     const visitorData = await sql`
-    SELECT date 
-    FROM visitordata 
-    WHERE date > '2024-11-11'
-    ORDER BY date ASC;
-  `;
+      SELECT date 
+      FROM visitordata 
+      WHERE date > '2024-11-11'
+      ORDER BY date ASC;
+    `;
 
     return NextResponse.json({ visitorData }, { status: 200 });
   } catch (error) {

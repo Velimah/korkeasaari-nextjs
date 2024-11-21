@@ -1,7 +1,8 @@
 export default async function UpdateDataBlob() {
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000"; // Default to localhost
   try {
     // Fetch all Enkora and FMI data from database API
-    const response = await fetch(`/api/database`, {
+    const response = await fetch("/api/database", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -15,7 +16,7 @@ export default async function UpdateDataBlob() {
     const data = await response.json();
 
     // Send the fetched data to the Blob API as JSON
-    const response2 = await fetch("/api/blob", {
+    const response2 = await fetch(`${apiUrl}/api/blob`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
