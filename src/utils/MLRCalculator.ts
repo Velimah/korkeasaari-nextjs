@@ -168,6 +168,6 @@ export default function MLRCalculator({
   getHistoricalData(blobData);
   //group the weather forecast data by date
   getWeatherForecast(weatherData);
-  //predict the visitor counts with monthly historical data and daily weather forecast data
+  //predict the visitor counts with historical and weather forecast data
   return PredictVisitorCounts(processedWeatherDataArray);
 }
