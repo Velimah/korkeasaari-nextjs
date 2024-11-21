@@ -13,7 +13,6 @@ interface PredictionData {
   day4prediction: number;
 }
 
-const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000"; // Default to localhost
 export async function UpdateVisitorPrediction(predictions: PredictionEntry[]) {
   unstable_noStore(); // Ensure this component is treated as a dynamic component
   // Process only the day 2-5 predictions
@@ -35,7 +34,7 @@ export async function UpdateVisitorPrediction(predictions: PredictionEntry[]) {
       };
 
       // Send the prediction data to the API
-      await fetch(`${apiUrl}/api/predictions`, {
+      await fetch(`/api/predictions`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -53,7 +52,7 @@ export async function getVisitorPredictions(): Promise<
 > {
   unstable_noStore(); // Ensure this component is treated as a dynamic component
   try {
-    const response = await fetch(`${apiUrl}/api/predictions`, {
+    const response = await fetch(`/api/predictions`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
