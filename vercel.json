@@ -2,11 +2,11 @@
   "crons": [
     {
       "path": "/api/cron-fmienkora",
-      "schedule": "0,10,20,30,40,50 * * * *"
+      "schedule": "0 13 * * *"
     },
     {
       "path": "/api/cron-predictions",
-      "schedule": "5,15,25,35,45,55 * * * *"
+      "schedule": "0 15 * * *"
     }
   ]
 }

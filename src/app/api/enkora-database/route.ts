@@ -4,7 +4,6 @@ import { unstable_noStore as noStore } from "next/cache";
 
 export async function GET(request: NextRequest) {
   try {
-    noStore(); // Ensure this component is treated as a dynamic component
     const visitorData = await sql`
     SELECT date 
     FROM visitordata 
