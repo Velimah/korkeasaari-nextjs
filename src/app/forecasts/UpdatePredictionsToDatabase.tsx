@@ -7,7 +7,7 @@ export function UpdatePredictionsToDatabase() {
   const updateDatabase = async () => {
     setLoading(true);
     try {
-      const response = await fetch("/api/cron-predictions", {
+      const response = await fetch("/api/cron-update-predictions", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

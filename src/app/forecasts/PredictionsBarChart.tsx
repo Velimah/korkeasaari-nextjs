@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from "react";
 import {
-  ChartConfig,
   ChartContainer,
-  ChartLegend,
-  ChartLegendContent,
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
@@ -11,7 +8,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Bar, Brush, CartesianGrid, ComposedChart, XAxis, YAxis } from "recharts";
 import { LoadingSpinner } from "@/components/ui/loading-spinner";
 import { getBLOBData, BLOB } from "@/hooks/fetchBLobData";
-import { getVisitorPredictions } from "@/hooks/UpdateVisitorPrediction";
+import { getVisitorPredictions } from "@/hooks/fetchVisitorPredictionData";
 import {
   Select,
   SelectContent,

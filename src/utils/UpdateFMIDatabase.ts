@@ -1,13 +1,9 @@
 import { sql } from "@vercel/postgres";
-import { NextRequest, NextResponse } from "next/server";
-import { unstable_noStore } from "next/cache";
 import { fetchFMIObservationData } from "@/hooks/fetchFMIObservationData";
 import processFMIWeatherData from "@/utils/FMIdataFormatter";
 import { getMissingDates } from "@/utils/DateHelperFunctions";
 
 export default async function UpdateFMIDatabase() {
-  unstable_noStore(); // Ensure the response is not cached
-
   const startDate = "2024-11-12"; // Database has all the data before this date
   const endDate = new Date();
   endDate.setDate(endDate.getDate() - 1);
@@ -32,11 +28,7 @@ export default async function UpdateFMIDatabase() {
       existingDates,
     );
     if (missingDates.length === 0) {
-      console.log("No missing dates found, exiting...");
-      return NextResponse.json(
-        { message: "No missing dates." },
-        { status: 200 },
-      );
+      return { success: false, message: "No missing FMI dates to update." };
     }
 
     // Process and insert data for missing dates
@@ -62,15 +54,12 @@ export default async function UpdateFMIDatabase() {
       `;
     }
 
-    return NextResponse.json(
-      { message: "Missing dates updated successfully." },
-      { status: 200 },
-    );
+    return { success: true, message: "Weather data updated to database." };
   } catch (error) {
     console.error("Error updating weather data:", error);
-    return NextResponse.json(
-      { error: "Failed to update weather data." },
-      { status: 500 },
-    );
+    return {
+      success: false,
+      message: "Error updating weather data to database",
+    };
   }
 }

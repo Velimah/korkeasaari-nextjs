@@ -2,11 +2,27 @@ import { NextRequest, NextResponse } from "next/server";
 import UpdateEnkoraDatabase from "@/utils/UpdateEnkoraDatabase";
 import UpdateFMIDatabase from "@/utils/UpdateFMIDatabase";
 import UpdateDataBlob from "@/utils/UpdateDataBlob";
+import { unstable_noStore } from "next/cache";
 
 export async function GET(request: NextRequest) {
   try {
-    await UpdateEnkoraDatabase();
-    await UpdateFMIDatabase();
+    unstable_noStore(); // Ensure caching is disabled
+    const enkoraUpdateResult = await UpdateEnkoraDatabase();
+    const fmiUpdateResult = await UpdateFMIDatabase();
+
+    // Check if both updates failed and return both messages
+    if (!enkoraUpdateResult.success && !fmiUpdateResult.success) {
+      return NextResponse.json(
+        {
+          message: `Enkora Update: ${enkoraUpdateResult.message}, FMI Update: ${fmiUpdateResult.message}`,
+        },
+        {
+          status: 400,
+        },
+      );
+    }
+
+    // If both updates were successful, proceed with blob update
     await UpdateDataBlob();
 
     return NextResponse.json(

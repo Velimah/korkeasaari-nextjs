@@ -38,10 +38,10 @@ export default async function UpdateDataBlob() {
     `;
   } catch (dbError) {
     console.error("Database query failed:", dbError);
-    return NextResponse.json(
-      { error: "Failed to fetch data from the database" },
-      { status: 500 },
-    );
+    return {
+      success: false,
+      message: "Database query failed.",
+    };
   }
 
   try {

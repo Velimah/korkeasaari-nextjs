@@ -1,11 +1,11 @@
 {
   "crons": [
     {
-      "path": "/api/cron-fmienkora",
+      "path": "/api/cron-update-fmienkora",
       "schedule": "0 10 * * *"
     },
     {
-      "path": "/api/cron-predictions",
+      "path": "/api/cron-update-predictions",
       "schedule": "0 12 * * *"
     }
   ]

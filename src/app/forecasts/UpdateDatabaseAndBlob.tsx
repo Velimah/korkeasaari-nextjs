@@ -7,7 +7,7 @@ export function UpdateDatabaseAndBlob() {
   const updateDatabase = async () => {
     setLoading(true);
     try {
-      const response = await fetch("/api/cron-fmienkora", {
+      const response = await fetch("/api/cron-update-fmienkora", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

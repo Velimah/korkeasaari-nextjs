@@ -1,7 +1,6 @@
 import { getMissingDates } from "./DateHelperFunctions";
 import processEnkoraVisitorData from "./EnkoraDataFormatter";
 import { sql } from "@vercel/postgres";
-import { NextResponse } from "next/server";
 
 export default async function UpdateEnkoraDatabase() {
   const startDate = "2024-11-12"; // Database has all data before this date
@@ -28,14 +27,10 @@ export default async function UpdateEnkoraDatabase() {
       currentDayMinusOne,
       existingDates,
     );
-    console.log("Missing dates for Enkora update:", missingDates);
 
     if (missingDates.length === 0) {
       console.log("No missing dates found. Exiting...");
-      return NextResponse.json(
-        { message: "No missing dates to update." },
-        { status: 200 },
-      );
+      return { success: false, message: "No missing Enkora dates to update." };
     }
 
     // Process missing dates sequentially
@@ -62,14 +57,14 @@ export default async function UpdateEnkoraDatabase() {
           console.error(
             `Failed to fetch data for ${date}. Status: ${response.status}`,
           );
-          continue; // Skip to the next date
+          return { success: false, message: "Failed to fetch visitor data." };
         }
 
         const jsonData = await response.json();
 
         if (!jsonData) {
           console.error(`No data returned for ${date}`);
-          continue;
+          return { success: false, message: "No visitor data received." };
         }
 
         // Process and validate the fetched data
@@ -87,7 +82,7 @@ export default async function UpdateEnkoraDatabase() {
           result.vuosiliput == null
         ) {
           console.error(`Invalid data for ${date}:`, result);
-          continue; // Skip invalid data
+          return { success: false, message: "Invalid visitor data." };
         }
 
         console.log("Inserting data into database:", result);
@@ -102,19 +97,22 @@ export default async function UpdateEnkoraDatabase() {
         `;
       } catch (error) {
         console.error(`Error processing date ${date}:`, error);
-        // Continue processing other dates despite errors
+        return {
+          success: false,
+          message: "Error inserting visitor data to database.",
+        };
       }
     }
 
-    return NextResponse.json(
-      { message: "Missing dates updated successfully." },
-      { status: 200 },
-    );
+    return {
+      success: true,
+      message: "visitor data updated to database.",
+    };
   } catch (error) {
     console.error("Critical error during database update:", error);
-    return NextResponse.json(
-      { error: "Failed to update Enkora data." },
-      { status: 500 },
-    );
+    return {
+      success: false,
+      message: "Error inserting visitor data to database",
+    };
   }
 }
