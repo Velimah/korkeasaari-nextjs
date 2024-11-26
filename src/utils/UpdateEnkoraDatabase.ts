@@ -1,84 +1,120 @@
 import { getMissingDates } from "./DateHelperFunctions";
-import { fetchEnkoraData } from "@/hooks/fetchEnkoraVisitorData";
 import processEnkoraVisitorData from "./EnkoraDataFormatter";
+import { sql } from "@vercel/postgres";
+import { NextResponse } from "next/server";
 
 export default async function UpdateEnkoraDatabase() {
-  const startDate = "2024-11-12"; //Database has all the data before this date
-  const endDate = new Date();
-  endDate.setDate(endDate.getDate() - 1);
-  const currentDayMinusOne = endDate.toISOString().split("T")[0]; // Format it as YYYY-MM-DD
+  const startDate = "2024-11-12"; // Database has all data before this date
+  const currentDate = new Date();
+  currentDate.setDate(currentDate.getDate() - 1); // Exclude today
+  const currentDayMinusOne = currentDate.toISOString().split("T")[0]; // Format as YYYY-MM-DD
 
-  if (startDate && currentDayMinusOne) {
-    try {
-      // Fetch all dates from database date column
-      const response = await fetch(`/api/enkora-database`, {
-        method: "GET", // Use GET method
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+  try {
+    // Fetch existing dates from the database
+    const existingData = await sql`
+      SELECT date 
+      FROM visitordata 
+      WHERE date > '2024-11-11'
+      ORDER BY date ASC;
+    `;
 
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
+    const existingDates = existingData.rows.map(
+      (entry) => entry.date.split("T")[0],
+    );
 
-      const { visitorData } = await response.json();
-      console.log("Visitor data from database:", visitorData);
-      const existingDates = visitorData.rows.map((entry: { date: string }) => {
-        return entry.date.split("T")[0];
-      });
+    // Find missing dates
+    const missingDates = getMissingDates(
+      startDate,
+      currentDayMinusOne,
+      existingDates,
+    );
+    console.log("Missing dates for Enkora update:", missingDates);
 
-      // find all missing dates between startDate and currentDayMinusOne
-      const missingDates = getMissingDates(
-        startDate,
-        currentDayMinusOne,
-        existingDates,
+    if (missingDates.length === 0) {
+      console.log("No missing dates found. Exiting...");
+      return NextResponse.json(
+        { message: "No missing dates to update." },
+        { status: 200 },
       );
-      console.log("Missing dates enkora:", missingDates);
-
-      if (missingDates.length === 0) {
-        console.log("No missing dates found, exiting...");
-        return true;
-      }
-
-      // Process missing dates sequentially to fetch from Enkora API
-      for (const date of missingDates) {
-        const data = await fetchEnkoraData(date);
-        let result;
-        if (data) {
-          // Process the fetched data to calculate to change variable names and restructure the object by day
-          result = processEnkoraVisitorData(data);
-          // If result is an array and you want just the first object
-          if (Array.isArray(result) && result.length > 0) {
-            result = result[0]; // Use the first object in the array
-          }
-        }
-
-        // Ensure that result is not undefined and is of the correct type
-        if (result && "date" in result) {
-          console.log("Sending Enkora visitor data to database:", result);
-
-          // Send the processed visitor data to the database
-          await fetch(`/api/enkora-database`, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              date: result.date,
-              kulkulupa: result.kulkulupa,
-              ilmaiskavijat: result.ilmaiskavijat,
-              paasyliput: result.paasyliput,
-              kampanjakavijat: result.kampanjakavijat,
-              verkkokauppa: result.verkkokauppa,
-              vuosiliput: result.vuosiliput,
-            }),
-          });
-        }
-      }
-      return false;
-    } catch (error) {
-      console.error("Error fetching visitor observation data:", error);
     }
+
+    // Process missing dates sequentially
+    for (const date of missingDates) {
+      try {
+        const url =
+          "https://oma.enkora.fi/korkeasaari/reports/validations/json";
+        const params = new URLSearchParams({
+          input_format: "post_data",
+          authentication: `${process.env.ENKORA_USER},${process.env.ENKORA_PASS}`,
+          clear_values: "1",
+          "values[timestamp]": date,
+          "values[group-0]": "day",
+          "values[group-1]": "service_group_id",
+        });
+
+        const response = await fetch(url, {
+          method: "POST",
+          body: params,
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        });
+
+        if (!response.ok) {
+          console.error(
+            `Failed to fetch data for ${date}. Status: ${response.status}`,
+          );
+          continue; // Skip to the next date
+        }
+
+        const jsonData = await response.json();
+
+        if (!jsonData) {
+          console.error(`No data returned for ${date}`);
+          continue;
+        }
+
+        // Process and validate the fetched data
+        const results = processEnkoraVisitorData(jsonData);
+        const result = results[0]; // Get the first result from the array
+
+        if (
+          !result ||
+          !result.date ||
+          result.kulkulupa == null ||
+          result.ilmaiskavijat == null ||
+          result.paasyliput == null ||
+          result.kampanjakavijat == null ||
+          result.verkkokauppa == null ||
+          result.vuosiliput == null
+        ) {
+          console.error(`Invalid data for ${date}:`, result);
+          continue; // Skip invalid data
+        }
+
+        console.log("Inserting data into database:", result);
+
+        // Insert data into the database
+        await sql`
+          INSERT INTO visitordata 
+          (date, kulkulupa, ilmaiskavijat, paasyliput, kampanjakavijat, verkkokauppa, vuosiliput)
+          VALUES 
+          (${result.date}, ${result.kulkulupa}, ${result.ilmaiskavijat}, ${result.paasyliput}, ${result.kampanjakavijat}, ${result.verkkokauppa}, ${result.vuosiliput})
+          ON CONFLICT (date) DO NOTHING;
+        `;
+      } catch (error) {
+        console.error(`Error processing date ${date}:`, error);
+        // Continue processing other dates despite errors
+      }
+    }
+
+    return NextResponse.json(
+      { message: "Missing dates updated successfully." },
+      { status: 200 },
+    );
+  } catch (error) {
+    console.error("Critical error during database update:", error);
+    return NextResponse.json(
+      { error: "Failed to update Enkora data." },
+      { status: 500 },
+    );
   }
 }
