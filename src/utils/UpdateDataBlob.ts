@@ -1,35 +1,105 @@
+import { put } from "@vercel/blob";
+import { NextResponse } from "next/server";
+import { sql } from "@vercel/postgres";
+
 export default async function UpdateDataBlob() {
+  let jsonData;
+
   try {
-    // Fetch all Enkora and FMI data from database API
-    const response = await fetch("/api/database", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    // Fetch data from the database
+    jsonData = await sql`
+      SELECT 
+        w.date AS date, 
+        w.temperature, 
+        w.precipitation, 
+        w.cloudcover,
+        v.kulkulupa, 
+        v.ilmaiskavijat, 
+        v.paasyliput, 
+        v.kampanjakavijat, 
+        v.verkkokauppa, 
+        v.vuosiliput,
+        (COALESCE(v.ilmaiskavijat, 0) + 
+        COALESCE(v.paasyliput, 0) + 
+        COALESCE(v.kampanjakavijat, 0) + 
+        COALESCE(v.verkkokauppa, 0) + 
+        COALESCE(v.vuosiliput, 0)) AS totalvisitors
+      FROM 
+        weatherdata w
+      LEFT JOIN 
+        visitordata v 
+      ON 
+        w.date = v.date
+      WHERE 
+        w.date > '2024-11-11'
+      ORDER BY 
+        w.date ASC
+      LIMIT 500;
+    `;
+  } catch (dbError) {
+    console.error("Database query failed:", dbError);
+    return NextResponse.json(
+      { error: "Failed to fetch data from the database" },
+      { status: 500 },
+    );
+  }
+
+  try {
+    // Fetch existing data from the blob
+    const response = await fetch(
+      "https://yxkilu3yp1tkxpeo.public.blob.vercel-storage.com/data/mydata.json",
+      { cache: "no-store" },
+    );
 
     if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
+      throw new Error(`Failed to fetch existing data: HTTP ${response.status}`);
     }
 
-    const data = await response.json();
+    const existingData = await response.json();
 
-    // Send the fetched data to the Blob API as JSON
-    const response2 = await fetch(`/api/blob`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
+    // Validate existing data structure
+    if (!Array.isArray(existingData)) {
+      throw new Error("Existing data is not an array");
+    }
+
+    // Parse new data
+    const newData = jsonData.rows.map((row) => ({
+      date: row.date,
+      temperature: row.temperature,
+      precipitation: row.precipitation,
+      cloudcover: row.cloudcover,
+      kulkulupa: row.kulkulupa,
+      ilmaiskavijat: row.ilmaiskavijat,
+      paasyliput: row.paasyliput,
+      kampanjakavijat: row.kampanjakavijat,
+      verkkokauppa: row.verkkokauppa,
+      vuosiliput: row.vuosiliput,
+      totalvisitors: row.totalvisitors,
+    }));
+
+    // Combine data, removing duplicates based on the 'date' field
+    const existingDates = new Set(existingData.map((data) => data.date));
+    const filteredNewData = newData.filter(
+      (data) => !existingDates.has(data.date),
+    );
+    const updatedData = [...existingData, ...filteredNewData];
+
+    // Convert updated data to JSON
+    const jsonString = JSON.stringify(updatedData);
+
+    // Upload updated data to the blob
+    const { url } = await put("data/mydata.json", jsonString, {
+      access: "public",
+      addRandomSuffix: false,
+      contentType: "application/json",
     });
 
-    if (!response2.ok) {
-      throw new Error(`Blob upload failed! status: ${response2.status}`);
-    }
-
-    const { url } = await response2.json();
-    console.log("Blob data uploaded to:", url);
-  } catch (error) {
-    console.error("Error fetching and uploading data:", error);
+    return NextResponse.json({ url }, { status: 200 });
+  } catch (uploadError) {
+    console.error("Upload failed:", uploadError);
+    return NextResponse.json(
+      { error: "Failed to upload updated data" },
+      { status: 500 },
+    );
   }
 }

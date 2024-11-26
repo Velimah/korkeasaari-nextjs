@@ -1,28 +1,33 @@
-import UpdateFMIDatabase from "@/utils/UpdateFMIDatabase";
-import UpdateEnkoraDatabase from "@/utils/UpdateEnkoraDatabase";
-import UpdateDataBlob from "@/utils/UpdateDataBlob";
 import { NextRequest, NextResponse } from "next/server";
-import { unstable_noStore } from "next/cache";
+import UpdateEnkoraDatabase from "@/utils/UpdateEnkoraDatabase";
+import UpdateFMIDatabase from "@/utils/UpdateFMIDatabase";
+import UpdateDataBlob from "@/utils/UpdateDataBlob";
 
 export async function GET(request: NextRequest) {
-  unstable_noStore(); // Ensure this component is treated as a dynamic component
   try {
-    const isFMIUpToDate = await UpdateFMIDatabase();
-    const isEnkoraUpToDate = await UpdateEnkoraDatabase();
-    if (isFMIUpToDate && isEnkoraUpToDate) {
-      console.log("database is up to date");
-      return NextResponse.json(
-        { response: "database is up to date" },
-        { status: 200 },
-      );
-    }
+    await UpdateEnkoraDatabase();
+    await UpdateFMIDatabase();
     await UpdateDataBlob();
-    return NextResponse.json({ response: "data updated" }, { status: 200 });
-  } catch (error) {
-    console.error("Upload error:", error);
+
     return NextResponse.json(
-      { error: "Failed to upload data" },
-      { status: 500 },
+      {
+        message: "All updates completed successfully!",
+      },
+      {
+        status: 200,
+      },
+    );
+  } catch (error) {
+    console.error("Error during updates:", error);
+
+    return NextResponse.json(
+      {
+        message: "An error occurred during updates.",
+        error: error instanceof Error ? error.message : "Unknown error",
+      },
+      {
+        status: 500,
+      },
     );
   }
 }

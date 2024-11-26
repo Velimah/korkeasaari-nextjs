@@ -104,7 +104,16 @@ export default function MLRCalculator({
     for (let i = 0; i < processedWeatherDataArray.length; i++) {
       // Get month index (0 for January, 11 for December)
       const dateObject = new Date(processedWeatherDataArray[i].date);
-      const month = dateObject.getMonth() + 1;
+      const month = dateObject.getMonth();
+
+      // Check for valid data
+      if (
+        !monthlyDataWeather[month]?.length ||
+        !monthlyDataVisitors[month]?.length
+      ) {
+        console.warn(`No historical data for month: ${month}`);
+        continue;
+      }
 
       // Separate weekday and weekend data, remove day index
       const weekdayDataVisitors = monthlyDataVisitors[month]
