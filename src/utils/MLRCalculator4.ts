@@ -132,9 +132,7 @@ export default function MLRCalculator4({
       // Debug: inspect raw prediction
       console.log("Raw Prediction:", predictedVisitors);
 
-      // Weight adjustment logic
-
-      // Calculate the average visitors from all months
+      // Calculate the average visitors per day from all months
       const averageVisitors =
         allVisitorData.reduce(
           (acc, val) => acc + val[0], // Access the first element (visitor count) from each month
@@ -149,36 +147,29 @@ export default function MLRCalculator4({
 
       const monthMultiplier = monthlyAverageVisitorTotals / averageVisitors;
 
-      // Calculate the weekend multiplier based on the month’s data
+      // Calculate the weekend visitor ratio based on the month’s data
       const weekendVisitorRatio =
         monthlyAverageVisitors[month].weekend /
         monthlyAverageVisitors[month].weekday;
 
-      // Calculate total visitors for the entire week (7 days)
+      // Calculate the weekday and weekend multipliers
       const totalVisitorsForWeek = predictedVisitors * 7;
       const totalWeekdays = 5; // Number of weekdays (5 days)
       const totalWeekends = 2; // Number of weekend days (2 days)
-
-      // Calculate the scaling factor
       const weekdayMultiplier =
         totalVisitorsForWeek /
         (totalWeekdays * predictedVisitors +
           totalWeekends * weekendVisitorRatio * predictedVisitors);
 
-      // Calculate the weekday and weekend multipliers
       const weekendMultiplier = weekendVisitorRatio * weekdayMultiplier;
 
-      // Calculate predicted visitors for weekdays and weekends
-      const weekdayVisitors =
-        predictedVisitors * monthMultiplier * weekdayMultiplier;
-      const weekendVisitors =
-        predictedVisitors * monthMultiplier * weekendMultiplier;
-
+      // Add the weight multipliers to the prediction
       const isWeekend = day === 0 || day === 6; // Check if it's a weekend (0 = Sunday, 6 = Saturday)
-
       isWeekend
-        ? (predictedVisitors = weekendVisitors)
-        : (predictedVisitors = weekdayVisitors);
+        ? (predictedVisitors =
+            predictedVisitors * monthMultiplier * weekendMultiplier)
+        : (predictedVisitors =
+            predictedVisitors * monthMultiplier * weekdayMultiplier);
 
       // Ensure no negative predictions
       predictedVisitors = Math.max(predictedVisitors, 0);
@@ -191,8 +182,6 @@ export default function MLRCalculator4({
         predictedvisitors: Math.round(predictedVisitors),
       });
     }
-
-    console.log("weightedPredictions:", predictions);
     return predictions;
   }
 
