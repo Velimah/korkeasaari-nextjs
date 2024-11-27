@@ -2,13 +2,12 @@ import { getBLOBData } from "@/hooks/fetchBLobData";
 import { fetchFMIForecastData } from "@/hooks/fetchFMIForecastData";
 import MLRCalculator from "@/utils/MLRCalculator";
 import { NextRequest, NextResponse } from "next/server";
-import { unstable_noStore } from "next/cache";
 import { getDaysAhead } from "@/utils/DateHelperFunctions";
 import { sql } from "@vercel/postgres";
 
-export async function GET(request: NextRequest) {
-  unstable_noStore(); // Ensure caching is disabled
+export const fetchCache = "force-no-store";
 
+export async function GET(request: NextRequest) {
   try {
     const blobData = await getBLOBData();
     const weatherData = await fetchFMIForecastData();

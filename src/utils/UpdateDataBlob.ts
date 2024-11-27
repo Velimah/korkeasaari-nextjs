@@ -31,7 +31,7 @@ export default async function UpdateDataBlob() {
       ON 
         w.date = v.date
       WHERE 
-        w.date > '2024-11-11'
+        w.date > '2024-11-20'
       ORDER BY 
         w.date ASC
       LIMIT 500;

@@ -3,7 +3,7 @@ import processEnkoraVisitorData from "./EnkoraDataFormatter";
 import { sql } from "@vercel/postgres";
 
 export default async function UpdateEnkoraDatabase() {
-  const startDate = "2024-11-12"; // Database has all data before this date
+  const startDate = "2024-11-21"; // Database has all data before this date
   const currentDate = new Date();
   currentDate.setDate(currentDate.getDate() - 1); // Exclude today
   const currentDayMinusOne = currentDate.toISOString().split("T")[0]; // Format as YYYY-MM-DD
@@ -13,7 +13,7 @@ export default async function UpdateEnkoraDatabase() {
     const existingData = await sql`
       SELECT date 
       FROM visitordata 
-      WHERE date > '2024-11-11'
+      WHERE date > '2024-11-20'
       ORDER BY date ASC;
     `;
 
@@ -106,7 +106,7 @@ export default async function UpdateEnkoraDatabase() {
 
     return {
       success: true,
-      message: "visitor data updated to database.",
+      message: "Visitor data updated to database.",
     };
   } catch (error) {
     console.error("Critical error during database update:", error);

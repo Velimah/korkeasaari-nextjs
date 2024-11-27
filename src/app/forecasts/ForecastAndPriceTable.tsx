@@ -5,6 +5,9 @@ import { ChartConfig, ChartContainer, ChartLegend, ChartLegendContent, ChartTool
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Bar, CartesianGrid, ComposedChart, XAxis, YAxis } from "recharts";
 import MLRCalculator from "@/utils/MLRCalculator";
+import MLRCalculator2 from "@/utils/MLRCalculator2";
+import MLRCalculator3 from "@/utils/MLRCalculator3";
+import MLRCalculator4 from "@/utils/MLRCalculator4";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
   Table,
@@ -47,7 +50,7 @@ export default function ForecastAndPriceTable({ weatherData }: { weatherData: We
 
       // Run MLRCalculator if both weatherData and blobData are available
       if (weatherData.length > 0 && response.length > 0) {
-        const result = MLRCalculator({ weatherData, blobData: response });
+        const result = MLRCalculator4({ weatherData, blobData: response });
         if (result) {
           setVisitorData(result);
         }
@@ -117,9 +120,9 @@ export default function ForecastAndPriceTable({ weatherData }: { weatherData: We
                         const isGoodVisitors = result.predictedvisitors >= 300;
 
                         const goodConditionsCount =
-                            (isGoodTemperature ? 1 : 0) +
-                            (isGoodRain ? 1 : 0) +
-                            (isGoodVisitors ? 1 : 0);
+                          (isGoodTemperature ? 1 : 0) +
+                          (isGoodRain ? 1 : 0) +
+                          (isGoodVisitors ? 1 : 0);
 
                         switch (goodConditionsCount) {
                           case 3:

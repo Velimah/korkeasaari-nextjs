@@ -2,11 +2,11 @@ import { NextRequest, NextResponse } from "next/server";
 import UpdateEnkoraDatabase from "@/utils/UpdateEnkoraDatabase";
 import UpdateFMIDatabase from "@/utils/UpdateFMIDatabase";
 import UpdateDataBlob from "@/utils/UpdateDataBlob";
-import { unstable_noStore } from "next/cache";
+
+export const fetchCache = "force-no-store";
 
 export async function GET(request: NextRequest) {
   try {
-    unstable_noStore(); // Ensure caching is disabled
     const enkoraUpdateResult = await UpdateEnkoraDatabase();
     const fmiUpdateResult = await UpdateFMIDatabase();
 

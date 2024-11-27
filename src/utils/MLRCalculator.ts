@@ -140,6 +140,7 @@ export default function MLRCalculator({
         weekendDataWeather,
         weekendDataVisitors,
       );
+      console.log("weekday", weekdayRegression, "weekend", weekendRegression);
 
       // Predict visitor counts using the corresponding regression model
       let result;
@@ -171,6 +172,7 @@ export default function MLRCalculator({
         predictedvisitors: Number(result.toFixed(0)),
       };
     }
+    console.log(predictions);
     return predictions;
   }
   //populate the monthly data arrays with historical weather data and visitor counts

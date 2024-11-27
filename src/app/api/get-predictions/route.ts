@@ -1,9 +1,9 @@
 import { sql } from "@vercel/postgres";
 import { NextRequest, NextResponse } from "next/server";
-import { unstable_noStore } from "next/cache";
+
+export const fetchCache = "force-no-store";
 
 export async function GET(request: NextRequest) {
-  unstable_noStore(); // Ensure this component is treated as a dynamic component
   try {
     // Fetch predictions and visitor data
     const predictionData = await sql`
