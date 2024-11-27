@@ -66,6 +66,38 @@ export default function ForecastAndPriceTable({ weatherData }: { weatherData: We
     },
   } satisfies ChartConfig
 
+
+  const getMonthlyThresholds = (month: number): { temperature: number; rain: number; visitors: number } => {
+    switch (month) {
+      case 0: // Tammikuu
+        return { temperature: -10, rain: 5, visitors: 150 };
+      case 1: // Helmikuu
+        return { temperature: -5, rain: 5, visitors: 200 };
+      case 2: // Maaliskuu
+        return { temperature: -3, rain: 5, visitors: 250 };
+      case 3: // Huhtikuu
+        return { temperature: -1, rain: 5, visitors: 300 };
+      case 4: // Toukokuu
+        return { temperature: 5, rain: 8, visitors: 900 };
+      case 5: // Kesäkuu
+        return { temperature: 10, rain: 8, visitors: 1200 };
+      case 6: // Heinäkuu
+        return { temperature: 15, rain: 7, visitors: 1400 };
+      case 7: // Elokuu
+        return { temperature: 10, rain: 5, visitors: 1000 };
+      case 8: // Syyskuu
+        return { temperature: 7, rain: 8, visitors: 700 };
+      case 9: // Lokakuu
+        return { temperature: 3, rain: 9, visitors: 400 };
+      case 10: // Marraskuu
+        return { temperature: 0, rain: 10, visitors: 200 };
+      case 11: // Joulukuu
+        return { temperature: -5, rain: 10, visitors: 150 };
+      default:
+        throw new Error("Invalid month provided.");
+    }
+  };
+
   return (
     <section className="flex justify-center p-6">
 
@@ -115,9 +147,13 @@ export default function ForecastAndPriceTable({ weatherData }: { weatherData: We
                     <TableCell className="text-center">{result.predictedvisitors.toFixed(0)}</TableCell>
                     <TableCell className="text-center font-semibold">
                       {(() => {
-                        const isGoodTemperature = result.temperature >= -5;
-                        const isGoodRain = result.precipitation <= 5;
-                        const isGoodVisitors = result.predictedvisitors >= 300;
+                        const date = new Date(result.date);
+                        const month = date.getMonth(); // Get the month (0-based)
+                        const { temperature, rain, visitors } = getMonthlyThresholds(month);
+
+                        const isGoodTemperature = result.temperature >= temperature;
+                        const isGoodRain = result.precipitation <= rain;
+                        const isGoodVisitors = result.predictedvisitors >= visitors;
 
                         const goodConditionsCount =
                           (isGoodTemperature ? 1 : 0) +
@@ -128,11 +164,11 @@ export default function ForecastAndPriceTable({ weatherData }: { weatherData: We
                           case 3:
                             return "20 €";
                           case 2:
-                            return "17.5 €";
+                            return "18.5 €";
                           case 1:
-                            return "15 €";
+                            return "16.5 €";
                           default:
-                            return "15 €";
+                            return "16.5 €";
                         }
                       })()}
                     </TableCell>
