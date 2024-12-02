@@ -64,43 +64,39 @@ export default function ForecastsFMICombinedChart({
     },
     cloudcover: {
       label: "Pilvisyys (%)",
-      color: "rgba(110, 136, 148, 0.2)",
+      color: "rgba(110, 136, 148, 0.15)",
     },
   } satisfies ChartConfig;
 
   return (
     <section className="flex flex-col justify-center p-6">
-      <div className="py-4">
-        <Select
-          onValueChange={(value) => setSelectedDataKey(value)}
-          value={selectedDataKey.toString()}
-        >
-          <SelectTrigger className="w-[250px]">
-            <SelectValue placeholder={yAxisLabel} />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectGroup>
-              <SelectItem value="precipitation">Sademäärä</SelectItem>
-              <SelectItem value="cloudcover">Pilvisyys</SelectItem>
-            </SelectGroup>
-          </SelectContent>
-        </Select>
-      </div>
-
       <Card className="w-full text-center">
         <CardHeader className="py-10">
-          <CardTitle className="pb-2">Sääennuste</CardTitle>
+          <CardTitle className="pb-2">
+            Lämpötila ja{" "}
+            {selectedDataKey == "precipitation" ? "Sademäärä" : "Pilvisyys"}
+          </CardTitle>
           <CardDescription>
             Tutki seuraavan viiden päivän sääennustetta. Valikosta voit valita
             haluatko nähdä pilvisyyden vai sademäärän.
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="flex justify-between px-20">
-            <CardTitle className="text-sm">
-              Lämpötila ja{" "}
-              {selectedDataKey == "precipitation" ? "Sademäärä" : "Pilvisyys"}
-            </CardTitle>
+          <div className="flex justify-between px-16">
+            <Select
+              onValueChange={(value) => setSelectedDataKey(value)}
+              value={selectedDataKey.toString()}
+            >
+              <SelectTrigger className="w-[150px]">
+                <SelectValue placeholder={yAxisLabel} />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  <SelectItem value="precipitation">Sademäärä</SelectItem>
+                  <SelectItem value="cloudcover">Pilvisyys</SelectItem>
+                </SelectGroup>
+              </SelectContent>
+            </Select>
             <CardDescription>
               <small>Lähde: Ilmatieteenlaitos</small>
             </CardDescription>

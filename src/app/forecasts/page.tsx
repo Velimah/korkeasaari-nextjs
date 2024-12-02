@@ -31,7 +31,7 @@ export default function WeatherData() {
     <>
       <section className="flex flex-col w-full">
         {weatherData && weatherData.length > 0 ? <ForecastsFMICombinedChart weatherData={weatherData} /> : <Card><div className=" p-48"> <LoadingSpinner /></div></Card>}
-        {weatherData && weatherData.length > 0 ? <ForecastAndPriceTable weatherData={weatherData} /> : <div className="p-48"> <LoadingSpinner /></div>}
+        {/**{weatherData && weatherData.length > 0 ? <ForecastAndPriceTable weatherData={weatherData} /> : <div className="p-48"> <LoadingSpinner /></div>}*/}
       </section>
       <PredictionsBarChart />
       {/*
