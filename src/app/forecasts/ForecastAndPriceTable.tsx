@@ -62,7 +62,7 @@ export default function ForecastAndPriceTable({ weatherData }: { weatherData: We
   const chartConfig = {
     predictedvisitors: {
       label: "Ennustettu Kävijämäärä",
-      color: "#AAC929",
+      color: "#FA9F42",
     },
   } satisfies ChartConfig
 

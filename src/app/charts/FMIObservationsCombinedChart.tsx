@@ -78,11 +78,11 @@ export default function WeatherHistoricalData() {
     },
     precipitation: {
       label: "Sademäärä (mm)",
-      color: "#0007d1",
+      color: "#618985",
     },
     cloudcover: {
       label: "Pilvisyys (%)",
-      color: "#00cfc8",
+      color: "rgba(110, 136, 148, 0.15)",
     },
   } satisfies ChartConfig
 

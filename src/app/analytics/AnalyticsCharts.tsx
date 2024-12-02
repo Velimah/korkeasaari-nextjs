@@ -128,7 +128,7 @@ export default function EnkoraDataStatic() {
     },
     totalvisitors: {
       label: "Kävijämäärä",
-      color: "#25582b",
+      color: "#FA9F42",
     },
     temperature: {
       label: "Lämpötila (°C)",
@@ -136,11 +136,11 @@ export default function EnkoraDataStatic() {
     },
     precipitation: {
       label: "Sademäärä (mm)",
-      color: "#0007d1",
+      color: "#618985",
     },
     cloudcover: {
       label: "Pilvisyys (%)",
-      color: "#00cfc8",
+      color: "rgba(110, 136, 148, 0.5)",
     },
   } satisfies ChartConfig;
 
