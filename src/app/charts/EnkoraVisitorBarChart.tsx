@@ -255,7 +255,7 @@ export default function EnkoraData() {
                   </ChartContainer>
 
                   {/*Checkbox group*/}
-                  <div className="checkboxGroupHome ml-10 text-left">
+                  <div className="checkboxGroupHome ml-10 text-left border rounded-[10px] p-5 h-[330px]">
                     {/*Date picker*/}
                     <Popover>
                       <PopoverTrigger asChild>
@@ -263,7 +263,7 @@ export default function EnkoraData() {
                           id="date"
                           variant={"outline"}
                           className={cn(
-                            "w-[250px] justify-start text-left font-normal",
+                            "w-[230px] justify-start text-left font-normal",
                             !date && "text-muted-foreground",
                           )}
                         >
@@ -299,19 +299,19 @@ export default function EnkoraData() {
                         />
                       </PopoverContent>
                     </Popover>
-                    <h3 className="mt-8 font-bold">Valitse lipputyypit:</h3>
+                    <CardTitle className="mt-4 font-semibold">Valitse lipputyypit:</CardTitle>
                     <div className="mt-4 flex flex-col space-y-4">
                       {Object.keys(chartConfig).map((category) => (
                         <div
                           key={category}
-                          className="flex items-center space-x-2"
+                          className="flex items-center space-x-3"
                         >
                           <Checkbox
                             checked={selectedCategory.includes(category)}
                             onCheckedChange={() => toggleCategory(category)}
                             id={category}
                           />
-                          <label htmlFor={category} className="cursor-pointer">
+                          <label htmlFor={category} className="text-sm cursor-pointer">
                             {
                               chartConfig[category as keyof typeof chartConfig]
                                 .label
