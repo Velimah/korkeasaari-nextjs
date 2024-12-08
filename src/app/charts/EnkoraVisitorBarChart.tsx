@@ -145,7 +145,7 @@ export default function EnkoraData() {
   };
 
   return (
-    <section className="m-6 text-center">
+    <section className="my-6 text-center">
       <div className="flex items-start justify-between">
         <Card className="flex-1">
           {/*show loading spinner until visitordata is loaded*/}

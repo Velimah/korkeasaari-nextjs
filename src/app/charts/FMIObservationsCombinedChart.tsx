@@ -1,8 +1,21 @@
-"use client";  // Ensure this component is treated as a client component
+"use client"; // Ensure this component is treated as a client component
 
-import { useEffect, useState } from 'react';
-import { ChartConfig, ChartContainer, ChartLegend, ChartLegendContent, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { useEffect, useState } from "react";
+import {
+  ChartConfig,
+  ChartContainer,
+  ChartLegend,
+  ChartLegendContent,
+  ChartTooltip,
+  ChartTooltipContent,
+} from "@/components/ui/chart";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import {
   Line,
   XAxis,
@@ -11,8 +24,8 @@ import {
   ComposedChart,
   Bar,
   Brush,
-} from 'recharts';
-import { LoadingSpinner } from '@/components/ui/loading-spinner';
+} from "recharts";
+import { LoadingSpinner } from "@/components/ui/loading-spinner";
 import {
   Select,
   SelectContent,
@@ -21,13 +34,14 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { BLOB, getBLOBData } from '@/hooks/fetchBLobData';
+import { BLOB, getBLOBData } from "@/hooks/fetchBLobData";
 
 export default function WeatherHistoricalData() {
   const [selectedYear, setSelectedYear] = useState<number>(2024);
   const [blobData, setBlobData] = useState<BLOB[]>([]);
   const [EnkoraFMIData, setEnkoraFMIData] = useState<BLOB[]>([]);
-  const [selectedDataKey, setSelectedDataKey] = useState<string>("precipitation");
+  const [selectedDataKey, setSelectedDataKey] =
+    useState<string>("precipitation");
   const years = [
     { label: "Kaikki vuodet", value: 0 },
     { label: "2019", value: 2019 },
@@ -42,7 +56,7 @@ export default function WeatherHistoricalData() {
   useEffect(() => {
     async function fetchBlobData() {
       const response = await getBLOBData();
-      if ('error' in response) {
+      if ("error" in response) {
         console.error(response.error);
         return;
       }
@@ -59,17 +73,17 @@ export default function WeatherHistoricalData() {
   }
 
   function applyYearFilter(year: number, data: BLOB[]) {
-    const filteredData = year === 0
-      ? data
-      : data.filter((item) => new Date(item.date).getFullYear() === year);
+    const filteredData =
+      year === 0
+        ? data
+        : data.filter((item) => new Date(item.date).getFullYear() === year);
 
     setEnkoraFMIData(filteredData);
   }
 
   // Map selectedDataKey to labels and color variables
-  const yAxisLabel = selectedDataKey === "precipitation"
-    ? "Sademäärä (mm)"
-    : "Pilvisyys (%)";
+  const yAxisLabel =
+    selectedDataKey === "precipitation" ? "Sademäärä (mm)" : "Pilvisyys (%)";
 
   const chartConfig = {
     temperature: {
@@ -84,65 +98,73 @@ export default function WeatherHistoricalData() {
       label: "Pilvisyys (%)",
       color: "rgba(110, 136, 148, 0.15)",
     },
-  } satisfies ChartConfig
+  } satisfies ChartConfig;
 
   return (
-    <section className="m-6 text-center">
-      <div className='flex gap-4'>
-
-        <div className='py-4'>
-          <Select
-            onValueChange={(value) =>
-              handleYearChange({
-                target: { value },
-              } as React.ChangeEvent<HTMLSelectElement>)
-            }
-            value={selectedYear.toString()}
-          >
-            <SelectTrigger className="w-[250px]">
-              <SelectValue placeholder="Select a year" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectGroup>
-                {years.map((year) => (
-                  <SelectItem key={year.value} value={year.value.toString()}>
-                    {year.label}
-                  </SelectItem>
-                ))}
-              </SelectGroup>
-            </SelectContent>
-          </Select>
-        </div>
-
-        <div className="py-4">
-          <Select onValueChange={(value) => setSelectedDataKey(value)} value={selectedDataKey.toString()}>
-            <SelectTrigger className="w-[250px]">
-              <SelectValue placeholder={yAxisLabel} />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectGroup>
-                <SelectItem value="precipitation">Sademäärä</SelectItem>
-                <SelectItem value="cloudcover">Pilvisyys</SelectItem>
-              </SelectGroup>
-            </SelectContent>
-          </Select>
-        </div>
-
-      </div>
-
-
+    <section className="my-10 text-center">
       <Card>
-        {EnkoraFMIData && EnkoraFMIData.length > 0 ?
+        {EnkoraFMIData && EnkoraFMIData.length > 0 ? (
           <>
             <CardHeader>
               <CardTitle>
-                {selectedDataKey === "precipitation" ? "Lämpötila ja Sademäärä" : "Lämpötila ja Pilvisyys"}
+                {selectedDataKey === "precipitation"
+                  ? "Lämpötila ja Sademäärä"
+                  : "Lämpötila ja Pilvisyys"}
               </CardTitle>
               <CardDescription>
                 {selectedYear === 0 ? "Kaikki vuodet" : selectedYear}
               </CardDescription>
+              <CardDescription>
+                Tutki säähistoriaa vuosi kerrallaan. Valikosta voit valita
+                vuoden ja haluatko nähdä pilvisyyden vai sademäärän.
+              </CardDescription>
             </CardHeader>
             <CardContent>
+              <div className="flex gap-4 px-16">
+                <div className="py-4">
+                  <Select
+                    onValueChange={(value) =>
+                      handleYearChange({
+                        target: { value },
+                      } as React.ChangeEvent<HTMLSelectElement>)
+                    }
+                    value={selectedYear.toString()}
+                  >
+                    <SelectTrigger className="w-[100px]">
+                      <SelectValue placeholder="Select a year" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectGroup>
+                        {years.map((year) => (
+                          <SelectItem
+                            key={year.value}
+                            value={year.value.toString()}
+                          >
+                            {year.label}
+                          </SelectItem>
+                        ))}
+                      </SelectGroup>
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                <div className="py-4">
+                  <Select
+                    onValueChange={(value) => setSelectedDataKey(value)}
+                    value={selectedDataKey.toString()}
+                  >
+                    <SelectTrigger className="w-[150px]">
+                      <SelectValue placeholder={yAxisLabel} />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectGroup>
+                        <SelectItem value="precipitation">Sademäärä</SelectItem>
+                        <SelectItem value="cloudcover">Pilvisyys</SelectItem>
+                      </SelectGroup>
+                    </SelectContent>
+                  </Select>
+                </div>
+              </div>
               <ChartContainer config={chartConfig} className="h-[400px] w-full">
                 <ComposedChart accessibilityLayer data={EnkoraFMIData}>
                   <CartesianGrid vertical={false} />
@@ -159,17 +181,20 @@ export default function WeatherHistoricalData() {
                         }}
                         formatter={(value, name) => (
                           <>
-                            <div className="flex items-center justify-between min-w-[130px] w-full gap-4 text-xs text-muted-foreground">
+                            <div className="flex w-full min-w-[130px] items-center justify-between gap-4 text-xs text-muted-foreground">
                               <div className="flex items-center gap-2">
                                 <div
                                   className="h-2.5 w-2.5 shrink-0 rounded-[2px] bg-[--color-bg]"
-                                  style={{
-                                    "--color-bg": `var(--color-${name})`,
-                                  } as React.CSSProperties}
+                                  style={
+                                    {
+                                      "--color-bg": `var(--color-${name})`,
+                                    } as React.CSSProperties
+                                  }
                                 />
-                                {chartConfig[name as keyof typeof chartConfig]?.label || name}
+                                {chartConfig[name as keyof typeof chartConfig]
+                                  ?.label || name}
                               </div>
-                              <div className="flex items-center gap-0.5 font-mono font-medium text-right text-foreground">
+                              <div className="flex items-center gap-0.5 text-right font-mono font-medium text-foreground">
                                 {value}
                               </div>
                             </div>
@@ -193,12 +218,20 @@ export default function WeatherHistoricalData() {
                       (dataMin: number) => Math.floor(dataMin - 2),
                       (dataMax: number) => Math.ceil(dataMax + 2),
                     ]}
-                    label={{ value: 'Lämpötila (°C)', angle: -90, position: 'insideLeft' }}
+                    label={{
+                      value: "Lämpötila (°C)",
+                      angle: -90,
+                      position: "insideLeft",
+                    }}
                   />
                   <YAxis
                     yAxisId="right"
                     orientation="right"
-                    label={{ value: yAxisLabel, angle: 90, position: 'insideRight' }}
+                    label={{
+                      value: yAxisLabel,
+                      angle: 90,
+                      position: "insideRight",
+                    }}
                   />
                   <Bar
                     yAxisId="right"
@@ -219,9 +252,13 @@ export default function WeatherHistoricalData() {
               </ChartContainer>
             </CardContent>
           </>
-          : <div className="p-56"> <LoadingSpinner /></div>}
+        ) : (
+          <div className="p-56">
+            {" "}
+            <LoadingSpinner />
+          </div>
+        )}
       </Card>
-
     </section>
   );
 }
