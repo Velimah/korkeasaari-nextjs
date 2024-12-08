@@ -29,6 +29,10 @@ export default function WeatherData() {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    document.title = "Koti";
+  }, []);
+
   return (
     <>
       <section className="flex justify-center pt-5 w-full">
@@ -40,13 +44,13 @@ export default function WeatherData() {
             <p className="pl-2 pt-10 font-bold">Hallinnoi dataasi tarkasti Zoolyticsin filtteröinnin avulla.</p></div>
           <p className="pl-2 pt-2 pb-8">Filtteröi tarkka ajanjakso miltä haluat dataa.</p>
           <div className="flex justify-center">
-            <p className="w-[100%] flex rounded border-b-4" style={{ borderColor: '#AAC929' }}></p>
+            <p className="w-[100%] flex rounded border-b-4" style={{ borderColor: 'rgba(170, 201, 41, 0.8)' }}></p>
           </div>
           <p className="pl-2 pt-8 font-bold"> Tarkat ennusteet
           </p>
           <p className="pl-2 pt-2 pb-8" >Ennakoi ajoissa tapahtumia ja myyntejä varten ennusteilla.</p>
           <div className="flex justify-center">
-            <p className="w-[100%] flex rounded border-b-4" style={{ borderColor: '#AAC929' }}></p>
+            <p className="w-[100%] flex rounded border-b-4" style={{ borderColor: 'rgba(170, 201, 41, 0.8)' }}></p>
           </div>
           <p className="pl-2 pt-8 font-bold"> Dataa monessa eri muodossa
           </p>

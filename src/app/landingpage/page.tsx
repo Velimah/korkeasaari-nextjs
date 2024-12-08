@@ -5,8 +5,8 @@ import Link from "next/link";
 import Image from "next/image";
 
 export const metadata: Metadata = {
-    title: "Landing Page",
-    description: "Welcome to the landing page.",
+    title: "Zoolytics",
+    description: "Tervetuloa.",
 };
 
 export default function Page() {

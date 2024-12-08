@@ -4,8 +4,8 @@ import FMIObservationsCombinedChart from "@/app/charts/FMIObservationsCombinedCh
 import EnkoraVisitorBarChart from "@/app/charts/EnkoraVisitorBarChart";
 
 export const metadata: Metadata = {
-  title: "Charts",
-  description: "Tervetuloa.",
+  title: "Tilastot",
+  description: "Sää ja Kävijämäärien tilastot.",
 };
 
 export default function Charts() {

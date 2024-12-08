@@ -27,6 +27,10 @@ export default function WeatherData() {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    document.title = "Ennusteet";
+  }, []);
+
   return (
     <>
       <section className="flex flex-col w-full">
