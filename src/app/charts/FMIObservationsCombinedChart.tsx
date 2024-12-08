@@ -50,7 +50,7 @@ export default function WeatherHistoricalData() {
       applyYearFilter(selectedYear, response); // Apply initial filter
     }
     fetchBlobData();
-  }, []);
+  }, [selectedYear]);
 
   function handleYearChange(event: React.ChangeEvent<HTMLSelectElement>) {
     const year = Number(event.target.value);
