@@ -13,15 +13,23 @@ export default function Page() {
     return (
         <>
             <section
-                className="absolute inset-0 flex justify-around items-center"
-                style={{ backgroundColor: "#AAC929", zIndex: 10 }}
+                className="absolute inset-0 flex flex-col md:flex-row justify-around items-center"
+                style={{
+                    background: "linear-gradient(135deg, #AAC929, #618985)",
+                    zIndex: 10,
+                }}
             >
-                <div className="flex flex-col w-1/2 gap-10 items-center justify-center">
-                    <H1 className="text-white text-center pb-6 max-w-[75%] border-b-4 border-white">
-                        Tervetuloa Zoolyticsiin. Analysoi tietoja juuri sinulle sopivalla sivustolla!
+                <div className="flex flex-col w-11/12 md:w-1/2 gap-10 items-center text-center">
+                    <H1 className="text-white font-bold text-4xl md:text-5xl pb-4 border-b-4 border-white">
+                        Tervetuloa Zoolyticsiin
                     </H1>
+                    <p className="text-white text-lg md:text-xl max-w-[80%] leading-relaxed">
+                        Analysoi sää- ja kävijätietoja vaivattomasti.
+                    </p>
                     <Link href="/homepage">
-                        <button className="flex items-center text-xl bg-green-700 hover:bg-green-600 transition text-white font-bold py-2 px-4 rounded">
+                        <button
+                            className="flex items-center justify-center text-xl bg-[#FA9F42] hover:bg-[#f08524] transition-all text-white font-semibold py-3 px-6 rounded shadow-md hover:shadow-lg"
+                        >
                             Aloita tästä!
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -35,16 +43,14 @@ export default function Page() {
                         </button>
                     </Link>
                 </div>
-                <div className="text-white text-center w-1/2 flex items-center justify-center">
+                <div className="mt-14 w-1/2 flex items-center justify-center">
                     <Image
                         src={kuva.src}
                         width={500}
                         height={500}
-                        alt=""
-                        className="max-w-[100%] w-[30em] h-auto"
+                        alt="Kuva analyysikaavioista"
+                        className="max-w-[100%] w-[30em] h-auto p-2 rounded-lg shadow-lg"
                     />
-
-
                 </div>
             </section>
         </>
