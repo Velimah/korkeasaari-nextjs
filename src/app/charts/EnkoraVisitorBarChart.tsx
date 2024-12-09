@@ -288,6 +288,7 @@ export default function EnkoraData() {
                           locale={fi}
                           weekStartsOn={1}
                           captionLayout="buttons"
+                          showWeekNumber
                           initialFocus
                           mode="range"
                           defaultMonth={date?.from}
@@ -295,7 +296,20 @@ export default function EnkoraData() {
                           onSelect={handleDateRange}
                           numberOfMonths={2}
                           disabled={(date) =>
-                            date > new Date() || date < new Date("2000-01-01")
+                            date > new Date() || date < new Date("2000-01-01") || date.toDateString() === new Date().toDateString()
+                          }
+                          footer={
+                            <Button
+                              className="m-5 text-xs bg-transparent text-primary hover:bg-primary hover:text-white"
+                              onClick={() => {
+                                const from = lastMonth;
+                                const to = yesterday;
+                                setDate({from, to});
+                                handleDateRange({from, to});
+                              }}
+                            >
+                              Viimeiset 30 päivää
+                            </Button>
                           }
                         />
                       </PopoverContent>
