@@ -83,21 +83,23 @@ export default function ForecastsFMICombinedChart({
         </CardHeader>
         <CardContent>
           <div className="flex justify-between px-16">
-            <Select
-              onValueChange={(value) => setSelectedDataKey(value)}
-              value={selectedDataKey.toString()}
-            >
-              <SelectTrigger className="w-[150px]">
-                <SelectValue placeholder={yAxisLabel} />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectGroup>
-                  <SelectItem value="precipitation">Sademäärä</SelectItem>
-                  <SelectItem value="cloudcover">Pilvisyys</SelectItem>
-                </SelectGroup>
-              </SelectContent>
-            </Select>
-            <CardDescription>
+            <div className="py-4">
+              <Select
+                onValueChange={(value) => setSelectedDataKey(value)}
+                value={selectedDataKey.toString()}
+              >
+                <SelectTrigger className="w-[150px]">
+                  <SelectValue placeholder={yAxisLabel} />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectGroup>
+                    <SelectItem value="precipitation">Sademäärä</SelectItem>
+                    <SelectItem value="cloudcover">Pilvisyys</SelectItem>
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
+            </div>
+            <CardDescription className="mt-10">
               <small>Lähde: Ilmatieteenlaitos</small>
             </CardDescription>
           </div>
