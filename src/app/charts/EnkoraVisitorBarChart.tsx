@@ -28,7 +28,7 @@ import { LoadingSpinner } from "@/components/ui/loading-spinner";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Calendar } from "@/components/ui/calendar";
 import { DateRange } from "react-day-picker";
-import { format, parseISO, set, subDays } from "date-fns";
+import { addDays, format, parseISO, set, subDays } from "date-fns";
 import {
   Popover,
   PopoverContent,
@@ -42,13 +42,14 @@ import { BLOB, getBLOBData } from "@/hooks/fetchBLobData";
 
 export default function EnkoraData() {
   const today = new Date();
+  const yesterday = subDays(today, 1);
   const lastMonth = subDays(today, 30);
 
   const [startDate, setStartDate] = useState<string>(
     lastMonth.toISOString().split("T")[0],
   );
   const [endDate, setEndDate] = useState<string>(
-    today.toISOString().split("T")[0],
+    yesterday.toISOString().split("T")[0],
   );
 
   const [blobData, setBlobData] = useState<BLOB[]>([]);
@@ -92,12 +93,12 @@ export default function EnkoraData() {
   const handleDateRange = (range: DateRange | undefined) => {
     if (range?.from && range?.to) {
       // Convert `from` and `to` to Date objects
-      const start = range.from;
-      const end = range.to;
+      const start = addDays(range.from, 1);
+      const end = addDays(range.to, 1);
       // Set the start and end dates as ISO strings
       setStartDate(start.toISOString().split("T")[0]);
       setEndDate(end.toISOString().split("T")[0]);
-      setDate(range);
+      setDate({from: range.from, to: range.to});
       // Filter the data within the selected date range
       const newData = blobData.filter((item) => {
         const date = parseISO(item.date); // Ensure item.date is in ISO format
@@ -255,7 +256,7 @@ export default function EnkoraData() {
                   </ChartContainer>
 
                   {/*Checkbox group*/}
-                  <div className="checkboxGroupHome ml-10 text-left border rounded-[10px] p-5 h-[330px]">
+                  <div className="checkboxGroupHome ml-10 h-[330px] rounded-[10px] border p-5 text-left">
                     {/*Date picker*/}
                     <Popover>
                       <PopoverTrigger asChild>
@@ -299,7 +300,9 @@ export default function EnkoraData() {
                         />
                       </PopoverContent>
                     </Popover>
-                    <CardTitle className="mt-4 font-semibold">Valitse lipputyypit:</CardTitle>
+                    <CardTitle className="mt-4 font-semibold">
+                      Valitse lipputyypit:
+                    </CardTitle>
                     <div className="mt-4 flex flex-col space-y-4">
                       {Object.keys(chartConfig).map((category) => (
                         <div
@@ -311,7 +314,10 @@ export default function EnkoraData() {
                             onCheckedChange={() => toggleCategory(category)}
                             id={category}
                           />
-                          <label htmlFor={category} className="text-sm cursor-pointer">
+                          <label
+                            htmlFor={category}
+                            className="cursor-pointer text-sm"
+                          >
                             {
                               chartConfig[category as keyof typeof chartConfig]
                                 .label
