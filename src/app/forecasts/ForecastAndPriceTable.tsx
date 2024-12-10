@@ -5,9 +5,6 @@ import { ChartConfig, ChartContainer, ChartLegend, ChartLegendContent, ChartTool
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Bar, CartesianGrid, ComposedChart, XAxis, YAxis } from "recharts";
 import MLRCalculator from "@/utils/MLRCalculator";
-import MLRCalculator2 from "@/utils/MLRCalculator2";
-import MLRCalculator3 from "@/utils/MLRCalculator3";
-import MLRCalculator4 from "@/utils/MLRCalculator4";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
   Table,
@@ -50,7 +47,7 @@ export default function ForecastAndPriceTable({ weatherData }: { weatherData: We
 
       // Run MLRCalculator if both weatherData and blobData are available
       if (weatherData.length > 0 && response.length > 0) {
-        const result = MLRCalculator4({ weatherData, blobData: response });
+        const result = MLRCalculator({ weatherData, blobData: response });
         if (result) {
           setVisitorData(result);
         }

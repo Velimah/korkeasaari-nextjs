@@ -30,47 +30,87 @@ export default function MLRCalculator({
   weatherData: WeatherData[];
   blobData: BLOB[];
 }) {
-  // arrays to store historical weather data and visitor counts for each month
-  const monthlyDataWeather: number[][][] = Array.from({ length: 12 }, () => []);
-  const monthlyDataVisitors: number[][][] = Array.from(
-    { length: 12 },
-    () => [],
-  );
+  const allWeatherDataWinterHolidays: number[][] = [];
+  const allVisitorDataWinterHolidays: number[][] = [];
+
   const processedWeatherDataArray: FormattedWeatherData[] = [];
 
-  // split the historical weather data and visitor counts into monthly arrays
+  const monthlyWeatherData: number[][][] = Array.from({ length: 12 }, () => []);
+  const monthlyVisitorData: number[][][] = Array.from({ length: 12 }, () => []);
+
+  const monthlyVisitorCounts = Array.from({ length: 12 }, () => ({
+    weekday: { total: 0, count: 0 },
+    weekend: { total: 0, count: 0 },
+  }));
+
+  // Store monthly averages for visitor counts by weekday/weekend
+  const monthlyAverageVisitors = Array.from({ length: 12 }, () => ({
+    weekday: 0,
+    weekend: 0,
+  }));
+
+  // Gather historical data and calculate monthly averages
   function getHistoricalData(blobData: BLOB[]) {
     blobData.forEach(
       ({ temperature, precipitation, cloudcover, date, totalvisitors }) => {
         const dateObj = new Date(date);
         const dayOfWeek = dateObj.getDay();
         const month = dateObj.getMonth();
+        const year = dateObj.getFullYear();
 
-        // Add weather data
-        monthlyDataWeather[month].push([
+        const weatherData = [
           temperature ?? 0,
           precipitation ?? 0,
           cloudcover ?? 0,
-          dayOfWeek,
-        ]);
+        ];
+        const visitorCount = totalvisitors ?? 0;
 
-        // Add visitor data
-        monthlyDataVisitors[month].push([totalvisitors ?? 0, dayOfWeek]);
+        // Categorize into weekday/weekend and update monthly averages
+        if (dayOfWeek === 0 || dayOfWeek === 6) {
+          monthlyVisitorCounts[month].weekend.total += visitorCount;
+          monthlyVisitorCounts[month].weekend.count += 1;
+        } else {
+          monthlyVisitorCounts[month].weekday.total += visitorCount;
+          monthlyVisitorCounts[month].weekday.count += 1;
+        }
+
+        // Define holiday ranges
+        const startOfWinterHoliday1 = `${year}-12-25`;
+        const endOfWinterHoliday1 = `${year}-12-31`;
+        const startOfWinterHoliday2 = `${year}-01-01`;
+        const endOfWinterHoliday2 = `${year}-01-06`;
+
+        // Check if the date falls within either range
+        if (
+          (date >= startOfWinterHoliday1 && date <= endOfWinterHoliday1) ||
+          (date >= startOfWinterHoliday2 && date <= endOfWinterHoliday2)
+        ) {
+          allWeatherDataWinterHolidays.push(weatherData);
+          allVisitorDataWinterHolidays.push([visitorCount]);
+        } else {
+          monthlyWeatherData[month].push(weatherData);
+          monthlyVisitorData[month].push([visitorCount]);
+        }
       },
     );
+
+    // Calculate monthly averages for weekday and weekend visitors
+    monthlyVisitorCounts.forEach((data, month) => {
+      monthlyAverageVisitors[month].weekday =
+        data.weekday.count > 0 ? data.weekday.total / data.weekday.count : 0;
+      monthlyAverageVisitors[month].weekend =
+        data.weekend.count > 0 ? data.weekend.total / data.weekend.count : 0;
+    });
   }
 
-  // group the hourly weather data by date and process it to get averages for each day
+  // Process weather forecast data
   function getWeatherForecast(weatherData: WeatherData[]) {
     const dailyWeatherData: { [date: string]: WeatherData[] } = {};
     weatherData.forEach(({ time, temperature, precipitation, cloudcover }) => {
-      // Extract the date part from the time string
       const date = time.split("T")[0];
-      // Initialize an array for the date if it doesn't exist
       if (!dailyWeatherData[date]) {
         dailyWeatherData[date] = [];
       }
-      // Push the weather data for that time into the date's array
       dailyWeatherData[date].push({
         time,
         temperature: temperature ?? 0,
@@ -78,107 +118,100 @@ export default function MLRCalculator({
         cloudcover: cloudcover ?? 0,
       });
     });
-    // Convert the grouped data into an array of objects
-    const formattedDailyWeatherData = Object.keys(dailyWeatherData).map(
-      (date) => ({
-        date,
-        data: dailyWeatherData[date],
-      }),
-    );
 
-    //process the weather forecast data to get averages for each day
-    for (const day of formattedDailyWeatherData) {
-      const processedWeatherData = processFMIWeatherData(day.data);
+    for (const day of Object.keys(dailyWeatherData)) {
+      const processedWeatherData = processFMIWeatherData(dailyWeatherData[day]);
       processedWeatherDataArray.push(processedWeatherData);
     }
   }
 
-  // predict visitor counts using the multivariate linear regression model
+  // Predict visitor counts with weights
   function PredictVisitorCounts(
     processedWeatherDataArray: FormattedWeatherData[],
   ) {
-    // arrays to store the prediction results
     const predictions: Prediction[] = [];
 
-    //loop through the average weather forecast data for each day and predict the visitor counts
-    for (let i = 0; i < processedWeatherDataArray.length; i++) {
-      // Get month index (0 for January, 11 for December)
-      const dateObject = new Date(processedWeatherDataArray[i].date);
-      const month = dateObject.getMonth();
+    for (const data of processedWeatherDataArray) {
+      const dateObj = new Date(data.date);
+      const year = dateObj.getFullYear();
+      const month = dateObj.getMonth();
+      const day = dateObj.getDay();
 
-      // Check for valid data
+      // Check if the date falls within winter holidays
+      let predictedVisitors = 0;
+      // Define holiday ranges
+      const startOfWinterHoliday1 = `${year}-12-25`;
+      const endOfWinterHoliday1 = `${year}-12-31`;
+      const startOfWinterHoliday2 = `${year}-01-01`;
+      const endOfWinterHoliday2 = `${year}-01-06`;
+
       if (
-        !monthlyDataWeather[month]?.length ||
-        !monthlyDataVisitors[month]?.length
+        (data.date >= startOfWinterHoliday1 &&
+          data.date <= endOfWinterHoliday1) ||
+        (data.date >= startOfWinterHoliday2 && data.date <= endOfWinterHoliday2)
       ) {
-        console.warn(`No historical data for month: ${month}`);
-        continue;
-      }
-
-      // Separate weekday and weekend data, remove day index
-      const weekdayDataVisitors = monthlyDataVisitors[month]
-        .filter((data) => data[1] !== 0 && data[1] !== 6)
-        .map((data) => [data[0]]);
-      const weekendDataVisitors = monthlyDataVisitors[month]
-        .filter((data) => data[1] === 0 || data[1] === 6)
-        .map((data) => [data[0]]);
-
-      const weekdayDataWeather = monthlyDataWeather[month]
-        .filter((data) => data[3] !== 0 && data[3] !== 6)
-        .map((data) => [data[0], data[1], data[2]]);
-      const weekendDataWeather = monthlyDataWeather[month]
-        .filter((data) => data[3] === 0 || data[3] === 6)
-        .map((data) => [data[0], data[1], data[2]]);
-
-      // Train separate regression models for weekday and weekend data
-      const weekdayRegression = new MultivariateLinearRegression(
-        weekdayDataWeather,
-        weekdayDataVisitors,
-      );
-
-      const weekendRegression = new MultivariateLinearRegression(
-        weekendDataWeather,
-        weekendDataVisitors,
-      );
-      console.log("weekday", weekdayRegression, "weekend", weekendRegression);
-
-      // Predict visitor counts using the corresponding regression model
-      let result;
-      if (dateObject.getDay() === 0 || dateObject.getDay() === 6) {
-        result = weekendRegression.predict([
-          processedWeatherDataArray[i].temperature,
-          processedWeatherDataArray[i].precipitation,
-          processedWeatherDataArray[i].cloudcover,
+        const winterHolidayRegression = new MultivariateLinearRegression(
+          allWeatherDataWinterHolidays,
+          allVisitorDataWinterHolidays,
+        );
+        predictedVisitors = winterHolidayRegression.predict([
+          data.temperature,
+          data.precipitation,
+          data.cloudcover,
         ])[0];
       } else {
-        result = weekdayRegression.predict([
-          processedWeatherDataArray[i].temperature,
-          processedWeatherDataArray[i].precipitation,
-          processedWeatherDataArray[i].cloudcover,
+        const monthlyRegression = new MultivariateLinearRegression(
+          monthlyWeatherData[month],
+          monthlyVisitorData[month],
+        );
+        predictedVisitors = monthlyRegression.predict([
+          data.temperature,
+          data.precipitation,
+          data.cloudcover,
         ])[0];
       }
-      // Ensure the result is not negative
-      if (result < 0) {
-        result = 0;
-      }
 
-      //add object with date, predicted visitor count, temperature and precipitation
+      // Calculate the weekend/weekday visitor ratio based on the month’s data
+      const weekendVisitorRatio =
+        monthlyAverageVisitors[month].weekend /
+        monthlyAverageVisitors[month].weekday;
 
-      predictions[i] = {
-        date: processedWeatherDataArray[i].date,
-        temperature: processedWeatherDataArray[i].temperature,
-        precipitation: processedWeatherDataArray[i].precipitation,
-        cloudcover: processedWeatherDataArray[i].cloudcover,
-        predictedvisitors: Number(result.toFixed(0)),
-      };
+      // Calculate the weekday and weekend multipliers with some unknown magical logic
+      const totalVisitorsForWeek = predictedVisitors * 7;
+      const totalWeekdays = 5; // Number of weekdays (5 days)
+      const totalWeekends = 2; // Number of weekend days (2 days)
+
+      const weekdayMultiplier =
+        totalVisitorsForWeek /
+        (totalWeekdays * predictedVisitors +
+          totalWeekends * weekendVisitorRatio * predictedVisitors);
+
+      const weekendMultiplier = weekendVisitorRatio * weekdayMultiplier;
+
+      // Add the weight multipliers to the prediction
+      const isWeekend = day === 0 || day === 6; // Check if it's a weekend (0 = Sunday, 6 = Saturday)
+      isWeekend
+        ? (predictedVisitors = predictedVisitors * weekendMultiplier)
+        : (predictedVisitors = predictedVisitors * weekdayMultiplier);
+
+      // Ensure no negative predictions
+      predictedVisitors = Math.max(predictedVisitors, 0);
+
+      predictions.push({
+        date: data.date,
+        temperature: data.temperature,
+        precipitation: data.precipitation,
+        cloudcover: data.cloudcover,
+        predictedvisitors: Math.round(predictedVisitors),
+      });
     }
-    console.log(predictions);
     return predictions;
   }
-  //populate the monthly data arrays with historical weather data and visitor counts
+
+  // Populate historical data and calculate averages
   getHistoricalData(blobData);
-  //group the weather forecast data by date
+  // Process the weather forecast data
   getWeatherForecast(weatherData);
-  //predict the visitor counts with historical and weather forecast data
+  // Predict visitor counts
   return PredictVisitorCounts(processedWeatherDataArray);
 }

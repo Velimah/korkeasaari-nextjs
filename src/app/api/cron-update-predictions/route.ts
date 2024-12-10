@@ -1,6 +1,6 @@
 import { getBLOBData } from "@/hooks/fetchBLobData";
 import { fetchFMIForecastData } from "@/hooks/fetchFMIForecastData";
-import MLRCalculator4 from "@/utils/MLRCalculator4";
+import MLRCalculator from "@/utils/MLRCalculator";
 import { NextRequest, NextResponse } from "next/server";
 import { getDaysAhead } from "@/utils/DateHelperFunctions";
 import { sql } from "@vercel/postgres";
@@ -24,7 +24,7 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    const predictions = MLRCalculator4({ weatherData, blobData });
+    const predictions = MLRCalculator({ weatherData, blobData });
 
     if (!predictions || !Array.isArray(predictions)) {
       return NextResponse.json(
