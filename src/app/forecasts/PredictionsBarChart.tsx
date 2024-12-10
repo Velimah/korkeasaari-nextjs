@@ -4,8 +4,21 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Bar, Brush, CartesianGrid, ComposedChart, XAxis, YAxis } from "recharts";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import {
+  Bar,
+  Brush,
+  CartesianGrid,
+  ComposedChart,
+  XAxis,
+  YAxis,
+} from "recharts";
 import { LoadingSpinner } from "@/components/ui/loading-spinner";
 import { getBLOBData, BLOB } from "@/hooks/fetchBLobData";
 import { getVisitorPredictions } from "@/hooks/fetchVisitorPredictionData";
@@ -32,7 +45,7 @@ export default function PredictionsBarChart() {
     { label: "Toukokuu", value: 5 },
     { label: "Kesäkuu", value: 6 },
     { label: "Heinäkuu", value: 7 },
-    { label: "Eolokuu", value: 8 },
+    { label: "Elokuu", value: 8 },
     { label: "Syyskuu", value: 9 },
     { label: "Lokakuu", value: 10 },
     { label: "Marraskuu", value: 11 },
@@ -55,7 +68,9 @@ export default function PredictionsBarChart() {
       }
 
       // Filter BLOB data to include only entries from 2024-11-19 onwards
-      const filteredBlobResponse = blobResponse.filter((blob) => new Date(blob.date) >= new Date("2024-11-19"));
+      const filteredBlobResponse = blobResponse.filter(
+        (blob) => new Date(blob.date) >= new Date("2024-11-19"),
+      );
 
       // Merge BLOB and Prediction data by date
       const mergedData = filteredBlobResponse.map((blob) => ({
@@ -66,7 +81,7 @@ export default function PredictionsBarChart() {
       applyFilters(selectedYear, selectedMonth, mergedData);
     }
     fetchData();
-  }, []);
+  }, [selectedMonth, selectedYear]);
 
   const chartConfig = {
     kulkulupa: { label: "Kulkulupa", color: "#000000" },
@@ -94,65 +109,95 @@ export default function PredictionsBarChart() {
   }
 
   function applyFilters(year: number, month: number, data: BLOB[]) {
-    const filteredByYear = year === 0 ? data : data.filter((item) => new Date(item.date).getFullYear() === year);
-    const filteredByMonth = month === 0 ? filteredByYear : filteredByYear.filter((item) => new Date(item.date).getMonth() + 1 === month);
+    const filteredByYear =
+      year === 0
+        ? data
+        : data.filter((item) => new Date(item.date).getFullYear() === year);
+    const filteredByMonth =
+      month === 0
+        ? filteredByYear
+        : filteredByYear.filter(
+            (item) => new Date(item.date).getMonth() + 1 === month,
+          );
 
     setEnkoraFMIData(filteredByMonth);
   }
 
   return (
     <section className="m-6 text-center">
-
-      <div className='py-4 gap-4 flex'>
-        <Select
-          onValueChange={(value) =>
-            handleYearChange({
-              target: { value },
-            } as React.ChangeEvent<HTMLSelectElement>)
-          }
-          value={selectedYear.toString()}
-        >
-          <SelectTrigger className="w-[250px]">
-            <SelectValue placeholder="Select a year" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectGroup>
-              {years.map((year) => (
-                <SelectItem key={year.value} value={year.value.toString()}>
-                  {year.label}
-                </SelectItem>
-              ))}
-            </SelectGroup>
-          </SelectContent>
-        </Select>
-        <Select
-          onValueChange={(value) => handleMonthChange({ target: { value } } as React.ChangeEvent<HTMLSelectElement>)}
-          value={selectedMonth.toString()}
-        >
-          <SelectTrigger className="w-[250px]">
-            <SelectValue placeholder="Select a month" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectGroup>
-              {months.map((month) => (
-                <SelectItem key={month.value} value={month.value.toString()}>
-                  {month.label}
-                </SelectItem>
-              ))}
-            </SelectGroup>
-          </SelectContent>
-        </Select>
-      </div>
-
       <Card>
-        {enkoraFMIData && enkoraFMIData.length > 0 ?
+        {enkoraFMIData && enkoraFMIData.length > 0 ? (
           <>
-            <CardHeader>
-              <CardTitle>Korkeasaaren Kävijämääräennusteet</CardTitle>
+            <CardHeader className="py-10">
+              <CardTitle className="pb-2">
+                Korkeasaaren Kävijämääräennusteet
+              </CardTitle>
+              <CardDescription>
+                Tutki menneitä kävijämääriä ja niiden perusteella laskettuja
+                ennusteita.
+              </CardDescription>
             </CardHeader>
             <CardContent>
+              <div className="flex gap-4 px-16">
+                <div className="py-4">
+                  <Select
+                    onValueChange={(value) =>
+                      handleYearChange({
+                        target: { value },
+                      } as React.ChangeEvent<HTMLSelectElement>)
+                    }
+                    value={selectedYear.toString()}
+                  >
+                    <SelectTrigger className="w-[150px]">
+                      <SelectValue placeholder="Select a year" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectGroup>
+                        {years.map((year) => (
+                          <SelectItem
+                            key={year.value}
+                            value={year.value.toString()}
+                          >
+                            {year.label}
+                          </SelectItem>
+                        ))}
+                      </SelectGroup>
+                    </SelectContent>
+                  </Select>
+                </div>
+                <div className="py-4">
+                  <Select
+                    onValueChange={(value) =>
+                      handleMonthChange({
+                        target: { value },
+                      } as React.ChangeEvent<HTMLSelectElement>)
+                    }
+                    value={selectedMonth.toString()}
+                  >
+                    <SelectTrigger className="w-[170px]">
+                      <SelectValue placeholder="Select a month" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectGroup>
+                        {months.map((month) => (
+                          <SelectItem
+                            key={month.value}
+                            value={month.value.toString()}
+                          >
+                            {month.label}
+                          </SelectItem>
+                        ))}
+                      </SelectGroup>
+                    </SelectContent>
+                  </Select>
+                </div>
+              </div>
               <ChartContainer config={chartConfig} className="h-[400px] w-full">
-                <ComposedChart data={enkoraFMIData} barGap={0} barCategoryGap="5%">
+                <ComposedChart
+                  data={enkoraFMIData}
+                  barGap={0}
+                  barCategoryGap="5%"
+                >
                   <CartesianGrid vertical={false} />
                   <XAxis
                     dataKey="date"
@@ -162,7 +207,12 @@ export default function PredictionsBarChart() {
                     }
                   />
                   <YAxis
-                    label={{ value: 'Kävijämäärä', angle: -90, position: 'insideLeft' }} />
+                    label={{
+                      value: "Kävijämäärä",
+                      angle: -90,
+                      position: "insideLeft",
+                    }}
+                  />
                   <ChartTooltip
                     content={
                       <ChartTooltipContent
@@ -172,11 +222,11 @@ export default function PredictionsBarChart() {
                             month: "short",
                             year: "numeric",
                             weekday: "short",
-                          })
+                          });
                         }}
                         formatter={(value, name, item, index) => (
                           <>
-                            <div className="flex items-center justify-between min-w-[130px] w-full gap-4 text-xs text-muted-foreground">
+                            <div className="flex w-full min-w-[130px] items-center justify-between gap-4 text-xs text-muted-foreground">
                               <div className="flex items-center gap-2">
                                 <div
                                   className="h-2.5 w-2.5 shrink-0 rounded-[2px] bg-[--color-bg]"
@@ -186,9 +236,10 @@ export default function PredictionsBarChart() {
                                     } as React.CSSProperties
                                   }
                                 />
-                                {chartConfig[name as keyof typeof chartConfig]?.label || name}
+                                {chartConfig[name as keyof typeof chartConfig]
+                                  ?.label || name}
                               </div>
-                              <div className="flex items-center gap-0.5 font-mono font-medium text-right text-foreground">
+                              <div className="flex items-center gap-0.5 text-right font-mono font-medium text-foreground">
                                 {value}
                               </div>
                             </div>
@@ -196,7 +247,11 @@ export default function PredictionsBarChart() {
                               <div className="mt-1.5 flex basis-full items-center border-t pt-1.5 text-xs font-medium text-foreground">
                                 Yhteensä
                                 <div className="ml-auto flex items-baseline gap-0.5 font-mono font-semibold tabular-nums text-foreground">
-                                  {item.payload.ilmaiskavijat + item.payload.paasyliput + item.payload.kampanjakavijat + item.payload.verkkokauppa + item.payload.vuosiliput}
+                                  {item.payload.ilmaiskavijat +
+                                    item.payload.paasyliput +
+                                    item.payload.kampanjakavijat +
+                                    item.payload.verkkokauppa +
+                                    item.payload.vuosiliput}
                                 </div>
                               </div>
                             )}
@@ -206,25 +261,66 @@ export default function PredictionsBarChart() {
                     }
                   />
                   {/* Stacked Bar for Ticket Types */}
-                  <Bar dataKey="kulkulupa" stackId="a" fill={chartConfig.kulkulupa.color} />
-                  <Bar dataKey="ilmaiskavijat" stackId="a" fill={chartConfig.ilmaiskavijat.color} />
-                  <Bar dataKey="paasyliput" stackId="a" fill={chartConfig.paasyliput.color} />
-                  <Bar dataKey="kampanjakavijat" stackId="a" fill={chartConfig.kampanjakavijat.color} />
-                  <Bar dataKey="verkkokauppa" stackId="a" fill={chartConfig.verkkokauppa.color} />
-                  <Bar dataKey="vuosiliput" stackId="a" fill={chartConfig.vuosiliput.color} />
+                  <Bar
+                    dataKey="kulkulupa"
+                    stackId="a"
+                    fill={chartConfig.kulkulupa.color}
+                  />
+                  <Bar
+                    dataKey="ilmaiskavijat"
+                    stackId="a"
+                    fill={chartConfig.ilmaiskavijat.color}
+                  />
+                  <Bar
+                    dataKey="paasyliput"
+                    stackId="a"
+                    fill={chartConfig.paasyliput.color}
+                  />
+                  <Bar
+                    dataKey="kampanjakavijat"
+                    stackId="a"
+                    fill={chartConfig.kampanjakavijat.color}
+                  />
+                  <Bar
+                    dataKey="verkkokauppa"
+                    stackId="a"
+                    fill={chartConfig.verkkokauppa.color}
+                  />
+                  <Bar
+                    dataKey="vuosiliput"
+                    stackId="a"
+                    fill={chartConfig.vuosiliput.color}
+                  />
 
                   {/* Separate Bars for Predictions */}
-                  <Bar dataKey="day1prediction" fill={chartConfig.day1prediction.color} />
-                  <Bar dataKey="day2prediction" fill={chartConfig.day2prediction.color} />
-                  <Bar dataKey="day3prediction" fill={chartConfig.day3prediction.color} />
-                  <Bar dataKey="day4prediction" fill={chartConfig.day4prediction.color} />
+                  <Bar
+                    dataKey="day1prediction"
+                    fill={chartConfig.day1prediction.color}
+                  />
+                  <Bar
+                    dataKey="day2prediction"
+                    fill={chartConfig.day2prediction.color}
+                  />
+                  <Bar
+                    dataKey="day3prediction"
+                    fill={chartConfig.day3prediction.color}
+                  />
+                  <Bar
+                    dataKey="day4prediction"
+                    fill={chartConfig.day4prediction.color}
+                  />
 
                   <Brush travellerWidth={20} stroke="#25582b" height={30} />
                 </ComposedChart>
               </ChartContainer>
             </CardContent>
           </>
-          : <div className="p-48"> <LoadingSpinner /></div>}
+        ) : (
+          <div className="p-48">
+            {" "}
+            <LoadingSpinner />
+          </div>
+        )}
       </Card>
     </section>
   );

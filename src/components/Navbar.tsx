@@ -19,16 +19,16 @@ export default function Navbar() {
   return (
     <header
       className="sticky top-0 z-20 bg-white dark:bg-black border-b-4"
-      style={{ borderBottomColor: "#AAC929" }}
+      style={{ borderBottomColor: "rgba(170, 201, 41, 0.8)" }}
     >
       <div className="mx-auto flex max-w-6xl flex-wrap justify-between items-center gap-3 px-3 py-4">
 
-        <Link href="/">
+        <Link href="/homepage">
           <Image
             className="pt-2"
             alt="logo of the website"
             src={zoolytics}
-            height={50}
+            height={40}
           />
         </Link>
 
