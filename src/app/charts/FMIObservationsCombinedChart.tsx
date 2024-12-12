@@ -211,6 +211,9 @@ export default function WeatherHistoricalData() {
                     tickLine={false}
                     tickMargin={10}
                     axisLine={false}
+                    tickFormatter={(value) =>
+                      new Date(value).toLocaleDateString("fi-FI")
+                    }
                   />
                   <YAxis
                     yAxisId="left"
