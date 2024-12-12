@@ -4,7 +4,7 @@ import processFMIWeatherData from "@/utils/FMIdataFormatter";
 import { getMissingDates } from "@/utils/DateHelperFunctions";
 
 export default async function UpdateFMIDatabase() {
-  const startDate = "2024-12-11"; // Database has all the data before this date
+  const startDate = "2024-12-10"; // Database has all the data before this date
   const endDate = new Date();
   endDate.setDate(endDate.getDate() - 1);
   const currentDayMinusOne = endDate.toISOString().split("T")[0];
@@ -14,7 +14,7 @@ export default async function UpdateFMIDatabase() {
     const existingData = await sql`
       SELECT date 
       FROM weatherdata 
-      WHERE date > '2024-12-10'
+      WHERE date > '2024-12-09'
       ORDER BY date ASC;
     `;
 

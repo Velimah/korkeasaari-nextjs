@@ -36,7 +36,7 @@ import {
 } from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
 import { CalendarIcon } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { cn } from "@/utils/twMerge";
 import { fi } from "date-fns/locale";
 import { BLOB, getBLOBData } from "@/hooks/fetchBLobData";
 

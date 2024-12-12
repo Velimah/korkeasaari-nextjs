@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils";
+import { cn } from "@/utils/twMerge";
 
 export function H2(props: React.HTMLProps<HTMLHeadingElement>) {
   return (

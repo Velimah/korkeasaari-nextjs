@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
-import UpdateEnkoraDatabase from "@/utils/UpdateEnkoraDatabase";
-import UpdateFMIDatabase from "@/utils/UpdateFMIDatabase";
-import UpdateDataBlob from "@/utils/UpdateDataBlob";
+import UpdateEnkoraDatabase from "@/services/UpdateEnkoraDatabase";
+import UpdateFMIDatabase from "@/services/UpdateFMIDatabase";
+import UpdateDataBlob from "@/services/UpdateDataBlob";
 
 export const fetchCache = "force-no-store";
 
