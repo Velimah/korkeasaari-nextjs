@@ -1,15 +1,15 @@
 export interface BLOB {
-  date: string; // "2019-01-02"
-  temperature: number | null; // -4.1
-  precipitation: number | null; // 0.3
-  cloudcover: number | null; // 83
-  kulkulupa: number | null; // 0
-  ilmaiskavijat: number | null; // 0
-  paasyliput: number | null; // 171
-  kampanjakavijat: number | null; // 4
-  verkkokauppa: number | null; // 4
-  vuosiliput: number | null; // 25
-  totalvisitors: number | null; // 204
+  date: string;
+  temperature: number | null;
+  precipitation: number | null;
+  cloudcover: number | null;
+  kulkulupa: number | null;
+  ilmaiskavijat: number | null;
+  paasyliput: number | null;
+  kampanjakavijat: number | null;
+  verkkokauppa: number | null;
+  vuosiliput: number | null;
+  totalvisitors: number | null;
 }
 
 export async function getBLOBData(): Promise<BLOB[] | { error: string }> {

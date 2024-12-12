@@ -1,3 +1,4 @@
+"use client"
 import React, { useEffect, useState } from "react";
 import {
   ChartContainer,
@@ -117,8 +118,8 @@ export default function PredictionsBarChart() {
       month === 0
         ? filteredByYear
         : filteredByYear.filter(
-            (item) => new Date(item.date).getMonth() + 1 === month,
-          );
+          (item) => new Date(item.date).getMonth() + 1 === month,
+        );
 
     setEnkoraFMIData(filteredByMonth);
   }
@@ -195,8 +196,8 @@ export default function PredictionsBarChart() {
               <ChartContainer config={chartConfig} className="h-[400px] w-full">
                 <ComposedChart
                   data={enkoraFMIData}
-                  barGap={0}
-                  barCategoryGap="5%"
+                  barGap={1}
+                  barCategoryGap="10%"
                 >
                   <CartesianGrid vertical={false} />
                   <XAxis

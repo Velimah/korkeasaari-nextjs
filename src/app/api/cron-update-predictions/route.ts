@@ -1,9 +1,9 @@
 import { getBLOBData } from "@/hooks/fetchBLobData";
 import { fetchFMIForecastData } from "@/hooks/fetchFMIForecastData";
-import MLRCalculator from "@/utils/MLRCalculator";
 import { NextRequest, NextResponse } from "next/server";
 import { getDaysAhead } from "@/utils/DateHelperFunctions";
 import { sql } from "@vercel/postgres";
+import MLRCalculator from "@/utils/MLRCalculator";
 
 export const fetchCache = "force-no-store";
 
@@ -40,7 +40,6 @@ export async function GET(request: NextRequest) {
     for (const entry of result) {
       const { date, predictedvisitors } = entry;
 
-      // Validate data
       if (!date || predictedvisitors == null) {
         return NextResponse.json(
           { error: "Missing required fields" },
@@ -48,13 +47,12 @@ export async function GET(request: NextRequest) {
         );
       }
 
-      // Prepare data for insertion
       const daysAhead = getDaysAhead(date);
       const dataToSend = {
         date: todayDate, // Today's date
-        predictedDate: date, // Future prediction date
+        predictedDate: date, // predicted date
         prediction: predictedvisitors,
-        daysAhead,
+        daysAhead, // predicted days ahead
       };
 
       try {

@@ -1,6 +1,6 @@
 "use client"; // Ensure this component is treated as a client component
 
-import React, { use, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   ChartConfig,
   ChartContainer,
@@ -98,7 +98,7 @@ export default function EnkoraData() {
       // Set the start and end dates as ISO strings
       setStartDate(start.toISOString().split("T")[0]);
       setEndDate(end.toISOString().split("T")[0]);
-      setDate({from: range.from, to: range.to});
+      setDate({ from: range.from, to: range.to });
       // Filter the data within the selected date range
       const newData = blobData.filter((item) => {
         const date = parseISO(item.date); // Ensure item.date is in ISO format
@@ -304,8 +304,8 @@ export default function EnkoraData() {
                               onClick={() => {
                                 const from = lastMonth;
                                 const to = yesterday;
-                                setDate({from, to});
-                                handleDateRange({from, to});
+                                setDate({ from, to });
+                                handleDateRange({ from, to });
                               }}
                             >
                               Viimeiset 30 päivää

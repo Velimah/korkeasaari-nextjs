@@ -194,7 +194,7 @@ export default function ForecastsFMICombinedChart({
 
               {/* Conditionally render Bar based on selectedDataKey */}
               {selectedDataKey === "precipitation" ||
-              selectedDataKey === "cloudcover" ? (
+                selectedDataKey === "cloudcover" ? (
                 <Bar
                   yAxisId="right"
                   dataKey={selectedDataKey}

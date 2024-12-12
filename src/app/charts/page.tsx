@@ -1,4 +1,3 @@
-import { H2 } from "@/components/ui/H2";
 import { Metadata } from "next";
 import FMIObservationsCombinedChart from "@/app/charts/FMIObservationsCombinedChart";
 import EnkoraVisitorBarChart from "@/app/charts/EnkoraVisitorBarChart";

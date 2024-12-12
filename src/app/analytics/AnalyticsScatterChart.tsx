@@ -2,8 +2,7 @@ import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from "
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { CartesianGrid, Scatter, ScatterChart, XAxis, YAxis } from "recharts";
 import { useState } from "react";
-import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import {DryCloudyIcon, DrySunnyIcon, RainHeavyCloudyIcon} from "@/components/weathericons";
+import { DryCloudyIcon, DrySunnyIcon, RainHeavyCloudyIcon } from "@/components/weathericons";
 
 interface AnalyticsCharts {
   EnkoraFMIData: Array<{

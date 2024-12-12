@@ -1,10 +1,9 @@
 import { ChartConfig, ChartContainer, ChartLegend, ChartLegendContent, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Bar, Brush, CartesianGrid, ComposedChart, Line, XAxis, YAxis } from "recharts";
-import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useState } from "react";
-import {LoadingSpinner} from "@/components/ui/loading-spinner";
-import {DryCloudyIcon, DrySunnyIcon, RainHeavyCloudyIcon} from "@/components/weathericons";
+import { LoadingSpinner } from "@/components/ui/loading-spinner";
+import { DryCloudyIcon, DrySunnyIcon, RainHeavyCloudyIcon } from "@/components/weathericons";
 
 interface AnalyticsCharts {
   EnkoraFMIData: Array<{
