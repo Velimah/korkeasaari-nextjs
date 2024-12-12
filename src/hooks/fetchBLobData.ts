@@ -16,7 +16,7 @@ export async function getBLOBData(): Promise<BLOB[] | { error: string }> {
   try {
     const response = await fetch(
       "https://yxkilu3yp1tkxpeo.public.blob.vercel-storage.com/data/mydata.json",
-      { next: { revalidate: 3600 } },
+      { cache: "no-store" },
     );
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
