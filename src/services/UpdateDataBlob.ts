@@ -31,10 +31,10 @@ export default async function UpdateDataBlob() {
       ON 
         w.date = v.date
       WHERE 
-        w.date > '2024-11-20'
+        w.date > '2024-12-10'
       ORDER BY 
         w.date ASC
-      LIMIT 500;
+      LIMIT 5000;
     `;
   } catch (dbError) {
     console.error("Database query failed:", dbError);
